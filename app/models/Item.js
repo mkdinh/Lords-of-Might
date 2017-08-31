@@ -6,7 +6,16 @@ module.exports = (sequelize,DataTypes) => {
         quantity: {
             type: DataTypes.INTEGER
         }
+
     })
+    
+    Item.associate = (models) => {
+        Item.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        })
+    }
 
     return Item;
 }

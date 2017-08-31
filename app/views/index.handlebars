@@ -1,1 +1,67 @@
-'Hello world!'
+<!DOCTYPE html>
+<html>
+  <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <strong>Message</strong><br>
+    <div id='messages'></div><br>
+    <div id='new'>
+        <form>
+            New: <input id='new-message' type='text'>
+        <input id='message-submit' type='submit'>
+        </form>
+    </div>
+
+    <form action="/users/login" method="post">
+    <div>
+        <label>Username:</label>
+        <input type="text" value='foo' name="username"/>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" value='bar' name="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Log In"/>
+    </div>
+    </form>
+
+    <h1>SignUp</h1>
+
+        <form action="/users/new" method="post">
+    <div>
+        <label>Username:</label>
+        <input type="text" value='fooz' name="username"/>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" value='baz' name="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Signup!"/>
+    </div>
+    </form>
+
+    <script>
+      function updateMessage(message) {
+          $("#messages").append('<p>'+message+'</p>')
+      }
+
+      var host = window.document.location.host.replace(/:.*/, '');
+      var ws = new WebSocket('ws://' + host + ':3000');
+
+    ws.onmessage = function (event) {
+        updateMessage(JSON.parse(event.data));
+        console.log(JSON.parse(event.data))
+    }
+      
+    $('#message-submit').click(function(ev){
+        ev.preventDefault()
+        var newMessage = $('#new-message').val().trim();
+        ws.send(newMessage)
+      });
+
+    </script>
+  </body>
+</html>
