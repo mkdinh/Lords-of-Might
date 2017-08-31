@@ -15,7 +15,7 @@ const db = require('./app/models');
 
 // External Logics
 // -------------------------------------------------------------
-// require(path.join(__dirname,'./app/login/auth.js'))
+
 
 // INITIALIZING SERVER
 // -------------------------------------------------------------
@@ -53,6 +53,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // -------------------------------------------------------------
 app.use('/users', require(path.join(__dirname,'./app/routes/users.js')));
 app.use('/messages', require(path.join(__dirname,'./app/routes/messages.js')));
+
 // INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
 const http = require('http');;

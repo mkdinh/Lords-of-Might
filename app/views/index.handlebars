@@ -5,7 +5,7 @@
       <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-      <h1> Login: {{loggedIn}} </h1>
+      <h1> Login: <span class='login-status'> {{loggedIn}}</span> </h1>
     <div id='login-wrapper' style='display:inline-block'>
         <h1>Login</h1>
         <form action="/users/login" method="post" >
@@ -50,63 +50,6 @@
         <div id='messages'></div><br>
     </div>
 
-    <script>
-        
-        function updateMessage(message) {
-            $("#messages").prepend('<p>'+message+'</p>')
-        }
-        
-        var socket;
-
-        if(localStorage.user){
-            initalizeIOConn()
-        }
-
-        $('#login-submit').on('click', function(ev){
-            ev.preventDefault();
-            var loginInfo = {
-                username: $('#login-username').val().trim(),
-                password: $('#login-password').val().trim()
-            }
-
-            $.ajax({
-                method: 'POST',
-                url: '/users/login',
-                data: loginInfo,
-                success: function(res){
-                    console.log(res)
-                    localStorage.setItem('user', res.id);
-                    initalizeIOConn();
-                }
-            })
-        })
-
-        $('#message-submit').click(function(ev){
-            ev.preventDefault()
-
-            var newMessage = {
-                body: $('#new-message').val().trim()
-            };
-            
-            $.ajax({
-                method: 'POST',
-                url: '/messages/new',
-                data: newMessage,
-                success: function(message){
-                    socket.emit('message', message.body)
-                }
-            })
-        });
-
-        function initalizeIOConn(){
-            socket = io.connect('http://localhost:3000');
-
-            socket.on('connect', function(data) {
-                socket.on('broadcast', function(message) {
-                    $('#messages').append('<p>'+message+'<p>')
-                });
-            })
-        }
-    </script>
+    <script src='/js/index.js'></script>
   </body>
 </html>
