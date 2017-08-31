@@ -1,14 +1,14 @@
 // DEPENDENCIES
 // -------------------------------------------------------------
 const express = require('express');
+const app = express();
 const hdbs = require('express-handlebars');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');  
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 const path = require('path');
-const WebSocket = require('ws');
-const http = require('http');
+// const WebSocket = require('ws');
 const passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
 const db = require('./app/models');
@@ -19,7 +19,6 @@ const db = require('./app/models');
 
 // INITIALIZING SERVER
 // -------------------------------------------------------------
-const app = express();
 const port = process.env.PORT || 3000;
 
 app.engine('handlebars', hdbs({
@@ -53,38 +52,22 @@ app.use(bodyParser.urlencoded({extended: false}));
 // INTIALIZING ROUTERS
 // -------------------------------------------------------------
 app.use('/users', require(path.join(__dirname,'./app/routes/users.js')));
-
-// INTIALIZING WEBSOCKET
+app.use('/messages', require(path.join(__dirname,'./app/routes/messages.js')));
+// INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
+const http = require('http');;
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const io = require('socket.io')(server)
 
-wss.broadcast = function broadcast(data) {
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify(data));
-      }
-    });
-};
-
-wss.on('connection',(ws) => {
-
-    ws.on('message', (data) => {
-        wss.broadcast(data);
-    });
-
-
-    ws.on('close', function () {
-        console.log('stopping client interval');
-    });
-});
+// load chat
+require(path.join(__dirname,'./app/ws/chat.js'))(io);
 
 
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
 
 db.sequelize.sync(
-    // {force: true}
+    // {force: true}   
 ).then(() => {
     server.listen(port, () => {
         console.log('listen to port',port)
@@ -92,9 +75,13 @@ db.sequelize.sync(
 })
 
 app.get('/', (req,res) => {
-    res.render('index')
-    console.log(req.session)
-    console.log(req.user)
+    var isLoggedIn = !!req.user;
+
+    res.render('index',{loggedIn: isLoggedIn})
+
+    if(req.user){
+        console.log(req.user.username)
+    }
 })
 
 

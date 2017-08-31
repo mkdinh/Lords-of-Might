@@ -2,66 +2,111 @@
 <html>
   <head>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <strong>Message</strong><br>
-    <div id='messages'></div><br>
-    <div id='new'>
-        <form>
-            New: <input id='new-message' type='text'>
-        <input id='message-submit' type='submit'>
+      <h1> Login: {{loggedIn}} </h1>
+    <div id='login-wrapper' style='display:inline-block'>
+        <h1>Login</h1>
+        <form action="/users/login" method="post" >
+            <div>
+                <label>Username:</label>
+                <input type="text" value='mkdinh94@gmail.com' id='login-username'/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" value='123456' id='login-password'/>
+            </div>
+            <div>
+                <input type="submit" id='login-submit' value="Log In"/>
+            </div>
         </form>
     </div>
+    <div id='signup-wrapper' style='display:inline-block; margin-left: 3rem'>
+        <h1>Sign Up</h1>
 
-    <form action="/users/login" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" value='foo' name="username"/>
+        <form action="/users/new" method="post" autocomplete="off">
+            <div>
+                <label>Username:</label>
+                <input type="text" id='signup-username' value='mkdinh94@gmail.com' name="username"/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" id='signup-password' value='123456' name="password"/>
+            </div>
+            <div>
+                <input type="submit" value="Signup!"/>
+            </div>
+            </form>
     </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" value='bar' name="password"/>
+    <div id='message-wrapper'>
+        <h2>Message</h2>
+        <div id='new'>
+            <form>
+                New: <input id='new-message' type='text'>
+            <input id='message-submit' type='submit'>
+            </form>
+        </div>
+        <div id='messages'></div><br>
     </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-    </form>
-
-    <h1>SignUp</h1>
-
-        <form action="/users/new" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" value='fooz' name="username"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" value='baz' name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Signup!"/>
-    </div>
-    </form>
 
     <script>
-      function updateMessage(message) {
-          $("#messages").append('<p>'+message+'</p>')
-      }
+        
+        function updateMessage(message) {
+            $("#messages").prepend('<p>'+message+'</p>')
+        }
+        
+        var socket;
 
-      var host = window.document.location.host.replace(/:.*/, '');
-      var ws = new WebSocket('ws://' + host + ':3000');
+        if(localStorage.user){
+            initalizeIOConn()
+        }
 
-    ws.onmessage = function (event) {
-        updateMessage(JSON.parse(event.data));
-        console.log(JSON.parse(event.data))
-    }
-      
-    $('#message-submit').click(function(ev){
-        ev.preventDefault()
-        var newMessage = $('#new-message').val().trim();
-        ws.send(newMessage)
-      });
+        $('#login-submit').on('click', function(ev){
+            ev.preventDefault();
+            var loginInfo = {
+                username: $('#login-username').val().trim(),
+                password: $('#login-password').val().trim()
+            }
 
+            $.ajax({
+                method: 'POST',
+                url: '/users/login',
+                data: loginInfo,
+                success: function(res){
+                    console.log(res)
+                    localStorage.setItem('user', res.id);
+                    initalizeIOConn();
+                }
+            })
+        })
+
+        $('#message-submit').click(function(ev){
+            ev.preventDefault()
+
+            var newMessage = {
+                body: $('#new-message').val().trim()
+            };
+            
+            $.ajax({
+                method: 'POST',
+                url: '/messages/new',
+                data: newMessage,
+                success: function(message){
+                    socket.emit('message', message.body)
+                }
+            })
+        });
+
+        function initalizeIOConn(){
+            socket = io.connect('http://localhost:3000');
+
+            socket.on('connect', function(data) {
+                socket.on('broadcast', function(message) {
+                    $('#messages').append('<p>'+message+'<p>')
+                });
+            })
+        }
     </script>
   </body>
 </html>
