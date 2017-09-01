@@ -51,8 +51,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // INTIALIZING ROUTERS
 // -------------------------------------------------------------
-app.use('/users', require(path.join(__dirname,'./app/routes/users.js')));
-app.use('/messages', require(path.join(__dirname,'./app/routes/messages.js')));
+app.use('/', require(path.join(__dirname,'./app/routes/html_controller.js')));
+app.use('/users', require(path.join(__dirname,'./app/routes/users_controller.js')));
+app.use('/messages', require(path.join(__dirname,'./app/routes/messages_controller.js')));
 
 // INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
@@ -60,8 +61,11 @@ const http = require('http');;
 const server = http.createServer(app);
 const io = require('socket.io')(server)
 
-// load chat
+// load chat ws
 require(path.join(__dirname,'./app/ws/chat.js'))(io);
+
+// load game ws
+require(path.join(__dirname,'./app/ws/game.js'))(io);
 
 
 // STARTING DB AND SERVER
@@ -73,16 +77,6 @@ db.sequelize.sync(
     server.listen(port, () => {
         console.log('listen to port',port)
     })
-})
-
-app.get('/', (req,res) => {
-    var isLoggedIn = !!req.user;
-
-    res.render('index',{loggedIn: isLoggedIn})
-
-    if(req.user){
-        console.log(req.user.username)
-    }
 })
 
 

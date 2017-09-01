@@ -50,7 +50,7 @@ $('#login-submit').on('click', function(ev){
         url: '/users/login',
         data: loginInfo,
         success: function(res){
-            console.log(res)
+            loginInfo.user_id = res.id
             localStorage.setItem('user',JSON.stringify(loginInfo));
             initalizeIOConn();
         }

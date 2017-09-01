@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.Item, {
             onDelete: "CASCADE"
         })
+
+        User.hasMany(models.Message, {
+            onDelete: "CASCADE"
+        })
+
+        User.hasOne(models.Avatar, {
+            onDelete: "CASCADE"
+        })
     }
 
     User.prototype.printStuff = function(){
