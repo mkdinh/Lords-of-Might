@@ -19,7 +19,7 @@ const db = require('./app/models');
 
 // INITIALIZING SERVER
 // -------------------------------------------------------------
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.engine('handlebars', hdbs({
     defaultLayout: 'main', 
@@ -70,14 +70,14 @@ require(path.join(__dirname,'./app/ws/game.js'))(io);
 
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
-
-db.sequelize.sync(
-    // {force: true}   
-).then(() => {
-    server.listen(port, () => {
-        console.log('listen to port',port)
-    })
-})
+server.listen(8080)
+// db.sequelize.sync(
+//     // {force: true}   
+// ).then(() => {
+//     server.listen(port, () => {
+//         console.log('listen to port',port)
+//     })
+// })
 
 
 
