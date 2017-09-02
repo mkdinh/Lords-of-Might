@@ -24,17 +24,17 @@ function(username, password, done) {
         .then(user => {
             
             if (user === null) {
-                console.log('Incorrect username')
+                // console.log('Incorrect username')
                return done(null, false, { message: 'Incorrect username.' });
             }
 
             user.comparePassword(password, function (err,isMatch) {
                 if (err) { return done(err); }
                 if(!isMatch){
-                    console.log('incorrect password')
+                    // console.log('incorrect password')
                     return done(null, false, { message: 'Incorrect password.' });
                 } else {
-                    console.log('logged in!')
+                    // console.log('logged in!')
                     return done(null, user);
                 }
             });
@@ -42,7 +42,7 @@ function(username, password, done) {
         })
         .catch((err) => {
             if (err) {
-                console.log(err);
+                // console.log(err);
                 return done(err); 
             }
        });
@@ -61,12 +61,12 @@ function(username, password, done) {
 // deserializing.
 
 passport.serializeUser(function(user, done) {
-    console.log('serializing')
+    // console.log('serializing')
     return done(null, user.id);
 });
   
 passport.deserializeUser(function(id, done) {
-    console.log('deserializing')
+    // console.log('deserializing')
     User.findById(id).then( function(user){
         if(!user){
             done(null)
@@ -114,10 +114,10 @@ router.post('/login', function(req, res, next) {
         if (!user) { return res.redirect('/'); }
         
         req.logIn(user, function(err) {
-            console.log('is auth: ',req.isAuthenticated())
+            // console.log('is auth: ',req.isAuthenticated())
             if (err) { return next(err); }
-            console.log('login in')
-            res.redirect('/');
+            // console.log('login in')
+            res.json(user)
         });
     })(req, res, next);
 });

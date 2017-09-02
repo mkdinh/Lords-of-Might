@@ -4,27 +4,41 @@ module.exports = (sequelize, DataTypes) => {
     var User = sequelize.define('User', {
         username: {
             type: DataTypes.STRING,
+            allowNull:false,
+            unique: true,
             validate: {
                 len: [6,50],
-                isUnique :true,
-                allowNull:false,
-                validate: {
-                    isEmail : true
-                }
+                isEmail : true
             }
             
         },
         password: {
             type: DataTypes.STRING,
+            allowNull:false,
             validate: {
                 len: [6,100],
-                allowNull:false
+            }
+        },
+        online: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            validate: {
             }
         }
+        
     })
 
     User.associate = (models) => {
         User.hasMany(models.Item, {
+            onDelete: "CASCADE"
+        })
+
+        User.hasMany(models.Message, {
+            onDelete: "CASCADE"
+        })
+
+        User.hasOne(models.Avatar, {
             onDelete: "CASCADE"
         })
     }
