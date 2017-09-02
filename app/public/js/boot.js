@@ -20,7 +20,7 @@ LoM.Boot.prototype = {
         this.scale.maxHeight = 1920;
 
         //have the game centered horizontally
-	    this.scale.pageAlignHorizontally = true;
+	    // this.scale.pageAlignHorizontally = true;
     
         //physics system for movement
         

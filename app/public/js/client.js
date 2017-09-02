@@ -13,8 +13,8 @@ Client.socket.on('render-user', function(data){
     LoM.Game.renderUser(data.new)
 })
 
-Client.move = function(dir,id){
-    this.socket.emit('key-pressed',{dir:dir,id:id})
+Client.move = function(movement){
+    this.socket.emit('key-pressed',movement)
 }
 
 Client.socket.on('start', function(data){
@@ -24,21 +24,16 @@ Client.socket.on('start', function(data){
     LoM.game.state.start('Game')
 })
 
-// Client.socket.on('allplayers', function(data){
-//         var data = [{id: 123,x: 250,y: 250,sprite: 5},  {id: 1245,x: 300,y: 250,sprite: 5}];
-//         console.log(data)
-//         for(i = 0; i < data.length; i++){
-//             if(data[i].id !== LoM.Game.userInfo.id){
-//                 LoM.Game.newSprite(data[i])
-//             }
-//         }
-// })
-
 Client.socket.on('move', function(data){
     // console.log(data)
     LoM.Game.movePlayer(data)
 })
 
+Client.socket.on('remove',function(data){
+    console.log('removed',data.id)
+    LoM.Game.removePlayer(data.id)
+
+})
 
 
 
