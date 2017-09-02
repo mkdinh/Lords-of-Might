@@ -1,6 +1,6 @@
 var Client = {};
 
-Client.socket = io.connect('http://localhost:8080');
+Client.socket = io.connect(window.location.hostname);
 
 Client.userInfoDB = function(){
     this.socket.emit('user')
