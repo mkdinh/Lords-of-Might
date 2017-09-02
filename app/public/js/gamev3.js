@@ -26,8 +26,9 @@ LoM.Game = {
         this.world.enableBody = true;
         // heep track of all players
         this.playerMap = {};
-        this.userReady = false;
-        this.playerReady = false;
+        this.npcMap = {};
+        this.enemyMap = {};
+
         this.gameReady = false;
         
 
@@ -41,16 +42,17 @@ LoM.Game = {
         this.othersGroup.enableBody = true;
         this.othersGroup.physicsBodyType = Phaser.Physics.ARCADE; 
 
+        this.npcGroup = this.add.group();
+        this.npcGroup.enableBody = true;
+        this.npcGroup.physicsBodyType = Phaser.Physics.ARCADE; 
+
         this.layerGroup = this.add.group();
         this.layerGroup.enableBody = true;
         this.layerGroup.physicsBodyType = Phaser.Physics.ARCADE;
         
         // random sprites
         // var sprite1 = this.add.sprite(350,250,'sprite2');
-        this.sprite2 = this.add.sprite(400,400,'sprite3')
-        this.sprite2.body.bounce.x = 1;
-        console.log(this.sprite2.body.velocity.x)
-        console.log(this.sprite2)
+ 
         // sprite2.body.immovable = true;
         // this.layerGroup.add(sprite1);
         // this.layerGroup.add(sprite2);
@@ -64,11 +66,11 @@ LoM.Game = {
         
         this.layerCollisions = [];
 
-        // for(var i = 0; i < this.map.layers.length; i++) {
-        //     if(i !== 7){
-        //         this.layer = this.map.createLayer(i);
-        //     }
-        // };
+        for(var i = 0; i < this.map.layers.length; i++) {
+            if(i !== 7){
+                this.layer = this.map.createLayer(i);
+            }
+        };
 
         // SET LAYERS COLLISION WITH SRPITES
         // -------------------------------------------------------------
@@ -90,8 +92,19 @@ LoM.Game = {
             this.newSprite(this.playerArray[i])
         }
 
+        var sprite2Info = {
+            id: 'npc',
+            sprite: 2,
+            name: 'sample',
+            velocity: {x: -10, y: 0},
+            world: {x: 400,y:400}
+        }
+        
+        this.newSprite(sprite2Info);
+        this.sprite2 = this.npcMap['sample'];
+
         // this.othersGroup.add(sprite1)
-        this.othersGroup.add(this.sprite2)
+        // this.othersGroup.add(this.sprite2)
 
         this.gameReady = true;
 
@@ -106,7 +119,7 @@ LoM.Game = {
     update: function(){
         if(this.gameReady){
             this.physics.arcade.collide(this.playerGroup,this.othersGroup, this.collisionHandler, null, this);
-
+            this.physics.arcade.collide(this.playerGroup,this.npcGroup, this.collisionHandler, null, this);
 
             var worldX = this.playerMap[this.userInfo.id].worldPosition.x;
             var worldY = this.playerMap[this.userInfo.id].worldPosition.y
@@ -130,6 +143,7 @@ LoM.Game = {
     newSprite : function(dbInfo){
         // console.log(dbInfo)
         // generating sprite
+        // console.log(dbInfo)
         var userSprite;
         var sprite = 6;
         var avatar = 'sprite' + sprite;
@@ -139,7 +153,8 @@ LoM.Game = {
         userSprite.body.maxVelocity.x = 100;
         userSprite.body.maxVelocity.y = 100;
         userSprite.body.bounce.x = 1;
-        userSprite.body.bounce.y = 1
+        userSprite.body.bounce.y = 1;
+
         // Setting player physics
         userSprite.body.collideWorldBounds = true;
         this.physics.enable(userSprite,Phaser.Physics.ARCADE);
@@ -153,7 +168,11 @@ LoM.Game = {
         var label_score = this.add.text(8, -15,dbInfo.id, style);
         userSprite.addChild(label_score);
 
-        if(dbInfo.id === this.userInfo.id){
+        if(dbInfo.id === 'npc'){
+            this.npcGroup.add(userSprite)
+            this.world.bringToTop(this.npcGroup);
+            console.log('other')
+        }else if(dbInfo.id === this.userInfo.id){
             this.playerGroup.add(userSprite)
             this.camera.follow(userSprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
             this.world.bringToTop(this.playerGroup);
@@ -182,11 +201,15 @@ LoM.Game = {
             userSprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             userSprite.animations.add('right',[144,145,146,147,148],true);
         }
-        
+        console.log(dbInfo.id)
         // Keep track of total players
         // console.log(userSprite)
-        this.playerMap[dbInfo.id] = userSprite
-        
+        if(dbInfo.id === 'npc'){
+            this.npcMap[dbInfo.name] = userSprite
+            console.log(this.npcMap)
+        }else{
+            this.playerMap[dbInfo.id] = userSprite
+        }
     },
 
     renderUser: function(userInfo){
