@@ -1,6 +1,8 @@
 var Client = {};
 
-Client.socket = io.connect(window.location.hostname);
+var host = window.location.hostname;
+console.log(host)
+Client.socket = io.connect();
 
 Client.userInfoDB = function(){
     this.socket.emit('user')
