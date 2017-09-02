@@ -5,30 +5,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../foundation/css/foundation.min.css" />
+    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../public/css/signUp.css" />
+    <link rel="stylesheet" href="/css/signUp.css" />
     <title>Sign Up - Lords of Might</title>
 </head>
 
 <body>
-    <h1> Login: <span class='login-status'> {{loggedIn}}</span> </h1>
-    <div id='login-wrapper' style='display:inline-block'>
-        <h1>Login</h1>
-        <form action="/users/login" method="post">
-            <div>
-                <label>Username:</label>
-                <input type="text" value='mkdinh94@gmail.com' id='login-username' />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" value='123456' id='login-password' />
-            </div>
-            <div>
-                <input type="submit" id='login-submit' value="Log In" />
-            </div>
-        </form>
-    </div>
+
     <div id='signup-wrapper' style='display:inline-block; margin-left: 3rem'>
         <h1>Sign Up</h1>
 
@@ -47,6 +31,16 @@
         </form>
     </div>
 
+    <!-- Foundation JQuery-->
+    <script src="css/foundation/js/vendor/jquery.js"></script>
+
+    <!-- Foundation JavaScript-->
+    <script src="js/vendor/foundation.min.js"></script>
+
+    <script>
+        $(document).foundation();
+
+    </script>
     <script src='/js/index.js'></script>
 </body>
 
