@@ -26,6 +26,8 @@ LoM.Game = {
         this.world.enableBody = true;
         // heep track of all players
         this.playerMap = {};
+        this.userReady = false;
+        this.playerReady = false;
         this.gameReady = false;
         
 
@@ -89,27 +91,25 @@ LoM.Game = {
     // -------------------------------------------------------------------------------------------    
     update: function(){
         if(this.gameReady){
-
             this.physics.arcade.collide(this.playerGroup);
             this.physics.arcade.collide(this.playerGroup,this.layerCollisions[0],this.collisionHandler,null,this)
             // player movement
             if(this.cursor.up.isDown){
-                this.client.move('up')
+                Client.move({dir:'up', id: this.userInfo.id})
             }else if(this.cursor.down.isDown){
-                this.client.move('down');
+                Client.move({dir: 'down', id: this.userInfo.id});
             }else if(this.cursor.left.isDown){
-                this.client.move('left')
+                Client.move({dir:'left', id: this.userInfo.id})
             }else if(this.cursor.right.isDown){
-                this.client.move('right')
+                Client.move({dir:'right', id: this.userInfo.id})
             }else{
-                this.client.move('stationary')
+                Client.move({dir:'stationary', id:this.userInfo.id})
             }
         }
     },
 
     newSprite : function(dbInfo){
         // generating sprite
-        console.log(LoM.Game)
         var userSprite;
         var sprite = 6;
         var avatar = 'sprite' + sprite;
@@ -126,7 +126,7 @@ LoM.Game = {
         this.camera.follow(userSprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
         
         var style = { font: "12px Arial", fill: "#000000",align:'center'};  
-        var label_score = this.add.text(8, -15, "Foo Bar", style);
+        var label_score = this.add.text(8, -15,dbInfo.id, style);
         userSprite.addChild(label_score);
 
         this.playerGroup.add(userSprite)
@@ -154,10 +154,8 @@ LoM.Game = {
         // Keep track of total players
         // console.log(userSprite)
         this.playerMap[dbInfo.id] = userSprite
-
-        this.userSpriteCreated = true;
         
-        // console.log(this.playerMap)
+        console.log(this.playerMap)
     },
 
     renderUser: function(userInfo){
@@ -178,14 +176,16 @@ LoM.Game = {
     },
 
     // retrieve proper sprite movement
-    movePlayer: function(id,x,y,dir){
-        var player = this.playerMap[id];
-        player.body.velocity.x = x;
-        player.body.velocity.y = y;
-        if(x === 0 && y === 0){
+    movePlayer: function(dirInfo){
+        var player = this.playerMap[dirInfo.dir.id];
+        // console.log(dirInfo)
+        player.body.velocity.x = dirInfo.player.x;
+        player.body.velocity.y = dirInfo.player.y;
+        if(dirInfo.player.x === 0 && dirInfo.player.y === 0){
             player.animations.stop()  
+
         }else{
-            player.animations.play(dir,10,false)
+            player.animations.play(dirInfo.dir.dir,10,false)
         }
     },
 
@@ -201,7 +201,7 @@ LoM.Game = {
     },
 
     collisionHandler: function(){
-        this.client.move('stationary')
+        Client.move('stationary')
     }
 }
 

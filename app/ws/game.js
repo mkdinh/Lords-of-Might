@@ -17,28 +17,31 @@ module.exports = function(io){
             socket.player = player;
 
             // start game
-            socket.emit('start',player)  
+            socket.emit('start',{user: player, others: getAllPlayers()})  
             // broadcast new player to all current players
-            socket.broadcast.emit('render-user',player)      
+            socket.broadcast.emit('render-user',{new:player})      
             // emit all players to new player
             socket.emit('allplayers', getAllPlayers());
         })
         
-        socket.on('key-pressed', function(dir){
-            if(dir === 'left'){
+        socket.on('key-pressed', function(data){
+
+            if(data.dir.dir === 'left'){
                 player.x = -100;
-            }else if(dir === 'right'){
+            }else if(data.dir.dir === 'right'){
                 player.x = 100;
-            }else if(dir === 'up'){
+            }else if(data.dir.dir === 'up'){
                 player.y = -100;
-            }else if(dir === 'down'){
+            }else if(data.dir.dir === 'down'){
                 player.y = 100;
-            }else if(dir === 'stationary'){
+            }else if(data.dir.dir === 'stationary'){
                 player.x = 0;
                 player.y = 0;
             }
+    
             // broadcast to all player
-            io.emit('move', {player: player, dir: dir} )
+            // console.log({player: player, dir: data.dir})
+            io.emit('move', {player: player, dir: data.dir} )
         })  
         
         socket.on('testing', function(data){
