@@ -36,17 +36,24 @@ LoM.Game = {
         this.playerGroup = this.add.group();
         this.playerGroup.enableBody = true;
         this.playerGroup.physicsBodyType = Phaser.Physics.ARCADE;
+        
+        this.othersGroup = this.add.group();
+        this.othersGroup.enableBody = true;
+        this.othersGroup.physicsBodyType = Phaser.Physics.ARCADE; 
 
         this.layerGroup = this.add.group();
         this.layerGroup.enableBody = true;
         this.layerGroup.physicsBodyType = Phaser.Physics.ARCADE;
         
         // random sprites
-        var sprite1 = this.add.sprite(300,250,'sprite2');
-        var sprite2 = this.add.sprite(250,300,'sprite3')
-        
-        this.layerGroup.add(sprite1);
-        this.layerGroup.add(sprite2);
+        // var sprite1 = this.add.sprite(350,250,'sprite2');
+        this.sprite2 = this.add.sprite(400,400,'sprite3')
+        this.sprite2.body.bounce.x = 1;
+        console.log(this.sprite2.body.velocity.x)
+        console.log(this.sprite2)
+        // sprite2.body.immovable = true;
+        // this.layerGroup.add(sprite1);
+        // this.layerGroup.add(sprite2);
 
         // populate map with layers 
         this.map = this.add.tilemap('map');
@@ -68,7 +75,7 @@ LoM.Game = {
         // set map collision
         this.layerCollisions.push(this.addLayerCollisions('Houses',[2,3,4]));
         this.layerCollisions.push(this.addLayerCollisions('Trees2',[212,213,214,215]));
-        console.log(this.layerCollisions)
+        // console.log(this.layerCollisions)
         // allow clicking on map
         // this.layer.inputEnabled = true; 
     
@@ -78,8 +85,15 @@ LoM.Game = {
         })
 
         // add user sprite to game state
-        this.newSprite(this.userInfo)
+        // console.log(this.playerArray)
+        for(i = 0; i < this.playerArray.length;i++){
+            this.newSprite(this.playerArray[i])
+        }
 
+        // this.othersGroup.add(sprite1)
+        this.othersGroup.add(this.sprite2)
+
+        this.gameReady = true;
 
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------
@@ -91,47 +105,65 @@ LoM.Game = {
     // -------------------------------------------------------------------------------------------    
     update: function(){
         if(this.gameReady){
-            this.physics.arcade.collide(this.playerGroup);
-            this.physics.arcade.collide(this.playerGroup,this.layerCollisions[0],this.collisionHandler,null,this)
-            // player movement
-            if(this.cursor.up.isDown){
-                Client.move({dir:'up', id: this.userInfo.id})
-            }else if(this.cursor.down.isDown){
-                Client.move({dir: 'down', id: this.userInfo.id});
-            }else if(this.cursor.left.isDown){
-                Client.move({dir:'left', id: this.userInfo.id})
-            }else if(this.cursor.right.isDown){
-                Client.move({dir:'right', id: this.userInfo.id})
-            }else{
-                Client.move({dir:'stationary', id:this.userInfo.id})
+            this.physics.arcade.collide(this.playerGroup,this.othersGroup, this.collisionHandler, null, this);
+
+
+            var worldX = this.playerMap[this.userInfo.id].worldPosition.x;
+            var worldY = this.playerMap[this.userInfo.id].worldPosition.y
+
+            if(!this.eventOccur){
+                if(this.cursor.up.isDown){
+                    Client.move({dir:'up', id: this.userInfo.id,  worldX: worldX, worldY: worldY });
+                }else if(this.cursor.down.isDown){;
+                    Client.move({dir: 'down', id: this.userInfo.id, worldX: worldX, worldY: worldY });
+                }else if(this.cursor.left.isDown){
+                    Client.move({dir:'left', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
+                }else if(this.cursor.right.isDown){
+                    Client.move({dir:'right', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
+                }else if(this.input.keyboard.upDuration(37,100)|| this.input.keyboard.upDuration(38,100) || this.input.keyboard.upDuration(39,100) || this.input.keyboard.upDuration(40,100)){
+                    Client.move({dir:'stationary', id:this.userInfo.id,   worldX: worldX, worldY: worldY})
+                }
             }
         }
     },
 
     newSprite : function(dbInfo){
+        // console.log(dbInfo)
         // generating sprite
         var userSprite;
         var sprite = 6;
         var avatar = 'sprite' + sprite;
-        userSprite =  this.add.sprite(dbInfo.x, dbInfo.y, avatar);
-        console.log(userSprite)
-
+        userSprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+        // console.log(userSprite)
+        console.log('id=',dbInfo.id,'x=',dbInfo.world.x,'y=',dbInfo.world.y)
         userSprite.body.maxVelocity.x = 100;
         userSprite.body.maxVelocity.y = 100;
-
+        userSprite.body.bounce.x = 1;
+        userSprite.body.bounce.y = 1
         // Setting player physics
         userSprite.body.collideWorldBounds = true;
         this.physics.enable(userSprite,Phaser.Physics.ARCADE);
-        // camera locked onto player
-        this.camera.follow(userSprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+
+        // Add events on collide
+        // userSprite.body.onCollide = new Phaser.Signal();
+        // userSprite.body.onCollide.add(this.collisionHandler,this)
+    
         
         var style = { font: "12px Arial", fill: "#000000",align:'center'};  
         var label_score = this.add.text(8, -15,dbInfo.id, style);
         userSprite.addChild(label_score);
 
-        this.playerGroup.add(userSprite)
-        this.world.bringToTop(this.playerGroup);
-        this.gameReady = true;
+        if(dbInfo.id === this.userInfo.id){
+            this.playerGroup.add(userSprite)
+            this.camera.follow(userSprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+            this.world.bringToTop(this.playerGroup);
+            console.log('user')
+        }else{
+            this.othersGroup.add(userSprite)
+            this.world.bringToTop(this.othersGroup);
+            console.log('other')
+        }
+
         
         // send movement to server
         if(sprite === 1){
@@ -155,17 +187,15 @@ LoM.Game = {
         // console.log(userSprite)
         this.playerMap[dbInfo.id] = userSprite
         
-        console.log(this.playerMap)
     },
 
     renderUser: function(userInfo){
-        console.log(this)
         this.newSprite(userInfo)
     },
 
     renderOthers: function(userArray){
         for(i = 0; i < userArray.length; i++){
-            console.log(userArray[i])
+            // camera locked onto player
             this.newSprite(userArray[i])
         }
         this.gameReady = true
@@ -177,20 +207,22 @@ LoM.Game = {
 
     // retrieve proper sprite movement
     movePlayer: function(dirInfo){
-        var player = this.playerMap[dirInfo.dir.id];
-        // console.log(dirInfo)
-        player.body.velocity.x = dirInfo.player.x;
-        player.body.velocity.y = dirInfo.player.y;
-        if(dirInfo.player.x === 0 && dirInfo.player.y === 0){
-            player.animations.stop()  
-
+        var player = this.playerMap[dirInfo.player.id];
+        player.body.velocity.x = dirInfo.player.velocity.x;
+        player.body.velocity.y = dirInfo.player.velocity.y;
+        // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
+        // play animation
+        if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
+            player.animations.stop()
+            // player.body.immovable = true; 
+            
         }else{
-            player.animations.play(dirInfo.dir.dir,10,false)
+            player.animations.play(dirInfo.dir,10,false)
         }
     },
 
     removePlayer: function(id){
-        this.playerMap[id].destroy();
+        this.playerMap[id].kill();
         delete this.playerMap[id]
     },
 
@@ -200,8 +232,20 @@ LoM.Game = {
         return layer;
     },
 
-    collisionHandler: function(){
-        Client.move('stationary')
+    collisionHandler: function(obj1,obj2){
+        obj1.body.velocity.x = -obj1.body.speed
+        obj1.body.velocity.y = -obj1.body.speed
+        console.log('collide',obj1)
+        // console.log('player collided',obj1.body.isMoving,obj2.body.isMoving)
+        obj2.body.velocity.x = 0
+        obj2.body.velocity.y = 0
+        // this.eventOccur = true
+        // console.log(this.eventOccur)
+        // setTimeout(function(){this.eventOccur = false; console.log(this.eventOccur)},4000)
+    },
+
+    randomInt: function (low,high){
+        return Math.floor(Math.random() * (high - low) + low);
     }
 }
 
