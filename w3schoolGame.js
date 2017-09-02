@@ -15,17 +15,19 @@ function startGame(){
 // --------------------------------------------------------------------
 function updateGameArea() {
     myGameArea.clear();
+    if(myChar){
     myChar.NewPos();
+    myChar.update()
+    }
 }
 
 // UPDATE CLIENTS POSITION
 // --------------------------------------------------------------------
 setInterval(function(){
     if(clients.length >= 2){
-        myChar.update();
         clients[1].update()
     }
-},100)
+},70)
 
 
 // INITIALZING CANVAS
@@ -166,9 +168,10 @@ function initalizeIOConn(){
 
 
         socket.on('clientPos', function(player){
-            console.log(player)
-            clients[1].x = player.x;
-            clients[1].y = player.y;
+            if(clients.length >= 2){
+                clients[1].x = player.x;
+                clients[1].y = player.y;
+            }
         })
 
     })

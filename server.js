@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 const path = require('path');
+const http = require('http');
 // const WebSocket = require('ws');
 const passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
@@ -19,7 +20,7 @@ const db = require('./app/models');
 
 // INITIALIZING SERVER
 // -------------------------------------------------------------
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.engine('handlebars', hdbs({
     defaultLayout: 'main', 
@@ -57,10 +58,9 @@ app.use('/messages', require(path.join(__dirname,'./app/routes/messages_controll
 
 // INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
-const http = require('http');;
-const server = http.createServer(app);
-const io = require('socket.io')(server)
-
+var server = http.createServer(app);
+var io = require('socket.io')(server)
+server.listen(port)
 // load chat ws
 require(path.join(__dirname,'./app/ws/chat.js'))(io);
 
@@ -70,14 +70,13 @@ require(path.join(__dirname,'./app/ws/game.js'))(io);
 
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
-
-db.sequelize.sync(
-    // {force: true}   
-).then(() => {
-    server.listen(port, () => {
-        console.log('listen to port',port)
-    })
-})
+// db.sequelize.sync(
+//     // {force: true}   
+// ).then(() => {
+//     server.listen(port, () => {
+//         console.log('listen to port',port)
+//     })
+// })
 
 
 
