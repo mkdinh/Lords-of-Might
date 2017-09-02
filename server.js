@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 const path = require('path');
+const http = require('http');
 // const WebSocket = require('ws');
 const passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
@@ -57,10 +58,9 @@ app.use('/messages', require(path.join(__dirname,'./app/routes/messages_controll
 
 // INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
-const http = require('http');;
-const server = http.createServer(app);
-const io = require('socket.io')(server)
-
+var server = http.createServer(app);
+var io = require('socket.io')(server)
+server.listen(port)
 // load chat ws
 require(path.join(__dirname,'./app/ws/chat.js'))(io);
 
@@ -70,7 +70,6 @@ require(path.join(__dirname,'./app/ws/game.js'))(io);
 
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
-server.listen(8080)
 // db.sequelize.sync(
 //     // {force: true}   
 // ).then(() => {

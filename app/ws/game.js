@@ -1,57 +1,56 @@
 
 module.exports = function(io){
-
-    lastPlayerID = 0;
-
+    var online = [];
+    var player = {};
+    
     io.on('connection', function(socket) {
         console.log('connected ..')  
-        socket.on('newPlayer',function(){
+        socket.on('user',function(){
             // create new player object
-            socket.player = {
-                id: lastPlayerID++,
-                x: randomInt(500,800),
-                y: randomInt(1000,1200),
+
+            player = {
+                id: randomInt(1,1000000),
+                x: randomInt(330,500),
+                y: randomInt(330,500),
                 sprite: randomInt(1,4)
             };
-            console.log(socket.player)
+            socket.player = player;
+
+            // start game
+            socket.emit('start',player)  
+            // broadcast new player to all current players
+            socket.broadcast.emit('render-user',player)      
             // emit all players to new player
             socket.emit('allplayers', getAllPlayers());
-            // broadcast new player to all current players
-            socket.broadcast.emit('new',socket.player)
-            
-            socket.on('click', function(data){
-                socket.player.x = data.x;
-                socket.player.y = data.y;
-                // broadcast to all player
-                io.emit('move',socket.player)
-            });
+        })
+        
+        socket.on('key-pressed', function(dir){
+            if(dir === 'left'){
+                player.x = -100;
+            }else if(dir === 'right'){
+                player.x = 100;
+            }else if(dir === 'up'){
+                player.y = -100;
+            }else if(dir === 'down'){
+                player.y = 100;
+            }else if(dir === 'stationary'){
+                player.x = 0;
+                player.y = 0;
+            }
+            // broadcast to all player
+            io.emit('move', {player: player, dir: dir} )
+        })  
+        
+        socket.on('testing', function(data){
+            console.log('test success!, data received: ', data)
+        })
 
-            socket.on('move', function(dir){
-                if(dir === 'left'){
-                    socket.player.x -= 100;
-                }
-                if(dir === 'right'){
-                    socket.player.x += 100;
-                }
-                if(dir === 'up'){
-                    socket.player.y -= 100;
-                }
-                if(dir === 'down'){
-                    socket.player.y += 100;
-                }if(dir === 'stationary'){
-                    socket.player.x = 0;
-                    socket.player.y = 0;
-                }
-                // broadcast to all player
-                io.emit('move', {player: socket.player, dir: dir} )
-                
-            })
 
-            socket.on('disconnect', function(){
-                io.emit('remove', socket.player.id)
-            })
-        });
-    })
+        socket.on('disconnect', function(){
+            console.log('user',player.id,'disconnected')
+            io.emit('remove', player.id)
+        })
+    });
 
     function getAllPlayers(){
         var players = [];

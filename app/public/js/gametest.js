@@ -51,18 +51,18 @@ Game.update = function(){
     game.physics.arcade.collide(sprite1, layer);
     // player movement console.lo
     if(cursor.up.isDown){
-        sprite1.body.velocity.y = -25
+        sprite1.body.velocity.y = -50
         // sprite1.body.y -= 5
     }else if(cursor.down.isDown){
         // sprite1.body.y += 5
-        sprite1.body.velocity.y = +25
+        sprite1.body.velocity.y = +50
     }else if(cursor.left.isDown){
         sprite1.body.x -= 5
     }else if(cursor.right.isDown){
         sprite1.body.x += 5
     }else{
         sprite1.body.velocity.x = 0
-        sprite1.body.velocity.y = 0
+        sprite.body.velocity.y = 0
     }
 }
 

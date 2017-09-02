@@ -1,35 +1,40 @@
-var Client = {};
+var Client = function(){
+    
+    this.socket = io.connect('http://localhost:8080');
 
-Client.socket = io.connect('http://localhost:8080');
-
-Client.askNewPlayer = function(){
-    Client.socket.emit('newPlayer')
-};
-
-Client.socket.on('new', function(data){
-    console.log('new player', data)
-    Game.addNewPlayer(data.id,data.x,data.y,data.sprite)
-})
-
-Client.socket.on('allplayers', function(data){
-    for(var i = 0; i < data.length; i++){
-        Game.addNewPlayer(data[i].id,data[i].x,data[i].y,data[i].sprite)
+    this.test = function(){
+        console.log('request received')
+        this.socket.emit('testing','testing-data')
     }
-})
 
-Client.sendClick = function(x,y){
-    Client.socket.emit('click',{x:x,y:y})
+    this.userInfoDB = function(){
+        this.socket.emit('user')
+    };
+
+    this.move = function(dir){
+        this.socket.emit('key-pressed',dir)
+    }
+
+    this.socket.on('allplayers', function(data){
+        // data.forEach(function(user){
+        //     console.log(user)
+        //     LoM.Game.newSprite(user)
+        // })
+    })
+
+    this.socket.on('move', function(data){
+        LoM.Game.movePlayer(data.player.id,data.player.x,data.player.y,data.dir)
+    })
+
+    this.socket.on('start', function(data){
+        LoM.Game.userInfo = data;
+        LoM.game.state.start('Game')
+    })
+    this.socket.on('render-user', function(data){
+        console.log('render user')
+        LoM.Game.renderUser(data)
+    })
 }
-
-
-Client.move = (function(dir){
-    Client.socket.emit('move',dir)
-
-})
-
-Client.socket.on('move', function(data){
-    Game.movePlayer(data.player.id,data.player.x,data.player.y,data.dir)
-})
 
 
 
