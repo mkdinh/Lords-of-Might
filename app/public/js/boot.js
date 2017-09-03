@@ -12,19 +12,33 @@ LoM.Boot.prototype = {
         // white background for loading screen
         this.game.stage.backgroundColor = '#fff';
         
-        // scaling options
-        // this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        // this.scale.minWidth = 240;
-        // this.scale.minHeight = 170;
-        // this.scale.maxWidth = 2880;
-        // this.scale.maxHeight = 1920;
-
-        //have the game centered horizontally
-	    // this.scale.pageAlignHorizontally = true;
-    
         //physics system for movement
         
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.world.setBounds(0, 0, 950, 1583)
+        this.world.enableBody = true;
 
         this.state.start('Preload');
-    }
+    },
+
+    removePlayer: function(id){
+        this.groupMap.players[id].kill();
+        delete this.groupMap.players[id]
+    },
+
+    // retrieve proper sprite movement
+    movePlayer: function(dirInfo){
+        var player = this.spriteMap.players[dirInfo.player.id];
+
+        player.body.velocity.x = dirInfo.player.velocity.x;
+        player.body.velocity.y = dirInfo.player.velocity.y;
+        // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
+
+        // play animation
+        if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
+            player.animations.stop()
+        }else{
+            player.animations.play(dirInfo.dir,10,false)
+        }
+    },
 }

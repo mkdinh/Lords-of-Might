@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- Custom CSS -->
+        {{!-- <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" /> --}}
+        <!-- Custom CSS -->
+        <title>Sign Up - Lords of Might</title>
+        <style>
+            button {
+                font-size: 25px
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>
+            <button type='submit' id='add-head'>Add head</button>
+            <button type='submit' id='add-torso'>Add torso</button>
+            <button type='submit' id='add-legs'>Add legs</button>
+            <button type='submit' id='add-weapon'>Add weapon</button>
+        </h1>
+                <h1>
+            <button type='submit' id='undo-head'>Undo head</button>
+            <button type='submit' id='undo-torso'>Undo torso</button>
+            <button type='submit' id='undo-legs'>Undo legs</button>
+            <button type='submit' id='undo-weapon'>Undo weapon</button>
+        </h1>
+        <canvas id='canvas' width='832' height='1344'>
+        <script src='/js/sprite.js'> </script>
+    </body>
+
+</html>

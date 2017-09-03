@@ -6,6 +6,11 @@ router.get('/', (req,res) => {
     res.render('index',{loggedIn: isLoggedIn})
 })
 
+
+router.get('/sprite', (req,res) => {
+    res.render('sprite')
+})
+
 router.get('/game', (req,res) => {
     var isLoggedIn = !!req.user;
     res.render('game', {loggedIn: isLoggedIn})

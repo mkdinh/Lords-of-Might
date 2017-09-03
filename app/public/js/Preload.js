@@ -22,6 +22,5 @@ LoM.Preload.prototype = {
     create: function(){
         
         Client.userInfoDB();
-        // this.state.start("Game")
     }
 }
