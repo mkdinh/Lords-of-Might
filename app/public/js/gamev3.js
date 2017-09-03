@@ -21,70 +21,27 @@ LoM.Game = {
     create: function(){
 
         // GAME VIEWS INITIALIZATION
-        // ------------------------------------------------------------
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.world.enableBody = true;
-        // heep track of all players
-        this.playerMap = {};
-        this.npcMap = {};
-        this.enemyMap = {};
-
+        // -----------------------------------------------------------
         this.gameReady = false;
-        
-
-
-        // create collision groups
-        this.playerGroup = this.add.group();
-        this.playerGroup.enableBody = true;
-        this.playerGroup.physicsBodyType = Phaser.Physics.ARCADE;
-        
-        this.othersGroup = this.add.group();
-        this.othersGroup.enableBody = true;
-        this.othersGroup.physicsBodyType = Phaser.Physics.ARCADE; 
-
-        this.npcGroup = this.add.group();
-        this.npcGroup.enableBody = true;
-        this.npcGroup.physicsBodyType = Phaser.Physics.ARCADE; 
-
-        this.layerGroup = this.add.group();
-        this.layerGroup.enableBody = true;
-        this.layerGroup.physicsBodyType = Phaser.Physics.ARCADE;
-        
-        // random sprites
-        // var sprite1 = this.add.sprite(350,250,'sprite2');
- 
-        // sprite2.body.immovable = true;
-        // this.layerGroup.add(sprite1);
-        // this.layerGroup.add(sprite2);
-
-        // populate map with layers 
+         
+        // setting world 
         this.map = this.add.tilemap('map');
         this.map.addTilesetImage('tilesheet','tileset');
-        
-        // set boundary of game state
-        this.world.setBounds(0, 0, 950, 1583);
-        
-        this.layerCollisions = [];
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.world.setBounds(0, 0, 950, 1583)
+        this.world.enableBody = true;
 
-        for(var i = 0; i < this.map.layers.length; i++) {
-            if(i !== 7){
-                this.layer = this.map.createLayer(i);
-            }
-        };
+        // generate data map
+        this.groupMap = {}
+        this.spriteMap = {}
 
-        // SET LAYERS COLLISION WITH SRPITES
-        // -------------------------------------------------------------
-        // set map collision
-        this.layerCollisions.push(this.addLayerCollisions('Houses',[2,3,4]));
-        this.layerCollisions.push(this.addLayerCollisions('Trees2',[212,213,214,215]));
-        // console.log(this.layerCollisions)
-        // allow clicking on map
-        // this.layer.inputEnabled = true; 
-    
-        // debugging collisions
-        this.layerCollisions.forEach(function(layer){
-            layer.debug = true;
-        })
+        
+        this.genGroupMap()
+        this.genSpriteMap()
+;
+        // generate layerx and layer collisions
+        this.genLayers();
+        this.genLayerCollisions('Houses','shop',this.buildingInteractions);
 
         // add user sprite to game state
         // console.log(this.playerArray)
@@ -101,10 +58,7 @@ LoM.Game = {
         }
         
         this.newSprite(sprite2Info);
-        this.sprite2 = this.npcMap['sample'];
-
-        // this.othersGroup.add(sprite1)
-        // this.othersGroup.add(this.sprite2)
+        this.sprite2 = this.groupMap.npcs['sample'];
 
         this.gameReady = true;
 
@@ -118,11 +72,13 @@ LoM.Game = {
     // -------------------------------------------------------------------------------------------    
     update: function(){
         if(this.gameReady){
-            this.physics.arcade.collide(this.playerGroup,this.othersGroup, this.collisionHandler, null, this);
-            this.physics.arcade.collide(this.playerGroup,this.npcGroup, this.collisionHandler, null, this);
-
-            var worldX = this.playerMap[this.userInfo.id].worldPosition.x;
-            var worldY = this.playerMap[this.userInfo.id].worldPosition.y
+            
+            this.physics.arcade.collide(this.groupMap.players, this.groupMap.players, this.playerInteractions, null, this);
+            this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.npcInteractions, null, this);
+            this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions['shop'],this.spriteMap.collisions['shop'].data['onCollide'], null, this);
+                
+            var worldX = this.spriteMap.players[this.userInfo.id].worldPosition.x;
+            var worldY = this.spriteMap.players[this.userInfo.id].worldPosition.y
 
             if(!this.eventOccur){
                 if(this.cursor.up.isDown){
@@ -143,134 +99,210 @@ LoM.Game = {
     newSprite : function(dbInfo){
         // console.log(dbInfo)
         // generating sprite
-        // console.log(dbInfo)
-        var userSprite;
-        var sprite = 6;
-        var avatar = 'sprite' + sprite;
-        userSprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
-        // console.log(userSprite)
+        var sprite;
+        dbInfo.sprite = 4
+        var spriteNum = dbInfo.sprite; 
+        var avatar = 'sprite' + spriteNum;
+        sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+        sprite.data = dbInfo;
+        // console.log(sprite)
         console.log('id=',dbInfo.id,'x=',dbInfo.world.x,'y=',dbInfo.world.y)
-        userSprite.body.maxVelocity.x = 100;
-        userSprite.body.maxVelocity.y = 100;
-        userSprite.body.bounce.x = 1;
-        userSprite.body.bounce.y = 1;
+        sprite.body.maxVelocity.x = 100;
+        sprite.body.maxVelocity.y = 100;
+        sprite.body.bounce.x = 1;
+        sprite.body.bounce.y = 1;
 
         // Setting player physics
-        userSprite.body.collideWorldBounds = true;
-        this.physics.enable(userSprite,Phaser.Physics.ARCADE);
+        sprite.body.collideWorldBounds = true;
+        this.physics.enable(sprite,Phaser.Physics.ARCADE);
 
         // Add events on collide
-        // userSprite.body.onCollide = new Phaser.Signal();
-        // userSprite.body.onCollide.add(this.collisionHandler,this)
+        // sprite.body.onCollide = new Phaser.Signal();
+        // sprite.body.onCollide.add(this.collisionHandler,this)
     
         
         var style = { font: "12px Arial", fill: "#000000",align:'center'};  
         var label_score = this.add.text(8, -15,dbInfo.id, style);
-        userSprite.addChild(label_score);
+        sprite.addChild(label_score);
 
         if(dbInfo.id === 'npc'){
-            this.npcGroup.add(userSprite)
-            this.world.bringToTop(this.npcGroup);
-            console.log('other')
-        }else if(dbInfo.id === this.userInfo.id){
-            this.playerGroup.add(userSprite)
-            this.camera.follow(userSprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
-            this.world.bringToTop(this.playerGroup);
-            console.log('user')
+            this.groupMap.npcs.add(sprite)
+            this.world.bringToTop(this.groupMap.npcs);
         }else{
-            this.othersGroup.add(userSprite)
-            this.world.bringToTop(this.othersGroup);
-            console.log('other')
+            this.groupMap.players.add(sprite)
+            this.world.bringToTop(this.groupMap.players);
+            console.log('players')
         }
 
-        
-        // send movement to server
-        if(sprite === 1){
-            userSprite.animations.add('up', Phaser.Animation.generateFrameNames('sprite', 7, 12), 5, true);
-            userSprite.animations.add('down', Phaser.Animation.generateFrameNames('sprite', 1, 6), 5, true);
-            userSprite.animations.add('left', Phaser.Animation.generateFrameNames('sprite', 19, 23), 5, true);
-            userSprite.animations.add('right', Phaser.Animation.generateFrameNames('sprite', 13, 17), 5, true);
-        }else if(sprite === 2 || sprite === 3 || sprite === 4){
-            userSprite.animations.add('up',[3,4,5,6],true);
-            userSprite.animations.add('down',[21,22,23,24],true);
-            userSprite.animations.add('left',[10,11,12,13],true);
-            userSprite.animations.add('right',[28,29,30,31],true);
-        }else if(sprite === 5 || sprite === 6){
-            userSprite.animations.add('up',[105,106,107,108,109,110,111,112],true);
-            userSprite.animations.add('down',[131,132,133,134,135],true);
-            userSprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
-            userSprite.animations.add('right',[144,145,146,147,148],true);
+        if(dbInfo.id === this.userInfo.id){
+            this.camera.follow(sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
         }
-        console.log(dbInfo.id)
+
+        this.genAnimations(sprite)
+
         // Keep track of total players
-        // console.log(userSprite)
+        // console.log(sprite)
         if(dbInfo.id === 'npc'){
-            this.npcMap[dbInfo.name] = userSprite
-            console.log(this.npcMap)
+            this.spriteMap.npcs[dbInfo.name] = sprite
         }else{
-            this.playerMap[dbInfo.id] = userSprite
+            this.spriteMap.players[dbInfo.id] = sprite
         }
-    },
-
-    renderUser: function(userInfo){
-        this.newSprite(userInfo)
-    },
-
-    renderOthers: function(userArray){
-        for(i = 0; i < userArray.length; i++){
-            // camera locked onto player
-            this.newSprite(userArray[i])
-        }
-        this.gameReady = true
     },
 
     render: function(){
         // this.debug.spriteInfo(this.playerMap[userInfo.id], 32, 32);
     },
 
+    removePlayer: function(id){
+        this.groupMap.players[id].kill();
+        delete this.groupMap.players[id]
+    },
+
     // retrieve proper sprite movement
     movePlayer: function(dirInfo){
-        var player = this.playerMap[dirInfo.player.id];
+        var player = this.spriteMap.players[dirInfo.player.id];
+
         player.body.velocity.x = dirInfo.player.velocity.x;
         player.body.velocity.y = dirInfo.player.velocity.y;
         // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
+
         // play animation
         if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
             player.animations.stop()
-            // player.body.immovable = true; 
-            
         }else{
             player.animations.play(dirInfo.dir,10,false)
         }
     },
 
-    removePlayer: function(id){
-        this.playerMap[id].kill();
-        delete this.playerMap[id]
+    // addLayerCollisions: function(name,exArray){
+    //     var layer = this.map.createLayer(name);
+    //     return layer;
+    // },
+
+    randomInt: function (low,high){
+        return Math.floor(Math.random() * (high - low) + low);
     },
 
-    addLayerCollisions: function(name,exArray){
-        var layer = this.map.createLayer(name);
-        this.map.setCollisionByExclusion(exArray,true, "Houses",false)
-        return layer;
+    buildingInteractions: function(obj1,obj2){
+        console.log('hey')
+        var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 400, align: "center", backgroundColor: "#ffff00" };
+        var t = this.add.text(this.camera.x + (this.width/2), this.camera.y + (this.height/2), "New building, open soon!", style);
+        t.fixedToCamera = true;
+        t.cameraOffset.setTo(200, 500);
     },
 
-    collisionHandler: function(obj1,obj2){
-        obj1.body.velocity.x = -obj1.body.speed
-        obj1.body.velocity.y = -obj1.body.speed
-        console.log('collide',obj1)
+    npcInteractions: function(npc){
+        // console.log('interacts with npc')
+    },
+
+    playerInteractions: function(obj1,obj2){
+        obj1.body.velocity.x = -obj1.body.speed;
+        obj1.body.velocity.y = -obj1.body.speed;
+        console.log('collide',obj1);
         // console.log('player collided',obj1.body.isMoving,obj2.body.isMoving)
-        obj2.body.velocity.x = 0
-        obj2.body.velocity.y = 0
+        obj2.body.velocity.x = 0;
+        obj2.body.velocity.y = 0;
         // this.eventOccur = true
         // console.log(this.eventOccur)
         // setTimeout(function(){this.eventOccur = false; console.log(this.eventOccur)},4000)
     },
 
-    randomInt: function (low,high){
-        return Math.floor(Math.random() * (high - low) + low);
+    genGroupMap: function(){
+        // layers
+        this.groupMap.layers = this.add.group();
+        this.groupMap.layers.enableBody = true;
+        this.groupMap.layers.physicsBodyType = Phaser.Physics.ARCADE;
+
+        // layer collisions
+        this.groupMap.layerCollisions = this.add.group();
+ 
+        // players
+        this.groupMap.players = this.add.group();
+        this.groupMap.players.enableBody = true;
+        this.groupMap.players.physicsBodyType = Phaser.Physics.ARCADE;
+        
+        // non playables
+        this.groupMap.npcs = this.add.group();
+        this.groupMap.npcs.enableBody = true;
+        this.groupMap.npcs.physicsBodyType = Phaser.Physics.ARCADE; 
+
+        this.groupMap.enemies = this.add.group();
+        this.groupMap.enemies.enableBody = true;
+        this.groupMap.enemies.physicsBodyType = Phaser.Physics.ARCADE; 
+
+        // this.groupMap.othersGroup = this.add.group();
+        // this.groupMap.othersGroup.enableBody = true;
+        // this.groupMap.othersGroup.physicsBodyType = Phaser.Physics.ARCADE; 
+
+    },
+    
+    genSpriteMap: function(){
+                this.spriteMap.players = {};
+                this.spriteMap.npcs = {};
+                this.spriteMap.enemies = {};
+                this.spriteMap.objects = {};
+                this.spriteMap.collisions = {}
+    },
+
+    genLayers: function(){
+        
+        // generate layers
+        for(var i = 0; i < this.map.layers.length; i++) {
+            this.groupMap.layers.add(this.map.createLayer(i));
+        };
+
+        // this.groupMap.layers.children.forEach(function(layer){
+        //     layer.debug = true;
+        // })
+    },
+
+    genLayerCollisions: function(layer,name,interaction) {
+        // SET LAYERS COLLISION WITH SRPITES
+        // -------------------------------------------------------------
+        var layerIndex = this.map.getLayer(layer);
+        
+        var layerData = this.map.layers[layerIndex];
+        layerData.debug = true
+        // set map collision
+        this.map.setCollisionBetween(147,148,true,layer,true);
+        this.map.setCollisionBetween(1595,1596,true,layer,true);
+        this.map.setCollisionBetween(1662,1662,true,layer,true);
+        this.spriteMap.collisions[name] = this.map.createLayer(layer);
+        this.spriteMap.collisions[name].data['onCollide'] = interaction 
+        console.log(this.spriteMap.collisions[name].data)
+
+        
+        
+        // allow clicking on map
+        // this.layer.inputEnabled = true; 
+    },
+    
+    genAnimations: function(sprite){
+        // send movement to server
+        spriteNum = sprite.data.sprite
+        if(spriteNum === 1){
+            sprite.animations.add('up', Phaser.Animation.generateFrameNames('sprite', 7, 12), 5, true);
+            sprite.animations.add('down', Phaser.Animation.generateFrameNames('sprite', 1, 6), 5, true);
+            sprite.animations.add('left', Phaser.Animation.generateFrameNames('sprite', 19, 23), 5, true);
+            sprite.animations.add('right', Phaser.Animation.generateFrameNames('sprite', 13, 17), 5, true);
+        }else if(spriteNum === 2 || spriteNum === 3 || spriteNum === 4){
+            sprite.animations.add('up',[3,4,5,6],true);
+            sprite.animations.add('down',[21,22,23,24],true);
+            sprite.animations.add('left',[10,11,12,13],true);
+            sprite.animations.add('right',[28,29,30,31],true);
+        }else if(spriteNum === 5 || spriteNum === 6){
+            sprite.animations.add('up',[105,106,107,108,109,110,111,112],true);
+            sprite.animations.add('down',[131,132,133,134,135],true);
+            sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
+            sprite.animations.add('right',[144,145,146,147,148],true);
+        }
+    },
+    
+    checkCollisions: function(){
+
     }
 }
+
 
 // var Game = {};
 // var layer=[];
