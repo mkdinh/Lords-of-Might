@@ -8,42 +8,45 @@
     <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/signUp.css" />
+    <!-- Lord of Might Font-->
+    <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
     <title>Sign Up - Lords of Might</title>
 </head>
 
 <body>
 
-    <div id='signup-wrapper' style='display:inline-block; margin-left: 3rem'>
-        <h1>Sign Up</h1>
+    <div class="row">
+        <div id='signup-wrapper'>
+            <h1>JOIN LORDS OF MIGHT</h1>
 
-        <form action="/users/new" method="post" autocomplete="off">
-            <div>
-                <label>Username:</label>
-                <input type="text" id='signup-username' name="username" />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" id='signup-password' name="password" />
-            </div>
-            <div>
-                <input type="submit" value="Signup!" />
-            </div>
-        </form>
+            <form action="/users/new" method="post" autocomplete="off">
+                <div>
+                    <label>CREATE A USERNAME:</label>
+                    <input type="text" id='signup-username' name="username" style="width: 235px; margin-left: 200px;" />
+                </div>
+                <div>
+                    <label>MAKE A PASSWORD:</label>
+                    <input type="password" id='signup-password' name="password" style="width: 235px; margin-left: 200px;" />
+                </div>
+                <div>
+                    <input id="button" type="submit" value="NEXT" />
+                </div>
+            </form>
+        </div>
     </div>
-
-
 
     <!-- Foundation JQuery-->
     <script src="css/foundation/js/vendor/jquery.js"></script>
 
     <!-- Foundation JavaScript-->
-    <script src="js/vendor/foundation.min.js"></script>
+    <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
     <script>
         $(document).foundation();
 
     </script>
-    <script src='/js/index.js'></script>
+    <script src='/js/signUp.js'></script>
+
 </body>
 
 </html>
