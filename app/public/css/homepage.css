@@ -3,12 +3,23 @@ body{
 	background-color: black;
 }
 
-h1 {
+h2 {
 	font-family: 'Metamorphous', cursive;
+	color: #3f3fa7;
+	font-size: 50px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	margin-bottom: 0px;
+}
+
+
+
+p {
+	color: white;
 }
 
 .button{
-	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-top: 5px;
 	padding: 20px;
     outline: none;
     border-radius: 15px;
@@ -16,6 +27,14 @@ h1 {
     border: 1px solid #060669;
 }
 
+.button:hover{
+	background-color: white;
+	color: #3f3fa7;
+}
+
+#logo {
+	width: 200px;
+}
 
 .orbit-slide {
 	margin-top: 
