@@ -8,8 +8,6 @@ Client.userInfoDB = function(){
 
 
 Client.socket.on('render-user', function(data){
-    console.log('render user')
-    console.log(data)
     LoM.Game.renderUser(data.new)
 })
 
@@ -18,14 +16,12 @@ Client.move = function(movement){
 }
 
 Client.socket.on('start', function(data){
-    console.log(data)
     LoM.Game.userInfo = data.user;
     LoM.Game.playerArray = data.others
     LoM.game.state.start('Game')
 })
 
 Client.socket.on('move', function(data){
-    // console.log(data)
     LoM.Game.movePlayer(data)
 })
 

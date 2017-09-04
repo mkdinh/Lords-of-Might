@@ -20,7 +20,7 @@ LoM.Preload.prototype = {
     this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);
     },
     create: function(){
+        
         Client.userInfoDB();
-        // this.state.start("Game")
     }
 }

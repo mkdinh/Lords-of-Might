@@ -12,6 +12,7 @@ module.exports = function(io){
 
             player = {
                 id: randomInt(1,1000000),
+                role: 'player',
                 world:{x:randomInt(350,500),y:randomInt(350,500)},
                 velocity: {x:0,y:0},
                 sprite: randomInt(1,4)

@@ -20,7 +20,7 @@ const db = require('./app/models');
 
 // INITIALIZING SERVER
 // -------------------------------------------------------------
-const port = process.env.PORT || 8080;
+var port = process.env.PORT || 8080;
 
 app.engine('handlebars', hdbs({
     defaultLayout: 'main',

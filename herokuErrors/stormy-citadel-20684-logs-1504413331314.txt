@@ -1,0 +1,11 @@
+2017-09-03T04:31:32.756967+00:00 app[web.1]: npm ERR!     node server.js
+2017-09-03T04:31:32.757101+00:00 app[web.1]: npm ERR! You can get information on how to open an issue for this project with:
+2017-09-03T04:31:32.757229+00:00 app[web.1]: npm ERR!     npm bugs rpg
+2017-09-03T04:31:32.757368+00:00 app[web.1]: npm ERR! Or if that isn't available, you can get their info via:
+2017-09-03T04:31:32.757500+00:00 app[web.1]: npm ERR!     npm owner ls rpg
+2017-09-03T04:31:32.757626+00:00 app[web.1]: npm ERR! There is likely additional logging output above.
+2017-09-03T04:31:32.761204+00:00 app[web.1]: 
+2017-09-03T04:31:32.761418+00:00 app[web.1]: npm ERR! Please include the following file with any support request:
+2017-09-03T04:31:32.761531+00:00 app[web.1]: npm ERR!     /app/npm-debug.log
+2017-09-03T04:31:32.823399+00:00 heroku[web.1]: Process exited with status 1
+2017-09-03T04:31:32.836902+00:00 heroku[web.1]: State changed from starting to crashed
