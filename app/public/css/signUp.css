@@ -1,3 +1,24 @@
 body {
-    background: blue;
+    background: url("../img/mainBackground.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+}
+
+h1,
+label,
+input {
+    font-family: 'Metamorphous', cursive;
+    color: white;
+}
+
+#signup-wrapper {
+    border: 1px solid #3f3fa7;
+    border-radius: 30px;
+    margin-top: 175px;
+    margin-left: 360px;
+    margin-right: 360px;
+    padding: 30px;
+    background-color: rgba(6, 6, 105, 0.8);
+    text-align: center;
+    color: white;
+    font-family: 'Metamorphous', cursive;
 }
