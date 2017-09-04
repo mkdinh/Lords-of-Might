@@ -1,14 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     var isLoggedIn = !!req.user;
-    res.render('index',{loggedIn: isLoggedIn})
+    res.render('index', {
+        loggedIn: isLoggedIn
+    })
 })
 
-router.get('/game', (req,res) => {
+router.get('/signUp', function (req, res) {
+    res.render('signUp', {})
+})
+
+
+router.get('/game', (req, res) => {
     var isLoggedIn = !!req.user;
-    res.render('game', {loggedIn: isLoggedIn})
+    res.render('game', {
+        loggedIn: isLoggedIn
+    })
 })
 
 module.exports = router;
