@@ -18,7 +18,12 @@
 
 </head>
 <body>
-<embed name="conan" src="/audio/conan.mp3" loop="true" hidden="false" autostart="true">
+<!-- <embed src="/audio/conan.mp3"
+    loop="true" 
+    autoplay="true" 
+    width="0" 
+    height="0">
+</embed -->>
 
 <!-- Row class no "Containers" in FOundation-->
 <div class="grid-x">
@@ -29,7 +34,7 @@
     <a class="button">Sign Up</a>
   </div>
   <div class="medium-2 large-2 cell">
-    <a class="button">Login</a>
+    <a class="button" id="login-btn">Login</a>
     </div>
 </div>   
 
@@ -42,25 +47,25 @@
     <ul class="orbit-container">
       <li class="is-active orbit-slide">
         <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/medieval characters.jpg" alt="Space">
+          <img class="orbit-image" src="/img/medieval-characters.jpg" style="height:500px;" alt="characters">
           <figcaption class="orbit-caption text-center">Choose Your Character</figcaption>
         </figure>
       </li>
       <li class="orbit-slide">
         <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/weapons-pic.jpg" alt="Space">
+          <img class="orbit-image" src="/img/weapons-pic.jpg" style="height:500px;"  alt="weapons">
           <figcaption class="orbit-caption text-center">Select Your Weapons</figcaption>
         </figure>
       </li>
       <li class="orbit-slide">
         <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/duel.jpg" alt="Space">
+          <img class="orbit-image" src="/img/duel.jpg" style="height:500px;" alt="Space">
           <figcaption class="orbit-caption text-center">Battle Your Enemies</figcaption>
         </figure>
       </li>
       <li class="orbit-slide">
         <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/victory.jpg" alt="Space">
+          <img class="orbit-image" src="/img/victory.jpg" style="height:500px;" alt="Space">
           <figcaption class="orbit-caption text-center">Conquer the Land</figcaption>
         </figure>
       </li>
@@ -74,6 +79,9 @@
   </nav>
 </div>
 
+
+
+
     <!-- Foundation JQuery-->
     <script src="css/foundation/js/vendor/jquery.js"></script>
 
@@ -81,7 +89,8 @@
     <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
     <script>
-        $(document).foundation();
+$(document).foundation();
+
 
     </script>
     <script src='/js/index.js'></script>
