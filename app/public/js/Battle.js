@@ -161,6 +161,25 @@ LoM.Battle = {
                 sprite.animations.play('left',10, true)
             })
 
+            
+            var addHealth = sprite.animations.add('potion',[260,260,260,260,260,260,260,260,261,262,262,262,261,260,260,260,143],false);
+
+                addHealth.onStart.add(function(){
+
+                var potionH = LoM.Game.add.sprite(210, 0,'health')
+                potionH.scale.x= .25;
+                potionH.scale.y= .25;
+        
+                falling = LoM.Game.add.tween(potionH).to({y: 330},1000,'Bounce',false)
+                    falling.onComplete.add(function(){
+                        potionH.kill();
+                        
+                    })
+                    
+                falling.start();
+
+            })
+
             var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
             
         }else if(sprite.data.position === 'receiver'){
@@ -247,6 +266,24 @@ LoM.Battle = {
                 sprite.animations.play('right',10, true)
             })
 
+            var addHealth = sprite.animations.add('potion',[260,260,260,260,260,260,260,260,261,262,262,262,261,260,260,260,117],false);
+            
+                addHealth.onStart.add(function(){
+
+                var potionH = LoM.Game.add.sprite(565, 0,'health')
+                potionH.scale.x= .25;
+                potionH.scale.y= .25;
+        
+                falling = LoM.Game.add.tween(potionH).to({y: 330},1000,'Bounce',false)
+                    falling.onComplete.add(function(){
+                        potionH.kill();
+                        
+                    })
+                    
+                falling.start();
+
+            })
+
             var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
         }
     },
@@ -260,7 +297,7 @@ LoM.Battle = {
         this.spriteMap[id].animations.play('spell', 10,  false)
     },
     potion: function(battleInfo,id){
-        this.spriteMap[id].animations.play('die', 10,  false)
+        this.spriteMap[id].animations.play('potion', 10,  false)
     }
 }
 
