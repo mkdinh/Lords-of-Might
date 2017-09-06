@@ -17,7 +17,7 @@ LoM.Boot.prototype = {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.world.setBounds(0, 0, 950, 1583)
         this.world.enableBody = true;
-        console.log('booting')
+        console.log('booting stuff')
         this.state.start('Preload');
     }
 }
