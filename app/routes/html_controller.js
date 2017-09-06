@@ -4,7 +4,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     // var isLoggedIn = !!req.user;
     res.render('index', {
-        loggedIn: isLoggedIn
+        // loggedIn: isLoggedIn
     })
 })
 
@@ -18,9 +18,9 @@ router.get('/sprite', (req,res) => {
 
 router.get('/game', (req,res) => {
 
-    var isLoggedIn = !!req.user;
+    // var isLoggedIn = !!req.user;
     res.render('game', {
-        loggedIn: isLoggedIn
+        // loggedIn: isLoggedIn
     })
 })
 
