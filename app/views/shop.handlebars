@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/shop.css" />
+    <!-- Lord of Might Font-->
+    <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+    <title>Shop - Lords of Might</title>
+</head>
+
+<body>
+
+    <!--
+<div class="row">
+    <h1 style="text-align: center; margin-top: 30px;">WHAT WOULD YOU LIKE TO BUY?</h1>
+</div>
+-->
+
+    <div class="row">
+
+        <!-- main content container-->
+        <div id="pageContainer">
+
+            <h1 style="text-align: center;">WHAT WOULD YOU LIKE TO BUY?</h1>
+
+            <!-- user profile picture-->
+            <div id="userProfile">
+                <p id="charName">USERNAME</p>
+            </div>
+
+            <!-- List of items to buy at the shop-->
+            <div id="items">
+                <p>SWORDS :</p>
+                <select>
+                <option value="volvo">Main-Gauche</option>
+                  <option value="saab">Footmans Sword</option>
+                  <option value="mercedes">Cutlass</option>
+                  <option value="audi">Great Sword</option>
+                </select>
+
+                <p>AXES : </p>
+                <select>
+                    <option value="volvo">Hatchet</option>
+                  <option value="saab">Felling Axe</option>
+                  <option value="mercedes">War Axe</option>
+                  <option value="audi">Great Axe</option>
+                </select>
+
+                <p>BOWS & CROSSBOWS :</p>
+                <select>
+                    <option value="volvo">Horse Bow</option>
+                  <option value="saab">Horn Bow </option>
+                  <option value="mercedes">Long Bow</option>
+                  <option value="audi">Great Bow</option>
+                </select>
+
+                <p>BOOTS: </p>
+                <select>
+                    <option value="volvo">Carbatine</option>
+                  <option value="saab">Clog</option>
+                  <option value="mercedes">Corked</option>
+                  <option value="audi">Great Boots</option>
+                </select>
+
+                <!--
+<select>
+                  <option value="volvo">Cloaks</option>
+                  <option value="volvo">Volvo
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+
+<select>
+                  <option value="volvo">Caps</option>
+                  <option value="volvo">Volvo
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+
+<select>
+                  <option value="volvo">Antidote</option>
+                  <option value="volvo">Volvo
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+-->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Foundation JQuery-->
+    <script src="css/foundation/js/vendor/jquery.js"></script>
+
+    <!-- Foundation JavaScript-->
+    <script src="css/foundation/js/vendor/foundation.min.js"></script>
+
+    <script>
+        $(document).foundation();
+
+    </script>
+    <script src='/js/shop.js'></script>
+
+</body>
+
+</html>

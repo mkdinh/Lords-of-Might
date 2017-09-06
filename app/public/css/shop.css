@@ -1,0 +1,63 @@
+body {
+    background: url("../img/preloadBG.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    color: white;
+    font-family: 'Metamorphous', cursive;
+}
+
+h1 {
+    font-family: 'Metamorphous', cursive;
+}
+
+
+/*ONLY POSITIONING*/
+
+#pageContainer {
+    padding: 20px;
+    margin: 20px;
+    margin-top: 50px;
+    height: 630px;
+}
+
+#userProfile {
+    padding: 10px;
+    margin: 10px;
+    margin-top: 30px;
+    height: 450px;
+    width: 550px;
+    float: left;
+}
+
+#items {
+    margin: 10px;
+    margin-left: 640px;
+    margin-top: 43px;
+    padding: 20px;
+    height: 415px;
+    font-size: 15px;
+}
+
+#charName {
+    text-align: center;
+}
+
+
+/*START OF DESIGNING*/
+
+#pageContainer {
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #3f3fa7;
+    border-radius: 30px;
+}
+
+#items {
+    border: 1px solid #3f3fa7;
+    border-radius: 30px;
+    background-color: rgba(6, 6, 105, 0.8);
+}
+
+#userProfile {
+    border: 1px solid #3f3fa7;
+    border-radius: 30px;
+    background-color: rgba(6, 6, 105, 0.8);
+}

@@ -1,0 +1,99 @@
+body {
+    background: url("../img/preloadBG.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+}
+
+#navDiv {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #060669;
+    color: white;
+    font-family: 'Metamorphous', cursive;
+    border-bottom: 1px solid #3f3fa7;
+    font-size: 30px;
+}
+
+#logoutButton {
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    padding: 15px;
+    color: white;
+    outline: none;
+}
+
+#logoutButton:hover {
+    border-left: 1px solid #3f3fa7;
+    border-right: 1px solid #3f3fa7;
+    color: #7979e0;
+}
+
+#button-container {
+    padding: 20px;
+}
+
+#fight {
+    color: white;
+    margin-top: 40px;
+    margin-left: 150px;
+    font-size: 40px;
+    font-family: 'Metamorphous', cursive;
+    padding: 20px;
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #3f3fa7;
+    border-radius: 20px;
+    width: 200px;
+    outline: none;
+}
+
+#shop {
+    color: white;
+    font-size: 40px;
+    margin-left: 100px;
+    font-family: 'Metamorphous', cursive;
+    border: 1px solid #3f3fa7;
+    padding: 20px;
+    background-color: rgba(6, 6, 105, 0.8);
+    border-radius: 20px;
+    width: 200px;
+    outline: none;
+}
+
+#shop:hover {
+    background-color: #060669;
+    border: 1px solid #3f3fa7;
+    color: #7979e0;
+}
+
+#fight:hover {
+    background-color: #060669;
+    border: 1px solid #3f3fa7;
+    color: #7979e0;
+}
+
+#statContainer {
+    margin: 30px;
+    margin-top: 40px;
+    color: white;
+    font-family: 'Metamorphous', cursive;
+}
+
+#userStat {
+    background-color: rgba(6, 6, 105, 0.8);
+    border-radius: 20px;
+    border: 1px solid #3f3fa7;
+    padding: 20px;
+    width: 36%;
+    float: left;
+    height: 380px;
+    margin-left: 40px;
+}
+
+#image-container {
+    background: url('../img/test-image.jpg')no-repeat center;
+    background-color: rgba(6, 6, 105, 0.8);
+    border-radius: 20px;
+    border: 1px solid #3f3fa7;
+    margin-left: 620px;
+    padding: 40px;
+    height: 380px;
+}

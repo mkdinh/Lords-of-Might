@@ -2,32 +2,65 @@
 <html>
 
 <head>
-    <title>Dummy Handlebar</title>
-    <meta charset="utf-8">
-    <!-- Foundation CSS -->
-    <link rel="stylesheet" href="css/foundation.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/userPage.css" />
+    <!-- Lord of Might Font-->
+    <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+    <title>User - Lords of Might</title>
 </head>
-
-
 
 <body>
 
+    <!--navbar-->
+    <div class="top-bar" id="navDiv">
 
+        <div class="top-bar-left">
+            WELCOME USERNAME!
+            <div id="username"></div>
+        </div>
 
+        <button class="top-bar-right" id="logoutButton">
+            LOGOUT
+        </button>
 
+    </div>
 
+    <!--fight or shop-->
+    <div id="button-container">
+        <button id="fight">
+            FIGHT
+        </button>
 
+        <button id="shop">
+            SHOP
+        </button>
+    </div>
 
-
-
+    <!-- character image-->
+    <div class="row" id="statContainer">
+        <div id="userStat">
+            <p style="border-bottom: 1px solid white;">Attributes</p>
+            <p>Speed : 80</p>
+            <p>Attack : 75</p>
+            <p>Defend : 85</p>
+            <p>Heal : 65</p>
+            <p style="border-top: 1px solid white;"> </p>
+            <p style="text-align: center; ">HINT</p>
+            <p style="text-align: center;">VISIT THE SHOP TO INCREASE YOUR PLAYER ATTRIBUTES!</p>
+        </div>
+        <div id="image-container">
+        </div>
+    </div>
 
     <!-- Foundation JQuery-->
-    <script src="js/vendor/jquery.js"></script>
+    <script src="css/foundation/js/vendor/jquery.js"></script>
 
     <!-- Foundation JavaScript-->
-    <script src="js/vendor/foundation.min.js"></script>
+    <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
     <script>
         $(document).foundation();
