@@ -23,6 +23,7 @@ LoM.Battle = {
     },
     create: function(){
         this.spriteMap = {}
+        this.tweenMap = {}
 
         this.createReceiver(this.battleInfo.receiver)
         this.createInitiator(this.battleInfo.initiator)
@@ -48,7 +49,7 @@ LoM.Battle = {
 
         this.battleInfo.initiator.position = "initiator";
 
-        this.addBattleAnimations(sprite)
+        this.addBattleAnimations(sprite,info.id)
 
         this.spriteMap[info.id] = sprite
     },
@@ -68,27 +69,63 @@ LoM.Battle = {
 
 
 
-        this.addBattleAnimations(sprite)
+        this.addBattleAnimations(sprite,info.id)
 
-        this.spriteMap[info.id] = sprite
+        this.spriteMap[info.id] = sprite;   
     },
 
-    addBattleAnimations: function(sprite){
+    addBattleAnimations: function(sprite,id){
+
+        var tweenT = 1500;
+        var animT = 15
+
         if(sprite.data.position === 'initiator'){
+            this.tweenMap[id] = {}
             var spell = sprite.animations.add('spell',[39,40,41,42,43,44,44,44,44,44,44,44,44,43,42,41,40,39],true)
+
             var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
+            left.onComplete.add(function(){
+                console.log('frame')
+            })
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
             var sword = sprite.animations.add('sword',[195,196,197,198,199,200,199,198,197,196,195],true);
-  
-            sprite.animations._anims.sword.onComplete.add(function(){
-                sprite.animations.play('left',10, true)
-            })
+                sprite.animations._anims.sword.onComplete.add(function(){
+                    sprite.animations.play('left',10, true);
+                    // this is the window object
+                    var returnTween = LoM.Battle.add.tween(sprite).to({x: 160, y: 230},tweenT, 'Linear', true);
+                    returnTween.onComplete.addOnce(function(){
+                        sprite.animations.stop();
+                        sprite.animations.play('right',50,false)
+                        sprite.frame = 13
+                    })
+                })
+    
+                this.tweenMap[id].sword = this.add.tween(sprite).to({x: 450, y: 230},tweenT, 'Linear', false);
+                this.tweenMap[id].sword.onStart.add(function(){sprite.animations.play('right',animT,true)}, this);
+                this.tweenMap[id].sword.onComplete.add(function(){
+                    sprite.animations.stop()
+                    sprite.animations.play('sword',animT,false)
+                }, this);
 
             var spear = sprite.animations.add('spear',[247,248,249,250,251,252,253,254,255,255,254,253,252,251,250,249,248,247],true);
             
-            sprite.animations._anims.spear.onComplete.add(function(){
-                sprite.animations.play('left',10, true)
-            })
+                sprite.animations._anims.spear.onComplete.add(function(){
+                    sprite.animations.play('left',10, true);
+                    // this is the window object
+                    var returnTween = LoM.Battle.add.tween(sprite).to({x: 160, y: 230},tweenT, 'Linear', true);
+                    returnTween.onComplete.addOnce(function(){
+                        sprite.animations.stop();
+                        sprite.animations.play('right',50,false)
+                        sprite.frame = 13
+                    })
+                })
+
+                this.tweenMap[id].spear = this.add.tween(sprite).to({x: 430, y: 230},tweenT, 'Linear', false);
+                this.tweenMap[id].spear.onStart.add(function(){sprite.animations.play('right',animT,true)}, this);
+                this.tweenMap[id].spear.onComplete.add(function(){
+                    sprite.animations.stop()
+                    sprite.animations.play('spear',animT,false)
+                }, this);
 
             var bow = sprite.animations.add('bow',[247,248,249,250,251,252,253,254,255,256,257,258,259],true);
 
@@ -99,20 +136,52 @@ LoM.Battle = {
             var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
             
         }else if(sprite.data.position === 'receiver'){
+
+
+            this.tweenMap[id] = {}
+            
             var spell = sprite.animations.add('spell',[13,14,15,16,17,18,18,18,18,18,18,18,18,17,16,15,14,13],true)
             var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
             var sword = sprite.animations.add('sword',[169,170,171,172,173,174,173,172,171,170,169],true);
 
-            sprite.animations._anims.sword.onComplete.add(function(){
-                sprite.animations.play('right',10, true)
-            })
+                sprite.animations._anims.sword.onComplete.add(function(){
+                    sprite.animations.play('right',10, true);
+                    // this is the window object
+                    var returnTween = LoM.Battle.add.tween(sprite).to({x: 515, y: 230},tweenT, 'Linear', true);
+                    returnTween.onComplete.addOnce(function(){
+                        sprite.animations.stop();
+                        sprite.animations.play('left',50,false)
+                        sprite.frame = 13
+                    })
+                })
+
+                this.tweenMap[id].sword = this.add.tween(sprite).to({x: 230, y: 230},tweenT, 'Linear', false);
+                this.tweenMap[id].sword.onStart.add(function(){sprite.animations.play('left',animT,true)}, this);
+                this.tweenMap[id].sword.onComplete.add(function(){
+                    sprite.animations.stop()
+                    sprite.animations.play('sword',animT,false)
+                }, this);
 
             var spear = sprite.animations.add('spear',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
             
-            sprite.animations._anims.sword.onComplete.add(function(){
-                sprite.animations.play('right',10, true)
-            })
+                sprite.animations._anims.spear.onComplete.add(function(){
+                    sprite.animations.play('right',10, true);
+                    // this is the window object
+                    var returnTween = LoM.Battle.add.tween(sprite).to({x: 515, y: 230},tweenT, 'Linear', true);
+                    returnTween.onComplete.addOnce(function(){
+                        sprite.animations.stop();
+                        sprite.animations.play('left',50,false)
+                        sprite.frame = 13
+                    })
+                })
+
+                this.tweenMap[id].spear = this.add.tween(sprite).to({x: 250, y: 230},tweenT, 'Linear', false);
+                this.tweenMap[id].spear.onStart.add(function(){sprite.animations.play('left',animT,true)}, this);
+                this.tweenMap[id].spear.onComplete.add(function(){
+                    sprite.animations.stop()
+                    sprite.animations.play('spear',animT,false)
+                }, this);
 
             var bow = sprite.animations.add('bow',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
             
@@ -125,11 +194,12 @@ LoM.Battle = {
     },
 
     attack: function(battleInfo,id){
-        this.spriteMap[id].animations.play('sword', 10,  false)
+        this.tweenMap[id].sword.start();
     },
     spell: function(battleInfo,id){
         console.log(id)
-        this.spriteMap[id].animations.play('spell', 10,  false)
+        this.tweenMap[id].spear.start();
+        // this.spriteMap[id].animations.play('spell', 10,  false)
     },
     potion: function(battleInfo,id){
         this.spriteMap[id].animations.play('die', 10,  false)
