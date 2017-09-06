@@ -1,7 +1,7 @@
 var LoM = LoM || {};
 var battleInfo = {};
-var initiator;
 var room;
+var user;
 
 // loading game assets
 LoM.Battle = function(){};
@@ -19,9 +19,7 @@ LoM.Battle = {
         this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);
 
         this.battleInfo = LoM.Game.battleInfo;
-        this.userInfo = LoM.Game.userInfo;
-        this.battleInfo.initiator = LoM.Game.userInfo;
-        console.log(this.battleInfo)
+        user = LoM.Game.userInfo;
     },
     create: function(){
         this.spriteMap = {}
@@ -43,12 +41,12 @@ LoM.Battle = {
         sprite.frame = 40;
         sprite.scale.x = 2;
         sprite.scale.y = 2;
+
+        sprite.data.position = "initiator";
         sprite.data.weapon = {};
         sprite.data.weapon.type = 'sword';
 
-        this.battleInfo.initiator.sprite = sprite;
         this.battleInfo.initiator.position = "initiator";
-        this.battleInfo.initiator.sprite.data.position = "initiator";
 
         this.addBattleAnimations(sprite)
 
@@ -56,18 +54,19 @@ LoM.Battle = {
     },
 
     createReceiver: function(info){
-        console.log(info)
+        
+        this.battleInfo.receiver.position = "receiver";
+
         var sprite =  this.add.sprite(515, 230, 'sprite5');
         sprite.frame = 13;
         sprite.scale.x = 2;
         sprite.scale.y = 2;
         
-        sprite.weapon = {};
-        sprite.weapon.type = 'sword';
+        sprite.data.position = "receiver";
+        sprite.data.weapon = {};
+        sprite.data.weapon.type = 'sword';
 
-        this.battleInfo.receiver.sprite = sprite
-        this.battleInfo.receiver.position = "receiver";
-        this.battleInfo.receiver.sprite.data.position = "receiver";
+
 
         this.addBattleAnimations(sprite)
 
@@ -94,6 +93,17 @@ LoM.Battle = {
             sprite.animations.add('bow',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
             sprite.animations.add('die',[260,261,262,263,264,265],true)
         }
+    },
+
+    attack: function(battleInfo,id){
+        this.spriteMap[id].animations.play('sword', 10,  false)
+    },
+    spell: function(battleInfo,id){
+        console.log(id)
+        this.spriteMap[id].animations.play('spell', 10,  false)
+    },
+    potion: function(battleInfo,id){
+        this.spriteMap[id].animations.play('die', 10,  false)
     }
 }
 

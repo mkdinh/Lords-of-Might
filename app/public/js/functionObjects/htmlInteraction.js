@@ -71,7 +71,7 @@ function battleUpdate(){
 
     rStats.append(rName,rHP,rMP);
     menu.append(iStats,rStats);
-
+    menu.fadeIn();
     addBattleButton()
 }
 
@@ -90,27 +90,17 @@ function addBattleButton(){
 
 $('.battle-options').on('click','#attack-btn', function(ev){
     ev.preventDefault();
-    var player = LoM.Battle.battleInfo.initiator.sprite;
-    player.animations.play('sword',15,false)
-    var opponent = LoM.Battle.battleInfo.receiver.sprite;
-    console.log(opponent)
-    opponent.animations.play('sword',15,false)
+    Client.battleAction(LoM.Battle.battleInfo,'attack',user.id)
     
 })
 
 $('.battle-options').on('click','#spell-btn', function(ev){
     ev.preventDefault();
-    var player = LoM.Battle.battleInfo.initiator.sprite
-    player.animations.play('spell',13,false)
-    var opponent = LoM.Battle.battleInfo.receiver.sprite
-    opponent.animations.play('spell',13,false)
+    Client.battleAction(LoM.Battle.battleInfo,'spell',user.id)
 })
 
 $('.battle-options').on('click','#health-btn', function(ev){
     ev.preventDefault();
-    var player = LoM.Battle.battleInfo.initiator.sprite
-    player.animations.play('die',13,false)
-    var opponent = LoM.Battle.battleInfo.receiver.sprite
-    opponent.animations.play('die',13,false)
+    Client.battleAction(LoM.Battle.battleInfo,'potion',user.id)
 })
     

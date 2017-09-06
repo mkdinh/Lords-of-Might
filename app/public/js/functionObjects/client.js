@@ -93,8 +93,22 @@ Client.socket.on('battle-room',function(instance){
 
 // HANDLE BATTLE REQUEST
 
-Client.battleAction = function(action){
-    this.socket.emit()
+Client.battleAction = function(battleInfo,action,id){
+            this.socket.emit('battleAction', {battleInfo: battleInfo, action: action, id: id})
 }
+
+Client.socket.on('battleReaction',function(data){
+    switch(data.action){
+        case 'attack':
+            LoM.Battle.attack(data.battleInfo,data.id)
+            return
+        case 'spell':
+            LoM.Battle.spell(data.battleInfo,data.id)
+            return
+        case 'potion':
+            LoM.Battle.potion(data.battleInfo,data.id)
+            return
+    }
+})
 
 

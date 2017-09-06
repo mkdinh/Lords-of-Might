@@ -94,6 +94,25 @@ module.exports = function(io){
 
         })
 
+
+        // HANDLIGN BATTLE ACTIONS
+
+        socket.on('battleAction', function(data){
+            console.log('listen to battle action')
+            switch(data.action){
+                case 'attack':
+                    attackCallback(data)
+                    return
+                case 'spell':
+                    spellCallback(data)
+                    return
+                case 'potion':
+                    potionCallback(data)
+                    return
+            }
+        })
+
+
     });
 
     function getAllPlayers(){
@@ -115,6 +134,31 @@ module.exports = function(io){
 
     function randomInt (low,high){
         return Math.floor(Math.random() * (high - low) + low);
+    }
+
+    function attackCallback(data){
+        // attack logic here with data
+        console.log('response to an attack request')
+        // emit signal to battling player
+        var room = data.battleInfo.room;
+        io.in(room).emit('battleReaction',data)
+
+    }
+
+    function spellCallback(data){
+        // attack logic here with data
+        console.log('response to an spell request')
+        // emit signal to battling player
+        var room = data.battleInfo.room;
+        io.in(data.battleInfo.room).emit('battleReaction',data)
+    }
+
+    function potionCallback(data){
+        // attack logic here with data
+        console.log('response to an potion request')
+        // emit signal to battling player
+        var room = data.battleInfo.room;
+        io.in(data.battleInfo.room).emit('battleReaction',data)
     }
 }
 
