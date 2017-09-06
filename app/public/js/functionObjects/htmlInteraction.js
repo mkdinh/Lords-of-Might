@@ -3,6 +3,7 @@
 function genBattleInteraction(){
 
     var interaction = $('.interaction');
+    var option = $('.battle-options');
     var wrapper = $("<div class='wrapper'>");
     var battleReq = $("<button class='battle-btn' id='battle-request'>Request Battle</button>");
     var battleAccept = $("<button class='battle-btn' id='battle-accept'>Accept Battle</button>");
@@ -13,6 +14,7 @@ function genBattleInteraction(){
     interaction.empty();
     interaction.append(wrapper);
     interaction.fadeIn();
+    option.fadeIn();
 }
 
 
@@ -28,7 +30,7 @@ function announcement(body){
     var announcement = $('.announcement');
     announcement.empty();
     
-    var item = $('<p>')
+    var item = $("<p class='announcement-item'>")
     // item.css('display','none')
     item.text(body)
 
@@ -72,6 +74,8 @@ function battleUpdate(){
     rStats.append(rName,rHP,rMP);
     menu.append(iStats,rStats);
     menu.fadeIn();
+  
+
     addBattleButton()
 }
 

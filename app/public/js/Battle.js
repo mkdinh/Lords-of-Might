@@ -75,23 +75,52 @@ LoM.Battle = {
 
     addBattleAnimations: function(sprite){
         if(sprite.data.position === 'initiator'){
-            sprite.animations.add('spell',[39,40,41,42,43,44,44,44,44,44,44,44,44,43,42,41,40,39],true)
-            sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
-            sprite.animations.add('right',[144,145,146,147,148],true);
-            sprite.animations.add('sword',[195,196,197,198,199,200,199,198,197,196,195],true);
-            sprite.animations.add('spear',[247,248,249,250,251,252,253,254,255,255,254,253,252,251,250,249,248,247],true);
-            sprite.animations.add('bow',[247,248,249,250,251,252,253,254,255,256,257,258,259],true);
-            sprite.animations.add('die',[260,261,262,263,264,265],true)
+            var spell = sprite.animations.add('spell',[39,40,41,42,43,44,44,44,44,44,44,44,44,43,42,41,40,39],true)
+            var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
+            var right = sprite.animations.add('right',[144,145,146,147,148],true);
+            var sword = sprite.animations.add('sword',[195,196,197,198,199,200,199,198,197,196,195],true);
+  
+            sprite.animations._anims.sword.onComplete.add(function(){
+                sprite.animations.play('left',10, true)
+            })
+
+            var spear = sprite.animations.add('spear',[247,248,249,250,251,252,253,254,255,255,254,253,252,251,250,249,248,247],true);
+            
+            sprite.animations._anims.spear.onComplete.add(function(){
+                sprite.animations.play('left',10, true)
+            })
+
+            var bow = sprite.animations.add('bow',[247,248,249,250,251,252,253,254,255,256,257,258,259],true);
+
+            sprite.animations._anims.bow.onComplete.add(function(){
+                sprite.animations.play('left',10, true)
+            })
+
+            var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
             
         }else if(sprite.data.position === 'receiver'){
-            console.log(sprite)
-            sprite.animations.add('spell',[13,14,15,16,17,18,18,18,18,18,18,18,18,17,16,15,14,13],true)
-            sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
-            sprite.animations.add('right',[144,145,146,147,148],true);
-            sprite.animations.add('sword',[169,170,171,172,173,174,173,172,171,170,169],true);
-            sprite.animations.add('spear',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
-            sprite.animations.add('bow',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
-            sprite.animations.add('die',[260,261,262,263,264,265],true)
+            var spell = sprite.animations.add('spell',[13,14,15,16,17,18,18,18,18,18,18,18,18,17,16,15,14,13],true)
+            var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
+            var right = sprite.animations.add('right',[144,145,146,147,148],true);
+            var sword = sprite.animations.add('sword',[169,170,171,172,173,174,173,172,171,170,169],true);
+
+            sprite.animations._anims.sword.onComplete.add(function(){
+                sprite.animations.play('right',10, true)
+            })
+
+            var spear = sprite.animations.add('spear',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
+            
+            sprite.animations._anims.sword.onComplete.add(function(){
+                sprite.animations.play('right',10, true)
+            })
+
+            var bow = sprite.animations.add('bow',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
+            
+            sprite.animations._anims.bow.onComplete.add(function(){
+                sprite.animations.play('right',10, true)
+            })
+
+            var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
         }
     },
 

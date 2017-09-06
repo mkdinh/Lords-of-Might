@@ -13,7 +13,6 @@ $('.add-button').on('click', function(){
     var ctx = document.getElementById('canvas').getContext('2d');
     // append link to obj
     sprite[part] = path;
-    console.log(sprite)
     var order = ['body','leg','torso','head'];
 
     // clear canvas
