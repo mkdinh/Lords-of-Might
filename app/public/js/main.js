@@ -6,3 +6,4 @@ LoM.game.state.add('Game', LoM.Game);
 LoM.game.state.add('Battle', LoM.Battle);
 // LoM.game.state.add('Game', LoM.Game);
 LoM.game.state.start('Boot');
+console.log('starting game')
