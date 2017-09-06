@@ -65,7 +65,7 @@ app.use('/messages', require(path.join(__dirname, '/app/routes/messages_controll
 // -------------------------------------------------------------
 var server = http.createServer(app);
 var io = require('socket.io')(server)
-server.listen(port)
+// server.listen(port)
 // load chat ws
 require(path.join(__dirname, './app/ws/chat.js'))(io);
 
@@ -75,10 +75,10 @@ require(path.join(__dirname, './app/ws/game.js'))(io);
 
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
-// db.sequelize.sync(
-//     // {force: true}   
-// ).then(() => {
-//     server.listen(port, () => {
-//         console.log('listen to port',port)
-//     })
-// })
+db.sequelize.sync(
+    {force: true}   
+).then(() => {
+    server.listen(port, () => {
+        console.log('listen to port',port)
+    })
+})
