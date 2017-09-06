@@ -77,7 +77,7 @@ function parsePathArray(paths) {
     }
     return parsed;
 }
-
+    
 
 
 // INITIALIZING SERVER

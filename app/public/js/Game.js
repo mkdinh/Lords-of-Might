@@ -56,7 +56,33 @@ LoM.Game = {
             velocity: {x: -10, y: 0},
             world: {x: 390,y:290}
         }
-        
+
+
+        var fireball = this.add.sprite(100,400,'fireball')
+        var genBall = fireball.animations.add('genBall',[1,2,3,4,5],1000, false)
+        var shootBall = fireball.animations.add('shootBall',[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],5000, true)
+        var explodeBall = fireball.animations.add('explode', [32,33,34,35,36,37,38,39],1000, false)
+
+        genBall.onComplete.add(function(){
+                var tweenBall =  LoM.Game.add.tween(fireball).to({x: 600},1000, 'Linear', false);
+                tweenBall.start()
+                tweenBall.onStart.add(function(){
+                    console.log('hey')
+                    fireball.animations.play('shootBall',20, true)
+                })
+                tweenBall.onComplete.add(function(){
+                    fireball.animations.stop();
+                    console.log('exploded')
+                    fireball.animations.play('explode',15, false)
+                    explodeBall.onComplete.add(function(){
+                        fireball.kill()
+                    })
+                })
+
+        })
+
+        fireball.animations.play('genBall',10,false)
+
         this.addPlayer(sprite2Info);
         this.sprite2 = this.groupMap.npcs['sample'];
 
