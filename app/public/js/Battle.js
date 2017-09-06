@@ -22,6 +22,11 @@ LoM.Battle = {
         user = LoM.Game.userInfo;
     },
     create: function(){
+
+                
+	    this.time.advancedTiming = true;
+        this.time.desiredFps = 60;
+
         this.spriteMap = {}
         this.tweenMap = {}
 
@@ -30,7 +35,7 @@ LoM.Battle = {
         battleUpdate();
     },
     update: function(){
-
+        console.log(this.time.desiredFps,this.time.fps,this.time.suggestedFps)
     },
     render: function(){
         // LoM.debug.geom(menu,'#0fffff');

@@ -22,6 +22,11 @@ LoM.Game = {
     create: function(){
         // GAME VIEWS INITIALIZATION
         // -----------------------------------------------------------
+        
+	    this.time.advancedTiming = true;
+        this.time.desiredFps = 30;
+        this.time.suggestedFps = 30;
+        
         game = this
         this.gameReady = false;
         this.eventActive = {};
@@ -78,7 +83,6 @@ LoM.Game = {
     // UPDATING GAME STATE
     // -------------------------------------------------------------------------------------------    
     update: function(){
-        
         // if all player data is loaded, start the game update
         if(this.gameReady){
             // always listen to building collisions
@@ -130,7 +134,13 @@ LoM.Game = {
     },
 
     render: function(){
-        // this.debug.spriteInfo(this.playerMap[userInfo.id], 32, 32);
+        // LoM.debug.text('render FPS: ' + (this.time.fps || '--') , 2, 14, "#00ff00");
+        
+            // if (game.time.suggestedFps !== null)
+            // {
+            //     game.debug.text('suggested FPS: ' + game.time.suggestedFps, 2, 28, "#00ff00");
+            //     game.debug.text('desired FPS: ' + game.time.desiredFps, 2, 42, "#00ff00");
+            // }
     },
 
     randomInt: function (low,high){
