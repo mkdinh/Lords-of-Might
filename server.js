@@ -29,6 +29,7 @@ app.engine('handlebars', hdbs({
 
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'app/views/'));
+app.set( 'port', ( process.env.PORT || 8080 ))
 // app.set('trust proxy', 1) // trust first proxy 
 app.use(cookieParser('keyboard cat'))
 app.use(session({
