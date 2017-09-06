@@ -55,10 +55,10 @@ app.use(bodyParser.urlencoded({
 
 // INTIALIZING ROUTERS
 // -------------------------------------------------------------
-app.use('/', require(path.join(__dirname, './app/routes/html_controller.js')));
+app.use('/', require(path.join(__dirname, '/app/routes/html_controller.js')));
 
-app.use('/users', require(path.join(__dirname, './app/routes/users_controller.js')));
-app.use('/messages', require(path.join(__dirname, './app/routes/messages_controller.js')));
+app.use('/users', require(path.join(__dirname, '/app/routes/users_controller.js')));
+app.use('/messages', require(path.join(__dirname, '/app/routes/messages_controller.js')));
 
 // INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
