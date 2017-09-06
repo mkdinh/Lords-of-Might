@@ -17,8 +17,11 @@ generator = {
             gameObj.groupMap[group] = gameObj.add.group();
             gameObj.groupMap[group].enableBody = true;
             gameObj.groupMap[group].physicsBodyType = Phaser.Physics.ARCADE;
-
             gameObj.spriteMap[group] = {};
+
+            if(group === 'players'){
+                group.inputEnableChildren = true;
+            }
         })
     },
 
@@ -39,7 +42,7 @@ generator = {
         // -------------------------------------------------------------
         this.spriteMap.tileMap[key] = this.add.tilemap('map');
         this.spriteMap.tileMap[key].addTilesetImage('tilesheet','tileset');
-
+  
         var layerIndex = this.spriteMap.tileMap[key].getLayer(layer);
         var layerData = this.spriteMap.tileMap[key].layers[layerIndex];
         
@@ -49,12 +52,11 @@ generator = {
 
         this.spriteMap.collisions[key] = this.spriteMap.tileMap[key].createLayer(layer)
         this.spriteMap.collisions[key].debug = true
-        this.spriteMap.collisions[key].key = key
+        this.spriteMap.collisions[key].data = {}
+        this.spriteMap.collisions[key].data['role'] = key
         this.spriteMap.tileMap[key].createLayer(layer);
-
-        // settinh collision data
-        this.spriteMap.collisions[key].data['onCollide'] = interaction 
-    
+        // setting collision data
+        this.spriteMap.collisions[key].data['onCollide'] = interaction; 
         
         // render all other layer once
         if(Object.keys(this.spriteMap.tileMap).length === 1){
@@ -62,6 +64,7 @@ generator = {
             this.genLayers(key);
         }     
         // this.layer.inputEnabled = true; 
+        console.log(this.spriteMap.collisions[key])
     },
     
     genAnimations: function(sprite){
@@ -82,6 +85,10 @@ generator = {
             sprite.animations.add('down',[131,132,133,134,135],true);
             sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             sprite.animations.add('right',[144,145,146,147,148],true);
+        }
+        if(sprite.data.role === 'npc'){
+            sprite.animations.currentFrame = sprite.animations.play('down',20,false)
+            console.log(sprite.animations)
         }
     }
 }

@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial scale=1.0">
+	<title>Lords of Might</title>
+	
+	<!-- Custom Style -->
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <!-- Lord of Might Font-->
+    <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
 
+</head>
+<body>
+<!-- <embed src="/audio/conan.mp3"
+    loop="true" 
+    autoplay="true" 
+    width="0" 
+    height="0">
+</embed -->>
+
+<!-- Row class no "Containers" in FOundation-->
+<div class="grid-x">
+  <div class="medium-8 large-8 cell">
+    <h2>Lords of Might</h2>
+  </div>
+  <div class="medium-2 large-2 cell">
+    <a class="button">Sign Up</a>
+  </div>
+  <div class="medium-2 large-2 cell">
+    <a class="button" id="login-btn">Login</a>
+    </div>
+</div>   
+
+<!-- Main Orbit Div -->
+<div class="orbit" role="region" aria-label="App Info" data-orbit>
+  <div class="orbit-wrapper">
+    <div class="orbit-controls">
+      <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+      <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+    </div>
+    <ul class="orbit-container">
+    <!-- Orbit Slides -->
+      <li class="is-active orbit-slide">
+        <figure class="orbit-figure">
+          <img class="orbit-image" src="/img/medieval-characters.jpg" style="height:500px;" alt="characters">
+          <figcaption class="orbit-caption text-center">Choose Your Character</figcaption>
+        </figure>
+      </li>
+      <li class="orbit-slide">
+        <figure class="orbit-figure">
+          <img class="orbit-image" src="/img/weapons-pic.jpg" style="height:500px;"  alt="weapons">
+          <figcaption class="orbit-caption text-center">Select Your Weapons</figcaption>
+        </figure>
+      </li>
+      <li class="orbit-slide">
+        <figure class="orbit-figure">
+          <img class="orbit-image" src="/img/duel.jpg" style="height:500px;" alt="Space">
+          <figcaption class="orbit-caption text-center">Battle Your Enemies</figcaption>
+        </figure>
+      </li>
+      <li class="orbit-slide">
+        <figure class="orbit-figure">
+          <img class="orbit-image" src="/img/victory.jpg" style="height:500px;" alt="Space">
+          <figcaption class="orbit-caption text-center">Conquer the Land</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+  <!-- Orbit Bullets -->
+  <nav class="orbit-bullets">
+    <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+    <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+    <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+    <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+  </nav>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <h2 class="text-center">Login</h2>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+        <form>
+            <div class="row">
+                <div class="medium-6 columns">
+                    <label>Input Label
+                        <input type="text" placeholder="Username">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-6 columns">
+                    <label>Input Label
+                        <input type="text" placeholder="Password">
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <!-- Foundation JQuery-->
+    <script src="css/foundation/js/vendor/jquery.js"></script>
+
+    <!-- Foundation JavaScript-->
+    <script src="css/foundation/js/vendor/foundation.min.js"></script>
+
+    <script>
+$(document).foundation();
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("login-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+    </script>
+    <script src='/js/index.js'></script>
+</body>
+
+</html>

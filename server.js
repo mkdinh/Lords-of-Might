@@ -13,9 +13,71 @@ const http = require('http');
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 const db = require('./app/models');
+const fs = require('fs');
 
 // External Logics
 // -------------------------------------------------------------
+
+var testFolder = path.join(__dirname,'./app/public/img/sprites/lpc');
+
+function traverseDirectory(dirname, callback) {
+    var directory = [];
+    fs.readdir(dirname, function(err, list) {
+      dirname = fs.realpathSync(dirname);
+      if (err) {
+        return callback(err);
+      }
+      var listlength = list.length;
+      list.forEach(function(file) {
+        file = dirname + "\/" + file;
+        fs.stat(file, function(err, stat) {
+          directory.push(file);
+   if (stat && stat.isDirectory()) {
+            traverseDirectory(file, function(err, parsed) {
+       directory = directory.concat(parsed);
+       if (!--listlength) {
+         callback(null, directory);
+       }
+     });
+   } else {
+       if (!--listlength) {
+         callback(null, directory);
+       }
+            }
+        });
+      });
+    });
+  }
+
+var imgPath; 
+
+traverseDirectory(testFolder, function(err, result) {
+    if (err) {
+      console.log(err);
+    }
+    // imgPath = result.map(function(path){
+    //    return path.split('\\public')[1].replace(/\\/g,"/")       
+    // })
+    // var object =parsePathArray(imgPath);
+    // console.log(object.img.sprites.lpc)
+})
+
+function parsePathArray(paths) {
+    var parsed = {};
+    for(var i = 0; i < 4; i++) {
+        var position = parsed;
+        var split = paths[i].split('/');
+        for(var j = 0; j < split.length; j++) {
+            if(split[j] !== "") {
+                if(typeof position[split[j]] === 'undefined')
+                    position[split[j]] = {};
+                position = position[split[j]];
+            }
+        }
+    }
+    return parsed;
+}
+    
 
 
 // INITIALIZING SERVER
@@ -29,6 +91,7 @@ app.engine('handlebars', hdbs({
 
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'app/views/'));
+app.set( 'port', ( process.env.PORT || 8080 ))
 // app.set('trust proxy', 1) // trust first proxy 
 app.use(cookieParser('keyboard cat'))
 app.use(session({
@@ -55,10 +118,10 @@ app.use(bodyParser.urlencoded({
 
 // INTIALIZING ROUTERS
 // -------------------------------------------------------------
-app.use('/', require(path.join(__dirname, './app/routes/html_controller.js')));
+app.use('/', require(path.join(__dirname, '/app/routes/html_controller.js')));
 
-app.use('/users', require(path.join(__dirname, './app/routes/users_controller.js')));
-app.use('/messages', require(path.join(__dirname, './app/routes/messages_controller.js')));
+app.use('/users', require(path.join(__dirname, '/app/routes/users_controller.js')));
+app.use('/messages', require(path.join(__dirname, '/app/routes/messages_controller.js')));
 
 // INTIALIZING SOCKET.IO
 // -------------------------------------------------------------
@@ -75,7 +138,7 @@ require(path.join(__dirname, './app/ws/game.js'))(io);
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
 // db.sequelize.sync(
-//     // {force: true}   
+//     {force: true}   
 // ).then(() => {
 //     server.listen(port, () => {
 //         console.log('listen to port',port)

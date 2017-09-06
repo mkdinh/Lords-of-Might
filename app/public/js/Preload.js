@@ -10,6 +10,7 @@ LoM.Preload.prototype = {
         this.splash.anchor.setTo(0.5);
     
     // load game assets
+    this.load.image('battleBG','/img/battleBG.png')
     this.load.tilemap('map', 'img/map/example_map.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.spritesheet('tileset', 'img/map/tilesheet.png',32,32);
     this.load.atlas('sprite1', 'img/sprites/1.png', 'img/sprites/1.json');
@@ -18,9 +19,11 @@ LoM.Preload.prototype = {
     this.load.spritesheet('sprite4','img/sprites/4.png',64,64,36); // this will be the sprite of the players
     this.load.spritesheet('sprite5','img/sprites/5.png',64,64,273);
     this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);
+    this.load.spritesheet('fireball','img/sprites/fireball.png',126,124,38)
+    this.load.spritesheet('health','img/sprites/health.png',113,120)
     },
     create: function(){
-        
+        // this.state.start('Battle');
         Client.userInfoDB();
     }
 }
