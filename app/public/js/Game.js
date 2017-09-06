@@ -4,6 +4,7 @@
 // setting up rpg canvas by declaring single rpg state with div id='rpg'
 
 var LoM = LoM || {};
+var game;
 
 LoM.Game = function(){};
 
@@ -19,11 +20,13 @@ LoM.Game = {
     // CREATE GAME STATE
     // -------------------------------------------------------------------------------------------    
     create: function(){
-
         // GAME VIEWS INITIALIZATION
         // -----------------------------------------------------------
+        game = this
         this.gameReady = false;
-        
+        this.eventActive = {};
+        this.eventActive.state = false;
+        this.battleInfo = {}
         // generate data map
         this.groupMap = {}
         this.spriteMap = {}
@@ -47,11 +50,11 @@ LoM.Game = {
 
         var sprite2Info = {
             id: '1',
-            sprite: 2,
+            sprite: 3,
             role: 'npc',
-            name: 'sample',
+            name: 'First NPC',
             velocity: {x: -10, y: 0},
-            world: {x: 400,y:400}
+            world: {x: 390,y:290}
         }
         
         this.addPlayer(sprite2Info);
@@ -72,29 +75,51 @@ LoM.Game = {
     update: function(){
         
         // if all player data is loaded, start the game update
-        if(this.gameReady){ 
-            
-            // check through all the collisions set in create 
-           this.checkLayerCollisions();
+        if(this.gameReady){
+            // always listen to building collisions
+            this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions['wallCollisions'],this.spriteMap.collisions['wallCollisions'].data['onCollide'], null, this);
             
             // update world position 
             var worldX = this.spriteMap.players[this.userInfo.id].worldPosition.x;
-            var worldY = this.spriteMap.players[this.userInfo.id].worldPosition.y
+            var worldY = this.spriteMap.players[this.userInfo.id].worldPosition.y;
+
+            this.checkLayerCollisions();
+            //  if no event is active
+            if(this.eventActive.state){
+                if(!this.lastLocationSaved){
+                    this.spriteMap.players[this.userInfo.id].lastLocation = {
+                        x: this.spriteMap.players[this.userInfo.id].worldPosition.x,
+                        y: this.spriteMap.players[this.userInfo.id].worldPosition.y      
+                    } 
+                    this.lastLocationSaved = true
+                }else{
+                    var lastLocation = this.spriteMap.players[this.userInfo.id].lastLocation
+                    var dX = worldX - lastLocation.x;
+                    var dY = worldY - lastLocation.y;
+                    var distance = Math.sqrt( Math.pow(dX, 2) + Math.pow(dY, 2));
+                    if(distance > 10){
+                        this.eventActive.state = false;
+                        this.eventActive.player = {};
+                        this.eventActive.target = {};
+                        this.lastLocationSaved = false;
+                        console.log('reset event')
+                        removeInteractionDisplay()
+                    }
+                }
+            }
 
             // listen for key press for character movement and pass that information to socket.io
             // if the last key pressed was 100ms ago, then listen stop updating to server 
-            if(!this.eventOccur){
-                if(this.cursor.up.isDown){
-                    Client.move({dir:'up', id: this.userInfo.id,  worldX: worldX, worldY: worldY });
-                }else if(this.cursor.down.isDown){;
-                    Client.move({dir: 'down', id: this.userInfo.id, worldX: worldX, worldY: worldY });
-                }else if(this.cursor.left.isDown){
-                    Client.move({dir:'left', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
-                }else if(this.cursor.right.isDown){
-                    Client.move({dir:'right', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
-                }else if(this.input.keyboard.upDuration(37,100)|| this.input.keyboard.upDuration(38,100) || this.input.keyboard.upDuration(39,100) || this.input.keyboard.upDuration(40,100)){
-                    Client.move({dir:'stationary', id:this.userInfo.id,   worldX: worldX, worldY: worldY})
-                }
+            if(this.cursor.up.isDown){
+                Client.move({dir:'up', id: this.userInfo.id,  worldX: worldX, worldY: worldY });
+            }else if(this.cursor.down.isDown){;
+                Client.move({dir: 'down', id: this.userInfo.id, worldX: worldX, worldY: worldY });
+            }else if(this.cursor.left.isDown){
+                Client.move({dir:'left', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
+            }else if(this.cursor.right.isDown){
+                Client.move({dir:'right', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
+            }else if(this.input.keyboard.upDuration(37,100)|| this.input.keyboard.upDuration(38,100) || this.input.keyboard.upDuration(39,100) || this.input.keyboard.upDuration(40,100)){
+                Client.move({dir:'stationary', id:this.userInfo.id, worldX: worldX, worldY: worldY})
             }
         }
     },
@@ -109,12 +134,19 @@ LoM.Game = {
 
     checkLayerCollisions: function(){
         // listen to player-npc and player-player interactions
-        this.physics.arcade.collide(this.groupMap.players, this.groupMap.players, this.playerInteractions, null, this);
-        this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.npcInteractions, null, this);
-        
+        // this.physics.arcade.collide(this.groupMap.players, this.groupMap.players, this.spriteCollisions, null, this);
+        // this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.spriteCollisions, null, this);
         // listen for collision interactions
         for(var collision in this.spriteMap.collisions){
-            this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions['buildingOutlines'],this.spriteMap.collisions['buildingOutlines'].data['onCollide'], null, this);
+            this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions[collision], 
+                this.spriteMap.collisions[collision].data['onCollide'],null, this);
         }
     }
 }
+
+// Jquery DOM interaction
+
+
+
+
+

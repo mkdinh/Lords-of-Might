@@ -17,17 +17,19 @@
 
     <body>
         <h1>
-            <button type='submit' id='add-head'>Add head</button>
-            <button type='submit' id='add-torso'>Add torso</button>
-            <button type='submit' id='add-legs'>Add legs</button>
-            <button type='submit' id='add-weapon'>Add weapon</button>
+            <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/cloth_hood_male.png" id='add-head'>Add head</button>
+            <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Add torso</button>
+            <button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Add legs</button>
+            <button type='submit' class='add-button' data-part='weapon' id='add-weapon'>Add weapon</button>
         </h1>
-                <h1>
+
+        {{!-- <h1> --}}
             <button type='submit' id='undo-head'>Undo head</button>
             <button type='submit' id='undo-torso'>Undo torso</button>
             <button type='submit' id='undo-legs'>Undo legs</button>
             <button type='submit' id='undo-weapon'>Undo weapon</button>
         </h1>
+
         <canvas id='canvas' width='832' height='1344'>
         <script src='/js/sprite.js'> </script>
     </body>

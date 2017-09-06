@@ -1,24 +1,25 @@
 
 module.exports = function(io){
     var online = [];
-    
+    var server = {};
+
     io.on('connection', function(socket) {
         // console.log('connected ..')  
         
         socket.player = {};
-        
         socket.on('user',function(){
             // create new player object
-
+            
             player = {
                 id: randomInt(1,1000000),
                 role: 'player',
                 world:{x:randomInt(350,500),y:randomInt(350,500)},
                 velocity: {x:0,y:0},
-                sprite: randomInt(1,4)
+                sprite: randomInt(6,6),
+                socketIO: {id: socket.id}
             };
             socket.player = player;
-            // console.log(socket.player)
+            // console.log(Object.keys(io.sockets.connected))
             // start game
             socket.emit('start',{user: player, others: getAllPlayers()})  
             // broadcast new player to all current players
@@ -43,7 +44,7 @@ module.exports = function(io){
             
             socket.player.world.x = movement.worldX;
             socket.player.world.y = movement.worldY;
-
+    
             // console.log({player: socket.player, dir: movement.dir})
             // broadcast to all player
             io.emit('move', {player: socket.player, dir: movement.dir} )
@@ -55,8 +56,42 @@ module.exports = function(io){
 
         socket.on('disconnect', function(){
             console.log('user',socket.player.id,'disconnected')
-            delete io[socket[socket.player.id]]
+            // var socketID = socket.player.socketIO.id;
+            // console.log(socketID)
+            // io.sockets.connected
             io.emit('remove',{id: socket.player.id})
+        })
+
+        // when server receive battle request, server sends battle information to the receiver player
+        socket.on('battle-request', function(battleInfo){
+            server.battleInfo = battleInfo
+            socket.to(server.battleInfo.receiver.socketIO.id).emit('battle-requested',battleInfo)
+
+        })
+
+        socket.on('battle-accept', function(battleInfo){
+            var room = randomInt(1,10000);
+            var initiator_socketID = server.battleInfo.initiator.socketIO.id;
+
+            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-accepted',{})
+            server.battleInfo.room = room;
+            
+            socket.join(room,function(){
+                socket.emit('battle-room',{room:room})
+            })
+            io.sockets.connected[initiator_socketID].join(room, function(){
+                socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-room',{room:room})
+
+            })
+       
+            // var roster = io.sockets.adapter.rooms[room].sockets;
+            // console.log(roster)
+
+        })
+
+        socket.on('battle-decline', function(sprites){
+            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-declined',{})
+
         })
 
     });
@@ -66,11 +101,15 @@ module.exports = function(io){
         // io.sockets.connect is an internal array of the sockets currently connected to the server
         Object.keys(io.sockets.connected).forEach(function(socketID){
             var player = io.sockets.connected[socketID].player;
-            if(player.id){
-                players.push(player)
-            };
+            if(!player.id){
+                delete io.sockets.connected[socketID]
+                console.log('empty object deleted')
+            }else{
+                players.push(player)       
+            }
         });
-        console.log(players)
+
+        // console.log(players)
         return players;
     }
 
@@ -78,3 +117,4 @@ module.exports = function(io){
         return Math.floor(Math.random() * (high - low) + low);
     }
 }
+
