@@ -35,8 +35,9 @@ LoM.Battle = {
 	    this.time.advancedTiming = true;
         this.time.desiredFps = 60;
 
-        this.spriteMap = {}
-        this.tweenMap = {}
+        this.spriteMap = {};
+        this.tweenMap = {};
+        this.playerMap = {};
 
         this.createReceiver(this.battleInfo.receiver)
         this.createInitiator(this.battleInfo.initiator)
@@ -66,13 +67,16 @@ LoM.Battle = {
         this.battleInfo.initiator.position = "initiator";
         this.battleInfo.initiator.turn  = true;
         sprite.data.position = "initiator";
-        sprite.data.weapon = {};
-        sprite.data.weapon.type = 'sword';
+        this.battleInfo.initiator.weapon = {};
+        this.battleInfo.initiator.weapon.type = 'spear';
+        this.battleInfo.initiator.hp = 100;
+        this.battleInfo.initiator.mp = 100;
         
 
         this.addBattleAnimations(sprite,info.id)
 
         this.spriteMap[info.id] = sprite
+        this.playerMap[info.id] = this.battleInfo.initiator;
     },
 
     createReceiver: function(info){
@@ -86,9 +90,11 @@ LoM.Battle = {
         this.battleInfo.receiver.position = "receiver";
         sprite.data.position = "receiver";
         this.battleInfo.receiver.turn  = false;
-        sprite.data.weapon = {};
-        sprite.data.weapon.type = 'sword';
-
+        this.battleInfo.receiver.weapon = {};
+        this.battleInfo.receiver.weapon.type = 'sword';
+        this.battleInfo.receiver.hp = 100;
+        this.battleInfo.receiver.mp = 100;
+        this.playerMap[info.id] = this.battleInfo.receiver;
 
 
         this.addBattleAnimations(sprite,info.id)
@@ -258,7 +264,7 @@ LoM.Battle = {
                     returnTween.onComplete.addOnce(function(){
                         sprite.animations.stop();
                         sprite.animations.play('left',50,false)
-                        sprite.frame = 13
+                        sprite.frame = 13;
                         console.log('sword slash!')
                     })
                 })
@@ -319,7 +325,8 @@ LoM.Battle = {
     },
 
     attack: function(battleInfo,id){
-        this.tweenMap[id].sword.start();
+        var weapon = this.playerMap[id].weapon.type;
+        this.tweenMap[id][weapon].start();
         setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},5000)
     },
     spell: function(battleInfo,id){

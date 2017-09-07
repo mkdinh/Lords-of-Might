@@ -129,10 +129,13 @@ var server = http.createServer(app);
 var io = require('socket.io')(server)
 server.listen(port)
 // load chat ws
-require(path.join(__dirname, './app/ws/chat.js'))(io);
+require(path.join(__dirname, './app/ws/chatSIO.js'))(io);
 
-// load game ws
-require(path.join(__dirname, './app/ws/game.js'))(io);
+// load main game ws
+require(path.join(__dirname, './app/ws/gameSIO.js'))(io);
+
+// load battle ws
+require(path.join(__dirname, './app/ws/battleSIO.js'))(io);
 
 
 // STARTING DB AND SERVER
