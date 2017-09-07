@@ -1,7 +1,9 @@
 var LoM = LoM || {};
 var battleInfo = {};
-var room;
 var user;
+var enemy;
+var room;
+var initialized = false;
 
 // loading game assets
 LoM.Battle = function(){};
@@ -18,39 +20,97 @@ LoM.Battle = {
         this.load.spritesheet('sprite5','img/sprites/sample.png',64,64,273);
         this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);
 
-        this.battleInfo = LoM.Game.battleInfo;
+
+        battleInfo = LoM.Game.battleInfo;
+
         user = LoM.Game.userInfo;
+        room = battleInfo.room;
+        delete battleInfo['room']
         
-        for(role in this.battleInfo){
-            if(this.battleInfo[role].id === user.id){
-                this.battleInfo[role].controller = 'user',
+        for(role in battleInfo){
+            if(battleInfo[role].id === user.id){
+                battleInfo[role].controller = 'user';
                 user.control = role
-                return 
+            }else{
+                battleInfo[role].controller = 'enemy',
+                enemy = battleInfo[role];
+                enemy.control = role
+                
             }
         }
     },
     create: function(){
-
-                
+            
 	    this.time.advancedTiming = true;
         this.time.desiredFps = 60;
 
         this.spriteMap = {};
         this.tweenMap = {};
-        this.playerMap = {};
+        this.state = {
+            player: {},
+            roleID: {
+                    attacker: user.id,
+                    defender: enemy.id,
+                },
+            turn: battleInfo.initiator.id,
+            room: room
+        }
 
-        this.createReceiver(this.battleInfo.receiver)
-        this.createInitiator(this.battleInfo.initiator)
-        battleUpdate();
+        this.createReceiver(battleInfo.receiver)
+        this.createInitiator(battleInfo.initiator)
+
+        battleUpdate(battleInfo.initiator,battleInfo.receiver);
+        initialized = true;
     },
     update: function(){
-        // console.log(this.battleInfo[user.control].turn)
-        if(this.battleInfo[user.control].turn === true ){
-            $(".action-btn").prop("disabled", false);
-            $('.battle-options').fadeIn();
-        }else{
-            $('.action-btn').prop("disabled", true);
-            $('.battle-options').fadeOut();
+        if(initialized){
+            if(this.state.turn === user.id ){
+                $(".action-btn").prop("disabled", false);
+                $('.battle-options').fadeIn();
+            }else{
+                $('.action-btn').prop("disabled", true);
+                $('.battle-options').fadeOut();
+            }
+
+            // console.log(this.state)
+            var attackerID = this.state.roleID.attacker;
+                var attackerHP = this.state.player[attackerID].hp;
+                var attackerMP = this.state.player[attackerID].mp;
+
+            var defenderID = this.state.roleID.defender;
+                var defenderHP = this.state.player[defenderID].hp;
+                var defenderMP = this.state.player[defenderID].mp;
+
+            $("#"+attackerID+'-HP').html("HP:"+ attackerHP)
+            $("#"+attackerID+'-HP').html("HP:"+ attackerHP)
+
+            $("#"+defenderID+'-HP').html("HP:"+ defenderHP)
+            $("#"+defenderID+'-HP').html("HP:"+ defenderHP)
+
+            if(attackerHP <= 0){
+
+                var battle = this;
+                initialized = false;
+
+                setTimeout(function(){
+                    battle.spriteMap[attackerID].animations.play('die',10, false)
+                    var body = defenderID + " WON!"
+                    announcement(body)
+                    gameOver()
+                },2000)
+            }
+
+            if(defenderHP <= 0){
+                var battle = this;
+                initialized = false;
+
+                setTimeout(function(){
+                    battle.spriteMap[defenderID].animations.play('die',10, false)
+                    var body = attackerID + " WON!"
+                    announcement(body)
+                    gameOver()
+                },2000)
+            }
         }
     },
     render: function(){
@@ -64,19 +124,28 @@ LoM.Battle = {
         sprite.scale.x = 2;
         sprite.scale.y = 2;
 
-        this.battleInfo.initiator.position = "initiator";
-        this.battleInfo.initiator.turn  = true;
         sprite.data.position = "initiator";
-        this.battleInfo.initiator.weapon = {};
-        this.battleInfo.initiator.weapon.type = 'spear';
-        this.battleInfo.initiator.hp = 100;
-        this.battleInfo.initiator.mp = 100;
+        battleInfo.initiator.position = "initiator";
+        battleInfo.initiator.weapon = {
+            type: 'spear',
+            damage: [1,20]
+        };
+   
+        battleInfo.initiator.spell = {
+            type: 'fire',
+            damage: [100,101],
+            mp: 35
+        };
+
+        battleInfo.initiator.hp = 100;
+        battleInfo.initiator.mp = 100;
+        
         
 
         this.addBattleAnimations(sprite,info.id)
 
         this.spriteMap[info.id] = sprite
-        this.playerMap[info.id] = this.battleInfo.initiator;
+        this.state.player[info.id] = battleInfo.initiator;
     },
 
     createReceiver: function(info){
@@ -87,19 +156,28 @@ LoM.Battle = {
         sprite.scale.x = 2;
         sprite.scale.y = 2;
         
-        this.battleInfo.receiver.position = "receiver";
         sprite.data.position = "receiver";
-        this.battleInfo.receiver.turn  = false;
-        this.battleInfo.receiver.weapon = {};
-        this.battleInfo.receiver.weapon.type = 'sword';
-        this.battleInfo.receiver.hp = 100;
-        this.battleInfo.receiver.mp = 100;
-        this.playerMap[info.id] = this.battleInfo.receiver;
+        battleInfo.receiver.position = "receiver";
+        // battleInfo.receiver.turn  = false;
+        battleInfo.receiver.weapon = {
+            type: 'sword',
+            damage: [6,15]
+        };
+   
+        battleInfo.receiver.spell = {
+            type: 'fire',
+            damage: [100,101],
+            mp: 35
+        };
+        battleInfo.receiver.hp = 100;
+        battleInfo.receiver.mp = 100;
 
 
         this.addBattleAnimations(sprite,info.id)
 
-        this.spriteMap[info.id] = sprite;   
+        this.spriteMap[info.id] = sprite;  
+        this.state.player[info.id] = battleInfo.receiver; 
+        
     },
 
     addBattleAnimations: function(sprite,id){
@@ -209,7 +287,7 @@ LoM.Battle = {
 
             })
 
-            var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
+            var die = sprite.animations.add('die',[260,261,262,263,264,265],false)
             
     
         // TAG: anim-receiver 
@@ -320,23 +398,34 @@ LoM.Battle = {
 
             })
 
-            var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
+            var die = sprite.animations.add('die',[260,261,262,263,264,265],false)
         }
     },
 
-    attack: function(battleInfo,id){
-        var weapon = this.playerMap[id].weapon.type;
-        this.tweenMap[id][weapon].start();
-        setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},5000)
+    attack: function(state){
+        // performing old state request
+        var attackerID = state.roleID.attacker;
+        var defenderID = state.roleID.defender;
+        var weapon = state.player[attackerID].weapon.type;
+        console.log(this.state.player[defenderID].hp)
+        this.tweenMap[attackerID][weapon].start();
+        setTimeout(function(){Client.actionCompleted(state)},5000)
     },
-    spell: function(battleInfo,id){
-        // this.tweenMap[id].spell.start();
-        this.spriteMap[id].animations.play('spell', 10,  false)
-        setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},3000)
+
+    spell: function(state){
+        var attackerID = state.roleID.attacker;
+        var defenderID = state.roleID.defender;
+        console.log(this.state.player[defenderID].hp)
+        this.spriteMap[attackerID].animations.play('spell', 10,  false)
+        setTimeout(function(){Client.actionCompleted(state)},3000)
     },
-    potion: function(battleInfo,id){
-        this.spriteMap[id].animations.play('potion', 10,  false)
-        setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},2000)
+
+    potion: function(state){
+        var attackerID = state.roleID.attacker;
+        var defenderID = state.roleID.defender;
+
+        this.spriteMap[attackerID].animations.play('potion', 10,  false)
+        setTimeout(function(){Client.actionCompleted(state)},2000)
     }
 }
 

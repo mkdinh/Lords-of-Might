@@ -92,35 +92,37 @@ Client.socket.on('battle-room',function(instance){
 
 // HANDLE BATTLE REQUEST
 
-Client.battleAction = function(battleInfo,action,id){
-            this.socket.emit('battleAction', {battleInfo: battleInfo, action: action, id: id})
+Client.battleAction = function(state){
+    console.log('action to client')
+    this.socket.emit('battleAction',state)
 }
 
-Client.socket.on('battleReaction',function(data){
-    switch(data.action){
+Client.socket.on('battleReaction',function(state){
+    // update current battle state
+    LoM.Battle.state.player = state.player;
+    switch(state.action){
         case 'attack':
-            LoM.Battle.attack(data.battleInfo,data.id)
+            LoM.Battle.attack(state)
             return
         case 'spell':
-            LoM.Battle.spell(data.battleInfo,data.id)
+            LoM.Battle.spell(state)
             return
         case 'potion':
-            LoM.Battle.potion(data.battleInfo,data.id)
+            LoM.Battle.potion(state)
             return
     }
 })
 
-Client.actionCompleted = function(battleInfo,id){
-    if(user.id === id){
+Client.actionCompleted = function(state){
+    if(user.id === state.roleID.attacker){
         console.log('action completed')
-        this.socket.emit('actionCompleted', battleInfo)
+        this.socket.emit('actionCompleted', state)
     }
 }
 
-Client.socket.on('your-turn',function(battleInfo){
-    // console.log(user.control,'your turn')
-    console.log('hey')
-    LoM.Battle.battleInfo[user.control].turn = true;
+Client.socket.on('your-turn',function(state){
+    console.log(user.id,'your turn')
+    LoM.Battle.state.turn = user.id;
 })
 
 

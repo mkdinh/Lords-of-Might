@@ -61,19 +61,19 @@ $('.interaction').on('click','#battle-decline', function(ev){
 
 // BATTLE STATE
 
-function battleUpdate(){
+function battleUpdate(initiator,receiver){
     var menu = $('.battle-info');
     var iStats = $("<div class='stats-wrapper'>")
     var rStats = $("<div class='stats-wrapper'>")
 
-    var iName = "<p class='stats-name'>"+LoM.Battle.battleInfo.initiator.id+"</p>";
-    var iHP = "<p class='stats-HP'>HP:"+100+"</p>";
-    var iMP= "<p class='stats-MP'>HP:"+100+"</p>";
+    var iName = "<p class='stats-name'>"+initiator.id+"</p>";
+    var iHP = "<p class='stats-HP' id='"+initiator.id+"-HP'>HP:"+100+"</p>";
+    var iMP= "<p class='stats-MP' id='"+initiator.id+"-MP'>HP:"+100+"</p>";
     iStats.append(iName,iHP,iMP)
 
-    var rName = "<p class='stats-name'>"+LoM.Battle.battleInfo.receiver.id+"</p>";
-    var rHP = "<p class='stats-HP'>HP:"+100+"</p>";
-    var rMP= "<p class='stats-MP'>HP:"+100+"</p>";
+    var rName = "<p class='stats-name'>"+receiver.id+"</p>";
+    var rHP = "<p class='stats-HP' id='"+receiver.id+"-HP'>HP:"+100+"</p>";
+    var rMP= "<p class='stats-MP' id='"+receiver.id+"-MP'>HP:"+100+"</p>";
 
     rStats.append(rName,rHP,rMP);
     menu.append(iStats,rStats);
@@ -82,6 +82,7 @@ function battleUpdate(){
 
     addBattleButton()
 }
+
 
 function addBattleButton(){
     
@@ -96,26 +97,50 @@ function addBattleButton(){
     $('.battle-options').append(attack,spell,health)
 }
 
+function gameOver(){
+    var button = $("<button class='action-btn' id='battle-return'>");
+    button.text('Return');
+    $('.battle-options').append(button);
+    $('.battle-options').fadeIn();
+}
+
 var enableSubmit = function(ele) {
     $(ele).removeAttr("disabled");
 }
 
+
 $('.battle-options').on('click','#attack-btn', function(ev){
     ev.preventDefault();
-    Client.battleAction(LoM.Battle.battleInfo,'attack',user.id);
+    var state = LoM.Battle.state;
+    state.action = 'attack';
+
+    Client.battleAction(state);
 })
+
 
 $('.battle-options').on('click','#spell-btn', function(ev){
     ev.preventDefault();
-    Client.battleAction(LoM.Battle.battleInfo,'spell',user.id)
+    var state = LoM.Battle.state;
+    state.action = 'spell';
+
+    Client.battleAction(state);
+
 })
 
 $('.battle-options').on('click','#health-btn', function(ev){
     ev.preventDefault();
-    Client.battleAction(LoM.Battle.battleInfo,'potion',user.id)
+    var state = LoM.Battle.state;
+    state.action = 'potion';
+
+    Client.battleAction(state);
+})
+
+$('.battle-options').on('click','#battle-return', function(){
+    LoM.game.state.start('Game')
 })
 
 $('.battle-options').on('click','.action-btn', function(){
-    LoM.Battle.battleInfo[user.control].turn = false;
+    LoM.Battle.state.turn = enemy.id;
 })
+
     

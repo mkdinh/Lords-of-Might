@@ -95,7 +95,9 @@ playerControl = {
     // retrieve proper sprite movement
     movePlayer: function(dirInfo){
         var player = this.spriteMap.players[dirInfo.player.id];
-
+        console.log(this.spriteMap.players)
+        console.log(dirInfo.player.id)
+        console.log(player)
         player.body.velocity.x = dirInfo.player.velocity.x;
         player.body.velocity.y = dirInfo.player.velocity.y;
         // console.log(dirInfo.player.world.x,dirInfo.player.world.y)

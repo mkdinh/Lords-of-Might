@@ -5,60 +5,29 @@ module.exports = function(io){
     var server = {};
 
     io.on('connection', function(socket) {
-        // console.log('connected ..')  
-        // when server receive battle request, server sends battle information to the receiver player
-        socket.on('battle-request', function(battleInfo){
-            server.battleInfo = battleInfo
-            socket.to(server.battleInfo.receiver.socketIO.id).emit('battle-requested',battleInfo)
-
-        })
-
-        socket.on('battle-accept', function(battleInfo){
-            var room = randomInt(1,10000);
-            var initiator_socketID = server.battleInfo.initiator.socketIO.id;
-
-            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-accepted',{})
-            server.battleInfo.room = room;
-            
-            socket.join(room,function(){
-                socket.emit('battle-room',{room:room})
-            })
-            io.sockets.connected[initiator_socketID].join(room, function(){
-                socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-room',{room:room})
-
-            })
-        
-            // var roster = io.sockets.adapter.rooms[room].sockets;
-            // console.log(roster)
-
-        })
-
-        socket.on('battle-decline', function(sprites){
-            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-declined',{})
-
-        })
-
 
         // HANDLIGN BATTLE ACTIONS
 
-        socket.on('battleAction', function(data){
-            // console.log('listen to battle action')
-            switch(data.action){
+        socket.on('battleAction', function(state){
+            console.log('action on server',state.action)
+            switch(state.action){
                 case 'attack':
-                    attackCallback(data)
+                    attackCallback(state)
                     return
                 case 'spell':
-                    spellCallback(data)
+                    spellCallback(state)
                     return
                 case 'potion':
-                    potionCallback(data)
+                    potionCallback(state)
                     return
             }
         })
 
-        socket.on('actionCompleted', function(battleInfo){
+        socket.on('actionCompleted', function(state){
+            // console.log(state)
             // console.log('action completed, start next user turn')
-            var room = battleInfo.room;
+            // console.log(battleInfo)
+            var room = state.room;
             // console.log(data)
             socket.to(room).emit('your-turn',{});
         })  
@@ -68,28 +37,45 @@ module.exports = function(io){
         return Math.floor(Math.random() * (high - low) + low);
     }
 
-    function attackCallback(data){
+    function attackCallback(state){
+        var attackerID = state.roleID.attacker;
+        var defenderID = state.roleID.defender;
+        var attacker = state.player[attackerID];
+        var defender = state.player[defenderID];
+        var room = state.room;
+
         // attack logic here with data
-        // console.log('response to an attack request')
+        
+        var attackPoints = randomInt(attacker.weapon.damage[0],attacker.weapon.damage[1]);
+        defender.hp -= attackPoints;
+
         // emit signal to battling player
-        var room = data.battleInfo.room;
-        io.in(room).emit('battleReaction',data)
+        io.in(room).emit('battleReaction',state)
 
     }
 
-    function spellCallback(data){
+    function spellCallback(state){
         // attack logic here with data
-        // console.log('response to an spell request')
+        var attackerID = state.roleID.attacker;
+        var defenderID = state.roleID.defender;
+        var attacker = state.player[attackerID];
+        var defender = state.player[defenderID];
+        var room = state.room;
+
+        // attack logic here with data
+        
+        var spellPoints = randomInt(attacker.spell.damage[0],attacker.spell.damage[1]);
+        defender.hp -= spellPoints;
         // emit signal to battling player
-        var room = data.battleInfo.room;
-        io.in(data.battleInfo.room).emit('battleReaction',data)
+        var room = state.room;
+        io.in(room).emit('battleReaction',state)
     }
 
-    function potionCallback(data){
+    function potionCallback(state){
         // attack logic here with data
         // console.log('response to an potion request')
         // emit signal to battling player
-        var room = data.battleInfo.room;
-        io.in(data.battleInfo.room).emit('battleReaction',data)
+        var room = state.room;
+        io.in(room).emit('battleReaction',state)
     }
 }
