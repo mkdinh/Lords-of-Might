@@ -64,7 +64,7 @@ generator = {
             this.genLayers(key);
         }     
         // this.layer.inputEnabled = true; 
-        console.log(this.spriteMap.collisions[key])
+        // console.log(this.spriteMap.collisions[key])
     },
     
     genAnimations: function(sprite){
@@ -88,7 +88,7 @@ generator = {
         }
         if(sprite.data.role === 'npc'){
             sprite.animations.currentFrame = sprite.animations.play('down',20,false)
-            console.log(sprite.animations)
+            // console.log(sprite.animations)
         }
     }
 }

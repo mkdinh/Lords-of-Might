@@ -74,7 +74,7 @@ playerControl = {
     },
     
     removePlayer: function(id){
-        if(id !== undefined || this.spriteMap.players[id] !== undefined || this.spriteMap !== undefined || this.spriteMap.players !== undefined){
+        if(id !== undefined && this.spriteMap.players[id] !== undefined && this.spriteMap !== undefined && this.spriteMap.players !== undefined){
             console.log(this.spriteMap.players)
             this.spriteMap.players[id].kill();
             delete this.spriteMap.players[id]

@@ -89,8 +89,8 @@ LoM.Game = {
             this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions['wallCollisions'],this.spriteMap.collisions['wallCollisions'].data['onCollide'], null, this);
             
             // update world position 
-            var worldX = this.spriteMap.players[this.userInfo.id].worldPosition.x;
-            var worldY = this.spriteMap.players[this.userInfo.id].worldPosition.y;
+            var worldX = this.spriteMap.players[this.userInfo.id].x;
+            var worldY = this.spriteMap.players[this.userInfo.id].y;
 
             this.checkLayerCollisions();
             //  if no event is active
@@ -119,8 +119,7 @@ LoM.Game = {
 
             // listen for key press for character movement and pass that information to socket.io
             // if the last key pressed was 100ms ago, then listen stop updating to server 
-            if(this.input.keyboard.isDown(Phaser.Keyboard.W)){
-                
+            if(this.input.keyboard.isDown(Phaser.Keyboard.W)){     
                 Client.move({dir:'up', id: this.userInfo.id,  worldX: worldX, worldY: worldY });
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.S)){;
                 Client.move({dir: 'down', id: this.userInfo.id, worldX: worldX, worldY: worldY });
@@ -128,7 +127,7 @@ LoM.Game = {
                 Client.move({dir:'left', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.D)){
                 Client.move({dir:'right', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
-            }else if(this.input.keyboard.upDuration(65,60)|| this.input.keyboard.upDuration(87,60) || this.input.keyboard.upDuration(83,60) || this.input.keyboard.upDuration(68,60)){
+            }else if(this.input.keyboard.upDuration(65,75)|| this.input.keyboard.upDuration(87,75) || this.input.keyboard.upDuration(83,75) || this.input.keyboard.upDuration(68,75)){
                 Client.move({dir:'stationary', id:this.userInfo.id, worldX: worldX, worldY: worldY})
             }
         }

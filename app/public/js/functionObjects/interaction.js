@@ -5,7 +5,7 @@ var interaction = {};
 
 interaction = {
 
-    spriteCollisions: function(oldPlayer,newPlayer){
+    npcInteractions: function(oldPlayer,newPlayer){
     },
 
     playerInteractions: function(target){
@@ -41,7 +41,7 @@ interaction = {
 
     shopInteractions: function(player,building){
         if(!this.eventActive.state){
-            console.log(building)
+            // console.log(building)
             // if(building.role === 'shop'){
                 var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 400, align: "center", backgroundColor: "#ffff00" };
                 
@@ -56,7 +56,7 @@ interaction = {
 
     innInteractions: function(player,building){
         if(!this.eventActive.state){
-            console.log(building)
+            // console.log(building)
             // if(building.role === 'shop'){
                 var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 400, align: "center", backgroundColor: "#ffff00" };
                 
