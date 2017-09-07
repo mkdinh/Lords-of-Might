@@ -1,6 +1,6 @@
 body{
 	font-family: 'Metamorphous', cursive;
-	background-color: black;
+	background-image: url(/img/preloadBG.jpg);
 }
 
 h2 {
@@ -11,6 +11,9 @@ h2 {
 	margin-bottom: 0px;
 }
 
+h4{
+    font-family: 'Metamorphous', cursive;
+}
 
 
 p {
@@ -49,23 +52,41 @@ p {
 
 /* The Modal (background) */
 .modal {
+    border-color: #060669;
+    border-width: 10px;
+    border-style: double;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
     display: none; /* Hidden by default */
     max-height: calc(100% - 100px);
   	position: fixed;
     top: 50%;
     left: 50%;
   	transform: translate(-50%, -50%);
-    width: 450px; /* Full width */
-    height: 450px; /* Full height */
+    width: 500px; /* Full width */
+    height: 500px; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: #3f3fa7; /* Fallback color */
+    background-color: #3f3fa7;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
     
+    
+}
+
+#login-modal {
+    background: black;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
 }
 
 /* Modal Content/Box */
 .modal-content {
     background-color: black;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 8% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 400px; /* Could be more or less, depending on screen size */
@@ -84,4 +105,15 @@ p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top: -300px; opacity: 0} 
+    to {top: 0; opacity: 1}
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
 }

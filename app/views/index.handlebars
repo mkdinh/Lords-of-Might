@@ -11,6 +11,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/homepage.css" />
     <!-- Lord of Might Font-->
@@ -23,7 +24,7 @@
     autoplay="true" 
     width="0" 
     height="0">
-</embed -->>
+</embed> -->
 
 <!-- Row class no "Containers" in FOundation-->
 <div class="grid-x">
@@ -82,24 +83,26 @@
   </nav>
 </div>
 
+<p class="text-center">A Flipped Scripts creation, 2017. </p>
+
 <!-- The Modal -->
 <div id="myModal" class="modal">
-    <h2 class="text-center">Login</h2>
+   
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
         <form>
             <div class="row">
                 <div class="medium-6 columns">
-                    <label>Input Label
-                        <input type="text" placeholder="Username">
+                    <label><h4 style="color: white">Username</h4>
+                        <input type="text" placeholder="What is your name, Peasant?">
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="medium-6 columns">
-                    <label>Input Label
-                        <input type="text" placeholder="Password">
+                    <label><h4 style="color: white">Password</h4>
+                        <input type="text" placeholder="You must use the Magic word">
                     </label>
                 </div>
             </div>
@@ -128,7 +131,7 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "block";  
 }
 
 // When the user clicks on <span> (x), close the modal
