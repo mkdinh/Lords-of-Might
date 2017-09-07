@@ -33,7 +33,7 @@ Client.socket.on('remove',function(data){
 })
 
 Client.socket.on('npc-interaction', function(sprites){
-    console.log(sprites)
+    // console.log(sprites)
 })
 
 // initiator sent battle request to server with battle infomation
@@ -74,14 +74,13 @@ Client.battleDecline = function(){
 }
 
 Client.socket.on('battle-declined',function(data){
-    var body = game.battleInfo.receiver.id + ' has declined your invitation'
-    announcement(body)
+    // var body = game.battleInfo.receiver.id + ' has declined your invitation'
+    // announcement(body)
     // $('#battle')
 })
 
 Client.socket.on('battle-room',function(instance){
     game.battleInfo.room = instance.room;
-    console.log('get a room!')
     var body = 'Joining room: ' + instance.room
     announcement(body)
     setTimeout(function(){
@@ -109,6 +108,19 @@ Client.socket.on('battleReaction',function(data){
             LoM.Battle.potion(data.battleInfo,data.id)
             return
     }
+})
+
+Client.actionCompleted = function(battleInfo,id){
+    if(user.id === id){
+        console.log('action completed')
+        this.socket.emit('actionCompleted', battleInfo)
+    }
+}
+
+Client.socket.on('your-turn',function(battleInfo){
+    // console.log(user.control,'your turn')
+    console.log('hey')
+    LoM.Battle.battleInfo[user.control].turn = true;
 })
 
 

@@ -7,7 +7,7 @@ playerControl = {
         var sprite;
         var spriteNum = dbInfo.sprite; 
         var avatar = 'sprite' + spriteNum;
-        console.log(dbInfo)
+        // console.log(dbInfo)
         sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
         sprite.data = dbInfo;
         sprite.eventActive = false;
@@ -23,7 +23,7 @@ playerControl = {
         sprite.events.onInputOut.add(this.pointerOutIndicator, this);
         sprite.input.useHandCursor = true;
 
-        console.log(sprite)
+        // console.log(sprite)
 
         if(dbInfo.role === 'npc'){
             sprite.body.immovable = true;
@@ -59,7 +59,7 @@ playerControl = {
 
         if(dbInfo.id === this.userInfo.id){
             this.camera.follow(sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
-            console.log(sprite.body)
+            // console.log(sprite.body)
         }
 
         this.genAnimations(sprite)
@@ -74,9 +74,11 @@ playerControl = {
     },
     
     removePlayer: function(id){
-        console.log(id)
-        this.spriteMap.players[id].kill();
-        delete this.spriteMap.players[id]
+        if(id !== undefined || this.spriteMap.players[id] !== undefined || this.spriteMap !== undefined || this.spriteMap.players !== undefined){
+            console.log(this.spriteMap.players)
+            this.spriteMap.players[id].kill();
+            delete this.spriteMap.players[id]
+        }
     },
 
     // retrieve proper sprite movement

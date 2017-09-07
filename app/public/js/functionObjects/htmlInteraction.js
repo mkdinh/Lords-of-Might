@@ -92,10 +92,13 @@ function addBattleButton(){
     $('.battle-options').append(attack,spell,health)
 }
 
+var enableSubmit = function(ele) {
+    $(ele).removeAttr("disabled");
+}
+
 $('.battle-options').on('click','#attack-btn', function(ev){
     ev.preventDefault();
-    Client.battleAction(LoM.Battle.battleInfo,'attack',user.id)
-    
+    Client.battleAction(LoM.Battle.battleInfo,'attack',user.id);
 })
 
 $('.battle-options').on('click','#spell-btn', function(ev){
@@ -106,5 +109,10 @@ $('.battle-options').on('click','#spell-btn', function(ev){
 $('.battle-options').on('click','#health-btn', function(ev){
     ev.preventDefault();
     Client.battleAction(LoM.Battle.battleInfo,'potion',user.id)
+})
+
+$('.battle-options').on('click','.action-btn', function(){
+    LoM.Battle.battleInfo[user.control].turn = false;
+    console.log(LoM.Battle.battleInfo[user.control].turn);
 })
     

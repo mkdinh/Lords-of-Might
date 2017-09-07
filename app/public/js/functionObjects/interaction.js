@@ -18,6 +18,7 @@ interaction = {
             }else{
                 removeInteractionDisplay()
                 console.log('why keep hitting yourself?')
+                return;
             }
             this.eventActive.state = true
         }

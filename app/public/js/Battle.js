@@ -20,6 +20,14 @@ LoM.Battle = {
 
         this.battleInfo = LoM.Game.battleInfo;
         user = LoM.Game.userInfo;
+        
+        for(role in this.battleInfo){
+            if(this.battleInfo[role].id === user.id){
+                this.battleInfo[role].controller = 'user',
+                user.control = role
+                return 
+            }
+        }
     },
     create: function(){
 
@@ -35,7 +43,14 @@ LoM.Battle = {
         battleUpdate();
     },
     update: function(){
-        console.log(this.time.desiredFps,this.time.fps,this.time.suggestedFps)
+        console.log(this.battleInfo[user.control].turn)
+        if(this.battleInfo[user.control].turn === true ){
+            $(".action-btn").prop("disabled", false);
+            $('.battle-options').fadeIn();
+        }else{
+            $('.action-btn').prop("disabled", true);
+            $('.battle-options').fadeOut();
+        }
     },
     render: function(){
         // LoM.debug.geom(menu,'#0fffff');
@@ -48,11 +63,12 @@ LoM.Battle = {
         sprite.scale.x = 2;
         sprite.scale.y = 2;
 
+        this.battleInfo.initiator.position = "initiator";
+        this.battleInfo.initiator.turn  = true;
         sprite.data.position = "initiator";
         sprite.data.weapon = {};
         sprite.data.weapon.type = 'sword';
-
-        this.battleInfo.initiator.position = "initiator";
+        
 
         this.addBattleAnimations(sprite,info.id)
 
@@ -61,14 +77,15 @@ LoM.Battle = {
 
     createReceiver: function(info){
         
-        this.battleInfo.receiver.position = "receiver";
-
+        
         var sprite =  this.add.sprite(515, 230, 'sprite5');
         sprite.frame = 13;
         sprite.scale.x = 2;
         sprite.scale.y = 2;
         
+        this.battleInfo.receiver.position = "receiver";
         sprite.data.position = "receiver";
+        this.battleInfo.receiver.turn  = false;
         sprite.data.weapon = {};
         sprite.data.weapon.type = 'sword';
 
@@ -82,7 +99,8 @@ LoM.Battle = {
     addBattleAnimations: function(sprite,id){
 
         var tweenT = 1500;
-        var animT = 15
+        var animT = 15;
+        var timeOutT = 500;
 
         if(sprite.data.position === 'initiator'){
             this.tweenMap[id] = {}
@@ -100,12 +118,12 @@ LoM.Battle = {
                         var tweenBall =  LoM.Battle.add.tween(fireball).to({x: 500},1000, 'Linear', false);
                         tweenBall.start()
                         tweenBall.onStart.add(function(){
-                            console.log('hey')
+                            // console.log('hey')
                             fireball.animations.play('shootBall',20, true)
                         })
                         tweenBall.onComplete.add(function(){
                             fireball.animations.stop();
-                            console.log('exploded')
+                            // console.log('exploded')
                             fireball.animations.play('explode',15, false)
                             explodeBall.onComplete.add(function(){
                                 fireball.kill()
@@ -118,7 +136,7 @@ LoM.Battle = {
 
             var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             left.onComplete.add(function(){
-                console.log('frame')
+                // console.log('frame')
             })
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
             var sword = sprite.animations.add('sword',[195,196,197,198,199,200,199,198,197,196,195],true);
@@ -129,7 +147,7 @@ LoM.Battle = {
                     returnTween.onComplete.addOnce(function(){
                         sprite.animations.stop();
                         sprite.animations.play('right',50,false)
-                        sprite.frame = 13
+                        sprite.frame = 13;
                     })
                 })
     
@@ -178,7 +196,7 @@ LoM.Battle = {
                 falling = LoM.Game.add.tween(potionH).to({y: 330},1000,'Bounce',false)
                     falling.onComplete.add(function(){
                         potionH.kill();
-                        
+                        // emit turn completed
                     })
                     
                 falling.start();
@@ -187,6 +205,10 @@ LoM.Battle = {
 
             var die = sprite.animations.add('die',[260,261,262,263,264,265],true)
             
+    
+        // TAG: anim-receiver 
+        // ------------------------------------------------------------------------------------------------
+
         }else if(sprite.data.position === 'receiver'){
 
 
@@ -206,7 +228,6 @@ LoM.Battle = {
                     var tweenBall =  LoM.Battle.add.tween(fireball).to({x: 150},1000, 'Linear', false);
                     tweenBall.start()
                     tweenBall.onStart.add(function(){
-                        console.log('hey')
                         fireball.animations.play('shootBall',20, true)
                     })
 
@@ -216,6 +237,9 @@ LoM.Battle = {
                         fireball.animations.play('explode',15, false)
                         explodeBall.onComplete.add(function(){
                             fireball.kill()
+                            // update player stat
+
+                            // turn finished
                         })
                     })
                 })
@@ -235,6 +259,7 @@ LoM.Battle = {
                         sprite.animations.stop();
                         sprite.animations.play('left',50,false)
                         sprite.frame = 13
+                        console.log('sword slash!')
                     })
                 })
 
@@ -282,7 +307,7 @@ LoM.Battle = {
                 falling = LoM.Game.add.tween(potionH).to({y: 330},1000,'Bounce',false)
                     falling.onComplete.add(function(){
                         potionH.kill();
-                        
+                        // update player stat
                     })
                     
                 falling.start();
@@ -295,14 +320,16 @@ LoM.Battle = {
 
     attack: function(battleInfo,id){
         this.tweenMap[id].sword.start();
+        setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},5000)
     },
     spell: function(battleInfo,id){
-        console.log(id) 
         // this.tweenMap[id].spell.start();
         this.spriteMap[id].animations.play('spell', 10,  false)
+        setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},3000)
     },
     potion: function(battleInfo,id){
         this.spriteMap[id].animations.play('potion', 10,  false)
+        setTimeout(function(){Client.actionCompleted(LoM.Battle.battleInfo,id)},2000)
     }
 }
 

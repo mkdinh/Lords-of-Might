@@ -7,3 +7,11 @@ LoM.game.state.add('Battle', LoM.Battle);
 // LoM.game.state.add('Game', LoM.Game);
 LoM.game.state.start('Boot');
 console.log('starting game')
+
+
+window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+    var errorJS = url.split('/')
+    if(errorJS[errorJS.length-1] === 'Game.js'){
+        location.reload()
+    }
+}

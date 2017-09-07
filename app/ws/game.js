@@ -112,6 +112,13 @@ module.exports = function(io){
             }
         })
 
+        socket.on('actionCompleted', function(battleInfo){
+            console.log('action completed, start next user turn')
+            var room = battleInfo.room;
+            // console.log(data)
+            socket.to(room).emit('your-turn',{});
+            })
+
 
     });
 
