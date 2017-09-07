@@ -79,7 +79,6 @@ module.exports = function(io){
         var defender = state.player[defenderID];
         var room = state.room;
         var addHP = randomInt(25,30)
-        var spellPoints = randomInt(attacker.spell.damage[0],attacker.spell.damage[1]);
         attacker.hp += addHP;
 
         // emit signal to battling player
