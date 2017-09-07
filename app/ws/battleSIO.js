@@ -55,17 +55,16 @@ module.exports = function(io){
     }
 
     function spellCallback(state){
-        // attack logic here with data
+        // spell logic here with data
         var attackerID = state.roleID.attacker;
         var defenderID = state.roleID.defender;
         var attacker = state.player[attackerID];
         var defender = state.player[defenderID];
         var room = state.room;
 
-        // attack logic here with data
-        
         var spellPoints = randomInt(attacker.spell.damage[0],attacker.spell.damage[1]);
         defender.hp -= spellPoints;
+
         // emit signal to battling player
         var room = state.room;
         io.in(room).emit('battleReaction',state)
@@ -73,7 +72,16 @@ module.exports = function(io){
 
     function potionCallback(state){
         // attack logic here with data
-        // console.log('response to an potion request')
+        // spell logic here with data
+        var attackerID = state.roleID.attacker;
+        var defenderID = state.roleID.defender;
+        var attacker = state.player[attackerID];
+        var defender = state.player[defenderID];
+        var room = state.room;
+        var addHP = randomInt(25,30)
+        var spellPoints = randomInt(attacker.spell.damage[0],attacker.spell.damage[1]);
+        attacker.hp += addHP;
+
         // emit signal to battling player
         var room = state.room;
         io.in(room).emit('battleReaction',state)

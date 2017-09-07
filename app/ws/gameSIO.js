@@ -28,6 +28,7 @@ module.exports = function(io){
             // // emit all players to new player
             // socket.emit('allplayers', getAllPlayers());
         })
+
         
         socket.on('key-pressed', function(movement){
             if(movement.dir === 'left'){
