@@ -45,8 +45,10 @@ module.exports = function(io){
                 socket.player.velocity.x = 0;
                 socket.player.velocity.y = 100;
             }else if(movement.dir === 'stationary'){
-                socket.player.velocity.x = 0;
-                socket.player.velocity.y = 0;
+                if(socket.player){
+                    socket.player.velocity.x = 0;
+                    socket.player.velocity.y = 0;
+                }
             }
             
             socket.player.world.x = movement.worldX;
@@ -54,7 +56,7 @@ module.exports = function(io){
     
             // console.log({player: socket.player, dir: movement.dir})
             // broadcast to all player
-            io.emit('move', {player: socket.player, dir: movement.dir} )
+            io.emit('move', {player: socket.player, dir: movement.dir, state: movement.state} )
         })  
         
         socket.on('testing', function(data){

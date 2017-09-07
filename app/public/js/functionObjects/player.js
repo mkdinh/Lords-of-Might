@@ -25,10 +25,8 @@ playerControl = {
         }
         
         if(dbInfo.role === 'npc'){
-            console.log(sprite.role)
+            // console.log(sprite.role)
             sprite.body.onCollide.add(this.npcInteractions,this)
-    
-            console.log(sprite.body.checkCollision)
         }
 
         // console.log(sprite)
@@ -68,7 +66,7 @@ playerControl = {
             this.world.bringToTop(this.groupMap.players);
         }
 
-        if(dbInfo.id === this.userInfo.id){
+        if(dbInfo.id === LoM.Game.userInfo.id){
             this.camera.follow(sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
             // console.log(sprite.body)
         }
@@ -95,9 +93,6 @@ playerControl = {
     // retrieve proper sprite movement
     movePlayer: function(dirInfo){
         var player = this.spriteMap.players[dirInfo.player.id];
-        console.log(this.spriteMap.players)
-        console.log(dirInfo.player.id)
-        console.log(player)
         player.body.velocity.x = dirInfo.player.velocity.x;
         player.body.velocity.y = dirInfo.player.velocity.y;
         // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
@@ -113,3 +108,4 @@ playerControl = {
 
 // combine playerControll and Game
 LoM.Game = Object.assign(LoM.Game,playerControl)
+LoM.Shop = Object.assign(LoM.Shop,playerControl)

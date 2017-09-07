@@ -17,13 +17,14 @@ Client.move = function(movement){
 
 Client.socket.on('start', function(data){
     LoM.Game.userInfo = data.user;
-    LoM.Game.playerArray = data.others
+    LoM.playerArray = data.others
     
-    LoM.game.state.start('Game')
+    
+    LoM.game.state.start('Shop')
 })
 
 Client.socket.on('move', function(data){
-    LoM.Game.movePlayer(data)
+    LoM[data.state].movePlayer(data)
 })
 
 Client.socket.on('remove',function(data){

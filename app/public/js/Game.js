@@ -120,15 +120,15 @@ LoM.Game = {
             // listen for key press for character movement and pass that information to socket.io
             // if the last key pressed was 100ms ago, then listen stop updating to server 
             if(this.input.keyboard.isDown(Phaser.Keyboard.W)){     
-                Client.move({dir:'up', id: this.userInfo.id,  worldX: worldX, worldY: worldY });
+                Client.move({dir:'up', id: this.userInfo.id,  worldX: worldX, worldY: worldY, state: 'Game' });
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.S)){;
-                Client.move({dir: 'down', id: this.userInfo.id, worldX: worldX, worldY: worldY });
+                Client.move({dir: 'down', id: this.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Game'  });
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.A)){
-                Client.move({dir:'left', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
+                Client.move({dir:'left', id: this.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Game'  })
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.D)){
-                Client.move({dir:'right', id: this.userInfo.id,  worldX: worldX, worldY: worldY })
+                Client.move({dir:'right', id: this.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Game'  })
             }else if(this.input.keyboard.upDuration(65,75)|| this.input.keyboard.upDuration(87,75) || this.input.keyboard.upDuration(83,75) || this.input.keyboard.upDuration(68,75)){
-                Client.move({dir:'stationary', id:this.userInfo.id, worldX: worldX, worldY: worldY})
+                Client.move({dir:'stationary', id:this.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Game' })
             }
         }
     },

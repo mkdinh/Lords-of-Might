@@ -95,3 +95,4 @@ generator = {
 
 // combine generator and game
 LoM.Game = Object.assign(LoM.Game,generator)
+LoM.Shop = Object.assign(LoM.Shop,generator)
