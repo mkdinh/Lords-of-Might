@@ -43,7 +43,7 @@ LoM.Battle = {
         battleUpdate();
     },
     update: function(){
-        console.log(this.battleInfo[user.control].turn)
+        // console.log(this.battleInfo[user.control].turn)
         if(this.battleInfo[user.control].turn === true ){
             $(".action-btn").prop("disabled", false);
             $('.battle-options').fadeIn();

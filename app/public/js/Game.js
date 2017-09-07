@@ -57,9 +57,9 @@ LoM.Game = {
             id: '1',
             sprite: 3,
             role: 'npc',
-            name: 'First NPC',
+            name: 'Mysterious Stranger',
             velocity: {x: -10, y: 0},
-            world: {x: 390,y:290}
+            world: {x: 390,y:280}
         }
 
 
@@ -97,8 +97,8 @@ LoM.Game = {
             if(this.eventActive.state){
                 if(!this.lastLocationSaved){
                     this.spriteMap.players[this.userInfo.id].lastLocation = {
-                        x: this.spriteMap.players[this.userInfo.id].worldPosition.x,
-                        y: this.spriteMap.players[this.userInfo.id].worldPosition.y      
+                        x: this.spriteMap.players[this.userInfo.id].x,
+                        y: this.spriteMap.players[this.userInfo.id].y      
                     } 
                     this.lastLocationSaved = true
                 }else{
@@ -106,7 +106,7 @@ LoM.Game = {
                     var dX = worldX - lastLocation.x;
                     var dY = worldY - lastLocation.y;
                     var distance = Math.sqrt( Math.pow(dX, 2) + Math.pow(dY, 2));
-                    if(distance > 10){
+                    if(distance > 20){
                         this.eventActive.state = false;
                         this.eventActive.player = {};
                         this.eventActive.target = {};
@@ -143,7 +143,7 @@ LoM.Game = {
     checkLayerCollisions: function(){
         // listen to player-npc and player-player interactions
         // this.physics.arcade.collide(this.groupMap.players, this.groupMap.players, this.spriteCollisions, null, this);
-        this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.spriteCollisions, null, this);
+        this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.npcInteractions, null, this);
         // listen for collision interactions
         for(var collision in this.spriteMap.collisions){
             this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions[collision], 

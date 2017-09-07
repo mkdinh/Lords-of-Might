@@ -16,12 +16,20 @@ playerControl = {
             sprite.body.velocity.x = 0;
             sprite.body.velocity.y = 0;
         });
+        if(dbInfo.role === 'player'){
+            sprite.inputEnabled = true;
+            sprite.events.onInputDown.add(this.playerInteractions, this);
+            sprite.events.onInputOver.add(this.pointerOverIndicator, this);
+            sprite.events.onInputOut.add(this.pointerOutIndicator, this);
+            sprite.input.useHandCursor = true;
+        }
         
-        sprite.inputEnabled = true;
-        sprite.events.onInputDown.add(this.playerInteractions, this);
-        sprite.events.onInputOver.add(this.pointerOverIndicator, this);
-        sprite.events.onInputOut.add(this.pointerOutIndicator, this);
-        sprite.input.useHandCursor = true;
+        if(dbInfo.role === 'npc'){
+            console.log(sprite.role)
+            sprite.body.onCollide.add(this.npcInteractions,this)
+    
+            console.log(sprite.body.checkCollision)
+        }
 
         // console.log(sprite)
 
@@ -30,6 +38,7 @@ playerControl = {
         }
         
         sprite.lastLocation = {};
+        sprite.frame = 27;
         sprite.body.maxVelocity.x = 100;
         sprite.body.maxVelocity.y = 100;
         sprite.body.bounce.x = 0;
@@ -42,9 +51,11 @@ playerControl = {
         var style = { font: "12px Arial", fill: "#000000",align:'center',boundsAlignH:'center', backgroundColor:'rgba(255,255,255,.3)'};
 
         if(dbInfo.role === 'player'){ 
-            var label = this.add.text(8, -15,dbInfo.id, style);   
+            var label = this.add.text(0, 0,dbInfo.id, style); 
+            label.anchor.set(-0.2,0.3);  
         }else{
-            var label= this.add.text(8, -15,dbInfo.name, style);
+            var label= this.add.text(0,0,dbInfo.name, style);
+            label.anchor.set(0.2,0.6);
         }
 
         sprite.addChild(label);

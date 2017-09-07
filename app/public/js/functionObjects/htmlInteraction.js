@@ -23,7 +23,7 @@ function removeInteractionDisplay(){
         $('.interaction').empty();
     });
     
-    $('.announcement').empty();
+    // $('.announcement').empty();
 }
 
 function announcement(body){
@@ -35,7 +35,11 @@ function announcement(body){
     item.text(body)
 
     announcement.append(item)
-    // item.fadeIn();
+    item.fadeIn();
+    setTimeout(function(){
+        item.fadeOut(function(){
+        item.remove()})
+    },3000)
 }
 
 $('.interaction').on('click','#battle-request', function(ev){
@@ -113,6 +117,5 @@ $('.battle-options').on('click','#health-btn', function(ev){
 
 $('.battle-options').on('click','.action-btn', function(){
     LoM.Battle.battleInfo[user.control].turn = false;
-    console.log(LoM.Battle.battleInfo[user.control].turn);
 })
     
