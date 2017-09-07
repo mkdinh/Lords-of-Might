@@ -31,11 +31,15 @@ module.exports = function(io){
         socket.on('key-pressed', function(movement){
             if(movement.dir === 'left'){
                 socket.player.velocity.x = -100;
+                socket.player.velocity.y = 0;
             }else if(movement.dir === 'right'){
                 socket.player.velocity.x = 100;
+                socket.player.velocity.y = 0;
             }else if(movement.dir === 'up'){
+                socket.player.velocity.x = 0;
                 socket.player.velocity.y = -100;
             }else if(movement.dir === 'down'){
+                socket.player.velocity.x = 0;
                 socket.player.velocity.y = 100;
             }else if(movement.dir === 'stationary'){
                 socket.player.velocity.x = 0;

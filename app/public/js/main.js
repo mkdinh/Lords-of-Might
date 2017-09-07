@@ -12,6 +12,7 @@ console.log('starting game')
 window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
     var errorJS = url.split('/')
     if(errorJS[errorJS.length-1] === 'Game.js'){
+        // LoM.game.state.start('Boot');
         location.reload()
     }
 }

@@ -15,7 +15,7 @@ LoM.Preload.prototype = {
     this.load.spritesheet('tileset', 'img/map/tilesheet.png',32,32);
     this.load.atlas('sprite1', 'img/sprites/1.png', 'img/sprites/1.json');
     this.load.spritesheet('sprite2','img/sprites/2.png',64,64,36); // this will be the sprite of the players
-    this.load.spritesheet('sprite3','img/sprites/3.png',63,63.70,36); // this will be the sprite of the players
+    this.load.spritesheet('sprite3','img/sprites/3.png',63,63,36); // this will be the sprite of the players
     this.load.spritesheet('sprite4','img/sprites/4.png',64,64,36); // this will be the sprite of the players
     this.load.spritesheet('sprite5','img/sprites/5.png',64,64,273);
     this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);

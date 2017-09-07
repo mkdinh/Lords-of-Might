@@ -144,7 +144,7 @@ LoM.Game = {
     checkLayerCollisions: function(){
         // listen to player-npc and player-player interactions
         // this.physics.arcade.collide(this.groupMap.players, this.groupMap.players, this.spriteCollisions, null, this);
-        // this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.spriteCollisions, null, this);
+        this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.spriteCollisions, null, this);
         // listen for collision interactions
         for(var collision in this.spriteMap.collisions){
             this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions[collision], 
