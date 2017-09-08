@@ -14,9 +14,11 @@ Client.socket.on('global-message', function(message){
     var user = message.user;
     var body = message.body;
 
-    var message = '<p>'+ user + ': ' + body + '</p>'
+    var message = '<p class="message-text">'+ user + ': ' + body + '</p>'
 
     globalMessages.append(message)
+
+    $('#global-messages')[0].scrollTop = $('#global-messages')[0].scrollHeight;
     
 })
 
