@@ -44,7 +44,7 @@ Client.socket.on('start', function(data){
     LoM.playerArray = data.others
     
     
-    LoM.game.state.start('Game')
+    LoM.game.state.start('Castle')
 })
 
 

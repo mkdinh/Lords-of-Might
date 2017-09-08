@@ -93,4 +93,5 @@ interaction = {
 }
 // combine interaction object and Game
 LoM.Game = Object.assign(LoM.Game,interaction);
-LoM.Shop = Object.assign(LoM.Shop,interaction)
+LoM.Shop = Object.assign(LoM.Shop,interaction);
+LoM.Castle = Object.assign(LoM.Castle,interaction)

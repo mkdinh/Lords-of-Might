@@ -139,3 +139,4 @@ playerControl = {
 // combine playerControll and Game
 LoM.Game = Object.assign(LoM.Game,playerControl)
 LoM.Shop = Object.assign(LoM.Shop,playerControl)
+LoM.Caslte = Object.assign(LoM.Castle,playerControl)

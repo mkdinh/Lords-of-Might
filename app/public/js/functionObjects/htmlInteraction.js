@@ -183,7 +183,6 @@ $('#global-message-input').on('keypress', function(ev){
         console.log(message)
         Client.sendGlobalMessage(message)
         $('#global-message-input').val('');
-        $('#global-messages')[0].scrollTop = $('#global-messages')[0].scrollHeight;
     }
 })
 
