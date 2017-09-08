@@ -1,6 +1,7 @@
 body{
 	font-family: 'Metamorphous', cursive;
-	background-image: url(/img/preloadBG.jpg);
+	background: url("../img/preloadBG.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
 }
 
 h2 {
@@ -43,7 +44,7 @@ p {
 	 
 	border: 10px white;
 	padding-top: 0px;
-	height: 400px;
+	height: 350px;
 }
 
 #top-players{
