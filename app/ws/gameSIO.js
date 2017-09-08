@@ -45,14 +45,15 @@ module.exports = function(io){
                 socket.player.velocity.x = 0;
                 socket.player.velocity.y = 100;
             }else if(movement.dir === 'stationary'){
-                if(socket.player){
+                if(Object.keys(socket.player).length !== 0){
                     socket.player.velocity.x = 0;
                     socket.player.velocity.y = 0;
                 }
             }
-            
-            socket.player.world.x = movement.worldX;
-            socket.player.world.y = movement.worldY;
+            if(Object.keys(socket.player).length !== 0){
+                socket.player.world.x = movement.worldX;
+                socket.player.world.y = movement.worldY;
+            }
     
             // console.log({player: socket.player, dir: movement.dir})
             // broadcast to all player

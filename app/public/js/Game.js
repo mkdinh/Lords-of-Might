@@ -49,8 +49,8 @@ LoM.Game = {
         this.setCollisions()
 
         // generate all online users accessing the game
-        for(i = 0; i < this.playerArray.length;i++){
-            this.addPlayer(this.playerArray[i])
+        for(i = 0; i < LoM.playerArray.length;i++){
+            this.addPlayer(LoM.playerArray[i],"Game")
         }
 
         var sprite2Info = {
@@ -63,7 +63,7 @@ LoM.Game = {
         }
 
 
-        this.addPlayer(sprite2Info);
+        this.addPlayer(sprite2Info, "Game");
         this.sprite2 = this.groupMap.npcs['sample'];
 
         // after all players is load for the current user, the game start

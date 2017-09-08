@@ -2,13 +2,27 @@ var LoM = LoM || {};
 
 playerControl = {
 
-    addPlayer : function(dbInfo){
+    addPlayer : function(dbInfo,state){
         // generating sprite
         var sprite;
         var spriteNum = dbInfo.sprite; 
         var avatar = 'sprite' + spriteNum;
-        // console.log(dbInfo)
-        sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+        console.log(dbInfo)
+
+        switch(state){
+            case 'Game':
+                sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+                break
+            case 'Shop':
+                if(dbInfo.role === "player"){
+                    sprite =  this.add.sprite(446, 580, avatar);
+                }else{
+                    sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+                }
+                break
+        }
+
+        console.log(state)
         sprite.data = dbInfo;
         sprite.eventActive = false;
         sprite.body.onCollide = new Phaser.Signal()

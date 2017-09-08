@@ -6,13 +6,26 @@ var interaction = {};
 interaction = {
 
     npcInteractions: function(player,npc){
+        if(player.data.role === 'player'){
+            player = player
+            npc = npc
+        }else{
+            var placeholder = player;
+            player = npc;
+            npc = placeholder
+        }
+        
         if(this.eventActive.state === false){
             switch(npc.data.name){
                 case 'Mysterious Stranger':
-                    if(npc.data.name === 'Mysterious Stranger')
                     console.log(this.eventActive.state)
                     this.eventActive.state = true
                     return
+                
+                case 'Shop Owner':
+                    console.log('talk to shop owner')
+                    this.eventActive.state = true
+                    return           
             }
         }
     },
@@ -50,16 +63,8 @@ interaction = {
 
     shopInteractions: function(player,building){
         if(!this.eventActive.state){
-            // // console.log(building)
-            // // if(building.role === 'shop'){
-            //     var style = { font: "32px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: 400, align: "center", backgroundColor: "#ffff00" };
-                
-            //     var t = this.add.text(this.camera.x + (this.width/2), this.camera.y + (this.height/2), "New shop, open soon!", style);
-            //     t.fixedToCamera = true;
-            //     t.cameraOffset.setTo(200, 500);
-            //     setTimeout(function(){t.destroy()},4000)
-            announcement('New Shop! Open Soon!')
-            // }
+            // announcement('New Shop! Open Soon!')
+            LoM.game.state.start("Shop")
         this.eventActive.state = true;
         }
     },
