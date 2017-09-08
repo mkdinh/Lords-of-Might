@@ -17,6 +17,7 @@ function initalizeIOConn(){
     })
 }
 
+console.log(localStorage)
 // login persistence with localstorage
 if(localStorage.hasOwnProperty('user')){
     var user = JSON.parse(localStorage.getItem('user'));

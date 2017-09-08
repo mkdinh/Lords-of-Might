@@ -16,10 +16,6 @@ LoM.Battle = {
         this.backgroundSprite = this.game.add.tileSprite(0,0, width, height, 'battleBG');
         this.backgroundSprite.scale.x = 3.2  
         this.backgroundSprite.scale.y = 3.2  
-        
-        this.load.spritesheet('sprite5','img/sprites/sample.png',64,64,273);
-        this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);
-
 
         battleInfo = LoM.Game.battleInfo;
 
@@ -118,8 +114,8 @@ LoM.Battle = {
     },
 
     createInitiator: function(info){
-        // console.log(info)
-        var sprite =  this.add.sprite(160, 230, 'sprite6');
+        var spriteNum = info.sprite;
+        var sprite =  this.add.sprite(160, 230, 'sprite'+spriteNum);
         sprite.frame = 40;
         sprite.scale.x = 2;
         sprite.scale.y = 2;
@@ -149,9 +145,8 @@ LoM.Battle = {
     },
 
     createReceiver: function(info){
-        
-        
-        var sprite =  this.add.sprite(515, 230, 'sprite5');
+        var spriteNum = info.sprite;
+        var sprite =  this.add.sprite(515, 230, 'sprite'+spriteNum);
         sprite.frame = 13;
         sprite.scale.x = 2;
         sprite.scale.y = 2;
