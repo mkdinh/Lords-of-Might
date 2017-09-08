@@ -4,10 +4,14 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <!-- Custom CSS -->
+        <!-- Foundation CSS -->
         {{!-- <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" /> --}}
         <!-- Custom CSS -->
-        <title>Sign Up - Lords of Might</title>
+        <link rel="stylesheet" href="/css/homepage.css" />
+        <!-- Lord of Might Font-->
+        <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+
+        <title>Customization - Lords of Might</title>
         <style>
             button {
                 font-size: 25px
@@ -16,13 +20,33 @@
     </head>
 
     <body>
-        <h1>
-            <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/cloth_hood_male.png" id='add-head'>Add head</button>
-            <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Add torso</button>
-            <button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Add legs</button>
-            <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button>
-            <button type='submit' class='add-button' data-part='weapon' id='add-weapon'>Add weapon</button>
+        <div class="grid-x">
+        <div class="medium-6 large-6 cell">
+        <h1> 
+            <h2>Body Type</h2>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">Orc</button>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/darkelf.png">Gollem</button>
+
+            <h2>Headgear</h2>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/cloth_hood_male.png" id='add-head'>Hood</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>Chainmail</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/bandanas/male/red.png" id='add-head'>Bandana</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png" id='add-head'>Cap</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png" id='add-head'>Recon</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/golden_helm_male.png" id='add-head'>Gold Helmet</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png" id='add-head'>Silver Helmet</button>
+
+
+            <h2>Accessories</h2>
+                <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Add torso</button>
+                <button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Add legs</button>
+
+            <h2>Weapon</h2>
+                <button type='submit' class='add-button' data-part='weapon' id='add-weapon'>Add weapon</button>
         </h1>
+
+        <h2>Modify</h2>
 
         {{!-- <h1> --}}
             <button type='submit' id='undo-head'>Undo head</button>
@@ -30,9 +54,20 @@
             <button type='submit' id='undo-legs'>Undo legs</button>
             <button type='submit' id='undo-weapon'>Undo weapon</button>
         </h1>
+        </div>
+        
+        <div class="medium-6 large-6 cell">
 
-        <canvas id='canvas' width='832' height='1344'>
+        <canvas id='canvas' width='832' height='1344'></canvas>
+
+        </div>
+
+    </div>
+
         <script src='/js/sprite.js'> </script>
+         <script>
+         $(document).foundation();
+         </script>
     </body>
 
 </html>

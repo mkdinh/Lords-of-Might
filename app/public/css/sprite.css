@@ -1,0 +1,22 @@
+body{
+	font-family: 'Metamorphous', cursive;
+	background: url("../img/preloadBG.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+}
+
+h2 {
+	font-family: 'Metamorphous', cursive;
+	color: #3f3fa7;
+	font-size: 50px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	margin-bottom: 0px;
+}
+
+h4{
+    font-family: 'Metamorphous', cursive;
+}
+
+
+p {
+	color: white;
+}
