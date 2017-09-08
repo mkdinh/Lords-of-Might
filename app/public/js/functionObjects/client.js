@@ -2,6 +2,28 @@ var Client = {};
 
 Client.socket = io.connect();
 
+// HANDLING CHAT
+// ------------------------------------------------------------------
+
+Client.sendGlobalMessage = function(message){
+    Client.socket.emit('global-message',message)
+}
+
+Client.socket.on('global-message', function(message){
+    var globalMessages = $('#global-messages')
+    var user = message.user;
+    var body = message.body;
+
+    var message = '<p>'+ user + ': ' + body + '</p>'
+
+    globalMessages.append(message)
+    
+})
+
+
+// HANDLING GAME CONNECTION
+// ------------------------------------------------------------------
+
 Client.userInfoDB = function(){
     this.socket.emit('user')
 };
@@ -22,6 +44,10 @@ Client.socket.on('start', function(data){
     
     LoM.game.state.start('Game')
 })
+
+
+// HANDLING CHAR MANAGEMENT
+// ------------------------------------------------------------------
 
 Client.socket.on('move', function(data){
     // console.log(data)
@@ -59,7 +85,6 @@ Client.socket.on('player-changed-state',function(player){
     //     console.log(key,LoM.playerMaster[key].world.location)
     // }
     
-
     var user = LoM.playerMaster[LoM.userInfo.id];
     console.log(user.world.location)
     LoM.playerMaster[player.id] = player;
@@ -80,6 +105,9 @@ Client.socket.on('player-changed-state',function(player){
     
 })
 
+
+// HANDLING BATTLE REQUEST
+// ------------------------------------------------------------------
 
 // initiator sent battle request to server with battle infomation
 Client.battleRequest = function(){
@@ -140,7 +168,9 @@ Client.socket.on('battle-room',function(instance){
     // $('#battle')
 })
 
-// HANDLE BATTLE REQUEST
+
+// HANDLING BATTLE MECHANICS
+// ------------------------------------------------------------------
 
 Client.battleAction = function(state){
     console.log('action to client')

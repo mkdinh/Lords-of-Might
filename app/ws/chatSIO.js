@@ -1,13 +1,17 @@
+
+
 module.exports = function(io){
 
-    
     io.on('connection', function(client) {  
-        console.log('Client connected...');
-        
-        client.on('group-message', function(message) {
-            client.emit('messages', message);
-            io.sockets.emit('broadcast', message)  
+        // HANDLING GLOBAL MESSAGING
+        // -----------------------------------------------------------------
+        client.on('global-message', function(message) {
+            // client.emit('messages', message);
+            io.sockets.emit('global-message', message)  
         });
+
+        // HANDLING PRIVATE MESSAGING
+        // -----------------------------------------------------------------
     
     });
 }

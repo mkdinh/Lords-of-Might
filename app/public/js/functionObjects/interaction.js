@@ -27,6 +27,7 @@ interaction = {
                     this.eventActive.state = true
                     return           
             }
+            this.eventActive.state = true;
         }
     },
 

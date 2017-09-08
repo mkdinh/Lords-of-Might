@@ -157,4 +157,46 @@ $('.battle-options').on('click','.action-btn', function(){
     LoM.Battle.state.turn = enemy.id;
 })
 
+
+// CHAT FUNCTION
+$('.message-input').on('focusin',function(){
+    LoM.game.input.enabled = false;
+})
+
+$('.message-input').on('focusout',function(){
+    LoM.game.input.enabled = true;
+})
+
+$('#game').on('click','canvas',function(){
+    $('.message-input').blur();
+    console.log('hey')
+});
+
+
+
+$('#global-message-input').on('keypress', function(ev){
+    if(ev.which === 13){
+        var message = {
+            body: $('#global-message-input').val().trim(),
+            user: LoM.userInfo.id
+        };
+        console.log(message)
+        Client.sendGlobalMessage(message)
+        $('#global-message-input').val('');
+    }
+})
+
+
+$('#private-message-input').on('keypress', function(ev){
+    if(ev.which === 13){
+        var message = {
+            body: $('#global-message-input').val().trim(),
+            user: LoM.userInfo.id,
+            room: LoM.Battle.battleInfo.room
+        };
+        console.log(message)
+        Client.sendPrivateMessage(message)
+        $('#private-message-input').val('');
+    }
+})
     

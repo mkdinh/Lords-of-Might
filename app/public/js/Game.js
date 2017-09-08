@@ -6,6 +6,7 @@
 var LoM = LoM || {};
 var game;
 var initialized = false;
+var chatActive = false;
 
 LoM.Game = function(){};
 
@@ -26,8 +27,8 @@ LoM.Game = {
         // -----------------------------------------------------------
         // setting updating frequency to lighten load on socket IO
 	    this.time.advancedTiming = true;
-        this.time.desiredFps = 30;
-        this.time.suggestedFps = 30;
+        this.time.desiredFps = 40;
+        this.time.suggestedFps = 40;
         
         // setting object reference to be used in other functions object
         game = this;
@@ -152,7 +153,7 @@ LoM.Game = {
                 Client.move({dir:'left', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Game'  })
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.D)){
                 Client.move({dir:'right', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Game'  })
-            }else if(this.input.keyboard.upDuration(65,75)|| this.input.keyboard.upDuration(87,75) || this.input.keyboard.upDuration(83,75) || this.input.keyboard.upDuration(68,75)){
+            }else if(this.input.keyboard.upDuration(65,30)|| this.input.keyboard.upDuration(87,100) || this.input.keyboard.upDuration(83,100) || this.input.keyboard.upDuration(68,100)){
                 Client.move({dir:'stationary', id:LoM.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Game' })
             }
         }

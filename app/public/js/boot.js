@@ -7,6 +7,9 @@ LoM.Boot.prototype = {
     preload: function(){
         // assets for loading screen
         this.load.image('logo','/img/preloadBG.jpg')
+    
+        // LoM.game.world.scale.x = 1.2;
+        // console.log(LoM.game.world)
     },
     create: function(){
         // white background for loading screen

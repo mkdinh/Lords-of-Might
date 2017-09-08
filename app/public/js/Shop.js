@@ -23,7 +23,7 @@ LoM.Shop = {
     create: function(){
         //initialize world boundary and background 
         this.stage.backgroundColor = '#000000';
-        this.world.setBounds(80, 175, 1500, 1500);
+        this.world.setBounds(-30, -200, 1500, 1500);
 
         // set update userInfo with the latest update from sprite master
         var id = LoM.userInfo.id 
@@ -64,21 +64,21 @@ LoM.Shop = {
         }
 
         this.addPlayer(owner,"Shop");     
-        this.spriteMap.npcs['Shop Owner'].body.immovable = false;
+        this.spriteMap.npcs['Shop Owner'].body.immovable = true;
      
         // generating the rest of the layers othert the owner sprite
         this.layerMap.counter = this.map.createLayer('counter');
         this.layerMap.counterTop = this.map.createLayer('counterTop');
         // this.layerMap.counter.debug = true;
-        this.layerMap.wallItem = this.map.createLayer('wallItem');
         this.map.setCollisionByExclusion([],true,'wall',true);
-
+        this.layerMap.wallItem = this.map.createLayer('wallItem');
+        
         // generate another tilemap for exit door collisions
         this.door = this.add.tilemap('shop-interior');
         this.door.addTilesetImage('interior', 'shop-tileset');
         this.layerMap.door = this.door.createLayer('door');
         this.door.setCollisionByExclusion([],true,'door',true);
-        this.layerMap.door.debug = true;
+        // this.layerMap.door.debug = true;
 
 
         // for each user profile in playerMast, if the loctionvis equal to Shop, then 
