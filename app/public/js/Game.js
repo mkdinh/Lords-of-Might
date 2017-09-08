@@ -5,6 +5,7 @@
 
 var LoM = LoM || {};
 var game;
+var initialized = false;
 
 LoM.Game = function(){};
 
@@ -12,6 +13,7 @@ LoM.Game = {
     // -------------------------------------------------------------------------------------------
     // INITALIZING GAME STATE
     // -------------------------------------------------------------------------------------------
+    // allow Game to run in the background
     init:function(){
         this.stage.disableVisibilityChange = true;
     },
@@ -22,19 +24,26 @@ LoM.Game = {
     create: function(){
         // GAME VIEWS INITIALIZATION
         // -----------------------------------------------------------
-        
+        // setting updating frequency to lighten load on socket IO
 	    this.time.advancedTiming = true;
         this.time.desiredFps = 30;
         this.time.suggestedFps = 30;
         
-        game = this
-        this.gameReady = false;
+        // setting object reference to be used in other functions object
+        game = this;
+
+        // event handling boolean
         this.eventActive = {};
         this.eventActive.state = false;
+
+        // object for storing battle info
         this.battleInfo = {}
+
         // generate data map
         this.groupMap = {}
         this.spriteMap = {}
+
+        // setting a higher hierachy object for userInfo to reference to
         LoM.userInfo = this.userInfo;
 
         // generate children objects for this.groupMap and this.spriteMap
@@ -48,10 +57,24 @@ LoM.Game = {
         // set collision events for the game for user interactions
         // look at collisions for more dtails
         this.setCollisions()
-
+        console.log(LoM.playerMaster)
         // generate all online users accessing the game
-        for(i = 0; i < LoM.playerArray.length;i++){
-            this.addPlayer(LoM.playerArray[i],"Game")
+        // use initial array if playerMaster is empty, else use playerMaster object
+        // to generate players
+        if(Object.keys(LoM.playerMaster).length > 0){
+            for(player in LoM.playerMaster){
+                // console.log(player)
+                if(LoM.playerMaster[player].world.location === 'Game'){
+                    this.addPlayer(LoM.playerMaster[player])
+                }
+            }
+        }
+        else{
+            for(i = 0; i < LoM.playerArray.length;i++){
+                if(LoM.playerArray[i].world.location === 'Game'){
+                    this.addPlayer(LoM.playerArray[i])
+                }
+            }
         }
 
         var sprite2Info = {
@@ -69,8 +92,7 @@ LoM.Game = {
 
         // after all players is load for the current user, the game start
         // this prevent update from running before all the players is loaded
-        this.gameReady = true;
-
+        
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------
         this.cursor = this.input.keyboard.createCursorKeys();  
@@ -78,6 +100,8 @@ LoM.Game = {
         this.input.keyboard.addKey(Phaser.Keyboard.A)
         this.input.keyboard.addKey(Phaser.Keyboard.S)
         this.input.keyboard.addKey(Phaser.Keyboard.D)
+
+        initialized = true;
     },
 
     // -------------------------------------------------------------------------------------------
@@ -85,25 +109,25 @@ LoM.Game = {
     // -------------------------------------------------------------------------------------------    
     update: function(){
         // if all player data is loaded, start the game update
-        if(this.gameReady){
+        if(initialized){
             // always listen to building collisions
             this.physics.arcade.collide(this.groupMap.players, this.spriteMap.collisions['wallCollisions'],this.spriteMap.collisions['wallCollisions'].data['onCollide'], null, this);
             
             // update world position 
-            var worldX = this.spriteMap.players[this.userInfo.id].x;
-            var worldY = this.spriteMap.players[this.userInfo.id].y;
+            var worldX = LoM.spriteMaster[this.userInfo.id].x;
+            var worldY = LoM.spriteMaster[this.userInfo.id].y;
 
             this.checkLayerCollisions();
             //  if no event is active
             if(this.eventActive.state){
                 if(!this.lastLocationSaved){
-                    this.spriteMap.players[this.userInfo.id].lastLocation = {
-                        x: this.spriteMap.players[this.userInfo.id].x,
-                        y: this.spriteMap.players[this.userInfo.id].y      
+                    LoM.spriteMaster[this.userInfo.id].lastLocation = {
+                        x: LoM.spriteMaster[this.userInfo.id].x,
+                        y: LoM.spriteMaster[this.userInfo.id].y      
                     } 
                     this.lastLocationSaved = true
                 }else{
-                    var lastLocation = this.spriteMap.players[this.userInfo.id].lastLocation
+                    var lastLocation = LoM.spriteMaster[this.userInfo.id].lastLocation
                     var dX = worldX - lastLocation.x;
                     var dY = worldY - lastLocation.y;
                     var distance = Math.sqrt( Math.pow(dX, 2) + Math.pow(dY, 2));

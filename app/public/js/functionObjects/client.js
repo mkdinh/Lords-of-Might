@@ -36,6 +36,7 @@ Client.socket.on('remove',function(data){
 
 Client.changeState = function(user){
     this.socket.emit('change-state',user)
+    console.log('emit',user)
 }
 
 Client.socket.on('change-state',function(user){
@@ -43,6 +44,7 @@ Client.socket.on('change-state',function(user){
         console.log(key,LoM.playerMaster[key].world.location)
     }
     var userID = user.id;
+    console.log(user)
     var userLocation = user.world.location;
     LoM.playerMaster[userID] = user;
 

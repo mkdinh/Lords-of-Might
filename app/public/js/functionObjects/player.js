@@ -2,7 +2,7 @@ var LoM = LoM || {};
 
 playerControl = {
 
-    addPlayer : function(dbInfo,state){
+    addPlayer : function(dbInfo){
         // generating sprite
         var sprite;
         var spriteNum = dbInfo.sprite; 

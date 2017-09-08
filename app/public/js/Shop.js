@@ -4,24 +4,28 @@ var initialized = false;
 LoM.Shop = function(){};
 
 LoM.Shop = {
-
+    // allow game to run offscreen
     init:function(){
         this.stage.disableVisibilityChange = true;
     },
 
     preload: function(){
-        // show logo in loading screen
-        this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo') 
-        this.splash.anchor.setTo(0.5);
+        
+        // set event handling boolean to prevent multiple collisions
         this.eventActive = {}
         this.eventActive.state = false;
+        
         // load game assets
-
         this.load.tilemap('shop-interior', 'img/map/shop.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('shop-tileset', 'img/map/interior.png',32,32);
         this.load.spritesheet('sprite2','img/sprites/2.png',64,64,36);
     },
     create: function(){
+        //initialize world boundary and background 
+        this.stage.backgroundColor = '#000000';
+        this.world.setBounds(80, 175, 1500, 1500);
+
+        // set update userInfo with the latest update from sprite master
         var id = LoM.userInfo.id 
         LoM.userInfo = LoM.playerMaster[id]
         console.log(LoM.userInfo)
@@ -29,24 +33,19 @@ LoM.Shop = {
         // if(Object.keys(LoM.playerMaster).length === 0){
         //     LoM.playerMaster[LoM.userInfo.id] = LoM.userInfo
         // }
-        // console.log(LoM.playerMaster)
+        
+        
+        // generate object map to keep track of data
         this.groupMap = {};
         this.spriteMap ={};
 
         this.genDataMap(['tileMap','layers','collisions','players','npcs','objects']);
-
         this.layerMap = {};
-  
-        this.physics.startSystem(Phaser.Physics.ARCADE);
-        this.stage.backgroundColor = '#000000';
-        this.world.setBounds(80, 175, 1500, 1500);
 
-        // create a exit door tile map
-
+        // generate base layers with wall collisions and sandwhiching npc srpite in between
+        // for a "behind the counter" effects
         this.map = this.add.tilemap('shop-interior');
         this.map.addTilesetImage('interior', 'shop-tileset');
-
-        
 
         this.layerMap.floor = this.map.createLayer('floor');
         this.layerMap.wall = this.map.createLayer('wall');
@@ -54,8 +53,7 @@ LoM.Shop = {
         this.layerMap.floorItemBack = this.map.createLayer('floorItemBack');
         // this.layerMap.wall.debug = true;
 
-        
-
+        // generating npc sprite
         var owner = {
             id: 'Shop Owner',
             sprite: 2,
@@ -65,55 +63,53 @@ LoM.Shop = {
             world: {x: 470,y:320,location: 'Shop'}
         }
 
-        this.addPlayer(owner,"Shop");
-        
+        this.addPlayer(owner,"Shop");     
         this.spriteMap.npcs['Shop Owner'].body.immovable = false;
-        // this.spriteMap.npcs['Shop Owner'].body.velocity.y = 100
-
-        // this.layerMap.door = this.map.createLayer('door');
+     
+        // generating the rest of the layers othert the owner sprite
         this.layerMap.counter = this.map.createLayer('counter');
         this.layerMap.counterTop = this.map.createLayer('counterTop');
         // this.layerMap.counter.debug = true;
         this.layerMap.wallItem = this.map.createLayer('wallItem');
         this.map.setCollisionByExclusion([],true,'wall',true);
 
-        // this.map.setTileIndexCallback(19,function(){console.log('hey')}, this);
-
+        // generate another tilemap for exit door collisions
         this.door = this.add.tilemap('shop-interior');
         this.door.addTilesetImage('interior', 'shop-tileset');
         this.layerMap.door = this.door.createLayer('door');
         this.door.setCollisionByExclusion([],true,'door',true);
-        // this.layerMap.door.debug = true;
-        // this.door.onCollide.add(function(){console.log('hey')})
-        this.door.setTileIndexCallback(19, function(){console.log('hey')}, this, 'door')
-        console.log(LoM.playerMaster)
-        // console.log(LoM.playerMaster)
+        this.layerMap.door.debug = true;
+
+
+        // for each user profile in playerMast, if the loctionvis equal to Shop, then 
+        // create a sprite for that user, preventing player that are not currently viewing
+        // shop from appearing
         for(player in LoM.playerMaster){
             // console.log(player)
             if(LoM.playerMaster[player].world.location === 'Shop'){
-                this.addPlayer(LoM.playerMaster[player], "Shop")
+                this.addPlayer(LoM.playerMaster[player])
             }
         };  
 
+        // start game update
         initialized = true;
     },
 
     update: function(){
         if(initialized){
+            // listen for collisions between groups of sprites and tileMap
+            // use this to active events
             this.physics.arcade.collide(this.groupMap.players, this.groupMap.npcs, this.npcInteractions, null, this);
             this.physics.arcade.collide(this.spriteMap.npcs.owner, this.layerMap.wall);
             this.physics.arcade.collide(LoM.spriteMaster[LoM.userInfo.id], this.layerMap.wall);
             this.physics.arcade.collide(this.spriteMap.players, this.layerMap.door,function(){console.log('hey')});
-
-            this.physics.arcade.collide(this.groupMap.players, this.layerMap.door,function(player,building){
+            // change state from Shop to Game
+            this.physics.arcade.collide(LoM.spriteMaster[LoM.userInfo.id], this.layerMap.door,function(player,building){
                 // console.log(player,building)
-                var user = {
-                    info: LoM.playerMaster[LoM.userInfo.id],
-                    state: "Shop"
-                };
-                
+                LoM.playerMaster[LoM.userInfo.id].world.location = "Game"
+                var user = LoM.playerMaster[LoM.userInfo.id]
+                console.log('exiting Shop')
                 Client.changeState(user);
-                // LoM.Game.spriteMap.players[player.id].world.location = 'Shop'
             },null, this);
             
 
