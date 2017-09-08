@@ -69,7 +69,6 @@ interaction = {
 
             console.log('hey')
             Client.changeState(user);
-            // LoM.Game.spriteMap.players[player.id].world.location = 'Shop'
 
         this.eventActive.state = true;
         }

@@ -49,7 +49,7 @@ $('.interaction').on('click','#battle-request', function(ev){
 
 $('.interaction').on('click','#battle-accept', function(ev){
     ev.preventDefault();
-    Client.battleAccept();
+    Client.battleAccept(LoM.Game.battleInfo);
 })
 
 
@@ -83,6 +83,10 @@ function battleUpdate(initiator,receiver){
     addBattleButton()
 }
 
+function removeBattleInteractions(){
+    $('.battle-info').fadeOut();
+    $('.battle-options').fadeOut();
+}
 
 function addBattleButton(){
     
@@ -136,7 +140,17 @@ $('.battle-options').on('click','#health-btn', function(ev){
 })
 
 $('.battle-options').on('click','#battle-return', function(){
-    LoM.game.state.start('Game')
+    $('#battle-return').prop('disabled',true)
+    announcement('Returning to town!')
+    removeBattleInteractions();
+    setTimeout(function(){
+        // LoM.game.state.start('Game')
+        LoM.playerMaster[LoM.userInfo.id].world.location = "Game"
+        var user = LoM.playerMaster[LoM.userInfo.id]
+        console.log('exiting Shop')
+        Client.changeState(user);
+    },3000)
+    
 })
 
 $('.battle-options').on('click','.action-btn', function(){

@@ -108,7 +108,7 @@ playerControl = {
             // console.log(this.spriteMap.players)
             this.spriteMap.players[id].kill();
             delete this.spriteMap.players[id]
-            delete LoM.spriteMaster[id]
+            delete LoM.playerMaster[id]
         }
     },
 

@@ -93,6 +93,7 @@ LoM.Battle = {
                     var body = defenderID + " WON!"
                     announcement(body)
                     gameOver()
+                    removeInteractionDisplay()
                 },2000)
             }
 
@@ -198,12 +199,12 @@ LoM.Battle = {
                         tweenBall.start()
                         tweenBall.onStart.add(function(){
                             // console.log('hey')
-                            fireball.animations.play('shootBall',20, true)
+                            fireball.animations.play('shootBall',25, true)
                         })
                         tweenBall.onComplete.add(function(){
                             fireball.animations.stop();
                             // console.log('exploded')
-                            fireball.animations.play('explode',15, false)
+                            fireball.animations.play('explode',25, false)
                             explodeBall.onComplete.add(function(){
                                 fireball.kill()
                             })
@@ -307,13 +308,13 @@ LoM.Battle = {
                     var tweenBall =  LoM.Battle.add.tween(fireball).to({x: 150},1000, 'Linear', false);
                     tweenBall.start()
                     tweenBall.onStart.add(function(){
-                        fireball.animations.play('shootBall',20, true)
+                        fireball.animations.play('shootBall',25, true)
                     })
 
                     tweenBall.onComplete.add(function(){
                         fireball.animations.stop();
                         console.log('exploded')
-                        fireball.animations.play('explode',15, false)
+                        fireball.animations.play('explode',25, false)
                         explodeBall.onComplete.add(function(){
                             fireball.kill()
                             // update player stat
