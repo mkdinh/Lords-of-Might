@@ -4,7 +4,7 @@ LoM.game.state.add('Boot', LoM.Boot);
 LoM.game.state.add('Preload', LoM.Preload);
 LoM.game.state.add('Game', LoM.Game);
 LoM.game.state.add('Battle', LoM.Battle);
-// LoM.game.state.add('Game', LoM.Game);
+LoM.game.state.add('Shop', LoM.Shop);
 LoM.game.state.start('Boot');
 console.log('starting game')
 
