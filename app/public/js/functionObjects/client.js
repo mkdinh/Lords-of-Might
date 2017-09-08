@@ -24,6 +24,7 @@ Client.socket.on('start', function(data){
 })
 
 Client.socket.on('move', function(data){
+    // console.log(data)
     LoM[data.state].movePlayer(data)
 })
 
@@ -33,9 +34,50 @@ Client.socket.on('remove',function(data){
 
 })
 
-Client.socket.on('npc-interaction', function(sprites){
-    // console.log(sprites)
+Client.changeState = function(user){
+    this.socket.emit('change-state',user)
+}
+
+Client.socket.on('change-state',function(user){
+    for(key in LoM.playerMaster){
+        console.log(key,LoM.playerMaster[key].world.location)
+    }
+    var userID = user.id;
+    var userLocation = user.world.location;
+    LoM.playerMaster[userID] = user;
+
+    setTimeout(function(){LoM.game.state.start(userLocation)},500);
+    for(key in LoM.playerMaster){
+        console.log(key,LoM.playerMaster[key].world.location)
+    }
 })
+
+Client.socket.on('player-changed-state',function(player){
+    for(key in LoM.playerMaster){
+        console.log(key,LoM.playerMaster[key].world.location)
+    }
+    
+
+    var user = LoM.playerMaster[LoM.userInfo.id];
+    console.log(player)
+    // if user state is not equal to play state, remove player sprite
+    if(user.world.location !== player.world.location){
+        LoM[user.world.location].spriteMap.players[player.id].kill()
+        // update player changes on playerMaster
+        LoM.playerMaster[player.id] = player;
+        console.log(LoM.playerMaster[player.id])
+    }else if(user.world.location === player.world.location){
+     //else if user location is equal to player location, add player sprite
+        LoM[user.world.location].addPlayer(player)
+        console.log('player added')
+    }
+
+    for(key in LoM.playerMaster){
+        console.log(key,LoM.playerMaster[key].world.location)
+    }
+    
+})
+
 
 // initiator sent battle request to server with battle infomation
 Client.battleRequest = function(){

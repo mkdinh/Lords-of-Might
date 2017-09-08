@@ -64,7 +64,13 @@ interaction = {
     shopInteractions: function(player,building){
         if(!this.eventActive.state){
             // announcement('New Shop! Open Soon!')
-            LoM.game.state.start("Shop")
+            LoM.playerMaster[LoM.userInfo.id].world.location = "Shop"
+            var user = LoM.playerMaster[LoM.userInfo.id]
+
+            console.log('hey')
+            Client.changeState(user);
+            // LoM.Game.spriteMap.players[player.id].world.location = 'Shop'
+
         this.eventActive.state = true;
         }
     },

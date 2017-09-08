@@ -14,7 +14,7 @@ module.exports = function(io){
             player = {
                 id: randomInt(1,1000000),
                 role: 'player',
-                world:{x:randomInt(350,500),y:randomInt(350,500)},
+                world:{x:randomInt(350,500),y:randomInt(350,500),location: 'Game'},
                 velocity: {x:0,y:0},
                 sprite: randomInt(6,6),
                 socketIO: {id: socket.id}
@@ -31,34 +31,44 @@ module.exports = function(io){
 
         
         socket.on('key-pressed', function(movement){
-            if(movement.dir === 'left'){
-                console.log(socket.player)
-                socket.player.velocity.x = -100;
-                socket.player.velocity.y = 0;
-            }else if(movement.dir === 'right'){
-                socket.player.velocity.x = 100;
-                socket.player.velocity.y = 0;
-            }else if(movement.dir === 'up'){
-                socket.player.velocity.x = 0;
-                socket.player.velocity.y = -100;
-            }else if(movement.dir === 'down'){
-                socket.player.velocity.x = 0;
-                socket.player.velocity.y = 100;
-            }else if(movement.dir === 'stationary'){
-                if(Object.keys(socket.player).length !== 0){
-                    socket.player.velocity.x = 0;
-                    socket.player.velocity.y = 0;
-                }
-            }
+            // console.log(Object.keys(io.sockets.connected).length)
             if(Object.keys(socket.player).length !== 0){
+                if(movement.dir === 'left'){
+                    socket.player.velocity.x = -100;
+                    socket.player.velocity.y = 0;
+                }else if(movement.dir === 'right'){
+                    socket.player.velocity.x = 100;
+                    socket.player.velocity.y = 0;
+                }else if(movement.dir === 'up'){
+                    socket.player.velocity.x = 0;
+                    socket.player.velocity.y = -100;
+                }else if(movement.dir === 'down'){
+                    socket.player.velocity.x = 0;
+                    socket.player.velocity.y = 100;
+                }else if(movement.dir === 'stationary'){
+                    if(Object.keys(socket.player).length !== 0){
+                        socket.player.velocity.x = 0;
+                        socket.player.velocity.y = 0;
+                    }
+                }
+
                 socket.player.world.x = movement.worldX;
                 socket.player.world.y = movement.worldY;
+                
+                if(socket.player.world.location !== movement.state){
+                    socket.player.world.location = movement.state
+                }
             }
-    
             // console.log({player: socket.player, dir: movement.dir})
             // broadcast to all player
             io.emit('move', {player: socket.player, dir: movement.dir, state: movement.state} )
-        })  
+        })
+        
+        socket.on('change-state', function(user){
+            // broadcast new player to all current players
+            socket.broadcast.emit('player-changed-state',user)
+            socket.emit('change-state', user)  
+        })
         
         socket.on('testing', function(data){
             console.log('test success!, data received: ', data)

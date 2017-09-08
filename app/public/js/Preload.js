@@ -22,6 +22,8 @@ LoM.Preload.prototype = {
     },
     create: function(){
         // this.state.start('Battle');
+        LoM.playerMaster = {};
+        LoM.spriteMaster = {};
         Client.userInfoDB();
     }
 }

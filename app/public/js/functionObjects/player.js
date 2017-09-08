@@ -7,28 +7,33 @@ playerControl = {
         var sprite;
         var spriteNum = dbInfo.sprite; 
         var avatar = 'sprite' + spriteNum;
-        console.log(dbInfo)
+        // console.log(dbInfo)
+        // console.log(dbInfo.world.location)
 
-        switch(state){
+        switch(dbInfo.world.location){
             case 'Game':
                 sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+                // console.log(sprite)
                 break
             case 'Shop':
                 if(dbInfo.role === "player"){
-                    sprite =  this.add.sprite(446, 580, avatar);
+                    // console.log(dbInfo.id)
+                    sprite =  this.add.sprite(446, 550, avatar);
                 }else{
                     sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
                 }
                 break
         }
 
-        console.log(state)
         sprite.data = dbInfo;
+        // console.log(sprite)
+        // console.log(sprite.data)
         sprite.eventActive = false;
         sprite.body.onCollide = new Phaser.Signal()
         sprite.body.onCollide.add(function(){
             sprite.body.velocity.x = 0;
             sprite.body.velocity.y = 0;
+            console.log(sprite.data.id)
         });
         if(dbInfo.role === 'player'){
             sprite.inputEnabled = true;
@@ -78,6 +83,8 @@ playerControl = {
         }else{
             this.groupMap.players.add(sprite)
             this.world.bringToTop(this.groupMap.players);
+            LoM.spriteMaster[dbInfo.id] = sprite;
+            LoM.playerMaster[dbInfo.id] = dbInfo;
         }
 
         if(dbInfo.id === LoM.Game.userInfo.id){
@@ -98,24 +105,33 @@ playerControl = {
     
     removePlayer: function(id){
         if(id !== undefined && this.spriteMap.players[id] !== undefined && this.spriteMap !== undefined && this.spriteMap.players !== undefined){
-            console.log(this.spriteMap.players)
+            // console.log(this.spriteMap.players)
             this.spriteMap.players[id].kill();
             delete this.spriteMap.players[id]
+            delete LoM.spriteMaster[id]
         }
     },
 
     // retrieve proper sprite movement
     movePlayer: function(dirInfo){
-        var player = this.spriteMap.players[dirInfo.player.id];
-        player.body.velocity.x = dirInfo.player.velocity.x;
-        player.body.velocity.y = dirInfo.player.velocity.y;
-        // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
+        var location = dirInfo.player.world.location;
+        var id = LoM.userInfo.id;
+        
+        if(location === LoM.playerMaster[id].world.location){
 
-        // play animation
-        if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
-            player.animations.stop()
-        }else{
-            player.animations.play(dirInfo.dir,10,false)
+            var player = LoM.spriteMaster[dirInfo.player.id];
+            player.body.velocity.x = dirInfo.player.velocity.x;
+            player.body.velocity.y = dirInfo.player.velocity.y;
+            
+            // LoM.playerMaster[dirInfo.player.id] = dirInfo.player;
+            // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
+
+            // play animation
+            if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
+                player.animations.stop()
+            }else{
+                player.animations.play(dirInfo.dir,10,false)
+            }
         }
     }
 }
