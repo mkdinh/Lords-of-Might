@@ -52,7 +52,7 @@ p {
 
 /* The Modal (background) */
 .modal {
-    border-color: #060669;
+    border-color: black;
     border-width: 10px;
     border-style: double;
     border-bottom-left-radius: 25%;
