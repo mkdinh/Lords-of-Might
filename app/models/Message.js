@@ -4,17 +4,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             validate: {
                 len: [1,100]
-            }        // date: {
-        //     type: DataTypes.DATE,
-        //     allowNull: true
-        //     }   
+            }
         }
     })
 
     Message.associate = (models) => {
         Message.belongsTo(models.User, {
             foreignKey: {
-                allowNull: false
+                allowNull: false,
             }
         })
     }

@@ -51,12 +51,12 @@ LoM.Preload = {
         // generate user game profile
         var user = {
             id: userID,
-            nickname: userDB.nickname,
+            name: userDB.name,
             role: 'player',
             world:{
-                x: userDB.Stat.lastX ,
-                y: userDB.Stat.lastY, 
-                location: userDB.Stat.state
+                x: userDB.Game_State.lastX ,
+                y: userDB.Game_State.lastY, 
+                state: userDB.Game_State.state
             },
             velocity: {x:0,y:0},
             sprite: 'sprite'+userID,
@@ -71,6 +71,7 @@ LoM.Preload = {
             }
         }
         // console.log(user)
+        LoM.userInfo = user
         LoM.playerMaster = {};
         LoM.spriteMaster = {};
         // console.log(user)

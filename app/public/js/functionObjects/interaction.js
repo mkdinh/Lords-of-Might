@@ -65,7 +65,7 @@ interaction = {
     shopInteractions: function(player,building){
         if(!this.eventActive.state){
             // announcement('New Shop! Open Soon!')
-            LoM.playerMaster[LoM.userInfo.id].world.location = "Shop"
+            LoM.playerMaster[LoM.userInfo.id].world.state = "Shop"
             var user = LoM.playerMaster[LoM.userInfo.id]
 
             console.log('hey')
@@ -91,7 +91,7 @@ interaction = {
     }
 
 }
-// combine interaction object and Game
-LoM.Game = Object.assign(LoM.Game,interaction);
+// combine interaction object and Town
+LoM.Town = Object.assign(LoM.Town,interaction);
 LoM.Shop = Object.assign(LoM.Shop,interaction);
 LoM.Castle = Object.assign(LoM.Castle,interaction)

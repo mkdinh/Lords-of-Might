@@ -7,13 +7,14 @@ const User = models.User;
 const Sprite = models.Sprite;
 const Item = models.Item;
 const Stats = models.Stats;
+const Game_State = models.Game_State;
 const router = express.Router();
 var spriteSheetFolder = path.join(__dirname,'../public/img/players');
 var spriteSheetID = {}
 
 router.get('/all', (req,res) => {
     User.findAll({
-        include: [Sprite,Item,Stats]
+        include: [Sprite,Item,Stats,Game_State]
     })
     .then((playerDB) => {
         // grab all player infomation on database

@@ -33,7 +33,7 @@ Client.userInfoDB = function(user){
 
 
 Client.socket.on('render-user', function(data){
-    LoM.Game.addPlayer(data.new)
+    LoM.Town.addPlayer(data.new)
 })
 
 Client.move = function(movement){
@@ -41,10 +41,16 @@ Client.move = function(movement){
 }
 
 Client.socket.on('start', function(data){
-    LoM.Game.userInfo = data.user;
-    LoM.playerArray = data.others;
-    
-    LoM.game.state.start('Game')
+    // parse data from object
+    var userInfo = data.user;
+    var otherPlayers = data.others;
+
+    // push data into game object
+    LoM.Town.userInfo = userInfo;
+    LoM.playerArray = otherPlayers;
+    console.log(userInfo)
+    // start game with current game state
+    LoM.game.state.start(userInfo.world.state)
 })
 
 
@@ -58,7 +64,7 @@ Client.socket.on('move', function(data){
 
 Client.socket.on('remove',function(data){
     console.log('removed',data.id)
-    LoM.Game.removePlayer(data.id)
+    LoM.Town.removePlayer(data.id)
 
 })
 
@@ -69,38 +75,38 @@ Client.changeState = function(user){
 
 Client.socket.on('change-state',function(user){
     // for(key in LoM.playerMaster){
-    //     console.log(key,LoM.playerMaster[key].world.location)
+    //     console.log(key,LoM.playerMaster[key].world.state)
     // }
     var userID = user.id;
     console.log(user)
-    var userLocation = user.world.location;
+    var userLocation = user.world.state;
     LoM.playerMaster[userID] = user;
 
     setTimeout(function(){LoM.game.state.start(userLocation)},500);
     // for(key in LoM.playerMaster){
-    //     console.log(key,LoM.playerMaster[key].world.location)
+    //     console.log(key,LoM.playerMaster[key].world.state)
     // }
 })
 
 Client.socket.on('player-changed-state',function(player){
     // for(key in LoM.playerMaster){
-    //     console.log(key,LoM.playerMaster[key].world.location)
+    //     console.log(key,LoM.playerMaster[key].world.state)
     // }
     
     var user = LoM.playerMaster[LoM.userInfo.id];
-    console.log(user.world.location)
+    console.log(user.world.state)
     LoM.playerMaster[player.id] = player;
     // if user state is not equal to play state, remove player sprite
-    if(user.world.location !== 'Battle'){
-        // if incoming player location is not Battle
-        if(user.world.location !== player.world.location){
-            LoM[user.world.location].spriteMap.players[player.id].kill()
+    if(user.world.state !== 'Battle'){
+        // if incoming player state is not Battle
+        if(user.world.state !== player.world.state){
+            LoM[user.world.state].spriteMap.players[player.id].kill()
             console.log('kill sprite')
             // update player changes on playerMaster
             console.log(LoM.playerMaster[player.id])
-        }else if(user.world.location === player.world.location){
-        //else if user location is equal to player location, add player sprite
-            LoM[user.world.location].addPlayer(player)
+        }else if(user.world.state === player.world.state){
+        //else if user state is equal to player state, add player sprite
+            LoM[user.world.state].addPlayer(player)
             console.log('player added')
         }
     }
@@ -162,7 +168,7 @@ Client.socket.on('battle-room',function(instance){
     setTimeout(function(){
         removeInteractionDisplay()
         // LoM.game.state.start('Battle')
-        LoM.playerMaster[LoM.userInfo.id].world.location = "Battle"
+        LoM.playerMaster[LoM.userInfo.id].world.state = "Battle"
         var user = LoM.playerMaster[LoM.userInfo.id]
         console.log('exiting Shop')
         Client.changeState(user);

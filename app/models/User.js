@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
                 len: [6,100],
             }
         },
-        nickname: {
+        name: {
             type: DataTypes.STRING,
             allowNull:false,
             validate: {
@@ -53,6 +53,9 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "CASCADE"
         })
         User.hasOne(models.Stats, {
+            onDelete: "CASCADE"
+        })
+        User.hasOne(models.Game_State, {
             onDelete: "CASCADE"
         })
     }
