@@ -26,8 +26,8 @@ Client.socket.on('global-message', function(message){
 // HANDLING GAME CONNECTION
 // ------------------------------------------------------------------
 
-Client.userInfoDB = function(){
-    this.socket.emit('user')
+Client.userInfoDB = function(user){
+    this.socket.emit('user',user)
 };
 
 

@@ -5,8 +5,8 @@ playerControl = {
     addPlayer : function(dbInfo){
         // generating sprite
         var sprite;
-        var spriteNum = dbInfo.sprite; 
-        var avatar = 'sprite' + spriteNum;
+            
+        var avatar = 'sprite'+ dbInfo.id;
         // console.log(dbInfo)
         // console.log(dbInfo.world.location)
 

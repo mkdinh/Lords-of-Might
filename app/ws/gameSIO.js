@@ -8,23 +8,17 @@ module.exports = function(io){
         // console.log('connected ..')  
         
         socket.player = {};
-        socket.on('user',function(){
+        socket.on('user',function(user){
             // create new player object
             
-            player = {
-                id: randomInt(1,1000000),
-                role: 'player',
-                world:{x:randomInt(350,500),y:randomInt(350,500),location: 'Game'},
-                velocity: {x:0,y:0},
-                sprite: randomInt(6,6),
-                socketIO: {id: socket.id}
-            };
-            socket.player = player;
+            user.socketIO = {id: socket.id}
+    
+            socket.player = user;
             // console.log(Object.keys(io.sockets.connected))
             // start game
-            socket.emit('start',{user: player, others: getAllPlayers()})  
+            socket.emit('start',{user: user, others: getAllPlayers()})  
             // broadcast new player to all current players
-            socket.broadcast.emit('render-user',{new:player})      
+            socket.broadcast.emit('render-user',{new: user})      
             // // emit all players to new player
             // socket.emit('allplayers', getAllPlayers());
         })

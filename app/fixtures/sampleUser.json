@@ -19,12 +19,12 @@
     {
         "model": "Sprite",
         "data": {
-            "body": "/img/sprite/lpc/stuff.png",
-            "head": "/img/sprite/lpc/stuff.png",
-            "leg": "/img/sprite/lpc/stuff.png", 
-            "torso": "/img/sprite/lpc/stuff.png",
-            "weapon": "/img/sprite/lpc/stuff.png",
-            "spell": "/img/sprite/lpc/stuff.png",
+            "body": "/img/sprites/lpc/body/male/skeleton.png",
+            "head": "/img/sprites/lpc/head/hoods/male/cloth_hood_male.png",
+            "leg": "img/sprites/lpc/legs/armor/male/metal_pants_male.png", 
+            "torso": "img/sprites/lpc/torso/plate/chest_male.png",
+            "weapon": "/img/sprites/lpc/weapons/both_hand.spear.png",
+            "spell": "/img/sprite/lpc/spells/fireball.png",
             "attack": 10,
             "speed": 10,
             "defense": 10,

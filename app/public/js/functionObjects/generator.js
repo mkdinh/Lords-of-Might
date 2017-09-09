@@ -69,23 +69,26 @@ generator = {
     
     genAnimations: function(sprite){
         // send movement to server
+        console.log(sprite)
         spriteNum = sprite.data.sprite
-        if(spriteNum === 1){
-            sprite.animations.add('up', Phaser.Animation.generateFrameNames('sprite', 7, 12), 5, true);
-            sprite.animations.add('down', Phaser.Animation.generateFrameNames('sprite', 1, 6), 5, true);
-            sprite.animations.add('left', Phaser.Animation.generateFrameNames('sprite', 19, 23), 5, true);
-            sprite.animations.add('right', Phaser.Animation.generateFrameNames('sprite', 13, 17), 5, true);
-        }else if(spriteNum === 2 || spriteNum === 3 || spriteNum === 4){
-            sprite.animations.add('up',[3,4,5,6],true);
-            sprite.animations.add('down',[21,22,23,24],true);
-            sprite.animations.add('left',[10,11,12,13],true);
-            sprite.animations.add('right',[28,29,30,31],true);
-        }else if(spriteNum === 5 || spriteNum === 6){
+
+        // if(spriteNum === 1){
+        //     sprite.animations.add('up', Phaser.Animation.generateFrameNames('sprite', 7, 12), 5, true);
+        //     sprite.animations.add('down', Phaser.Animation.generateFrameNames('sprite', 1, 6), 5, true);
+        //     sprite.animations.add('left', Phaser.Animation.generateFrameNames('sprite', 19, 23), 5, true);
+        //     sprite.animations.add('right', Phaser.Animation.generateFrameNames('sprite', 13, 17), 5, true);
+        // }else if(spriteNum === 2 || spriteNum === 3 || spriteNum === 4){
+        //     sprite.animations.add('up',[3,4,5,6],true);
+        //     sprite.animations.add('down',[21,22,23,24],true);
+        //     sprite.animations.add('left',[10,11,12,13],true);
+        //     sprite.animations.add('right',[28,29,30,31],true);
+        // }else if(spriteNum === 5 || spriteNum === 6){
+        
             sprite.animations.add('up',[105,106,107,108,109,110,111,112],true);
             sprite.animations.add('down',[131,132,133,134,135],true);
             sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             sprite.animations.add('right',[144,145,146,147,148],true);
-        }
+        
         if(sprite.data.role === 'npc'){
             sprite.animations.currentFrame = sprite.animations.play('down',20,false)
             // console.log(sprite.animations)
