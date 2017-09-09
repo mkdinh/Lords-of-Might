@@ -32,7 +32,7 @@ if(localStorage.hasOwnProperty('user')){
         url: '/users/login',
         data: loginInfo,
         success: function(res){
-            alert('successfully sign up! choose your character!')
+            alert('Auto Login!')
         }
     })
 }
