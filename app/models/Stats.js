@@ -1,5 +1,15 @@
 module.exports = (sequelize,DataTypes) => {
     var Stats = sequelize.define('Stats', {
+        HP:{
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: 100
+        },
+        MP:{
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: 50
+        },
         attack: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -15,39 +25,7 @@ module.exports = (sequelize,DataTypes) => {
         heal: {
             type: DataTypes.INTEGER,
             allowNull: false
-        },
-        state: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: 'Game'
-        },
-
-        lastX: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 500
-        },
-        lastY: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 500
-        },
-        win: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        lose: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        gold: {
-            type: DataTypes.INTEGER,
-            allowNull:false,
-            defaultValue: 100
         }
-
     })
     
     Stats.associate = (models) => {
