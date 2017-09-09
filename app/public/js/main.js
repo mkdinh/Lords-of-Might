@@ -2,7 +2,7 @@ var LoM = LoM || {};
 var width = $('#game').width();
 var height = $('#game').height();
 console.log(width,height)
-LoM.game = new Phaser.Game(1280, 1280, Phaser.AUTO, document.getElementById('game'));
+LoM.game = new Phaser.Game(width, height, Phaser.AUTO, document.getElementById('game'));
 LoM.game.state.add('Boot', LoM.Boot);
 LoM.game.state.add('Preload', LoM.Preload);
 LoM.game.state.add('Game', LoM.Game);
