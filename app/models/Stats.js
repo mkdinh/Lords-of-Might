@@ -31,7 +31,22 @@ module.exports = (sequelize,DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 500
-        } 
+        },
+        win: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        lose: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        gold: {
+            type: DataTypes.INTEGER,
+            allowNull:false,
+            defaultValue: 100
+        }
 
     })
     
