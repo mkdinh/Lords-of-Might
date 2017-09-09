@@ -5,6 +5,12 @@ module.exports = (sequelize,DataTypes) => {
         },
         quantity: {
             type: DataTypes.INTEGER
+        },
+        link: {
+            type: DataTypes.STRING
+        },
+        data_point: {
+            type: DataTypes.INTEGER
         }
 
     })

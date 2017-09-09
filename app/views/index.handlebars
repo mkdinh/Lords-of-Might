@@ -19,12 +19,12 @@
 
 </head>
 <body>
-<embed src="/audio/conan.mp3"
+{{!-- <embed src="/audio/conan.mp3"
     loop="true" 
-    autoplay="true" 
+    autoplay="false" 
     width="0" 
     height="0">
-</embed>
+</embed> --}}
 
 <!-- Row class no "Containers" in FOundation-->
 <div class="grid-x">
@@ -88,30 +88,56 @@
 <p class="text-center">A Flipped Scripts creation, 2017. </p>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
-   
+<div id="signup-modal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-        <form>
-            <div class="row">
-                <div class="medium-6 columns">
-                    <label><h4 style="color: white">Username</h4>
-                        <input type="text" placeholder="What is your name, Peasant?">
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="medium-6 columns">
-                    <label><h4 style="color: white">Password</h4>
-                        <input type="text" placeholder="You must use the Magic word">
-                    </label>
-                    <a class="button" id="enter-btn">Enter</a>
-                </div>
-            </div>
-        </form>
-    </div>
+      <form>
+          <div class="row">
+              <div class="medium-6 columns">
+                  <label><h4 style="color: white">Username</h4>
+                      <input type="text" id='signup-username' value='foobar@gmail.com' placeholder="What is your name, Peasant?">
+                  </label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="medium-6 columns">
+                  <label><h4 style="color: white">Password</h4>
+                      <input type="text" id='signup-password' value='foobar' placeholder="You must use the Magic word">
+                  </label>
+                  <a class="button" id="signup-submit">Enter</a>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
 
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+ 
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+      <form>
+          <div class="row">
+              <div class="medium-6 columns">
+                  <label><h4 style="color: white">Username</h4>
+                      <input type="text" id='login-username' value='foobar@gmail.com' placeholder="What is your name, Peasant?">
+                  </label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="medium-6 columns">
+                  <label><h4 style="color: white">Password</h4>
+                      <input type="text" id='login-password' value='foobar' placeholder="You must use the Magic word">
+                  </label>
+                  <a class="button" id="login-submit">Enter</a>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
 
 
     <!-- Foundation JQuery-->
@@ -121,37 +147,37 @@
     <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
     <script>
-$(document).foundation();
+      $(document).foundation();
 
-// Get the modal
-var modal = document.getElementById('myModal');
+      // Get the modal
+      var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-var btn = document.getElementById("login-btn");
+      // Get the button that opens the modal
+      var btn = document.getElementById("login-btn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";  
-}
+      // When the user clicks on the button, open the modal 
+      btn.onclick = function() {
+          modal.style.display = "block";  
+      }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
 
 
-    </script>
-    <script src='/js/index.js'></script>
+  </script>
+  <script src='/js/index.js'></script>
 </body>
 
 </html>

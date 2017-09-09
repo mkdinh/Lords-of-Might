@@ -1,0 +1,45 @@
+[
+    {
+        "model": "User",
+        "data": {
+            "username": "foobar@gmail.com",
+            "password": "foobar",
+            "nickname": "foozy",
+            "profile": "http://cdn2-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-8.jpg",
+            "online": false
+        }
+    },
+    {
+        "model": "Message",
+        "data": {
+            "body": "hello World",
+            "UserId": 1
+        }
+    },
+    {
+        "model": "Sprite",
+        "data": {
+            "body": "/img/sprite/lpc/stuff.png",
+            "head": "/img/sprite/lpc/stuff.png",
+            "leg": "/img/sprite/lpc/stuff.png", 
+            "torso": "/img/sprite/lpc/stuff.png",
+            "weapon": "/img/sprite/lpc/stuff.png",
+            "spell": "/img/sprite/lpc/stuff.png",
+            "attack": 10,
+            "speed": 10,
+            "defense": 10,
+            "heal": 10,
+            "UserId": 1
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "item_name": "sword",
+            "quantity": 10,
+            "link": "/img/sprite/lpc/stuff.png",
+            "data_point": 10,
+            "UserId": 1
+        }
+    }
+]

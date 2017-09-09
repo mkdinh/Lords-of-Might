@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             validate: {
                 len: [1,100]
-            }
+            }        // date: {
+        //     type: DataTypes.DATE,
+        //     allowNull: true
+        //     }   
         }
     })
 

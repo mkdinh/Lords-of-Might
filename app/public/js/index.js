@@ -7,15 +7,15 @@ var socket;
 // ---------------------------------------------------------------------
 
 // intializze socket.io upon onnection
-function initalizeIOConn(){
-    socket = io.connect('http://localhost:3000');
+// function initalizeIOConn(){
+//     socket = io.connect('http://localhost:3000');
 
-    socket.on('connect', function(data) {
-        socket.on('broadcast', function(message) {
-            $('#messages').append('<p>'+message+'<p>')
-        });
-    })
-}
+//     socket.on('connect', function(data) {
+//         socket.on('broadcast', function(message) {
+//             $('#messages').append('<p>'+message+'<p>')
+//         });
+//     })
+// }
 
 console.log(localStorage)
 // login persistence with localstorage
@@ -32,8 +32,7 @@ if(localStorage.hasOwnProperty('user')){
         url: '/users/login',
         data: loginInfo,
         success: function(res){
-            $('.login-status').text('true')
-            initalizeIOConn();
+            alert('successfully sign up! choose your character!')
         }
     })
 }
@@ -51,10 +50,17 @@ $('#login-submit').on('click', function(ev){
         url: '/users/login',
         data: loginInfo,
         success: function(res){
+            console.log(res)
             loginInfo.user_id = res.id
             localStorage.setItem('user',JSON.stringify(loginInfo));
-            initalizeIOConn();
-        }
+            // initalizeIOConn();
+            window.location.replace('/user')
+        },
+        error:  function(xhr, status, error) {
+            console.log(xhr)
+            var err = xhr.responseJSON.message;
+            alert(err);
+          }
     })
 })
 
@@ -62,24 +68,24 @@ $('#login-submit').on('click', function(ev){
 // ---------------------------------------------------------------------
 
 // update message to browser DOM
-function updateMessage(message) {
-    $("#messages").prepend('<p>'+message+'</p>')
-}
+// function updateMessage(message) {
+//     $("#messages").prepend('<p>'+message+'</p>')
+// }
 
-// on click, save message onto database and emit message to all clients
-$('#message-submit').click(function(ev){
-    ev.preventDefault()
+// // on click, save message onto database and emit message to all clients
+// $('#message-submit').click(function(ev){
+//     ev.preventDefault()
     
-    var newMessage = {
-        body: $('#new-message').val().trim()
-    };
+//     var newMessage = {
+//         body: $('#new-message').val().trim()
+//     };
     
-    $.ajax({
-        method: 'POST',
-        url: '/messages/new',
-        data: newMessage,
-        success: function(message){
-            socket.emit('message', message.body)
-        }
-    })
-});
+//     $.ajax({
+//         method: 'POST',
+//         url: '/messages/new',
+//         data: newMessage,
+//         success: function(message){
+//             socket.emit('message', message.body)
+//         }
+//     })
+// });

@@ -24,20 +24,23 @@ function(username, password, done) {
         .then(user => {
             
             if (user === null) {
-                // console.log('Incorrect username')
+                console.log('Incorrect username')
                return done(null, false, { message: 'Incorrect username.' });
             }
+            
+            // console.log(user.get({plain:true}).password)
+            return(done(null,user))
 
-            user.comparePassword(password, function (err,isMatch) {
-                if (err) { return done(err); }
-                if(!isMatch){
-                    // console.log('incorrect password')
-                    return done(null, false, { message: 'Incorrect password.' });
-                } else {
-                    // console.log('logged in!')
-                    return done(null, user);
-                }
-            });
+            // user.comparePassword(password, function (err,isMatch) {
+            //     if (err) { return done(err); }
+            //     if(!isMatch){
+            //         // console.log('incorrect password')
+            //         return done(null, false, { message: 'Incorrect password.' });
+            //     } else {
+            //         console.log('logged in!')
+            //         return done(null, user);
+            //     }
+            // });
             
         })
         .catch((err) => {
@@ -64,6 +67,7 @@ passport.serializeUser(function(user, done) {
     // console.log('serializing')
     return done(null, user.id);
 });
+
   
 passport.deserializeUser(function(id, done) {
     // console.log('deserializing')
@@ -96,7 +100,7 @@ router.post('/new', (req,res) => {
     }
 
     User.create(newUser).then(() => {
-        res.end();
+        res.redirect('/user');
     })
 }); 
 
@@ -110,13 +114,13 @@ router.get('/new'), function(req,res){
 
 router.post('/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
-        if (err) { return next(err); }
-        if (!user) { return res.redirect('/'); }
+        if (err) { return next(err)}
+        if (!user) { return res.send(500, {message: 'wrong username or password'})}
         
         req.logIn(user, function(err) {
             // console.log('is auth: ',req.isAuthenticated())
-            if (err) { return next(err); }
-            // console.log('login in')
+            if (err) { return res.send(500, {message: 'wrong username or password'}) }
+
             res.json(user)
         });
     })(req, res, next);
@@ -124,7 +128,7 @@ router.post('/login', function(req, res, next) {
 
 router.post('/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.send({message: "Successfully signed out!"})
 });
 
 

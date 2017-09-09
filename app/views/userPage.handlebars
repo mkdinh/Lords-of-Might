@@ -23,7 +23,7 @@
             <div id="username"></div>
         </div>
 
-        <button class="top-bar-right" id="logoutButton">
+        <button class="top-bar-right" id="logout-btn">
             LOGOUT
         </button>
 
@@ -64,7 +64,17 @@
 
     <script>
         $(document).foundation();
+        $('#logout-btn').on('click', function(){
 
+            $.ajax({
+                url: '/users/logout',
+                method: 'POST',
+                success: function(res){
+                    alert(res.message);
+                    window.location.replace('/');
+                }
+            })
+        })
     </script>
 </body>
 

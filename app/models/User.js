@@ -19,12 +19,23 @@ module.exports = (sequelize, DataTypes) => {
                 len: [6,100],
             }
         },
+        nickname: {
+            type: DataTypes.STRING,
+            allowNull:false,
+            validate: {
+                len: [1,20],
+            },
+            defaultValue: "Nooby Noob" 
+        },
+        profile: {
+            type: DataTypes.STRING,
+            allowNull:false,
+            defaultValue: "http://s7d2.scene7.com/is/image/PetSmart/5141661?$sclp-prd-main_large$"
+        },
         online: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            validate: {
-            }
         }
         
     })
@@ -38,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "CASCADE"
         })
 
-        User.hasOne(models.Avatar, {
+        User.hasOne(models.Sprite, {
             onDelete: "CASCADE"
         })
     }
@@ -53,9 +64,9 @@ module.exports = (sequelize, DataTypes) => {
     
     User.prototype.comparePassword = function(password, fn){
         var hash = this.password;
-
+        
         return bcrypt.compare(password, hash, function(err, res) {
-            console.log(res)
+            // console.log(res)
             fn(err,res)
         })
     }
