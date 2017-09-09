@@ -25,13 +25,23 @@
             "torso": "img/sprites/lpc/torso/plate/chest_male.png",
             "weapon": "/img/sprites/lpc/weapons/both_hand.spear.png",
             "spell": "/img/sprite/lpc/spells/fireball.png",
+            "UserId": 1
+        }
+    },
+    {
+        "model": "Stats",
+        "data": {
             "attack": 10,
             "speed": 10,
             "defense": 10,
             "heal": 10,
+            "State": "Game",
+            "LastX": "500",
+            "LastY": "500",
             "UserId": 1
         }
     },
+
     {
         "model": "Item",
         "data": {

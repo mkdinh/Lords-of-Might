@@ -28,6 +28,7 @@ Client.socket.on('global-message', function(message){
 
 Client.userInfoDB = function(user){
     this.socket.emit('user',user)
+    // console.log(user)
 };
 
 
@@ -41,8 +42,7 @@ Client.move = function(movement){
 
 Client.socket.on('start', function(data){
     LoM.Game.userInfo = data.user;
-    LoM.playerArray = data.others
-    
+    LoM.playerArray = data.others;
     
     LoM.game.state.start('Game')
 })

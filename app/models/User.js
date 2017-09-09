@@ -52,6 +52,9 @@ module.exports = (sequelize, DataTypes) => {
         User.hasOne(models.Sprite, {
             onDelete: "CASCADE"
         })
+        User.hasOne(models.Stats, {
+            onDelete: "CASCADE"
+        })
     }
 
     User.prototype.printStuff = function(){

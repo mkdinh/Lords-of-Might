@@ -47,20 +47,20 @@ LoM.Preload = {
         var userID = userLocalStor.user_id; 
         var userDB = LoM.playerDB[userID];
         var sprite = userDB.Sprite;
-
+        // console.log(userDB)
         // generate user game profile
         var user = {
             id: userID,
+            nickname: userDB.nickname,
             role: 'player',
-            world:{x:randomInt(350,500),y:randomInt(350,500), location: 'Game'},
+            world:{
+                x: userDB.Stat.lastX ,
+                y: userDB.Stat.lastY, 
+                location: userDB.Stat.state
+            },
             velocity: {x:0,y:0},
             sprite: 'sprite'+userID,
-            stats:{
-                attack: sprite.attack,
-                defense: sprite.defense,
-                speed: sprite.speed,
-                heal: sprite.heal
-            },
+            stats: userDB.Stat,
             equipments: {
                 weapon: parsePNG(sprite.weapon),
                 spell: parsePNG(sprite.spell),
@@ -70,10 +70,10 @@ LoM.Preload = {
                 body: parsePNG(sprite.body)
             }
         }
-        console.log(user)
+        // console.log(user)
         LoM.playerMaster = {};
         LoM.spriteMaster = {};
-
+        // console.log(user)
         Client.userInfoDB(user);
     }
 }

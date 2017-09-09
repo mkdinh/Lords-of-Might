@@ -23,22 +23,6 @@ module.exports = (sequelize,DataTypes) => {
         spell: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        attack: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        speed: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        defense: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        heal: {
-            type: DataTypes.INTEGER,
-            allowNull: false
         }
     })
 

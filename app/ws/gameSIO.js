@@ -12,7 +12,6 @@ module.exports = function(io){
             // create new player object
             
             user.socketIO = {id: socket.id}
-    
             socket.player = user;
             // console.log(Object.keys(io.sockets.connected))
             // start game

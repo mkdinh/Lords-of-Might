@@ -58,7 +58,7 @@ LoM.Game = {
         // set collision events for the game for user interactions
         // look at collisions for more dtails
         this.setCollisions()
-        console.log(LoM.playerMaster)
+
         // generate all online users accessing the game
         // use initial array if playerMaster is empty, else use playerMaster object
         // to generate players
@@ -71,6 +71,7 @@ LoM.Game = {
             }
         }
         else{
+            // console.log(LoM.playerArray)
             for(i = 0; i < LoM.playerArray.length;i++){
                 if(LoM.playerArray[i].world.location === 'Game'){
                     this.addPlayer(LoM.playerArray[i])
@@ -79,8 +80,8 @@ LoM.Game = {
         }
 
         var sprite2Info = {
-            id: '1',
-            sprite: 3,
+            id: '2',
+            sprite: "sprite3",
             role: 'npc',
             name: 'Mysterious Stranger',
             velocity: {x: -10, y: 0},

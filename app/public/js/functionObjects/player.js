@@ -5,14 +5,13 @@ playerControl = {
     addPlayer : function(dbInfo){
         // generating sprite
         var sprite;
-            
-        var avatar = 'sprite'+ dbInfo.id;
+
         // console.log(dbInfo)
         // console.log(dbInfo.world.location)
 
         switch(dbInfo.world.location){
             case 'Game':
-                sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+                sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, dbInfo.sprite);
                 // console.log(sprite)
                 break
             case 'Shop':
@@ -33,9 +32,10 @@ playerControl = {
         sprite.body.onCollide.add(function(){
             sprite.body.velocity.x = 0;
             sprite.body.velocity.y = 0;
-            console.log(sprite.data.id)
+            // console.log(sprite.data.id)
         });
         if(dbInfo.role === 'player'){
+    
             sprite.inputEnabled = true;
             sprite.events.onInputDown.add(this.playerInteractions, this);
             sprite.events.onInputOver.add(this.pointerOverIndicator, this);
@@ -68,15 +68,17 @@ playerControl = {
         var style = { font: "12px Arial", fill: "#000000",align:'center',boundsAlignH:'center', backgroundColor:'rgba(255,255,255,.3)'};
 
         if(dbInfo.role === 'player'){ 
-            var label = this.add.text(0, 0,dbInfo.id, style); 
-            label.anchor.set(-0.2,0.3);  
+            var label = this.add.text(0, 0,dbInfo.nickname, style); 
+            label.position.x -= label.width * 0.5;
+            label.position.y -= label.height * 0.5;
         }else{
             var label= this.add.text(0,0,dbInfo.name, style);
-            label.anchor.set(0.2,0.6);
+            label.position.x -= label.width * .25;
+            label.position.y -= label.height * 0.75;
         }
 
         sprite.addChild(label);
-
+        // console.log(dbInfo)
         if(dbInfo.role === 'npc'){
             this.groupMap.npcs.add(sprite)
             this.world.bringToTop(this.groupMap.npcs);
@@ -85,6 +87,7 @@ playerControl = {
             this.world.bringToTop(this.groupMap.players);
             LoM.spriteMaster[dbInfo.id] = sprite;
             LoM.playerMaster[dbInfo.id] = dbInfo;
+            // console.log(LoM.spriteMaster)
         }
 
         if(dbInfo.id === LoM.Game.userInfo.id){
