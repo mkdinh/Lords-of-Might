@@ -1,12 +1,12 @@
 module.exports = (sequelize,DataTypes) => {
     var Stats = sequelize.define('Stats', {
         HP:{
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 100
         },
         MP:{
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 50
         },

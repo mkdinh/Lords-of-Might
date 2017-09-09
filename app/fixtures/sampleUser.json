@@ -17,6 +17,12 @@
         }
     },
     {
+        "model": "Game_State",
+        "data": {
+            "UserId": 1
+        }
+    },
+    {
         "model": "Sprite",
         "data": {
             "body": "/img/sprites/lpc/body/male/skeleton.png",
