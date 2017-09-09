@@ -3,7 +3,7 @@ module.exports = (sequelize,DataTypes) => {
         state: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 'Game'
+            defaultValue: 'Town'
         },
         lastX: {
             type: DataTypes.INTEGER,

@@ -30,7 +30,7 @@
             "leg": "img/sprites/lpc/legs/armor/male/metal_pants_male.png", 
             "torso": "img/sprites/lpc/torso/plate/chest_male.png",
             "weapon": "/img/sprites/lpc/weapons/both_hand.spear.png",
-            "spell": "/img/sprite/lpc/spells/fireball.png",
+            "spell": "/img/sprite/lpc/spells/shadow_bomb.png",
             "UserId": 1
         }
     },
@@ -41,9 +41,6 @@
             "speed": 10,
             "defense": 10,
             "heal": 10,
-            "State": "Game",
-            "LastX": "500",
-            "LastY": "500",
             "UserId": 1
         }
     },
@@ -52,6 +49,9 @@
         "model": "Item",
         "data": {
             "item_name": "sword",
+            "type": "weapon",
+            "buy": 10,
+            "sell": 5,
             "quantity": 10,
             "link": "/img/sprite/lpc/stuff.png",
             "data_point": 10,

@@ -1,5 +1,6 @@
 var LoM = LoM || {};
 var initialized = false;
+
 // loading game assets
 LoM.Shop = function(){};
 
@@ -29,11 +30,6 @@ LoM.Shop = {
         var id = LoM.userInfo.id 
         LoM.userInfo = LoM.playerMaster[id]
         console.log(LoM.userInfo)
-        // LoM.userInfo.world.location = 'Shop';
-        // if(Object.keys(LoM.playerMaster).length === 0){
-        //     LoM.playerMaster[LoM.userInfo.id] = LoM.userInfo
-        // }
-        
         
         // generate object map to keep track of data
         this.groupMap = {};
@@ -56,13 +52,14 @@ LoM.Shop = {
         // generating npc sprite
         var owner = {
             id: 'Shop Owner',
-            sprite: 2,
+            sprite: "sprite"+2,
             role: 'npc',
             name: 'Shop Owner',
             velocity: {x: 0, y: -100},
-            world: {x: 470,y:320,location: 'Shop'}
+            world: {x: 470,y:320,state: 'Shop'}
         }
 
+        // add owner npc *******HOPEFULLY FROM DB**************
         this.addPlayer(owner,"Shop");     
         this.spriteMap.npcs['Shop Owner'].body.immovable = true;
      
@@ -86,7 +83,7 @@ LoM.Shop = {
         // shop from appearing
         for(player in LoM.playerMaster){
             // console.log(player)
-            if(LoM.playerMaster[player].world.location === 'Shop'){
+            if(LoM.playerMaster[player].world.state === 'Shop'){
                 this.addPlayer(LoM.playerMaster[player])
             }
         };  
@@ -103,10 +100,10 @@ LoM.Shop = {
             this.physics.arcade.collide(this.spriteMap.npcs.owner, this.layerMap.wall);
             this.physics.arcade.collide(LoM.spriteMaster[LoM.userInfo.id], this.layerMap.wall);
             this.physics.arcade.collide(this.spriteMap.players, this.layerMap.door,function(){console.log('hey')});
-            // change state from Shop to Game
+            // change state from Shop to Town
             this.physics.arcade.collide(LoM.spriteMaster[LoM.userInfo.id], this.layerMap.door,function(player,building){
                 // console.log(player,building)
-                LoM.playerMaster[LoM.userInfo.id].world.location = "Game"
+                LoM.playerMaster[LoM.userInfo.id].world.state = "Town"
                 var user = LoM.playerMaster[LoM.userInfo.id]
                 console.log('exiting Shop')
                 Client.changeState(user);

@@ -17,9 +17,9 @@ LoM.Battle = {
         this.backgroundSprite.scale.x = 3.2  
         this.backgroundSprite.scale.y = 3.2  
 
-        battleInfo = LoM.Game.battleInfo;
+        battleInfo = LoM.Town.battleInfo;
 
-        user = LoM.Game.userInfo;
+        user = LoM.Town.userInfo;
         room = battleInfo.room;
         delete battleInfo['room']
         
@@ -269,11 +269,11 @@ LoM.Battle = {
 
                 addHealth.onStart.add(function(){
 
-                var potionH = LoM.Game.add.sprite(210, 0,'health')
+                var potionH = LoM.Town.add.sprite(210, 0,'health')
                 potionH.scale.x= .25;
                 potionH.scale.y= .25;
         
-                falling = LoM.Game.add.tween(potionH).to({y: 330},1000,'Bounce',false)
+                falling = LoM.Town.add.tween(potionH).to({y: 330},1000,'Bounce',false)
                     falling.onComplete.add(function(){
                         potionH.kill();
                         // emit turn completed
@@ -380,11 +380,11 @@ LoM.Battle = {
             
                 addHealth.onStart.add(function(){
 
-                var potionH = LoM.Game.add.sprite(565, 0,'health')
+                var potionH = LoM.Town.add.sprite(565, 0,'health')
                 potionH.scale.x= .25;
                 potionH.scale.y= .25;
         
-                falling = LoM.Game.add.tween(potionH).to({y: 330},1000,'Bounce',false)
+                falling = LoM.Town.add.tween(potionH).to({y: 330},1000,'Bounce',false)
                     falling.onComplete.add(function(){
                         potionH.kill();
                         // update player stat
