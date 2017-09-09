@@ -58,8 +58,7 @@ Client.socket.on('start', function(data){
 // ------------------------------------------------------------------
 
 Client.socket.on('move', function(data){
-    // console.log(data)
-    LoM[data.state].movePlayer(data)
+    LoM.player.movePlayer(data)
 })
 
 Client.socket.on('remove',function(data){
@@ -70,22 +69,19 @@ Client.socket.on('remove',function(data){
 
 Client.changeState = function(user){
     this.socket.emit('change-state',user)
-    console.log('emit',user)
 }
 
 Client.socket.on('change-state',function(user){
-    // for(key in LoM.playerMaster){
-    //     console.log(key,LoM.playerMaster[key].world.state)
-    // }
+
     var userID = user.id;
-    console.log(user)
-    var userLocation = user.world.state;
+    var state = user.world.state;
     LoM.playerMaster[userID] = user;
 
-    setTimeout(function(){LoM.game.state.start(userLocation)},500);
-    // for(key in LoM.playerMaster){
-    //     console.log(key,LoM.playerMaster[key].world.state)
-    // }
+    setTimeout(function(){
+        console.log(LoM.eventActive.state)
+        LoM.game.state.start(state);
+    },500);
+
 })
 
 Client.socket.on('player-changed-state',function(player){
