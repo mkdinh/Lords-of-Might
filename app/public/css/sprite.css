@@ -4,6 +4,10 @@ body{
     -webkit-background-size: cover;
 }
 
+.row{
+	
+}
+
 h2 {
 	font-family: 'Metamorphous', cursive;
 	color: #3f3fa7;
@@ -13,10 +17,25 @@ h2 {
 }
 
 h4{
-    font-family: 'Metamorphous', cursive;
+    font-family: 'Metamorphous', cursive;	
+	color:white;
 }
 
 
 p {
 	color: white;
+}
+
+button{
+	color: white;
+	margin-bottom: 5px;
+	margin-top: 5px;
+    outline: none;
+    border-radius: 15px;
+    background-color: #3f3fa7;
+    border: 1px solid #060669;
+}
+
+.material-icons {
+	margin-top: 7px;
 }
