@@ -4,11 +4,14 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <!-- Foundation CSS -->
-        {{!-- <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" /> --}}
+
+        <!-- Materialize CSS -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/homepage.css" />
-        <!-- Lord of Might Font-->
+        <link rel="stylesheet" href="/css/homepage.css"/>
+
+        <!-- Lords of Might Font-->
         <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
 
         <title>Customization - Lords of Might</title>
@@ -26,9 +29,9 @@
         width="0" no
         height="0">
     </embed>
-        <div class="grid-x">
+        <div class="row">
     
-        <div class="medium-9 large-9 cell">
+        <div class="col s6">
         <h1> 
             <h2>Body Type</h2>
                 <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button>
@@ -63,7 +66,7 @@
         </h1>
         </div>
         
-        <div class="medium-3 large-3 cell">
+        <div class="col s6">
 
         <canvas id='canvas' width='300' height='300'></canvas>
 

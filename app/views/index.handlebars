@@ -4,84 +4,92 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial scale=1.0">
+
 	<title>Lords of Might</title>
 	
-	<!-- Custom Style -->
+	
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/homepage.css" />
     <!-- Lord of Might Font-->
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
 
 </head>
 <body>
-{{!-- <embed src="/audio/conan.mp3"
+ <embed src="/audio/conan.mp3"
     loop="true" 
     autoplay="false" 
     width="0" no
     height="0">
-</embed> --}}
+</embed> 
 
 <!-- Row class no "Containers" in FOundation-->
-<div class="grid-x">
-  <div class="medium-8 large-8 cell">
-    <h2>Lords of Might</h2>
-  </div>
-  <div class="medium-2 large-2 cell">
-    <a class="button" href='/signUp'>Sign Up</a>
-  </div>
-  <div class="medium-2 large-2 cell">
-    <a class="button" id="login-btn">Login</a>
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo"><h2>Lords of Might</h2></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <button class="nav-btns" id="sign-btn">
+            <a href="/signUp" style="font-size: 24px;">Sign Up</a>
+        </li>
+          </button>
+        <li>
+          <button class="nav-btns" id="login-btn">
+            Login
+          </button>
+        </li>
+      </ul>
     </div>
-</div>   
+  </nav>
 
-<!-- Main Orbit Div -->
-<div class="orbit" role="region" aria-label="App Info" data-orbit>
-  <div class="orbit-wrapper">
-    <div class="orbit-controls">
-      <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-      <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-    </div>
-    <ul class="orbit-container">
-    <!-- Orbit Slides -->
-      <li class="is-active orbit-slide">
-        <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/medieval-characters.jpg" style="height:600px;" alt="characters">
-          <figcaption class="orbit-caption text-center">Choose Your Character</figcaption>
-        </figure>
+<div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="/img/medieval-characters.jpg"> 
+        <div class="caption center-align">
+          <h3>Choose Your Character</h3>
+        </div>
       </li>
-      <li class="orbit-slide">
-        <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/weapons-pic.jpg" style="height:400px;"  alt="weapons">
-          <figcaption class="orbit-caption text-center">Select Your Weapons</figcaption>
-        </figure>
+      <li>
+        <img src="/img/weapons-pic.jpg" style="height: 850px;">
+        <div class="caption left-align">
+          <h3>Select Your Weapons</h3>
+        </div>
       </li>
-      <li class="orbit-slide">
-        <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/duel.jpg" style="height:600px;" alt="Space">
-          <figcaption class="orbit-caption text-center">Battle Your Enemies</figcaption>
-        </figure>
+      <li>
+        <img src="/img/duel.jpg" style="height: 800px;"> 
+        <div class="caption right-align">
+          <h3 style="color: black;">Battle Your Enemies</h3>
+        </div>
       </li>
-      <li class="orbit-slide">
-        <figure class="orbit-figure">
-          <img class="orbit-image" src="/img/victory.jpg" style="height:350px;" alt="Space">
-          <figcaption class="orbit-caption text-center">Conquer the Land</figcaption>
-        </figure>
+      <li>
+        <img src="/img/victory.jpg">
+        <div class="caption center-align">
+          <h3 style="color: black;">Conquer the Land!</h3>
+        </div>
       </li>
     </ul>
   </div>
-  <!-- Orbit Bullets -->
-  <nav class="orbit-bullets">
-    <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-    <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-    <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-    <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
-  </nav>
-</div>
+<!-- Main Carousel Div -->
+<!-- <div class="carousel carousel-slider duration">
+    <a class="carousel-item" href="#one!">
+      <img src="/img/medieval-characters.jpg" style="height: 500px;"></a>
+    <a class="carousel-item" href="#two!">
+      <img src="/img/weapons-pic.jpg" style="height: 500px;"></a>
+    <a class="carousel-item" href="#three!">
+      <img src="/img/duel.jpg" style="height: 500px;"></a>
+    <a class="carousel-item" href="#four!">
+      <img src="/img/victory.jpg" style="height: 500px;"></a>
+  </div> -->
 
 <div class="row">
 
@@ -140,14 +148,17 @@
 </div>
 
 
-    <!-- Foundation JQuery-->
-    <script src="css/foundation/js/vendor/jquery.js"></script>
-
-    <!-- Foundation JavaScript-->
-    <script src="css/foundation/js/vendor/foundation.min.js"></script>
-
     <script>
-      $(document).foundation();
+
+      $(document).ready(function(){
+
+        $('.slider').slider();
+      // $('.carousel.carousel-slider').carousel({fullWidth: true});
+
+      // $('.carousel').carousel({dist:0});
+      //   window.setInterval(function(){$('.carousel').carousel('next')},3000)
+// 
+
 
       // Get the modal
       var modal = document.getElementById('myModal');
@@ -174,7 +185,7 @@
               modal.style.display = "none";
           }
       }
-
+});
       
 
 
