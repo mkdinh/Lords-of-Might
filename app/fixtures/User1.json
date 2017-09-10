@@ -40,7 +40,8 @@
             "attack": 10,
             "speed": 10,
             "defense": 10,
-            "heal": 10,
+            "hp": 100,
+            "mp": 100,
             "UserId": 1
         }
     },
@@ -91,6 +92,8 @@
             "speed": 5,
             "defense": 0,
             "heal": 0,
+            "hp": 0,
+            "mp": 20,
             "buy": 15,
             "sell": 10
 
@@ -107,6 +110,8 @@
             "speed": 5,
             "defense": 10,
             "heal": 0,
+            "hp": 20,
+            "mp": 20,
             "buy": 15,
             "sell": 10
         }
@@ -122,6 +127,8 @@
             "speed": 5,
             "defense": 10,
             "heal": 0,
+            "hp": 10,
+            "mp": 10,
             "buy": 10,
             "sell": 5
         }
@@ -137,6 +144,8 @@
             "speed": 10,
             "defense": 2,
             "heal": 0,
+            "hp": 5,
+            "mp": 5,
             "buy": 10,
             "sell": 5
         }
@@ -151,7 +160,7 @@
             "attack": 0,
             "speed": 0,
             "defense": 0,
-            "heal": 10,
+            "heal": 40,
             "buy": 10,
             "sell": 5
         }

@@ -33,16 +33,26 @@ LoM.Preload = {
     },
 
     create: function(){
+        // white background for loading screen
+        this.game.stage.backgroundColor = '#fff';
+        //physics system for movement
+        
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.world.setBounds(0, 0, 950, 1583)
+        this.world.enableBody = true;
+        console.log('initialzing')
+
         // grab user from localStorage
         var userLocalStor = JSON.parse(localStorage.getItem('user'));
         var userID = userLocalStor.user_id; 
         var userDB = LoM.playerDB[userID];
         var sprite = userDB.Sprite;
         // console.log(userDB)
-
+        console.log(userDB)
         // generate user game profile
         var user = {
             id: userID,
+            profile: userDB.profile,
             name: userDB.name,
             online: true,
             role: 'player',
@@ -54,17 +64,66 @@ LoM.Preload = {
             velocity: {x:0,y:0},
             sprite: 'sprite-'+userID,
             stats: userDB.Stat,
-            equipments: {
+            inventory: userDB.Inventories,
+            equipments: {},
+            spritesheet: {
                 weapon: parsePNG(sprite.weapon),
                 spell: parsePNG(sprite.spell),
                 head: parsePNG(sprite.head),
                 torso: parsePNG(sprite.torso),
                 leg: parsePNG(sprite.leg),
                 body: parsePNG(sprite.body)
+            },
+            updateEquipments: function updateEquipments(){
+                let equipped = this.equipments;
+                let allType = ['quest','head','torso','leg','feet','hand','weapon','consumable'];
+                for(i = 0; i < this.inventory.length; i++){
+                    if(this.inventory[i].equipped){
+                        // if equipped, find the item slot
+                        let slot = this.inventory[i].Item.slot;
+                        equipped[allType[slot]] = this.inventory[i].Item
+                    }
+                }
+                console.log(equipped)
+                allType.forEach(function(type){
+                    if(equipped[type] === undefined){
+                        $('#equip-'+type).html("Not Equipped")
+                    }else{         
+                        $('#equip-'+type).html(equipped[type].name)
+                    }
+                })
+
+                this.updateStats();
+                this.updateProfile();
+            },
+            updateStats: function(){
+                let stats = this.stats;
+                let allAttr = ["hp","mp","attack","defense","speed"];
+                let equipments = this.equipments;
+
+                for(item in equipments){
+                    
+                    for(i = 0; i < allAttr.length; i++){
+                        let attr = allAttr[i]
+                        stats[attr] += equipments[item][attr]           
+                    }
+                }
+
+                allAttr.forEach(function(attr){
+                    $('#user-'+attr).html(stats[attr])
+                });
+            },
+            updateProfile: function(){
+                let profile = this.profile;
+                console.log(profile)
+                $('#user-profile').html("<img class='profile-img' src='"+profile+"'/>")
             }
         }
 
-        LoM.userInfo = user
+        user.updateEquipments();
+        
+        LoM.userInfo = user;
+
 
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------
@@ -74,11 +133,19 @@ LoM.Preload = {
         LoM.game.input.keyboard.addKey(Phaser.Keyboard.S)
         LoM.game.input.keyboard.addKey(Phaser.Keyboard.D)
         
-        initialized = true;
+        setTimeout(function(){
+            setTimeout(function(){
+                $('ul.tabs').tabs()
+                },200);
+
+            $('#sidebar').fadeIn()
+            },300
+        )
 
         Client.userInfoDB(user);
+  
     }
-};
+}
 
 LoM.playerControl.eventListener = function(worldX,worldY){
      //  if no event is active
@@ -131,4 +198,16 @@ var parsePNG = function(url){
 
 function randomInt (low,high){
     return Math.floor(Math.random() * (high - low) + low);
+}
+
+
+
+var updateStats = function(){
+    let stats = ['attack','defense','speed','hp','mp']
+    let inventory = LoM.userInfo.inventory
+    for(i = 0; i < inventory.length; i++){
+        switch(iventory.item.slot){
+            case 1:
+        }
+    }
 }

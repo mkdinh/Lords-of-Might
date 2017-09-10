@@ -1,4 +1,9 @@
 
+// Initializing Materialize
+setTimeout(function(){$('ul.tabs').tabs()},1000);
+
+        
+
 // create interaction div
 function genBattleInteraction(){
 

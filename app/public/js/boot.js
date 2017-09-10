@@ -27,20 +27,12 @@ LoM.Boot.prototype = {
                 let playerID = playerDB[i].id;
                 LoM.playerDB[playerID] = playerDB[i]
             } 
-            
+            console.log('starting preload')
             LoM.game.state.start('Preload');
         }
     });
 
     },
     create: function(){
-        // white background for loading screen
-            this.game.stage.backgroundColor = '#fff';
-            //physics system for movement
-            
-            this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            this.world.setBounds(0, 0, 950, 1583)
-            this.world.enableBody = true;
-            console.log('booting stuff')
     }
 }

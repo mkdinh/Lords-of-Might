@@ -16,6 +16,11 @@ body{
   margin: 0;
 }
 
+.container .row{
+  margin-left:0;
+  margin-right: 0;
+}
+
 .row .col{
   padding: 0
 }
@@ -134,6 +139,29 @@ canvas{
   position:relative;
   background-color: white;
   height: 100%;
+  display:none;
+}
+
+.tab-item{
+
+}
+
+#user-stats,#user-equipments{
+  padding: 1rem;
+  height: 59vh;
+  overflow: auto;
+}
+
+
+.profile-img{
+  position: relative;
+  max-width: 33%;
+  margin: 1rem auto;
+  display: block
+}
+
+.stats-item,  .equip-item{
+  font-weight: bold
 }
 
 #global-message-box,#private-message-box{

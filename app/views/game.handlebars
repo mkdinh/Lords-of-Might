@@ -33,15 +33,92 @@
     <div class="container">
       <div class='row'>
         <div class="col s9">
-          <div id='game'>
-            <div class='announcement'></div>
-            <div class='interaction'></div>
-            <div class='battle-info'></div>
-            <div class='battle-options'></div>
+          <div class='row'>
+            <div id='game'>
+              <div class='announcement'></div>
+              <div class='interaction'></div>
+              <div class='battle-info'></div>
+              <div class='battle-options'></div>
+            </div>
           </div>
         </div>
 
-        <div class="col s3" id='sidebar' style=''>
+        <div class="col s3" id='sidebar'>
+          <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s6"><a class="active" href="#user-stats">Stats</a></li>
+                <li class="tab col s6"><a href="#user-equipments">Equipments</a></li>
+              </ul>
+            </div>
+
+            <div id="user-stats" class="tab-item col s12">
+              <div id='user-profile'></div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><span class='stats-item'>HP</span></td>
+                    <td><span id='user-hp'></span></td>
+                    <td><span class='stats-item'>MP</span></td>
+                    <td><span id='user-mp'></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='stats-item'>Attack</span></td>
+                    <td><span id='user-attack'></span></td>
+                    <td><span class='stats-item'>Defense</span></td>
+                    <td><span id='user-defense'></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='stats-item'>Agility</span></td>
+                    <td><span id='user-speed'></span></td>
+                    <td><span class='stats-item'>Recovery</span></td>
+                    <td><span id='user-recovery'>10</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='stats-item'>Win</span></td>
+                    <td><span id='user-win'></span></td>
+                    <td><span class='stats-item'>Lose</span></td>
+                    <td><span id='user-lose'>10</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="user-equipments" class="tab-item col s12">
+              <table>
+                <tbody>
+                  <tr>
+                    <td><span class='equip-item'>Head</span></td>
+                    <td><span id='equip-head'></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='equip-item'>Torso</span></td>
+                    <td><span id='equip-torso'></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='equip-item'>Hand</span></td>
+                    <td><span id='equip-hand'></span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='equip-item'>Leg</span></td>
+                    <td><span id='equip-leg'></td>
+                  </tr>
+                  <tr>
+                    <td><span class='equip-item'>Feet</span></td>
+                    <td><span id='equip-feet'></td>
+                  </tr>
+                  <tr>
+                    <td><span class='equip-item'>Weapon</span></td>
+                    <td><span id='equip-weapon'></td>
+                  </tr>
+                  <tr>
+                    <td><span class='equip-item'>Spell</span></td>
+                    <td><span id='equip-spell'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class='row'>
           <div id='global-message-box'>
             <div id='global-messages'></div>
             <input type='text' class='message-input' id='global-message-input' placeholder='chat with other players'>
