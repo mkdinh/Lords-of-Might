@@ -51,10 +51,10 @@ module.exports = (sequelize, DataTypes) => {
         User.hasOne(models.Sprite, {
             onDelete: "CASCADE"
         })
-        User.hasOne(models.Stats, {
+        User.hasOne(models.Game_State, {
             onDelete: "CASCADE"
         })
-        User.hasOne(models.Game_State, {
+        User.hasOne(models.Stats, {
             onDelete: "CASCADE"
         })
     }

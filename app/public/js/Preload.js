@@ -98,7 +98,7 @@ LoM.Preload = {
             },
             updateStats: function(){
                 let stats = this.stats;
-                let allAttr = ["hp","mp","attack","defense","speed"];
+                let allAttr = ["hp","mp","attack","defense","agility","recovery"];
                 let equipments = this.equipments;
 
                 for(item in equipments){
@@ -203,7 +203,7 @@ function randomInt (low,high){
 
 
 var updateStats = function(){
-    let stats = ['attack','defense','speed','hp','mp']
+    let stats = ['attack','defense','agility','hp','mp']
     let inventory = LoM.userInfo.inventory
     for(i = 0; i < inventory.length; i++){
         switch(iventory.item.slot){

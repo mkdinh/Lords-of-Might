@@ -142,8 +142,8 @@ canvas{
   display:none;
 }
 
-.tab-item{
-
+.tab-item tr{
+  font-size: .8rem;
 }
 
 #user-stats,#user-equipments{
@@ -161,7 +161,8 @@ canvas{
 }
 
 .stats-item,  .equip-item{
-  font-weight: bold
+  font-weight: bold;
+  font-size: .9rem;
 }
 
 #global-message-box,#private-message-box{

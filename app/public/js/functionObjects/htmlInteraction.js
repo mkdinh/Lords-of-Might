@@ -1,6 +1,6 @@
 
 // Initializing Materialize
-setTimeout(function(){$('ul.tabs').tabs()},1000);
+
 
         
 

@@ -21,11 +21,11 @@ module.exports = (sequelize,DataTypes) => {
         }
     })
 
-    Spell.assosiate = (models) => {
-        Spell.hasMany(models.Items, {
-            onDelete: "CASCADE"
-        })
-    }
+    // Spell.assosiate = (models) => {
+    //     Spell.hasMany(models.Inventory, {
+    //         onDelete: "CASCADE"
+    //     })
+    // }
 
     return Spell;
 }

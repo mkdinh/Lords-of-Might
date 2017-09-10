@@ -38,9 +38,11 @@
         "model": "Stats",
         "data": {
             "attack": 10,
-            "speed": 10,
+            "agility": 10,
             "defense": 10,
-            "heal": 10,
+            "recovery": 10,
+            "hp": 100,
+            "mp": 100,
             "UserId": 2
         }
     },
@@ -89,9 +91,11 @@
             "class": "spear",
             "slot": 6,
             "attack": 20,
-            "speed": 3,
+            "agility": 3,
             "defense": 0,
-            "heal": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 20,
             "buy": 15,
             "sell": 10
 
@@ -105,9 +109,11 @@
             "class": "metal",
             "slot": 2,
             "attack": 0,
-            "speed": 2,
+            "agility": 2,
             "defense": 15,
-            "heal": 0,
+            "recovery": 0,
+            "hp": 30,
+            "mp": 20,
             "buy": 15,
             "sell": 10
         }
@@ -120,9 +126,11 @@
             "class": "metal",
             "slot": 3,
             "attack": 0,
-            "speed": 5,
+            "agility": 5,
             "defense": 15,
-            "heal": 0,
+            "recovery": 0,
+            "hp": 25,
+            "mp":20,
             "buy": 10,
             "sell": 5
         }
@@ -135,9 +143,11 @@
             "class": "matal",
             "slot": "4",
             "attack": 0,
-            "speed": 4,
+            "agility": 4,
             "defense": 6,
-            "heal": 0,
+            "recovery": 0,
+            "hp": 10,
+            "mp": 10,
             "buy": 10,
             "sell": 5
         }
@@ -150,9 +160,9 @@
             "class": "potion",
             "slot": "4",
             "attack": 0,
-            "speed": 0,
+            "agility": 0,
             "defense": 0,
-            "heal": 10,
+            "recovery": 10,
             "buy": 10,
             "sell": 5
         }

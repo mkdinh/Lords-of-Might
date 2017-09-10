@@ -9,7 +9,9 @@ var spriteSheetID = {}
 
 router.get('/all', (req,res) => {
     db.User.findAll({
-        include: [db.Game_State, db.Sprite, db.Stats, 
+        include: [db.Game_State,
+            {model: db.Sprite}, 
+            {model: db.Stats},
             {model: db.Inventory , include: [db.Item]}]
     })
     .then((playerDB) => {

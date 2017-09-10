@@ -35,7 +35,7 @@ module.exports = (sequelize,DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
-        speed: {
+        agility: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
@@ -45,7 +45,7 @@ module.exports = (sequelize,DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
-        heal: {
+        recovery: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
