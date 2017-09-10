@@ -24,7 +24,13 @@ h4{
 
 
 p {
+    text-align: center;
 	color: white;
+}
+
+.separate {
+    border-color: white;
+    border-width: 10px;
 }
 
 button{
