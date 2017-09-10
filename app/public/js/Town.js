@@ -18,6 +18,7 @@ LoM.Town = {
     init:function(){
         this.stage.disableVisibilityChange = true;
     },
+    
 
     // -------------------------------------------------------------------------------------------
     // CREATE GAME STATE
@@ -29,7 +30,7 @@ LoM.Town = {
 	    this.time.advancedTiming = true;
         this.time.desiredFps = 40;
         this.time.suggestedFps = 40;
-        
+        $("body").css('background-color','#000000')
         // setting object reference to be used in other functions object
         game = this;
 
@@ -77,7 +78,7 @@ LoM.Town = {
             for(player in LoM.playerMaster){
                 // console.log(player)
                 if(LoM.playerMaster[player].world.state === 'Town'){
-                    LoM.player.addPlayer(LoM.playerMaster[player])
+                    LoM.player.add(LoM.playerMaster[player])
                 }
             }
         }
@@ -85,14 +86,14 @@ LoM.Town = {
             // console.log(LoM.playerArray)
             for(i = 0; i < LoM.playerArray.length;i++){
                 if(LoM.playerArray[i].world.state === 'Town'){
-                    LoM.player.addPlayer(LoM.playerArray[i])
+                    LoM.player.add(LoM.playerArray[i])
                 }
             }
         }
 
         var sprite2Info = {
-            id: '2',
-            sprite: "sprite3",
+            id: '1',
+            sprite: "npc-1",
             role: 'npc',
             name: 'Mysterious Stranger',
             velocity: {x: -10, y: 0},
@@ -100,12 +101,14 @@ LoM.Town = {
         }
 
 
-        LoM.player.addPlayer(sprite2Info);
+        LoM.player.add(sprite2Info);
         this.sprite2 = this.groupMap.npcs['sample'];
 
         // after all players is load for the current user, the game start
         // this prevent update from running before all the players is loaded
         
+
+        LoM.Town.clickLayer.events.onInputUp.add(LoM.player.getCoordinates, this);
 
         initialized = true;
     },
@@ -121,7 +124,7 @@ LoM.Town = {
             
             this.checkLayerCollisions();
             
-            // update world position 
+            // update world position    
             var worldX = LoM.spriteMaster[LoM.userInfo.id].x;
             var worldY = LoM.spriteMaster[LoM.userInfo.id].y;
 

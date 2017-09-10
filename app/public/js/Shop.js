@@ -64,7 +64,7 @@ LoM.Shop = {
         }
 
         // add owner npc *******HOPEFULLY FROM DB**************
-        LoM.player.addPlayer(owner,"Shop");     
+        LoM.player.add(owner,"Shop");     
         this.spriteMap.npcs['Shop Owner'].body.immovable = true;
      
         // generating the rest of the layers othert the owner sprite
@@ -87,7 +87,7 @@ LoM.Shop = {
         for(player in LoM.playerMaster){
             // console.log(player)
             if(LoM.playerMaster[player].world.state === 'Shop'){
-                LoM.player.addPlayer(LoM.playerMaster[player])
+                LoM.player.add(LoM.playerMaster[player])
             }
         };  
 
@@ -105,11 +105,12 @@ LoM.Shop = {
             this.physics.arcade.collide(this.spriteMap.players, this.layerMap.door,function(){console.log('hey')});
             // change state from Shop to Town
             this.physics.arcade.collide(LoM.spriteMaster[LoM.userInfo.id], this.layerMap.door,function(player,building){
-                // console.log(player,building)
-                LoM.playerMaster[LoM.userInfo.id].world.state = "Town"
-                var user = LoM.playerMaster[LoM.userInfo.id]
-                console.log('exiting Shop')
-                Client.changeState(user);
+                if(!LoM.eventActive.state){
+                    LoM.playerMaster[LoM.userInfo.id].world.state = "Town"
+                    var user = LoM.playerMaster[LoM.userInfo.id]
+                    console.log('exiting Shop')
+                    Client.changeState(user);
+                }
             },null, this);
             
 

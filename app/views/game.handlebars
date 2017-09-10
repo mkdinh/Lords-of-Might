@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html>
+
   <head>
         <meta charset="UTF-8">
         <!-- Style -->
+          <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="/css/game.css">
-        <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        
         <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
         <link rel='stylesheet' type='text/css' href='css/game.css'>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
+         <script src="/js/phaser.map"></script>
         <script src="/js/phaser.min.js"></script>
 
         <script src="js/boot.js" type="text/javascript"></script>
@@ -25,37 +30,32 @@
         
   </head>
   <body>
-    <div class="grid-x">
-      <div class="medium-9 large-9 cell">
-        <div id='game'>
-          <div class='announcement'></div>
-          <div class='interaction'></div>
-          <div class='battle-info'></div>
-          <div class='battle-options'></div>
-        </div>
-      </div>
-      <div class="medium-3 large-3 cell" id='sidebar'>
-        <div id='global-message-box'>
-          <div id='global-messages'></div>
-          <input type='text' class='message-input' id='global-message-input' placeholder='chat with other players'>
+    <div class="container">
+      <div class='row'>
+        <div class="col s9">
+          <div id='game'>
+            <div class='announcement'></div>
+            <div class='interaction'></div>
+            <div class='battle-info'></div>
+            <div class='battle-options'></div>
+          </div>
         </div>
 
-        <div id='private-message-box'>
-          <div id='private-messages'></div>
-          <input type='text' class='message-input' id='private-message-input' placeholder='chat with other players'>
+        <div class="col s3" id='sidebar' style=''>
+          <div id='global-message-box'>
+            <div id='global-messages'></div>
+            <input type='text' class='message-input' id='global-message-input' placeholder='chat with other players'>
+          </div>
+
+          <div id='private-message-box'>
+            <div id='private-messages'></div>
+            <input type='text' class='message-input' id='private-message-input' placeholder='chat with other players'>
+          </div>
         </div>
       </div>
     </div>
-      
 
 
-
-    </div>
     <script src='js/functionObjects/htmlInteraction.js' type='text/javascript'></script>
     <script src="js/main.js" type="text/javascript"></script>
-
-    <script>
-  
-    </script>
   </body>
-</html>

@@ -70,14 +70,15 @@ LoM.interaction = {
 
     shopInteractions: function(player,building){
         var state = LoM.userInfo.world.state;
-
+        if(!LoM.eventActive.state){
             // announcement('New Shop! Open Soon!')
             LoM.playerMaster[LoM.userInfo.id].world.state = "Shop"
             var user = LoM.playerMaster[LoM.userInfo.id]
 
-            console.log('hey')
             // LoM.eventActive.state = true;
             Client.changeState(user);
+            LoM.eventActive.state = true
+        }
     },
 
     innInteractions: function(player,building){

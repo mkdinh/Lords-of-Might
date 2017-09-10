@@ -2,7 +2,7 @@ var LoM = LoM || {};
 
 LoM.player = {
 
-    addPlayer : function(dbInfo){
+    add: function(dbInfo){
         // generating sprite
         var sprite;
         var state = dbInfo.world.state;
@@ -13,10 +13,10 @@ LoM.player = {
         switch(dbInfo.world.state){
             case 'Town':
                 sprite =  LoM[state].add.sprite(dbInfo.world.x, dbInfo.world.y, dbInfo.sprite);
-                // console.log(sprite)
                 break
             case 'Shop':
                 if(dbInfo.role === "player"){
+                    console.log(dbInfo)
                     // console.log(dbInfo.id)
                     sprite =  LoM[state].add.sprite(446, 550, dbInfo.sprite);
                 }else{
@@ -69,7 +69,6 @@ LoM.player = {
         var style = { font: "12px Arial", fill: "#000000",align:'center',boundsAlignH:'center', backgroundColor:'rgba(255,255,255,.3)'};
 
         if(dbInfo.role === 'player'){ 
-            console.log(sprite)
             var label = LoM[state].add.text(0, 0,dbInfo.name, style); 
             label.anchor.set(0.5)
             label.position.x += ((sprite.width/2)+(sprite.width - label.width)/2)
@@ -86,6 +85,7 @@ LoM.player = {
         if(dbInfo.role === 'npc'){
             LoM[state].groupMap.npcs.add(sprite)
             LoM[state].world.bringToTop(LoM[state].groupMap.npcs);
+            
         }else{
             LoM[state].groupMap.players.add(sprite)
             LoM[state].world.bringToTop(LoM[state].groupMap.players);
@@ -99,8 +99,11 @@ LoM.player = {
             // console.log(sprite.body)
         }
 
-        LoM.generator.genAnimations(sprite)
-        
+        if(dbInfo.role === 'player'){
+            LoM.generator.genAnimations(sprite)
+        }else{
+                sprite.frame = 19
+        }
         // Keep track of total players
         // console.log(sprite)
         if(dbInfo.role === 'npc'){
@@ -110,17 +113,21 @@ LoM.player = {
         }
     },
     
-    removePlayer: function(id){
-        if(id !== undefined && this.spriteMap.players[id] !== undefined && this.spriteMap !== undefined && this.spriteMap.players !== undefined){
-            // console.log(this.spriteMap.players)
-            this.spriteMap.players[id].kill();
-            delete this.spriteMap.players[id]
-            delete LoM.playerMaster[id]
+    remove: function(player){
+        console.log(player)
+        console.log(LoM.spriteMaster)
+        if(player.id !== undefined && LoM.spriteMaster[player.id] !== undefined){
+            console.log(player)
+            LoM[player.state].spriteMap.players[player.id].kill();
+
+            delete LoM[player.state].spriteMap.players[player.id]
+            delete LoM.playerMaster[player.id]
         }
     },
 
     // retrieve proper sprite movement
-    movePlayer: function(dirInfo){
+    move: function(dirInfo){
+        // console.log(dirInfo)
         var state = dirInfo.player.world.state;
         var id = LoM.userInfo.id;
             // console.log(state,id)
@@ -130,7 +137,11 @@ LoM.player = {
             player.body.velocity.x = dirInfo.player.velocity.x;
             player.body.velocity.y = dirInfo.player.velocity.y;
             
-            // LoM.playerMaster[dirInfo.player.id] = dirInfo.player;
+            //  update player position
+            LoM.playerMaster[dirInfo.player.id].world.x = dirInfo.player.world.x;
+            //  update player position
+            LoM.playerMaster[dirInfo.player.id].world.y = dirInfo.player.world.y;
+
             // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
 
             // play animation
@@ -140,6 +151,10 @@ LoM.player = {
                 player.animations.play(dirInfo.dir,10,false)
             }
         }
+    },
+
+    getCoordinates: function(layer,pointer){
+        // Client.sendClick(pointer.worldX,pointer.worldY);
     }
 }
 

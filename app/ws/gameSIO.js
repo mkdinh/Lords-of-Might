@@ -105,7 +105,10 @@ module.exports = function(io){
             // var socketID = socket.player.socketIO.id;
             // console.log(socketID)
             // io.sockets.connected
-            io.emit('remove',{id: socket.player.id})
+            if(Object.keys(socket.player).length !== 0){
+                console.log(socket.player)
+                io.emit('remove',{state: socket.player.world.state, id: socket.player.id})
+            }
         })
     });
 

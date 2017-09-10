@@ -66,12 +66,12 @@ function battleUpdate(initiator,receiver){
     var iStats = $("<div class='stats-wrapper'>")
     var rStats = $("<div class='stats-wrapper'>")
 
-    var iName = "<p class='stats-name'>"+initiator.id+"</p>";
+    var iName = "<p class='stats-name'>"+initiator.name+"</p>";
     var iHP = "<p class='stats-HP' id='"+initiator.id+"-HP'>HP:"+100+"</p>";
     var iMP= "<p class='stats-MP' id='"+initiator.id+"-MP'>HP:"+100+"</p>";
     iStats.append(iName,iHP,iMP)
 
-    var rName = "<p class='stats-name'>"+receiver.id+"</p>";
+    var rName = "<p class='stats-name'>"+receiver.name+"</p>";
     var rHP = "<p class='stats-HP' id='"+receiver.id+"-HP'>HP:"+100+"</p>";
     var rMP= "<p class='stats-MP' id='"+receiver.id+"-MP'>HP:"+100+"</p>";
 
@@ -169,7 +169,10 @@ $('.message-input').on('focusout',function(){
 
 $('#game').on('click','canvas',function(){
     $('.message-input').blur();
-    console.log('hey')
+    var xCoord = LoM.game.input.mousePointer.x +LoM.game.camera.x - 32; 
+    var yCoord = LoM.game.input.mousePointer.y+LoM.game.camera.y - 42;
+
+    LoM.player.getCoordinates
 });
 
 
@@ -180,9 +183,15 @@ $('#global-message-input').on('keypress', function(ev){
             body: $('#global-message-input').val().trim(),
             user: LoM.userInfo.id
         };
-        console.log(message)
-        Client.sendGlobalMessage(message)
-        $('#global-message-input').val('');
+        $.ajax({
+            url: 'messages/new',
+            method: 'POST',
+            data: message,
+            success: function(){
+                Client.sendGlobalMessage(message)
+                $('#global-message-input').val('');
+            }
+        })
     }
 })
 
