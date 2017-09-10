@@ -5,7 +5,7 @@ if(height<100){
     height = 0.90*document.body.clientHeight;
 }
 console.log(width,height)
-LoM.game = new Phaser.Game(800, 500, Phaser.CANVAS, document.getElementById('game'));
+LoM.game = new Phaser.Game(width, 500, Phaser.CANVAS, document.getElementById('game'));
 LoM.game.state.add('Boot', LoM.Boot);
 LoM.game.state.add('Preload', LoM.Preload);
 LoM.game.state.add('Town', LoM.Town);

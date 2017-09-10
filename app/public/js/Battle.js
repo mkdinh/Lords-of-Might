@@ -5,17 +5,23 @@ var enemy;
 var room;
 var initialized = false;
 
+
 // loading game assets
 LoM.Battle = function(){};
 
 LoM.Battle = {
     preload: function(){
+
         var width = 25*32;
         var height = 16*32;
+        var gameWidth = $('#game').width();
+        var gameHeight = $('#game').width();
+        LoM.Battle.offsetX = (gameWidth - width)/2;
 
-        $("body").css('background-color','#201A1A')
+        $("body").css('background-color','#201A1A');
+        game.stage.backgroundColor = '#201A1A'
 
-        this.backgroundSprite = this.game.add.tileSprite(0,0, width, height, 'battleBG');
+        this.backgroundSprite = this.game.add.tileSprite(LoM.Battle.offsetX ,0, width, height, 'battleBG');
         this.backgroundSprite.scale.x = 1
         this.backgroundSprite.scale.y = 1
 
@@ -72,18 +78,18 @@ LoM.Battle = {
 
             // console.log(this.state)
             var attackerID = this.state.roleID.attacker;
-                var attackerHP = this.state.player[attackerID].stats.hp;
-                var attackerMP = this.state.player[attackerID].stats.mp;
+                var attackerHP = this.state.player[attackerID].battle.hp;
+                var attackerMP = this.state.player[attackerID].battle.mp;
 
             var defenderID = this.state.roleID.defender;
-                var defenderHP = this.state.player[defenderID].stats.hp;
-                var defenderMP = this.state.player[defenderID].stats.mp;
+                var defenderHP = this.state.player[defenderID].battle.hp;
+                var defenderMP = this.state.player[defenderID].battle.mp;
 
-            $("#"+attackerID+'-HP').html("HP:"+ attackerHP)
-            $("#"+attackerID+'-HP').html("HP:"+ attackerHP)
+            $("#"+attackerID+'-hp').html("HP:"+ attackerHP)
+            $("#"+attackerID+'-mp').html("MP:"+ attackerMP)
 
-            $("#"+defenderID+'-HP').html("HP:"+ defenderHP)
-            $("#"+defenderID+'-HP').html("HP:"+ defenderHP)
+            $("#"+defenderID+'-hp').html("HP:"+ defenderHP)
+            $("#"+defenderID+'-mp').html("MP:"+ defenderMP)
 
             if(attackerHP <= 0){
 
@@ -117,7 +123,7 @@ LoM.Battle = {
     },
 
     createInitiator: function(info){
-        var sprite =  this.add.sprite(175, 230, info.sprite);
+        var sprite =  this.add.sprite(LoM.Battle.offsetX +175, 230, info.sprite);
         sprite.frame = 40;
         sprite.scale.x = 1;
         sprite.scale.y = 1;
@@ -125,21 +131,22 @@ LoM.Battle = {
         sprite.data.position = "initiator";
         battleInfo.initiator.position = "initiator";
         battleInfo.initiator.weapon = {
-            type: info.equipments.weapon,
-            damage: [1,20]
+            type: info.equipments.weapon.class,
+            damage: [(info.stats.attack/3), (info.stats.attack + info.equipments.weapon.attack)/2]
         };
    
         battleInfo.initiator.spell = {
-            type: info.equipments.spell,
-            damage: [10,25],
-            mp: 35
+            // type: info.equipments.spell,
+            name: 'poison discharge',
+            damage: [10,30],
+            mp: 110
         };
-
-        battleInfo.initiator.hp = info.stats.hp
-        battleInfo.initiator.mp = info.stats.mp;
         
-        console.log(info)
-
+        battleInfo.initiator.battle = {
+            hp: info.stats.hp,
+            mp: info.stats.mp
+        }
+        
         this.addBattleAnimations(sprite,info)
 
         this.spriteMap[info.id] = sprite
@@ -147,7 +154,7 @@ LoM.Battle = {
     },
 
     createReceiver: function(info){
-        var sprite =  this.add.sprite(560, 230, info.sprite);
+        var sprite =  this.add.sprite(LoM.Battle.offsetX  + 560, 230, info.sprite);
         sprite.frame = 13;
         sprite.scale.x = 1;
         sprite.scale.y = 1;
@@ -156,17 +163,22 @@ LoM.Battle = {
         battleInfo.receiver.position = "receiver";
         // battleInfo.receiver.turn  = false;
         battleInfo.receiver.weapon = {
-            type: info.equipments.weapon,
-            damage: [6,15]
+            type: info.equipments.weapon.class,
+            damage: [(info.stats.attack/3), (info.stats.attack + info.equipments.weapon.attack)/2]
         };
    
         battleInfo.receiver.spell = {
-            type: info.equipments.spell,
-            damage: [100,101],
+            // type: info.equipments.spell,
+            name: 'ice blast',
+            damage: [10,30],
             mp: 35
         };
-        battleInfo.receiver.hp = info.stats.hp;
-        battleInfo.receiver.mp = info.stats.mp;
+
+        battleInfo.receiver.battle = {
+            hp: info.stats.hp,
+            mp: info.stats.mp
+        }
+        
 
 
         this.addBattleAnimations(sprite,info)
@@ -185,17 +197,17 @@ LoM.Battle = {
         if(sprite.data.position === 'initiator'){
             this.tweenMap[info.id] = {}
             var spell = sprite.animations.add('spell',[39,40,41,42,43,44,44,44,44,44,44,44,44,43,42,41,40,39],true)
-
+                console.log(spell)
             spell.onStart.add(function(){
-
-                var fireball = LoM.Battle.add.sprite(170,200,info.equipments.spell)
+                console.log(info)
+                var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX  + 170,190, info.equipments.spell)
                 var genBall = fireball.animations.add('genBall',[1,2,3,4,5],1000, false)
                 var shootBall = fireball.animations.add('shootBall',[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],5000, true)
                 var explodeBall = fireball.animations.add('explode', [32,33,34,35,36,37,38,39],1000, false)
 
 
                 genBall.onComplete.add(function(){
-                        var tweenBall =  LoM.Battle.add.tween(fireball).to({x: 520},750, 'Linear', false);
+                        var tweenBall =  LoM.Battle.add.tween(fireball).to({x: LoM.Battle.offsetX  +  520},750, 'Linear', false);
                         tweenBall.start()
                         tweenBall.onStart.add(function(){
                             // console.log('hey')
@@ -220,13 +232,13 @@ LoM.Battle = {
             })
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
 
-            switch(info.equipments.weapon){
+            switch(info.equipments.weapon.class){
                 case 'sword':
                 var sword = sprite.animations.add('sword',[195,196,197,198,199,200,199,198,197,196,195],true);
                     sprite.animations._anims.sword.onComplete.add(function(){
                         sprite.animations.play('left',10, true);
                         // this is the window object
-                        var returnTween = LoM.Battle.add.tween(sprite).to({x: 175, y: 230},tweenT, 'Linear', true);
+                        var returnTween = LoM.Battle.add.tween(sprite).to({x:LoM.Battle.offsetX  +  175, y: 230},tweenT, 'Linear', true);
                         returnTween.onComplete.addOnce(function(){
                             sprite.animations.stop();
                             sprite.animations.play('right',50,false)
@@ -234,7 +246,7 @@ LoM.Battle = {
                         })
                     })
         
-                this.tweenMap[info.id].sword = this.add.tween(sprite).to({x: 540, y: 230},tweenT, 'Linear', false);
+                this.tweenMap[info.id].sword = this.add.tween(sprite).to({x: LoM.Battle.offsetX  +  540, y: 230},tweenT, 'Linear', false);
                 this.tweenMap[info.id].sword.onStart.add(function(){sprite.animations.play('right',animT,true)}, this);
                 this.tweenMap[info.id].sword.onComplete.add(function(){
                     sprite.animations.stop()
@@ -258,7 +270,7 @@ LoM.Battle = {
                         })
                     })
 
-                    this.tweenMap[info.id].spear = this.add.tween(sprite).to({x: 520, y: 230},tweenT, 'Linear', false);
+                    this.tweenMap[info.id].spear = this.add.tween(sprite).to({x: LoM.Battle.offsetX  +  520, y: 230},tweenT, 'Linear', false);
                     this.tweenMap[info.id].spear.onStart.add(function(){sprite.animations.play('right',animT,true)}, this);
                     this.tweenMap[info.id].spear.onComplete.add(function(){
                         sprite.animations.stop()
@@ -283,7 +295,7 @@ LoM.Battle = {
 
                 addHealth.onStart.add(function(){
 
-                var potionH = LoM.Town.add.sprite(195, 0,'health')
+                var potionH = LoM.Town.add.sprite(LoM.Battle.offsetX + 195, 0,'health')
                 potionH.scale.x= .25;
                 potionH.scale.y= .25;
         
@@ -312,14 +324,14 @@ LoM.Battle = {
 
             spell.onStart.add(function(){
 
-                var fireball = LoM.Battle.add.sprite(480,200,info.equipments.spell)
+                var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX + 480,190,info.equipments.spell)
                 var genBall = fireball.animations.add('genBall',[1,2,3,4,5],1000, false)
                 var shootBall = fireball.animations.add('shootBall',[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],5000, true)
                 var explodeBall = fireball.animations.add('explode', [32,33,34,35,36,37,38,39],1000, false)
 
 
                 genBall.onComplete.add(function(){
-                    var tweenBall =  LoM.Battle.add.tween(fireball).to({x: 130},750, 'Linear', false);
+                    var tweenBall =  LoM.Battle.add.tween(fireball).to({x: LoM.Battle.offsetX  +  130},750, 'Linear', false);
                     tweenBall.start()
                     tweenBall.onStart.add(function(){
                         fireball.animations.play('shootBall',25, true)
@@ -344,7 +356,7 @@ LoM.Battle = {
             var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
 
-            switch(info.equipments.weapon){
+            switch(info.equipments.weapon.class){
 
                 case "sword":                    
                     var sword = sprite.animations.add('sword',[169,170,171,172,173,174,173,172,171,170,169],true);
@@ -352,7 +364,7 @@ LoM.Battle = {
                         sprite.animations._anims.sword.onComplete.add(function(){
                             sprite.animations.play('right',10, true);
                             // this is the window object
-                            var returnTween = LoM.Battle.add.tween(sprite).to({x: 560, y: 230},tweenT, 'Linear', true);
+                            var returnTween = LoM.Battle.add.tween(sprite).to({x: LoM.Battle.offsetX  +  560, y: 230},tweenT, 'Linear', true);
                             returnTween.onComplete.addOnce(function(){
                                 sprite.animations.stop();
                                 sprite.animations.play('left',50,false)
@@ -361,7 +373,7 @@ LoM.Battle = {
                             })
                         })
 
-                        this.tweenMap[info.id].sword = this.add.tween(sprite).to({x: 210, y: 230},tweenT, 'Linear', false);
+                        this.tweenMap[info.id].sword = this.add.tween(sprite).to({x: LoM.Battle.offsetX  +  210, y: 230},tweenT, 'Linear', false);
                         this.tweenMap[info.id].sword.onStart.add(function(){sprite.animations.play('left',animT,true)}, this);
                         this.tweenMap[info.id].sword.onComplete.add(function(){
                             sprite.animations.stop()
@@ -375,7 +387,7 @@ LoM.Battle = {
                     sprite.animations._anims.spear.onComplete.add(function(){
                         sprite.animations.play('right',10, true);
                         // this is the window object
-                        var returnTween = LoM.Battle.add.tween(sprite).to({x: 560, y: 230},tweenT, 'Linear', true);
+                        var returnTween = LoM.Battle.add.tween(sprite).to({x: LoM.Battle.offsetX  +  560, y: 230},tweenT, 'Linear', true);
                         returnTween.onComplete.addOnce(function(){
                             sprite.animations.stop();
                             sprite.animations.play('left',50,false)
@@ -383,7 +395,7 @@ LoM.Battle = {
                         })
                     })
 
-                    this.tweenMap[info.id].spear = this.add.tween(sprite).to({x: 220, y: 230},tweenT, 'Linear', false);
+                    this.tweenMap[info.id].spear = this.add.tween(sprite).to({x: LoM.Battle.offsetX   +  220, y: 230},tweenT, 'Linear', false);
                     this.tweenMap[info.id].spear.onStart.add(function(){sprite.animations.play('left',animT,true)}, this);
                     this.tweenMap[info.id].spear.onComplete.add(function(){
                         sprite.animations.stop()
@@ -404,7 +416,7 @@ LoM.Battle = {
             
                 addHealth.onStart.add(function(){
 
-                var potionH = LoM.Town.add.sprite(580, 0,'health')
+                var potionH = LoM.Town.add.sprite(LoM.Battle.offsetX + 580, 0,'health')
                 potionH.scale.x= .25;
                 potionH.scale.y= .25;
         
@@ -424,10 +436,10 @@ LoM.Battle = {
 
     attack: function(state){
         // performing old state request
+        console.log(state)
         var attackerID = state.roleID.attacker;
         var defenderID = state.roleID.defender;
         var weapon = state.player[attackerID].weapon.type;
-        console.log(this.state.player[defenderID].hp)
         this.tweenMap[attackerID][weapon].start();
         setTimeout(function(){Client.actionCompleted(state)},5000)
     },
@@ -435,7 +447,6 @@ LoM.Battle = {
     spell: function(state){
         var attackerID = state.roleID.attacker;
         var defenderID = state.roleID.defender;
-        console.log(this.state.player[defenderID].hp)
         this.spriteMap[attackerID].animations.play('spell', 10,  false)
         setTimeout(function(){Client.actionCompleted(state)},3000)
     },

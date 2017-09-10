@@ -20,8 +20,8 @@ LoM.Preload = {
     var Allspells = ['fireball','ice_blast','poison_discharge',"shadow_bomb"]
     
     Allspells.forEach(function(spell){
-
-        LoM.Preload.load.spritesheet(spell,'img/spells/'+spell+'.png',126,124,38);
+        let name = spell.replace("_"," ")
+        LoM.Preload.load.spritesheet(name,'img/spells/'+spell+'.png',126,124,38);
     })
 
     this.load.image('battleBG','/img/battleBG.png')
@@ -121,7 +121,7 @@ LoM.Preload = {
         }
 
         user.updateEquipments();
-        
+        user.equipments.spell = 'ice blast';
         LoM.userInfo = user;
 
 

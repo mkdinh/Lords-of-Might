@@ -72,13 +72,13 @@ function battleUpdate(initiator,receiver){
     var rStats = $("<div class='stats-wrapper'>")
 
     var iName = "<p class='stats-name'>"+initiator.name+"</p>";
-    var iHP = "<p class='stats-HP' id='"+initiator.id+"-HP'>HP:"+100+"</p>";
-    var iMP= "<p class='stats-MP' id='"+initiator.id+"-MP'>HP:"+100+"</p>";
+    var iHP = "<p class='stats-hp' id='"+initiator.id+"-hp'>HP:"+initiator.battle.hp+"</p>";
+    var iMP= "<p class='stats-mp' id='"+initiator.id+"-mp'>HP:"+initiator.battle.mp+"</p>";
     iStats.append(iName,iHP,iMP)
 
     var rName = "<p class='stats-name'>"+receiver.name+"</p>";
-    var rHP = "<p class='stats-HP' id='"+receiver.id+"-HP'>HP:"+100+"</p>";
-    var rMP= "<p class='stats-MP' id='"+receiver.id+"-MP'>HP:"+100+"</p>";
+    var rHP = "<p class='stats-hp' id='"+receiver.id+"-hp'>HP:"+receiver.battle.hp+"</p>";
+    var rMP= "<p class='stats-mp' id='"+receiver.id+"-mp'>HP:"+receiver.battle.mp+"</p>";
 
     rStats.append(rName,rHP,rMP);
     menu.append(iStats,rStats);
@@ -130,10 +130,18 @@ $('.battle-options').on('click','#attack-btn', function(ev){
 $('.battle-options').on('click','#spell-btn', function(ev){
     ev.preventDefault();
     var state = LoM.Battle.state;
-    state.action = 'spell';
+    var currentMP = state.player[LoM.userInfo.id].battle.mp;
+    var spellcost = state.player[LoM.userInfo.id].spell.mp;
+    var newMP = currentMP - spellcost;
 
-    Client.battleAction(state);
-
+    if(newMP < 0){
+        var body = "You do not have enough MP"
+        announcement(body);
+        setTimeout(function(){LoM.Battle.state.turn = LoM.userInfo.id},500);
+    }else{
+        state.action = 'spell';
+        Client.battleAction(state);
+    }
 })
 
 $('.battle-options').on('click','#health-btn', function(ev){
