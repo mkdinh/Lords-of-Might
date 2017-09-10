@@ -4,6 +4,10 @@ body{
     -webkit-background-size: cover;
 }
 
+.row{
+	background-color: #3f3fa7;
+}
+
 h2 {
 	font-family: 'Metamorphous', cursive;
 	color: #3f3fa7;
