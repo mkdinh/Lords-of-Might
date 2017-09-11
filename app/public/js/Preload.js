@@ -8,7 +8,6 @@ LoM.Preload = function(){};
 
 LoM.Preload = {
     preload: function(){
-
         // show logo in loading screen
         this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo') 
         this.splash.anchor.setTo(0.5);
@@ -40,14 +39,13 @@ LoM.Preload = {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.world.setBounds(0, 0, 950, 1583)
         this.world.enableBody = true;
-        console.log('initialzing')
 
         // grab user from localStorage
         var userLocalStor = JSON.parse(localStorage.getItem('user'));
         var userID = userLocalStor.user_id; 
-        var userDB = LoM.playerDB[userID];
+        let userDB = LoM.playerDB[userID];
         var sprite = userDB.Sprite;
-        // console.log(userDB)
+        
         console.log(userDB)
         // generate user game profile
         var user = {
@@ -63,7 +61,8 @@ LoM.Preload = {
             },
             velocity: {x:0,y:0},
             sprite: 'sprite-'+userID,
-            stats: userDB.Stat,
+            based_stats: userDB.Stat,
+            modified_stats: userDB.Stat,
             inventory: userDB.Inventories,
             equipments: {},
             spritesheet: {
@@ -73,57 +72,12 @@ LoM.Preload = {
                 torso: parsePNG(sprite.torso),
                 leg: parsePNG(sprite.leg),
                 body: parsePNG(sprite.body)
-            },
-            updateEquipments: function updateEquipments(){
-                let equipped = this.equipments;
-                let allType = ['quest','head','torso','leg','feet','hand','weapon','consumable'];
-                for(i = 0; i < this.inventory.length; i++){
-                    if(this.inventory[i].equipped){
-                        // if equipped, find the item slot
-                        let slot = this.inventory[i].Item.slot;
-                        equipped[allType[slot]] = this.inventory[i].Item
-                    }
-                }
-                console.log(equipped)
-                allType.forEach(function(type){
-                    if(equipped[type] === undefined){
-                        $('#equip-'+type).html("Not Equipped")
-                    }else{         
-                        $('#equip-'+type).html(equipped[type].name)
-                    }
-                })
-
-                this.updateStats();
-                this.updateProfile();
-            },
-            updateStats: function(){
-                let stats = this.stats;
-                let allAttr = ["hp","mp","attack","defense","agility","recovery"];
-                let equipments = this.equipments;
-
-                for(item in equipments){
-                    
-                    for(i = 0; i < allAttr.length; i++){
-                        let attr = allAttr[i]
-                        stats[attr] += equipments[item][attr]           
-                    }
-                }
-
-                allAttr.forEach(function(attr){
-                    $('#user-'+attr).html(stats[attr])
-                });
-            },
-            updateProfile: function(){
-                let profile = this.profile;
-                console.log(profile)
-                $('#user-profile').html("<img class='profile-img' src='"+profile+"'/>")
             }
         }
 
-        user.updateEquipments();
-        user.equipments.spell = 'ice blast';
         LoM.userInfo = user;
-
+        LoM.user.getInventory();
+        // user.equipments.spell = 'ice blast';
 
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------
@@ -176,7 +130,6 @@ LoM.playerControl.eventListener = function(worldX,worldY){
 LoM.playerControl.controlInput = function(worldX,worldY){
 
     if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.W)){  
-        console.log(worldX,worldY)
         Client.move({dir:'up', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state});
     }else if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.S)){;
         Client.move({dir: 'down', id: LoM.userInfo.id, worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state});

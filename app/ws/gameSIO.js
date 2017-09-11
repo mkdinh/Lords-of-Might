@@ -10,7 +10,7 @@ module.exports = function(io){
         socket.player = {};
         socket.on('user',function(user){
             // create new player object
-            
+            console.log(user)
             user.socketIO = {id: socket.id}
             socket.player = user;
             // console.log(Object.keys(io.sockets.connected))

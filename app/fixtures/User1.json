@@ -40,6 +40,7 @@
             "attack": 10,
             "agility": 10,
             "defense": 10,
+            "recovery": 10,
             "hp": 100,
             "mp": 100,
             "UserId": 1

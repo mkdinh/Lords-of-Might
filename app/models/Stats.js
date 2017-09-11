@@ -10,6 +10,11 @@ module.exports = (sequelize,DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
+        gold: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 100
+        },
         hp:{
             type: DataTypes.INTEGER,
             allowNull: false,

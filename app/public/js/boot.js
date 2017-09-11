@@ -21,11 +21,12 @@ LoM.Boot.prototype = {
         method: "GET",
         success: function(playerDB){
     
+            console.log(playerDB)
             // for each player, load the info into a LoM key called LoM.playerDB
             // load the spritesheet with an id key into the game
             for(let i = 0; i < playerDB.length; i++){
                 let playerID = playerDB[i].id;
-                LoM.playerDB[playerID] = playerDB[i]
+                LoM.playerDB[playerID] = playerDB[i]    
             } 
             console.log('starting preload')
             LoM.game.state.start('Preload');

@@ -160,7 +160,7 @@ $('.battle-options').on('click','#battle-return', function(){
         // LoM.game.state.start('Town')
         LoM.playerMaster[LoM.userInfo.id].world.location = "Town"
         var user = LoM.playerMaster[LoM.userInfo.id]
-        console.log('exiting Shop')
+
         Client.changeState(user);
     },3000)
     
@@ -170,6 +170,50 @@ $('.battle-options').on('click','.action-btn', function(){
     LoM.Battle.state.turn = enemy.id;
 })
 
+// INVENTORY INTERACTIONS
+
+// on click on an item
+$('#user-inventories').on('click',".invent-item",function(ev){
+    ev.preventDefault();
+    // grab sequelize information
+    var item = this;
+    var iventId = $(this).attr('data-invent-id');
+    var equipped;
+    // unequip the item if it is equip
+    if($(this).hasClass('equipped')){
+        equipped = {equipped: 0};
+    }else{
+        equipped = {equipped: 1};
+    }
+    // console.log(equipped)
+    // perform an ajax call to change the equip state on server,
+    $.ajax({
+        url: 'game/inventories/'+iventId+'?_method=PUT',
+        type: "POST",
+        dataType: 'json',
+        data: equipped,
+        success: function(res){
+            console.log(res)
+            // on success remove equip class if return false
+            if(parseInt(res.equipped) === 1){
+                $(item).addClass('equipped');
+            }else{
+                $(item).removeClass('equipped');
+                // console.log('unequipped')
+            }
+            // run updateEquipments function
+            LoM.user.updateEquipments()
+            // console.log(LoM.userInfo)
+            // also resend out update to ther players 
+            // Client.userUpdate(user)
+        }
+    })
+});
+
+// SIDE BAR TAB FUNCTION
+$('.user-info-tab').on('click', function(){
+    LoM.user.getInventory()
+})
 
 // CHAT FUNCTION
 $('.message-input').on('focusin',function(){
@@ -216,7 +260,7 @@ $('#private-message-input').on('keypress', function(ev){
             user: LoM.userInfo.id,
             room: LoM.Battle.battleInfo.room
         };
-        console.log(message)
+
         Client.sendPrivateMessage(message)
         $('#private-message-input').val('');
     }

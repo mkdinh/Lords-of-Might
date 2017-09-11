@@ -142,17 +142,43 @@ canvas{
   height: 100%;
   display:none;
 }
+.tab-item{
+  position: relative;
+}
 
 .tab-item tr{
   font-size: .8rem;
 }
 
-#user-stats,#user-equipments{
+#user-stats,#user-equipments,#user-inventories{
   padding: 1rem;
   height: 59vh;
   overflow: auto;
+  text-align: center;
 }
 
+.invent-item{
+  border: 1px solid black;
+  text-align: center;
+  margin: 0.5rem;
+  width: 50px;
+  transition: border 0.2s
+}
+
+.invent-item:hover{
+  border: 2px solid red
+}
+
+.invent-item.equipped{
+  border: 2px solid green
+}
+
+#user-currency{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 1rem;
+}
 
 .profile-img{
   position: relative;

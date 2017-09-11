@@ -19,5 +19,26 @@ router.get('/all', (req,res) => {
     })
 });
 
+router.get('/inventories/:userId', (req,res) => {
+    var userId = req.params.userId;
+    // search for all items belongs to user
+    db.Inventory.findAll({where: {userId: userId},include: [db.Item]})
+    .then((inventory) => {
+        // return items to be updated to the game
+        res.json(inventory)
+    })
+})
+
+router.put('/inventories/:id', (req,res) => {
+    // grab data from req.body
+    var inventId = req.params.id;
+    var equipped = req.body;
+    console.log(equipped, inventId)
+    // perform sequelize update on item id
+    db.Inventory.update(equipped, {where: {id: inventId}}).then( () =>{
+        res.json(equipped)
+    })
+    
+})
 
 module.exports = router;
