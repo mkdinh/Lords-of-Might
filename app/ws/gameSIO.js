@@ -48,8 +48,8 @@ module.exports = function(io){
                 socket.player.world.x = movement.worldX;
                 socket.player.world.y = movement.worldY;
                 
-                if(socket.player.world.location !== movement.state){
-                    socket.player.world.location = movement.state
+                if(socket.player.world.state !== movement.state){
+                    socket.player.world.state = movement.state
                 }
             }
             // console.log({player: socket.player, dir: movement.dir})

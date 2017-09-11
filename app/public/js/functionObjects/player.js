@@ -7,19 +7,19 @@ playerControl = {
         var sprite;
 
         // console.log(dbInfo)
-        // console.log(dbInfo.world.location)
+        // console.log(dbInfo.world.state)
 
-        switch(dbInfo.world.location){
-            case 'Game':
+        switch(dbInfo.world.state){
+            case 'Town':
                 sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, dbInfo.sprite);
                 // console.log(sprite)
                 break
             case 'Shop':
                 if(dbInfo.role === "player"){
                     // console.log(dbInfo.id)
-                    sprite =  this.add.sprite(446, 550, avatar);
+                    sprite =  this.add.sprite(446, 550, dbInfo.sprite);
                 }else{
-                    sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, avatar);
+                    sprite =  this.add.sprite(dbInfo.world.x, dbInfo.world.y, dbInfo.sprite);
                 }
                 break
         }
@@ -68,13 +68,16 @@ playerControl = {
         var style = { font: "12px Arial", fill: "#000000",align:'center',boundsAlignH:'center', backgroundColor:'rgba(255,255,255,.3)'};
 
         if(dbInfo.role === 'player'){ 
-            var label = this.add.text(0, 0,dbInfo.nickname, style); 
-            label.position.x -= label.width * 0.5;
-            label.position.y -= label.height * 0.5;
+            console.log(sprite)
+            var label = this.add.text(0, 0,dbInfo.name, style); 
+            label.anchor.set(0.5)
+            label.position.x += ((sprite.width/2)+(sprite.width - label.width)/2)
+            // label.position.x -= label.width * 0.5;
+            // label.position.y -= label.height * 0.5;
         }else{
             var label= this.add.text(0,0,dbInfo.name, style);
-            label.position.x -= label.width * .25;
-            label.position.y -= label.height * 0.75;
+            label.anchor.set(0.5)
+            label.position.x += ((sprite.width)+(sprite.width - label.width)/2)
         }
 
         sprite.addChild(label);
@@ -90,7 +93,7 @@ playerControl = {
             // console.log(LoM.spriteMaster)
         }
 
-        if(dbInfo.id === LoM.Game.userInfo.id){
+        if(dbInfo.id === LoM.Town.userInfo.id){
             this.camera.follow(sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
             // console.log(sprite.body)
         }
@@ -117,10 +120,10 @@ playerControl = {
 
     // retrieve proper sprite movement
     movePlayer: function(dirInfo){
-        var location = dirInfo.player.world.location;
+        var state = dirInfo.player.world.state;
         var id = LoM.userInfo.id;
-        
-        if(location === LoM.playerMaster[id].world.location){
+            // console.log(state,id)
+        if(state === LoM.playerMaster[id].world.state){
 
             var player = LoM.spriteMaster[dirInfo.player.id];
             player.body.velocity.x = dirInfo.player.velocity.x;
@@ -139,7 +142,7 @@ playerControl = {
     }
 }
 
-// combine playerControll and Game
-LoM.Game = Object.assign(LoM.Game,playerControl)
+// combine playerControll and Town
+LoM.Town = Object.assign(LoM.Town,playerControl)
 LoM.Shop = Object.assign(LoM.Shop,playerControl)
 LoM.Caslte = Object.assign(LoM.Castle,playerControl)

@@ -49,7 +49,7 @@ $('.interaction').on('click','#battle-request', function(ev){
 
 $('.interaction').on('click','#battle-accept', function(ev){
     ev.preventDefault();
-    Client.battleAccept(LoM.Game.battleInfo);
+    Client.battleAccept(LoM.Town.battleInfo);
 })
 
 
@@ -144,8 +144,8 @@ $('.battle-options').on('click','#battle-return', function(){
     announcement('Returning to town!')
     removeBattleInteractions();
     setTimeout(function(){
-        // LoM.game.state.start('Game')
-        LoM.playerMaster[LoM.userInfo.id].world.location = "Game"
+        // LoM.game.state.start('Town')
+        LoM.playerMaster[LoM.userInfo.id].world.location = "Town"
         var user = LoM.playerMaster[LoM.userInfo.id]
         console.log('exiting Shop')
         Client.changeState(user);

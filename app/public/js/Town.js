@@ -8,13 +8,13 @@ var game;
 var initialized = false;
 var chatActive = false;
 
-LoM.Game = function(){};
+LoM.Town = function(){};
 
-LoM.Game = {
+LoM.Town = {
     // -------------------------------------------------------------------------------------------
     // INITALIZING GAME STATE
     // -------------------------------------------------------------------------------------------
-    // allow Game to run in the background
+    // allow Town to run in the background
     init:function(){
         this.stage.disableVisibilityChange = true;
     },
@@ -55,9 +55,20 @@ LoM.Game = {
         // Generate Layer Collisions
         // -----------------------------------------------------------------------
         
-        // set collision events for the game for user interactions
-        // look at collisions for more dtails
-        this.setCollisions()
+        // set collision events for the game for user interactions with an array of tile index
+        this.genLayerCollisions('Houses','wallCollisions',
+            [],
+            this.wallCollisions
+        ); 
+
+        this.genLayerCollisions('Houses','shop',
+            [1595],
+            this.shopInteractions
+        )
+        this.genLayerCollisions('Houses','inn',
+            [147],
+            this.innInteractions
+        )
 
         // generate all online users accessing the game
         // use initial array if playerMaster is empty, else use playerMaster object
@@ -65,7 +76,7 @@ LoM.Game = {
         if(Object.keys(LoM.playerMaster).length > 0){
             for(player in LoM.playerMaster){
                 // console.log(player)
-                if(LoM.playerMaster[player].world.location === 'Game'){
+                if(LoM.playerMaster[player].world.state === 'Town'){
                     this.addPlayer(LoM.playerMaster[player])
                 }
             }
@@ -73,7 +84,7 @@ LoM.Game = {
         else{
             // console.log(LoM.playerArray)
             for(i = 0; i < LoM.playerArray.length;i++){
-                if(LoM.playerArray[i].world.location === 'Game'){
+                if(LoM.playerArray[i].world.state === 'Town'){
                     this.addPlayer(LoM.playerArray[i])
                 }
             }
@@ -85,11 +96,11 @@ LoM.Game = {
             role: 'npc',
             name: 'Mysterious Stranger',
             velocity: {x: -10, y: 0},
-            world: {x: 390,y:280,location:'Game'}
+            world: {x: 390,y:280,state:'Town'}
         }
 
 
-        this.addPlayer(sprite2Info, "Game");
+        this.addPlayer(sprite2Info, "Town");
         this.sprite2 = this.groupMap.npcs['sample'];
 
         // after all players is load for the current user, the game start
@@ -147,15 +158,15 @@ LoM.Game = {
             // listen for key press for character movement and pass that information to socket.io
             // if the last key pressed was 100ms ago, then listen stop updating to server 
             if(this.input.keyboard.isDown(Phaser.Keyboard.W)){     
-                Client.move({dir:'up', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY, state: 'Game' });
+                Client.move({dir:'up', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY, state: 'Town' });
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.S)){;
-                Client.move({dir: 'down', id: LoM.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Game'  });
+                Client.move({dir: 'down', id: LoM.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Town'  });
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.A)){
-                Client.move({dir:'left', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Game'  })
+                Client.move({dir:'left', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Town'  })
             }else if(this.input.keyboard.isDown(Phaser.Keyboard.D)){
-                Client.move({dir:'right', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Game'  })
+                Client.move({dir:'right', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY,  state: 'Town'  })
             }else if(this.input.keyboard.upDuration(65,30)|| this.input.keyboard.upDuration(87,100) || this.input.keyboard.upDuration(83,100) || this.input.keyboard.upDuration(68,100)){
-                Client.move({dir:'stationary', id:LoM.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Game' })
+                Client.move({dir:'stationary', id:LoM.userInfo.id, worldX: worldX, worldY: worldY,  state: 'Town' })
             }
         }
     },

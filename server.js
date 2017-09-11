@@ -20,68 +20,6 @@ const sequelize_fixtures = require('sequelize-fixtures');
 // -------------------------------------------------------------
 
 
-// function traverseDirectory(dirname, callback) {
-//     var directory = [];
-//     fs.readdir(dirname, function(err, list) {
-//       dirname = fs.realpathSync(dirname);
-//       if (err) {
-//         return callback(err);
-//       }
-//       var listlength = list.length;
-//       list.forEach(function(file) {
-//         file = dirname + "\/" + file;
-//         fs.stat(file, function(err, stat) {
-//           directory.push(file);
-//    if (stat && stat.isDirectory()) {
-//             traverseDirectory(file, function(err, parsed) {
-//        directory = directory.concat(parsed);
-//        if (!--listlength) {
-//          callback(null, directory);
-//        }
-//      });
-//    } else {
-//        if (!--listlength) {
-//          callback(null, directory);
-//        }
-//             }
-//         });
-//       });
-//     });
-//   }
-
-// var imgPath; 
-
-// traverseDirectory(testFolder, function(err, result) {
-//     if (err) {
-//       console.log(err);
-//     }
-
-    
-//     imgPath = result.map(function(path){
-//        return path.split('\\public')[1].replace(/\\/g,"/")       
-//     })
-//     var object =parsePathArray(imgPath);
-//     console.log(object.img.sprites.lpc)
-// })
-
-// function parsePathArray(paths) {
-//     var parsed = {};
-//     for(var i = 0; i < 4; i++) {
-//         var position = parsed;
-//         var split = paths[i].split('/');
-//         for(var j = 0; j < split.length; j++) {
-//             if(split[j] !== "") {
-//                 if(typeof position[split[j]] === 'undefined')
-//                     position[split[j]] = {};
-//                 position = position[split[j]];
-//             }
-//         }
-//     }
-//     return parsed;
-// }
-
-// var spriteSheetFolder = path.join(__dirname,'./app/public/img/players/');
-
 // fs.readdir(spriteSheetFolder, (err, files) => {
 //     files.forEach(file => {
 //       console.log('this is',file);
@@ -151,35 +89,42 @@ require(path.join(__dirname, './app/ws/battleSIO.js'))(io);
 
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
-// db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
-//     .then(function(result){
-//         db.sequelize.sync(
-//             {force: true}   
-//         ).then(() => {
-//         //from file 
-//             sequelize_fixtures.loadFile('./app/fixtures/sampleUser.json', db).then(function(){
-//             db.User.find({where: {id : 1},
-//                 include: [db.Sprite,db.Message,db.Item]})
-//                 //     {model: "Sprite", required: true}
-//                 //     // {model: "Message", required: true},
-//                 //     // {model: "Item", required: true}
-//                 // ]})
+var restart = false;
+// var restart = true;
+
+if(restart){
+db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
+    .then(function(result){
+        db.sequelize.sync(
+            {force: true}   
+        ).then(() => {
+        //from file 
+            sequelize_fixtures.loadFile('./app/fixtures/sampleUser.json', db).then(function(){
+            db.User.find({where: {id : 1},
+                include: [db.Sprite,db.Message,db.Item]})
+                //     {model: "Sprite", required: true}
+                //     // {model: "Message", required: true},
+                //     // {model: "Item", required: true}
+                // ]})
                 
-//                 .then((result) => {
-//                     console.log(result.Sprite)
-//                     })
-//                 }); 
+                .then((result) => {
 
-//             server.listen(port, () => {
-//             console.log('listen to port',port)
-//             })
-//         })
-//     })
+                    })
+                }); 
 
-db.sequelize.sync(
-    // {force: true}   
-).then(() => {
-    server.listen(port, () => {
-        console.log('listen to port',port)
+            server.listen(port, () => {
+            console.log('listen to port',port)
+            })
         })
-})
+    })
+}else{
+
+    db.sequelize.sync(
+        // {force: true}   
+    ).then(() => {
+        server.listen(port, () => {
+            console.log('listen to port',port)
+        })
+    })
+    
+}
