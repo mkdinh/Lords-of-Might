@@ -4,11 +4,15 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <!-- Foundation CSS -->
-        {{!-- <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" /> --}}
+
+        <!-- Materialize CSS -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/homepage.css" />
-        <!-- Lord of Might Font-->
+        <link rel="stylesheet" href="/css/sprite.css"/>
+
+        <!-- Lords of Might Font-->
         <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
 
         <title>Customization - Lords of Might</title>
@@ -19,41 +23,45 @@
         </style>
     </head>
 
-    <body>
+<body>
         <embed src="/audio/custom_theme.mp3"
         loop="true" 
         autoplay="false" 
         width="0" no
         height="0">
     </embed>
-        <div class="grid-x">
+<div class="row">
+            <h2 style="text-align: center;">Create Your Character</h2>
+        <div class="col s6">
+        
+        
+            <h4>Body Type</h4>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png"><i class="small material-icons">accessibility</i>Skeleton</button>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">
+                <i class="small material-icons">accessibility</i>Orc</button>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/darkelf.png">
+                <i class="small material-icons">accessibility</i>Gollem</button>
+
+            <h4>Headgear</h4>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>
+                <i class="small material-icons">add</i>Chainmail</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png" id='add-head'>
+                <i class="small material-icons">add</i>Cap</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png" id='add-head'>
+                <i class="small material-icons">add</i>Recon</button>
+                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png" id='add-head'>
+                <i class="small material-icons">add</i>Silver Helmet</button>
+
+
+            <h4>Accessories</h4>
+                <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'><i class="small material-icons">add</i>Chest Protector</button>
+                <button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'><i class="small material-icons">add</i>Lower Body</button>
+
+            <h4>Weapon</h4>
+                <button type='submit' class='add-button' data-part='weapon' id='add-weapon'><i class="small material-icons">add</i>Weapon</button>
     
-        <div class="medium-9 large-9 cell">
-        <h1> 
-            <h2>Body Type</h2>
-                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button>
-                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">Orc</button>
-                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/darkelf.png">Gollem</button>
 
-            <h2>Headgear</h2>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/cloth_hood_male.png" id='add-head'>Hood</button>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>Chainmail</button>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/bandanas/male/red.png" id='add-head'>Bandana</button>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png" id='add-head'>Cap</button>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png" id='add-head'>Recon</button>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/golden_helm_male.png" id='add-head'>Gold Helmet</button>
-                <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png" id='add-head'>Silver Helmet</button>
-
-
-            <h2>Accessories</h2>
-                <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Add torso</button>
-                <button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Add legs</button>
-
-            <h2>Weapon</h2>
-                <button type='submit' class='add-button' data-part='weapon' id='add-weapon'>Add weapon</button>
-        </h1>
-
-        <h2>Modify</h2>
+        <h4>Modify</h4>
 
         {{!-- <h1> --}}
             <button type='submit' id='undo-head'>Undo head</button>
@@ -63,19 +71,20 @@
         </h1>
         </div>
         
-        <div class="medium-3 large-3 cell">
+        <div class="col s6">
 
-        <canvas id='canvas' width='300' height='300'></canvas>
+        <canvas id='canvas' width='250' height='250'></canvas>
 
         </div>
             
-    </div>
+</div>
 
 
         <script src='/js/sprite.js'> </script>
          <script>
-         $(document).foundation();
+        
+
          </script>
-    </body>
+</body>
 
 </html>

@@ -1,29 +1,44 @@
 
 const express = require('express');
-const models = require('../models');
+const db = require('../models');
 const fs = require('fs');
 const path = require('path');
-const User = models.User;
-const Sprite = models.Sprite;
-const Item = models.Item;
-const Stats = models.Stats;
-const Game_State = models.Game_State;
 const router = express.Router();
 var spriteSheetFolder = path.join(__dirname,'../public/img/players');
 var spriteSheetID = {}
 
 router.get('/all', (req,res) => {
-    User.findAll({
-        include: [Sprite,Item,Stats,Game_State]
+    db.User.findAll({
+        include: [db.Game_State,
+            {model: db.Sprite}, 
+            {model: db.Stats},
+            {model: db.Inventory , include: [db.Item]}]
     })
     .then((playerDB) => {
-        // grab all player infomation on database
         res.json(playerDB)
-            // fs.readdir(spriteSheetFolder, (err, files) => {
-            //     // read the id of the already created spritesheet files and send it to client
-            // })
     })
 });
 
+router.get('/inventories/:userId', (req,res) => {
+    var userId = req.params.userId;
+    // search for all items belongs to user
+    db.Inventory.findAll({where: {userId: userId},include: [db.Item]})
+    .then((inventory) => {
+        // return items to be updated to the game
+        res.json(inventory)
+    })
+})
+
+router.put('/inventories/:id', (req,res) => {
+    // grab data from req.body
+    var inventId = req.params.id;
+    var equipped = req.body;
+    console.log(equipped, inventId)
+    // perform sequelize update on item id
+    db.Inventory.update(equipped, {where: {id: inventId}}).then( () =>{
+        res.json(equipped)
+    })
+    
+})
 
 module.exports = router;

@@ -11,9 +11,9 @@ router.get('/all', (req,res) => {
 router.post('/new', (req,res) => {
     var query = {
         body: req.body.body,
-        UserId: req.user.id
+        UserId: req.body.user
     }
-
+    console.log(req.body)
     Message.create(query)
         .then((message) => {
             res.json(message)

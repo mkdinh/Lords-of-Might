@@ -1,15 +1,51 @@
 module.exports = (sequelize,DataTypes) => {
     var Item = sequelize.define('Item', {
-        item_name: {
+        name:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
-        type: {
+        type:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
-        
-        quantity: {
+        class:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        slot:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 1,
+                max: 7
+            }
+        },
+        hp:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        mp:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        attack: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        agility: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        defense: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        recovery: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
@@ -21,22 +57,13 @@ module.exports = (sequelize,DataTypes) => {
         },
         sell: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        link: {
-            type: DataTypes.STRING
-        },
-        data_point: {
-            type: DataTypes.INTEGER
-        },
+            allowNull: false
+        }
     })
     
     Item.associate = (models) => {
-        Item.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
+        Item.hasMany(models.Inventory, {
+            onDelete: "CASCADE"
         })
     }
 

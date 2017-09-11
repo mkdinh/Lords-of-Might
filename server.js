@@ -99,23 +99,12 @@ db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
             {force: true}   
         ).then(() => {
         //from file 
-            sequelize_fixtures.loadFile('./app/fixtures/sampleUser.json', db).then(function(){
-            db.User.find({where: {id : 1},
-                include: [db.Sprite,db.Message,db.Item]})
-                //     {model: "Sprite", required: true}
-                //     // {model: "Message", required: true},
-                //     // {model: "Item", required: true}
-                // ]})
-                
-                .then((result) => {
-
-                    })
-                }); 
-
-            server.listen(port, () => {
-            console.log('listen to port',port)
-            })
-        })
+            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json','./app/fixtures/User2.json'], db).then(function(){
+                server.listen(port, () => {
+                console.log('listen to port',port)
+                })
+             })
+         })
     })
 }else{
 

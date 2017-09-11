@@ -1,6 +1,7 @@
 var LoM = LoM || {};
 
-LoM.playerDB = {};
+var initialized = false;
+var start = false;
 
 // loading game assets
 LoM.Preload = function(){};
@@ -11,47 +12,47 @@ LoM.Preload = {
         this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo') 
         this.splash.anchor.setTo(0.5);
     
-    // load game assets
-    $.ajax({
-        url: '/game/all',
-        method: "GET",
-        success: function(playerDB){
-            
-            // for each player, load the info into a LoM key called LoM.playerDB
-            // load the spritesheet with an id key into the game
-            for(let i = 0; i < playerDB.length; i++){
-                let playerID = playerDB[i].id;
-                LoM.playerDB[playerID] = playerDB[i]
-                LoM.Preload.load.spritesheet('sprite'+playerID,'img/players/'+playerID+'.png',64,64,273)
-            }
-        }
-    });
+    for(id in LoM.playerDB){
+        LoM.Preload.load.spritesheet('sprite-'+id,'img/players/'+id+'.png',64,64,273)
+    }
+    // load spells
+    var Allspells = ['fireball','ice_blast','poison_discharge',"shadow_bomb"]
+    
+    Allspells.forEach(function(spell){
+        let name = spell.replace("_"," ")
+        LoM.Preload.load.spritesheet(name,'img/spells/'+spell+'.png',126,124,38);
+    })
 
-    console.log(LoM.playerDB)
     this.load.image('battleBG','/img/battleBG.png')
+    this.load.image('health','/img/items/health.png',64,64)
     this.load.tilemap('map', 'img/map/example_map.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.spritesheet('tileset', 'img/map/tilesheet.png',32,32);
-    this.load.atlas('sprite1', 'img/sprites/1.png', 'img/sprites/1.json');
-    this.load.spritesheet('sprite2','img/sprites/2.png',64,64,36); // this will be the sprite of the players
-    this.load.spritesheet('sprite3','img/sprites/3.png',63,63,36); // this will be the sprite of the players
-    this.load.spritesheet('sprite4','img/sprites/4.png',64,64,36); // this will be the sprite of the players
-    this.load.spritesheet('sprite5','img/sprites/5.png',64,64,273);
-    this.load.spritesheet('sprite6','img/sprites/6.png',64,64,273);
-    this.load.spritesheet('fireball','img/sprites/lpc/spells/fireball.png',126,124,38);
-    this.load.spritesheet('health','img/sprites/health.png',113,120)
+    this.load.spritesheet('npc-1','img/sprites/3.png',63,63,36); // this will be the sprite of the players
 
     },
+
     create: function(){
+        // white background for loading screen
+        this.game.stage.backgroundColor = '#fff';
+        //physics system for movement
+        
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.world.setBounds(0, 0, 950, 1583)
+        this.world.enableBody = true;
+
         // grab user from localStorage
         var userLocalStor = JSON.parse(localStorage.getItem('user'));
         var userID = userLocalStor.user_id; 
-        var userDB = LoM.playerDB[userID];
+        let userDB = LoM.playerDB[userID];
         var sprite = userDB.Sprite;
-        // console.log(userDB)
+        
+        console.log(userDB)
         // generate user game profile
         var user = {
             id: userID,
+            profile: userDB.profile,
             name: userDB.name,
+            online: true,
             role: 'player',
             world:{
                 x: userDB.Game_State.lastX ,
@@ -59,9 +60,12 @@ LoM.Preload = {
                 state: userDB.Game_State.state
             },
             velocity: {x:0,y:0},
-            sprite: 'sprite'+userID,
-            stats: userDB.Stat,
-            equipments: {
+            sprite: 'sprite-'+userID,
+            based_stats: userDB.Stat,
+            modified_stats: userDB.Stat,
+            inventory: userDB.Inventories,
+            equipments: {},
+            spritesheet: {
                 weapon: parsePNG(sprite.weapon),
                 spell: parsePNG(sprite.spell),
                 head: parsePNG(sprite.head),
@@ -70,12 +74,71 @@ LoM.Preload = {
                 body: parsePNG(sprite.body)
             }
         }
-        // console.log(user)
-        LoM.userInfo = user
-        LoM.playerMaster = {};
-        LoM.spriteMaster = {};
-        // console.log(user)
+
+        LoM.userInfo = user;
+        LoM.user.getInventory();
+        // user.equipments.spell = 'ice blast';
+
+        // ENABLE KEYBOARD INPUT
+        // --------------------------------------------------------------
+        LoM.cursor = LoM.game.input.keyboard.createCursorKeys();  
+        LoM.game.input.keyboard.addKey(Phaser.Keyboard.W)
+        LoM.game.input.keyboard.addKey(Phaser.Keyboard.A)
+        LoM.game.input.keyboard.addKey(Phaser.Keyboard.S)
+        LoM.game.input.keyboard.addKey(Phaser.Keyboard.D)
+        
+        setTimeout(function(){
+            setTimeout(function(){
+                $('ul.tabs').tabs()
+                },200);
+
+            $('#sidebar').fadeIn()
+            },300
+        )
+
         Client.userInfoDB(user);
+  
+    }
+}
+
+LoM.playerControl.eventListener = function(worldX,worldY){
+     //  if no event is active
+     if(LoM.eventActive.state){
+         if(!LoM.eventActive.lastLocationSaved){
+             LoM.eventActive.lastLocation = {
+                 x: LoM.spriteMaster[LoM.userInfo.id].x,
+                 y: LoM.spriteMaster[LoM.userInfo.id].y      
+             } 
+             LoM.eventActive.lastLocationSaved = true
+         }else{
+             var lastLocation = LoM.eventActive.lastLocation
+             var dX = worldX - lastLocation.x;
+             var dY = worldY - lastLocation.y;
+             var distance = Math.sqrt( Math.pow(dX, 2) + Math.pow(dY, 2));
+             if(distance > 20){
+                 LoM.eventActive.state = false;
+                 LoM.eventActive.player = {};
+                 LoM.eventActive.target = {};
+                 LoM.eventActive.lastLocationSaved = false;
+                 console.log('reset event')
+                 removeInteractionDisplay()
+             }
+         }
+     }
+};
+
+LoM.playerControl.controlInput = function(worldX,worldY){
+
+    if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.W)){  
+        Client.move({dir:'up', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state});
+    }else if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.S)){;
+        Client.move({dir: 'down', id: LoM.userInfo.id, worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state});
+    }else if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.A)){
+        Client.move({dir:'left', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state})
+    }else if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.D)){
+        Client.move({dir:'right', id: LoM.userInfo.id,  worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state})
+    }else if(LoM.game.input.keyboard.upDuration(65,75)|| LoM.game.input.keyboard.upDuration(87,75) || LoM.game.input.keyboard.upDuration(83,75) || LoM.game.input.keyboard.upDuration(68,75)){
+        Client.move({dir:'stationary', id:LoM.userInfo.id, worldX: worldX, worldY: worldY, state: LoM.userInfo.world.state})
     }
 }
 
@@ -88,4 +151,16 @@ var parsePNG = function(url){
 
 function randomInt (low,high){
     return Math.floor(Math.random() * (high - low) + low);
+}
+
+
+
+var updateStats = function(){
+    let stats = ['attack','defense','agility','hp','mp']
+    let inventory = LoM.userInfo.inventory
+    for(i = 0; i < inventory.length; i++){
+        switch(iventory.item.slot){
+            case 1:
+        }
+    }
 }

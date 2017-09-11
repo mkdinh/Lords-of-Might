@@ -1,0 +1,181 @@
+[
+    {
+        "model": "User",
+        "data": {
+            "username": "foobaz@gmail.com",
+            "password": "foobaz",
+            "name": "barry",
+            "profile": "http://cdn2-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-8.jpg",
+            "online": false
+        }
+    },
+    {
+        "model": "Message",
+        "data": {
+            "body": "hello World",
+            "UserId": 2
+        }
+    },
+    {
+        "model": "Game_State",
+        "data": {
+            "UserId": 2
+        }
+    },
+    {
+        "model": "Sprite",
+        "data": {
+            "body": "/img/sprites/lpc/body/male/skeleton.png",
+            "head": "/img/sprites/lpc/head/hoods/male/cloth_hood_male.png",
+            "leg": "img/sprites/lpc/legs/armor/male/metal_pants_male.png", 
+            "torso": "img/sprites/lpc/torso/plate/chest_male.png",
+            "weapon": "/img/sprites/lpc/weapons/right hand/male/sword.png",
+            "spell": "/img/sprite/lpc/spells/poison_discharge.png",
+            "UserId": 2
+        }
+    },
+    {
+        "model": "Stats",
+        "data": {
+            "attack": 10,
+            "agility": 10,
+            "defense": 10,
+            "recovery": 10,
+            "hp": 100,
+            "mp": 100,
+            "UserId": 2
+        }
+    },
+
+    {
+        "model": "Inventory",
+        "data": {
+            "equipped": true,
+            "quantity": 1,
+            "UserId": 2,
+            "ItemId": 6
+        }
+    },
+    {
+        "model": "Inventory",
+        "data": {
+            "equipped": true,
+            "quantity": 1,
+            "UserId": 2,
+            "ItemId": 7
+        }
+    },
+    {
+        "model": "Inventory",
+        "data": {
+            "equipped": true,
+            "quantity": 1,
+            "UserId": 2,
+            "ItemId": 8
+        }
+    },
+    {
+        "model": "Inventory",
+        "data": {
+            "equipped": true,
+            "quantity": 1,
+            "UserId": 2,
+            "ItemId": 9
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "long spear",
+            "type": "weapon",
+            "class": "spear",
+            "slot": 6,
+            "attack": 20,
+            "agility": 3,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 20,
+            "buy": 15,
+            "sell": 10
+
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Chain Mail Shirt",
+            "type": "armour",
+            "class": "metal",
+            "slot": 2,
+            "attack": 0,
+            "agility": 2,
+            "defense": 15,
+            "recovery": 0,
+            "hp": 30,
+            "mp": 20,
+            "buy": 15,
+            "sell": 10
+        }
+    },
+        {
+        "model": "Item",
+        "data": {
+            "name": "Chain Mail Pants",
+            "type": "armour",
+            "class": "metal",
+            "slot": 3,
+            "attack": 0,
+            "agility": 5,
+            "defense": 15,
+            "recovery": 0,
+            "hp": 25,
+            "mp":20,
+            "buy": 10,
+            "sell": 5
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Reinforced Boots",
+            "type": "armour",
+            "class": "matal",
+            "slot": "4",
+            "attack": 0,
+            "agility": 4,
+            "defense": 6,
+            "recovery": 0,
+            "hp": 10,
+            "mp": 10,
+            "buy": 10,
+            "sell": 5
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Health Potion",
+            "type": "consumable",
+            "class": "potion",
+            "slot": "4",
+            "attack": 0,
+            "agility": 0,
+            "defense": 0,
+            "recovery": 10,
+            "buy": 10,
+            "sell": 5
+        }
+    },
+    {
+        "model": "Spell",
+        "data": {
+            "name": "poison discharge",
+            "type": "offense",
+            "equipped": true,
+            "damage_min": 10,
+            "damge_max": 30,
+            "pic": "/img/spell/poison_discharge.png"
+        }
+    }
+]

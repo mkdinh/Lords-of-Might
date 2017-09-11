@@ -47,7 +47,7 @@ module.exports = function(io){
         // attack logic here with data
         
         var attackPoints = randomInt(attacker.weapon.damage[0],attacker.weapon.damage[1]);
-        defender.hp -= attackPoints;
+        defender.battle.hp -= attackPoints;
 
         // emit signal to battling player
         io.in(room).emit('battleReaction',state)
@@ -63,8 +63,8 @@ module.exports = function(io){
         var room = state.room;
 
         var spellPoints = randomInt(attacker.spell.damage[0],attacker.spell.damage[1]);
-        defender.hp -= spellPoints;
-
+        defender.battle.hp -= spellPoints;
+        attacker.battle.mp -= attacker.spell.mp;
         // emit signal to battling player
         var room = state.room;
         io.in(room).emit('battleReaction',state)
@@ -79,7 +79,7 @@ module.exports = function(io){
         var defender = state.player[defenderID];
         var room = state.room;
         var addHP = randomInt(25,30)
-        attacker.hp += addHP;
+        attacker.battle.hp += addHP;
 
         // emit signal to battling player
         var room = state.room;

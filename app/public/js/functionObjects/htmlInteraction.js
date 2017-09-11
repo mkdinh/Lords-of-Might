@@ -1,4 +1,9 @@
 
+// Initializing Materialize
+
+
+        
+
 // create interaction div
 function genBattleInteraction(){
 
@@ -66,14 +71,14 @@ function battleUpdate(initiator,receiver){
     var iStats = $("<div class='stats-wrapper'>")
     var rStats = $("<div class='stats-wrapper'>")
 
-    var iName = "<p class='stats-name'>"+initiator.id+"</p>";
-    var iHP = "<p class='stats-HP' id='"+initiator.id+"-HP'>HP:"+100+"</p>";
-    var iMP= "<p class='stats-MP' id='"+initiator.id+"-MP'>HP:"+100+"</p>";
+    var iName = "<p class='stats-name'>"+initiator.name+"</p>";
+    var iHP = "<p class='stats-hp' id='"+initiator.id+"-hp'>HP:"+initiator.battle.hp+"</p>";
+    var iMP= "<p class='stats-mp' id='"+initiator.id+"-mp'>HP:"+initiator.battle.mp+"</p>";
     iStats.append(iName,iHP,iMP)
 
-    var rName = "<p class='stats-name'>"+receiver.id+"</p>";
-    var rHP = "<p class='stats-HP' id='"+receiver.id+"-HP'>HP:"+100+"</p>";
-    var rMP= "<p class='stats-MP' id='"+receiver.id+"-MP'>HP:"+100+"</p>";
+    var rName = "<p class='stats-name'>"+receiver.name+"</p>";
+    var rHP = "<p class='stats-hp' id='"+receiver.id+"-hp'>HP:"+receiver.battle.hp+"</p>";
+    var rMP= "<p class='stats-mp' id='"+receiver.id+"-mp'>HP:"+receiver.battle.mp+"</p>";
 
     rStats.append(rName,rHP,rMP);
     menu.append(iStats,rStats);
@@ -125,10 +130,18 @@ $('.battle-options').on('click','#attack-btn', function(ev){
 $('.battle-options').on('click','#spell-btn', function(ev){
     ev.preventDefault();
     var state = LoM.Battle.state;
-    state.action = 'spell';
+    var currentMP = state.player[LoM.userInfo.id].battle.mp;
+    var spellcost = state.player[LoM.userInfo.id].spell.mp;
+    var newMP = currentMP - spellcost;
 
-    Client.battleAction(state);
-
+    if(newMP < 0){
+        var body = "You do not have enough MP"
+        announcement(body);
+        setTimeout(function(){LoM.Battle.state.turn = LoM.userInfo.id},500);
+    }else{
+        state.action = 'spell';
+        Client.battleAction(state);
+    }
 })
 
 $('.battle-options').on('click','#health-btn', function(ev){
@@ -147,7 +160,7 @@ $('.battle-options').on('click','#battle-return', function(){
         // LoM.game.state.start('Town')
         LoM.playerMaster[LoM.userInfo.id].world.location = "Town"
         var user = LoM.playerMaster[LoM.userInfo.id]
-        console.log('exiting Shop')
+
         Client.changeState(user);
     },3000)
     
@@ -157,6 +170,50 @@ $('.battle-options').on('click','.action-btn', function(){
     LoM.Battle.state.turn = enemy.id;
 })
 
+// INVENTORY INTERACTIONS
+
+// on click on an item
+$('#user-inventories').on('click',".invent-item",function(ev){
+    ev.preventDefault();
+    // grab sequelize information
+    var item = this;
+    var iventId = $(this).attr('data-invent-id');
+    var equipped;
+    // unequip the item if it is equip
+    if($(this).hasClass('equipped')){
+        equipped = {equipped: 0};
+    }else{
+        equipped = {equipped: 1};
+    }
+    // console.log(equipped)
+    // perform an ajax call to change the equip state on server,
+    $.ajax({
+        url: 'game/inventories/'+iventId+'?_method=PUT',
+        type: "POST",
+        dataType: 'json',
+        data: equipped,
+        success: function(res){
+            console.log(res)
+            // on success remove equip class if return false
+            if(parseInt(res.equipped) === 1){
+                $(item).addClass('equipped');
+            }else{
+                $(item).removeClass('equipped');
+                // console.log('unequipped')
+            }
+            // run updateEquipments function
+            LoM.user.updateEquipments()
+            // console.log(LoM.userInfo)
+            // also resend out update to ther players 
+            // Client.userUpdate(user)
+        }
+    })
+});
+
+// SIDE BAR TAB FUNCTION
+$('.user-info-tab').on('click', function(){
+    LoM.user.getInventory()
+})
 
 // CHAT FUNCTION
 $('.message-input').on('focusin',function(){
@@ -169,7 +226,10 @@ $('.message-input').on('focusout',function(){
 
 $('#game').on('click','canvas',function(){
     $('.message-input').blur();
-    console.log('hey')
+    var xCoord = LoM.game.input.mousePointer.x +LoM.game.camera.x - 32; 
+    var yCoord = LoM.game.input.mousePointer.y+LoM.game.camera.y - 42;
+
+    LoM.player.getCoordinates
 });
 
 
@@ -180,9 +240,15 @@ $('#global-message-input').on('keypress', function(ev){
             body: $('#global-message-input').val().trim(),
             user: LoM.userInfo.id
         };
-        console.log(message)
-        Client.sendGlobalMessage(message)
-        $('#global-message-input').val('');
+        $.ajax({
+            url: 'messages/new',
+            method: 'POST',
+            data: message,
+            success: function(){
+                Client.sendGlobalMessage(message)
+                $('#global-message-input').val('');
+            }
+        })
     }
 })
 
@@ -194,7 +260,7 @@ $('#private-message-input').on('keypress', function(ev){
             user: LoM.userInfo.id,
             room: LoM.Battle.battleInfo.room
         };
-        console.log(message)
+
         Client.sendPrivateMessage(message)
         $('#private-message-input').val('');
     }

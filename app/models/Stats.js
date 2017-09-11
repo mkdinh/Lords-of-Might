@@ -1,32 +1,53 @@
 module.exports = (sequelize,DataTypes) => {
     var Stats = sequelize.define('Stats', {
-        HP:{
+        win: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        lose: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        gold: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 100
         },
-        MP:{
+        hp:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 100
+        },
+        mp:{
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 50
         },
         attack: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 5
         },
-        speed: {
+        agility: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 5
         },
         defense: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 5
         },
-        heal: {
+        recovery: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 5
         }
     })
+
+
     
     Stats.associate = (models) => {
         Stats.belongsTo(models.User, {
@@ -34,6 +55,11 @@ module.exports = (sequelize,DataTypes) => {
                 allowNull: false
             }
         })
+        // Stats.belongsTo(models.Sprite, {
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // })
     }
 
     return Stats;

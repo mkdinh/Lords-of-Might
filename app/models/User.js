@@ -41,21 +41,20 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     User.associate = (models) => {
-        User.hasMany(models.Item, {
-            onDelete: "CASCADE"
-        })
-
+        
         User.hasMany(models.Message, {
             onDelete: "CASCADE"
+        })      
+        User.hasMany(models.Inventory, {
+            onDelete: "CASCADE"
         })
-
         User.hasOne(models.Sprite, {
             onDelete: "CASCADE"
         })
-        User.hasOne(models.Stats, {
+        User.hasOne(models.Game_State, {
             onDelete: "CASCADE"
         })
-        User.hasOne(models.Game_State, {
+        User.hasOne(models.Stats, {
             onDelete: "CASCADE"
         })
     }

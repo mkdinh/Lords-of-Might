@@ -4,13 +4,19 @@ body{
     -webkit-background-size: cover;
 }
 
+nav{
+    background-color: transparent;
+}
+
+
 h2 {
 	font-family: 'Metamorphous', cursive;
 	color: #3f3fa7;
-	font-size: 50px;
+	font-size: 70px;
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 	margin-bottom: 0px;
 }
+
 
 h4{
     font-family: 'Metamorphous', cursive;
@@ -18,10 +24,12 @@ h4{
 
 
 p {
+    text-align: center;
 	color: white;
 }
 
-.button{
+
+button{
 	margin-bottom: 5px;
 	margin-top: 5px;
 	padding: 20px;
@@ -31,24 +39,32 @@ p {
     border: 1px solid #060669;
 }
 
-.button:hover{
+.nav-btns {
+
+    margin-right: 20px; 
+    font-size: 25px;
+}
+
+#sign-btn {
+    margin-right: 30px;
+}
+
+/*button:hover{
 	background-color: white;
 	color: #3f3fa7;
-}
+}*/
 
 #logo {
 	width: 200px;
 }
 
-.orbit-slide {
-	 
-	border: 10px white;
-	padding-top: 0px;
-	height: 350px;
+.slider{
+    margin-top: 50px;
+    height: 600px;
 }
 
-#top-players{
-	margin-top: 50px;
+.slides{
+    height: 600px;
 }
 
 /* The Modal (background) */

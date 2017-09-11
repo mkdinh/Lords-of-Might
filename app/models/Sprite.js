@@ -27,11 +27,29 @@ module.exports = (sequelize,DataTypes) => {
     })
 
     Sprite.assosiate = (models) => {
-        Sprite.hasOne(models.User, {
-            foreignKey:{
+        // Sprite.hasOne(models.User, {
+        //     foreignKey:{
+        //         allowNull: false
+        //     }
+        // })
+
+        Sprite.belongsTo(models.User, {
+            foreignKey: {
                 allowNull: false
             }
         })
+
+        // Sprite.belongsTo(models.Stats, {
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // })
+        
+        // Sprite.belongsTo(models.Spell, {
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // })
     }
 
     return Sprite;
