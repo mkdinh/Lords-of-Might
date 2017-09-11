@@ -37,6 +37,7 @@ LoM.user = {
             $('#inventory-space').append(linkWrapper)
         }
         $("#user-gold-amount").html(LoM.userInfo.game_state.gold)
+        $("#invent-space-available").html('space: ' + inv.length + "/10")
         LoM.user.updateEquipments();
     },
 
