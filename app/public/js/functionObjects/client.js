@@ -33,8 +33,10 @@ if(!JSON.parse(localStorage.getItem('user'))){
     // ------------------------------------------------------------------
 
     Client.userInfoDB = function(user){
-        this.socket.emit('user',user)
-        console.log(user)
+        console.log(user.equipments)
+        setTimeout(function(){
+            Client.socket.emit('user',user);
+        },1000)
     };
 
 
@@ -54,7 +56,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
         // push data into game object
         LoM.Town.userInfo = userInfo;
         LoM.playerArray = otherPlayers;
-        console.log(userInfo)
+        // console.log(userInfo)
         // start game with current game state
         LoM.game.state.start(userInfo.world.state)
     })
@@ -74,6 +76,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
     })
 
     Client.changeState = function(user){
+        console.log(user)
         LoM.eventActive.state = true;
         this.socket.emit('change-state',user)
     }
@@ -122,16 +125,18 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
     // initiator sent battle request to server with battle infomation
     Client.battleRequest = function(){
-        $('#battle-request').fadeOut(function(){})
-
-        console.log('battle request sent')
-        this.socket.emit('battle-request', game.battleInfo)
+        $('#battle-request').fadeOut(function(){
+            console.log(game.battleInfo)
+            console.log('battle request sent')
+            Client.socket.emit('battle-request', game.battleInfo)
+        })
     }
 
     Client.socket.on('battle-requested',function(battleInfo){
         game.battleInfo = battleInfo;
+        console.log(battleInfo)
         genBattleInteraction()
-        console.log('battle request received')
+        // console.log('battle request received')
         $('#battle-request').remove();
         $('#battle-accept').fadeIn();
         $('#battle-decline').fadeIn();
@@ -140,12 +145,14 @@ if(!JSON.parse(localStorage.getItem('user'))){
     })
 
     Client.battleAccept = function(battleInfo){
+        console.log(battleInfo)
         // send accept information to server
         this.socket.emit('battle-accept',battleInfo)
         removeInteractionDisplay()
     }
 
     Client.socket.on('battle-accepted',function(battleInfo){
+        console.log(battleInfo)
         var body = game.battleInfo.receiver.id + ' has accept your invitation! Good luck on the battlefield!'
         announcement(body)
         // battleInfo.receiver.id)

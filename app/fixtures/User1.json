@@ -83,98 +83,11 @@
         }
     },
     {
-        "model": "Item",
+        "model": "Spell_Inventory",
         "data": {
-            "name": "Short Sword",
-            "type": "weapon",
-            "class": "sword",
-            "slot": 6,
-            "attack": 15,
-            "agility": 5,
-            "defense": 0,
-            "recovery": 0,
-            "hp": 0,
-            "mp": 20,
-            "buy": 15,
-            "sell": 10
-
-        }
-    },
-    {
-        "model": "Item",
-        "data": {
-            "name": "Leather Tunics",
-            "type": "armour",
-            "class": "leather",
-            "slot": 2,
-            "attack": 0,
-            "agility": 5,
-            "defense": 10,
-            "recovery": 0,
-            "hp": 20,
-            "mp": 20,
-            "buy": 15,
-            "sell": 10
-        }
-    },
-        {
-        "model": "Item",
-        "data": {
-            "name": "Leather Pants",
-            "type": "armour",
-            "class": "leather",
-            "slot": 3,
-            "attack": 0,
-            "agility": 5,
-            "defense": 10,
-            "recovery": 0,
-            "hp": 10,
-            "mp": 10,
-            "buy": 10,
-            "sell": 5
-        }
-    },
-    {
-        "model": "Item",
-        "data": {
-            "name": "Leather Boots",
-            "type": "armour",
-            "class": "leather",
-            "slot": "4",
-            "attack": 0,
-            "agility": 10,
-            "defense": 2,
-            "recovery": 0,
-            "hp": 5,
-            "mp": 5,
-            "buy": 10,
-            "sell": 5
-        }
-    },
-    {
-        "model": "Item",
-        "data": {
-            "name": "Health Potion",
-            "type": "consumable",
-            "class": "potion",
-            "slot": "4",
-            "attack": 0,
-            "agility": 0,
-            "defense": 0,
-            "recovery": 40,
-            "buy": 10,
-            "sell": 5
-        }
-    },
-    {
-        "model": "Spell",
-        "data": {
-            "name": "ice blast",
-            "type": "offense",
             "equipped": true,
-            "damage_min": 10,
-            "damge_max": 30,
-            "pic": "/img/spell/ice_blast.png"
+            "UserId": 1,
+            "SpellId": 4
         }
     }
 ]

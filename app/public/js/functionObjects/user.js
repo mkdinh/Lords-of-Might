@@ -18,7 +18,7 @@ LoM.user = {
     },
 
     updateInventory: function(){
-        $('#user-inventories').empty();
+        $('#inventory-space').empty();
 
         var inv = LoM.userInfo.inventory;
         for(i = 0; i < inv.length; i++){
@@ -34,16 +34,17 @@ LoM.user = {
                 pic.addClass('invent-item');
             }
             linkWrapper.append(pic)
-            $('#user-inventories').append(linkWrapper)
+            $('#inventory-space').append(linkWrapper)
         }
-        $("#user-gold-amount").html(LoM.userInfo.based_stats.gold)
+        $("#user-gold-amount").html(LoM.userInfo.game_state.gold)
         LoM.user.updateEquipments();
     },
 
     updateEquipments: function(){
+        LoM.userInfo.equipments = {};
         var equipped = LoM.userInfo.equipments;
-        equipped = {};
 
+        // equipping to slot
         let allType = ['quest','head','torso','leg','feet','hand','weapon','consumable'];
         for(i = 0; i < LoM.userInfo.inventory.length; i++){
             if(LoM.userInfo.inventory[i].equipped){
@@ -52,6 +53,7 @@ LoM.user = {
                 equipped[allType[slot]] = LoM.userInfo.inventory[i].Item
             }
         }
+        console.log('update equipments', equipped)
 
         allType.forEach(function(type){
             if(equipped[type] === undefined){
@@ -61,35 +63,53 @@ LoM.user = {
             }
         })
 
-        LoM.user.updateStats(equipped);
-        LoM.user.updateProfile();
+        // equipping spell
+        var spells = LoM.userInfo.spells;
+        for( i = 0; i < spells.length; i++){
+            if(spells[i].equipped){
+                equipped["spell"] = spells[i].Spell;
+                $('#equip-spell').html(spells[i].Spell.name)
+            }
+        }
+
+        setTimeout(function(){
+            LoM.user.updateStats(equipped);
+            LoM.user.updateProfile();
+        },500)
     },
     updateStats: function(equipments){
         var based_stats = LoM.userInfo.based_stats;
         var modified_stats = LoM.userInfo.modified_stats;
         // modfied_stats = based_stats;
-
+        // console.log(equipments)
+        // these are the stats to be calculated 
         var allAttr = ["hp","mp","attack","defense","agility","recovery"];
 
+        // reset modified stats to base stats so calculated stats doesnt get add onto current modifed states
         for(attr in modified_stats){
                 modified_stats[attr] = based_stats[attr]
         }
         
+        // check over each equipments and calculate current stats
         for(item in equipments){
-            for(i = 0; i < allAttr.length; i++){
-                let attr = allAttr[i]   
-                modified_stats[attr] += equipments[item][attr]   
+            if(item !== "spell"){
+                for(i = 0; i < allAttr.length; i++){
+                    let attr = allAttr[i]   
+                    modified_stats[attr] += equipments[item][attr]   
+                }
             }
         }
 
+        // append stats to browser
         allAttr.forEach(function(attr){
             $('#user-'+attr).html(modified_stats[attr])
         });
+
     },
     updateProfile: function(){
         let profile = LoM.userInfo.profile;
-        let win = LoM.userInfo.based_stats.win;
-        let lose = LoM.userInfo.based_stats.lose;
+        let win = LoM.userInfo.game_state.win;
+        let lose = LoM.userInfo.game_state.lose;
 
         $('#user-profile').html("<img class='profile-img' src='"+profile+"'/>")
         $('#user-win').html(win)

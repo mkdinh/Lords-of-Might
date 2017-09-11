@@ -1,5 +1,5 @@
 var LoM = LoM || {};
-
+var game;
 LoM.playerDB = {};
 LoM.playerControl = {};
 LoM.eventActive = {state: false};
@@ -21,7 +21,7 @@ LoM.Boot.prototype = {
         method: "GET",
         success: function(playerDB){
     
-            console.log(playerDB)
+            // console.log(playerDB)
             // for each player, load the info into a LoM key called LoM.playerDB
             // load the spritesheet with an id key into the game
             for(let i = 0; i < playerDB.length; i++){

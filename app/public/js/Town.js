@@ -4,7 +4,6 @@
 // setting up rpg canvas by declaring single rpg state with div id='rpg'
 
 var LoM = LoM || {};
-var game;
 var initialized = false;
 var chatActive = false;
 
@@ -79,6 +78,7 @@ LoM.Town = {
                 // console.log(player)
                 if(LoM.playerMaster[player].world.state === 'Town'){
                     LoM.player.add(LoM.playerMaster[player])
+                    console.log(LoM.playerMaster[player])
                 }
             }
         }
@@ -87,6 +87,7 @@ LoM.Town = {
             for(i = 0; i < LoM.playerArray.length;i++){
                 if(LoM.playerArray[i].world.state === 'Town'){
                     LoM.player.add(LoM.playerArray[i])
+                    console.log(LoM.playerArray[i])
                 }
             }
         }

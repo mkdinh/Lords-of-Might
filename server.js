@@ -99,7 +99,7 @@ db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
             {force: true}   
         ).then(() => {
         //from file 
-            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json','./app/fixtures/User2.json'], db).then(function(){
+            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json','./app/fixtures/User2.json','./app/fixtures/Items.json','./app/fixtures/Spells.json'], db).then(function(){
                 server.listen(port, () => {
                 console.log('listen to port',port)
                 })

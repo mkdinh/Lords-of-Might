@@ -38,8 +38,9 @@ LoM.interaction = {
 
         if(LoM.eventActive.state === false){
             if(target.data.id !== this.userInfo.id){
-                LoM[state].battleInfo.initiator = LoM[state].spriteMap.players[LoM.userInfo.id].data
-                LoM[state].battleInfo.receiver = LoM[state].spriteMap.players[target.data.id].data
+                
+                LoM[state].battleInfo.initiator = LoM.playerMaster[LoM.userInfo.id]
+                LoM[state].battleInfo.receiver = LoM.playerMaster[target.data.id]
                 genBattleInteraction()
                 // setTimeout(function(){removeInteractionDisplay()},10000)
             }else{

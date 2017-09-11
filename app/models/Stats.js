@@ -1,20 +1,5 @@
 module.exports = (sequelize,DataTypes) => {
     var Stats = sequelize.define('Stats', {
-        win: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        lose: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        gold: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 100
-        },
         hp:{
             type: DataTypes.INTEGER,
             allowNull: false,

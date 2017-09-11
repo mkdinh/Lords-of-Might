@@ -1,25 +1,20 @@
 module.exports = (sequelize,DataTypes) => {
-    var Inventory = sequelize.define('Inventory', {
+    var Spell_Inventory = sequelize.define('Spell_Inventory', {
         equipped: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
-        },
-        quantity: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
         }
     })
     
-    Inventory.associate = (models) => {
-        Inventory.belongsTo(models.User, {
+    Spell_Inventory.associate = (models) => {
+        Spell_Inventory.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         })
 
-        Inventory.belongsTo(models.Item, {
+        Spell_Inventory.belongsTo(models.Spell, {
             foreignKey: {
                 allowNull: false
             }
@@ -32,5 +27,5 @@ module.exports = (sequelize,DataTypes) => {
         // })
     }
 
-    return Inventory;
+    return Spell_Inventory;
 }

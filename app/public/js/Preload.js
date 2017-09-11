@@ -16,11 +16,10 @@ LoM.Preload = {
         LoM.Preload.load.spritesheet('sprite-'+id,'img/players/'+id+'.png',64,64,273)
     }
     // load spells
-    var Allspells = ['fireball','ice_blast','poison_discharge',"shadow_bomb"]
+    var spellType = ['fire','ice','poison',"shadow"]
     
-    Allspells.forEach(function(spell){
-        let name = spell.replace("_"," ")
-        LoM.Preload.load.spritesheet(name,'img/spells/'+spell+'.png',126,124,38);
+    spellType.forEach(function(spell){
+        LoM.Preload.load.spritesheet(spell,'img/spells/'+spell+'.png',126,124,38);
     })
 
     this.load.image('battleBG','/img/battleBG.png')
@@ -46,7 +45,7 @@ LoM.Preload = {
         let userDB = LoM.playerDB[userID];
         var sprite = userDB.Sprite;
         
-        console.log(userDB)
+        // console.log(userDB)
         // generate user game profile
         var user = {
             id: userID,
@@ -54,6 +53,8 @@ LoM.Preload = {
             name: userDB.name,
             online: true,
             role: 'player',
+            spells: userDB.Spell_Inventories,
+            game_state: userDB.Game_State,
             world:{
                 x: userDB.Game_State.lastX ,
                 y: userDB.Game_State.lastY, 
@@ -77,7 +78,7 @@ LoM.Preload = {
 
         LoM.userInfo = user;
         LoM.user.getInventory();
-        // user.equipments.spell = 'ice blast';
+
 
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------

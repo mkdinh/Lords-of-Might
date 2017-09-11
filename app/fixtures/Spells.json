@@ -1,0 +1,50 @@
+[
+    {
+        "model": "Spell",
+        "data": {
+            "name": "Ice Blast",
+            "type": "ice",
+            "class": "offense",
+            "level": 1,
+            "damage_min": 10,
+            "damage_max": 30,
+            "pic": "/img/spells/ice.png"
+        }
+    },
+    {
+        "model": "Spell",
+        "data": {
+            "name": "Poison Discharge",
+            "type": "poison",
+            "class": "offense",
+            "level": 1,
+            "damage_min": 10,
+            "damage_max": 30,
+            "pic": "/img/spells/poison.png"
+        }
+    },
+    {
+        "model": "Spell",
+        "data": {
+            "name": "Fireball",
+            "type": "fire",
+            "class": "offense",
+            "level": 1,
+            "damage_min": 10,
+            "damage_max": 30,
+            "pic": "/img/spells/fire.png"
+        }
+    },
+    {
+        "model": "Spell",
+        "data": {
+            "name": "Shadow Bomb",
+            "type": "shadow",
+            "class": "offense",
+            "level": 1,
+            "damage_min": 10,
+            "damage_max": 30,
+            "pic": "/img/spells/shadow.png"
+        }
+    }  
+]

@@ -12,7 +12,9 @@ router.get('/all', (req,res) => {
         include: [db.Game_State,
             {model: db.Sprite}, 
             {model: db.Stats},
-            {model: db.Inventory , include: [db.Item]}]
+            {model: db.Inventory , include: [db.Item]},
+            {model: db.Spell_Inventory, include: [db.Spell]}
+        ]
     })
     .then((playerDB) => {
         res.json(playerDB)

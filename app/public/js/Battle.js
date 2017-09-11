@@ -4,7 +4,7 @@ var user;
 var enemy;
 var room;
 var initialized = false;
-
+var initiatorReady = receiverReady = false;
 
 // loading game assets
 LoM.Battle = function(){};
@@ -30,7 +30,7 @@ LoM.Battle = {
         user = LoM.Town.userInfo;
         room = battleInfo.room;
         delete battleInfo['room']
-        
+
         for(role in battleInfo){
             if(battleInfo[role].id === user.id){
                 battleInfo[role].controller = 'user';
@@ -60,14 +60,15 @@ LoM.Battle = {
             room: room
         }
 
-        this.createReceiver(battleInfo.receiver)
-        this.createInitiator(battleInfo.initiator)
-
-        battleUpdate(battleInfo.initiator,battleInfo.receiver);
-        initialized = true;
+        setTimeout(function(){
+            LoM.Battle.createInitiator(battleInfo.initiator)
+            LoM.Battle.createReceiver(battleInfo.receiver)
+            battleUpdate(battleInfo.initiator,battleInfo.receiver);
+        },1000)
+        
     },
     update: function(){
-        if(initialized){
+        if(initiatorReady && receiverReady){
             if(this.state.turn === user.id ){
                 $(".action-btn").prop("disabled", false);
                 $('.battle-options').fadeIn();
@@ -76,7 +77,7 @@ LoM.Battle = {
                 $('.battle-options').fadeOut();
             }
 
-            // console.log(this.state)
+            console.log(this.state)
             var attackerID = this.state.roleID.attacker;
                 var attackerHP = this.state.player[attackerID].battle.hp;
                 var attackerMP = this.state.player[attackerID].battle.mp;
@@ -123,6 +124,7 @@ LoM.Battle = {
     },
 
     createInitiator: function(info){
+        console.log(info)
         var sprite =  this.add.sprite(LoM.Battle.offsetX +175, 230, info.sprite);
         sprite.frame = 40;
         sprite.scale.x = 1;
@@ -132,25 +134,28 @@ LoM.Battle = {
         battleInfo.initiator.position = "initiator";
         battleInfo.initiator.weapon = {
             type: info.equipments.weapon.class,
-            damage: [(info.stats.attack/3), (info.stats.attack + info.equipments.weapon.attack)/2]
+            damage: [(info.modified_stats.attack/3), (info.modified_stats.attack + info.equipments.weapon.attack)/2]
         };
-   
+        
+        var spell = info.equipments.spell;
         battleInfo.initiator.spell = {
-            // type: info.equipments.spell,
-            name: 'poison discharge',
-            damage: [10,30],
+            name: spell.name,
+            type: spell.type,
+            damage: [spell.min_damage,spell.max_damage],
             mp: 110
         };
         
         battleInfo.initiator.battle = {
-            hp: info.stats.hp,
-            mp: info.stats.mp
+            hp: info.modified_stats.hp,
+            mp: info.modified_stats.mp
         }
         
         this.addBattleAnimations(sprite,info)
 
         this.spriteMap[info.id] = sprite
         this.state.player[info.id] = battleInfo.initiator;
+
+        initiatorReady = true;
     },
 
     createReceiver: function(info){
@@ -164,19 +169,21 @@ LoM.Battle = {
         // battleInfo.receiver.turn  = false;
         battleInfo.receiver.weapon = {
             type: info.equipments.weapon.class,
-            damage: [(info.stats.attack/3), (info.stats.attack + info.equipments.weapon.attack)/2]
+            damage: [(info.modified_stats.attack/3), (info.modified_stats.attack + info.equipments.weapon.attack)/2]
         };
-   
+        
+        var spell = info.equipments.spell;
+
         battleInfo.receiver.spell = {
-            // type: info.equipments.spell,
-            name: 'ice blast',
-            damage: [10,30],
+            name: spell.name,
+            type: spell.type,
+            damage: [spell.min_damage,spell.max_damage],
             mp: 35
         };
 
         battleInfo.receiver.battle = {
-            hp: info.stats.hp,
-            mp: info.stats.mp
+            hp: info.modified_stats.hp,
+            mp: info.modified_stats.mp
         }
         
 
@@ -185,6 +192,8 @@ LoM.Battle = {
 
         this.spriteMap[info.id] = sprite;  
         this.state.player[info.id] = battleInfo.receiver; 
+
+        receiverReady = true;
         
     },
 
@@ -197,10 +206,9 @@ LoM.Battle = {
         if(sprite.data.position === 'initiator'){
             this.tweenMap[info.id] = {}
             var spell = sprite.animations.add('spell',[39,40,41,42,43,44,44,44,44,44,44,44,44,43,42,41,40,39],true)
-                console.log(spell)
             spell.onStart.add(function(){
                 console.log(info)
-                var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX  + 170,190, info.equipments.spell)
+                var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX  + 170,190, info.equipments.spell.type)
                 var genBall = fireball.animations.add('genBall',[1,2,3,4,5],1000, false)
                 var shootBall = fireball.animations.add('shootBall',[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],5000, true)
                 var explodeBall = fireball.animations.add('explode', [32,33,34,35,36,37,38,39],1000, false)
@@ -246,7 +254,7 @@ LoM.Battle = {
                         })
                     })
         
-                this.tweenMap[info.id].sword = this.add.tween(sprite).to({x: LoM.Battle.offsetX  +  540, y: 230},tweenT, 'Linear', false);
+                this.tweenMap[info.id].sword = this.add.tween(sprite).to({x: LoM.Battle.offsetX  +  520, y: 230},tweenT, 'Linear', false);
                 this.tweenMap[info.id].sword.onStart.add(function(){sprite.animations.play('right',animT,true)}, this);
                 this.tweenMap[info.id].sword.onComplete.add(function(){
                     sprite.animations.stop()
@@ -262,7 +270,7 @@ LoM.Battle = {
                     sprite.animations._anims.spear.onComplete.add(function(){
                         sprite.animations.play('left',10, true);
                         // this is the window object
-                        var returnTween = LoM.Battle.add.tween(sprite).to({x: 175, y: 230},tweenT, 'Linear', true);
+                        var returnTween = LoM.Battle.add.tween(sprite).to({x: LoM.Battle.offsetX + 175, y: 230},tweenT, 'Linear', true);
                         returnTween.onComplete.addOnce(function(){
                             sprite.animations.stop();
                             sprite.animations.play('right',50,false)
@@ -324,7 +332,7 @@ LoM.Battle = {
 
             spell.onStart.add(function(){
 
-                var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX + 480,190,info.equipments.spell)
+                var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX + 480,190,info.equipments.spell.type)
                 var genBall = fireball.animations.add('genBall',[1,2,3,4,5],1000, false)
                 var shootBall = fireball.animations.add('shootBall',[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],5000, true)
                 var explodeBall = fireball.animations.add('explode', [32,33,34,35,36,37,38,39],1000, false)

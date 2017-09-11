@@ -84,98 +84,11 @@
         }
     },
     {
-        "model": "Item",
+        "model": "Spell_Inventory",
         "data": {
-            "name": "long spear",
-            "type": "weapon",
-            "class": "spear",
-            "slot": 6,
-            "attack": 20,
-            "agility": 3,
-            "defense": 0,
-            "recovery": 0,
-            "hp": 0,
-            "mp": 20,
-            "buy": 15,
-            "sell": 10
-
-        }
-    },
-    {
-        "model": "Item",
-        "data": {
-            "name": "Chain Mail Shirt",
-            "type": "armour",
-            "class": "metal",
-            "slot": 2,
-            "attack": 0,
-            "agility": 2,
-            "defense": 15,
-            "recovery": 0,
-            "hp": 30,
-            "mp": 20,
-            "buy": 15,
-            "sell": 10
-        }
-    },
-        {
-        "model": "Item",
-        "data": {
-            "name": "Chain Mail Pants",
-            "type": "armour",
-            "class": "metal",
-            "slot": 3,
-            "attack": 0,
-            "agility": 5,
-            "defense": 15,
-            "recovery": 0,
-            "hp": 25,
-            "mp":20,
-            "buy": 10,
-            "sell": 5
-        }
-    },
-    {
-        "model": "Item",
-        "data": {
-            "name": "Reinforced Boots",
-            "type": "armour",
-            "class": "matal",
-            "slot": "4",
-            "attack": 0,
-            "agility": 4,
-            "defense": 6,
-            "recovery": 0,
-            "hp": 10,
-            "mp": 10,
-            "buy": 10,
-            "sell": 5
-        }
-    },
-    {
-        "model": "Item",
-        "data": {
-            "name": "Health Potion",
-            "type": "consumable",
-            "class": "potion",
-            "slot": "4",
-            "attack": 0,
-            "agility": 0,
-            "defense": 0,
-            "recovery": 10,
-            "buy": 10,
-            "sell": 5
-        }
-    },
-    {
-        "model": "Spell",
-        "data": {
-            "name": "poison discharge",
-            "type": "offense",
             "equipped": true,
-            "damage_min": 10,
-            "damge_max": 30,
-            "pic": "/img/spell/poison_discharge.png"
+            "UserId": 2,
+            "SpellId": 2
         }
     }
 ]

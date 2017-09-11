@@ -48,6 +48,9 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.Inventory, {
             onDelete: "CASCADE"
         })
+        User.hasMany(models.Spell_Inventory,{
+            onDelete: "CASCADE"
+        })
         User.hasOne(models.Sprite, {
             onDelete: "CASCADE"
         })

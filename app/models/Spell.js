@@ -6,26 +6,31 @@ module.exports = (sequelize,DataTypes) => {
         type: {
             type: DataTypes.STRING,
         },
-        equipped: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
+        class: {
+            type: DataTypes.STRING,
         },
         damage_min: {
             type: DataTypes.INTEGER,
+            allowNull: false,
         },
         damage_max: {
             type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        level:{
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         pic: {
             type: DataTypes.STRING,
         }
     })
 
-    // Spell.assosiate = (models) => {
-    //     Spell.hasMany(models.Inventory, {
-    //         onDelete: "CASCADE"
-    //     })
-    // }
+    Spell.assosiate = (models) => {
+        Spell.hasMany(models.Spell_Inventory, {
+            onDelete: "CASCADE"
+        })
+    }
 
     return Spell;
 }
