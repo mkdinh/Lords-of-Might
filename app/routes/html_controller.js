@@ -21,10 +21,6 @@ router.get('/user', function (req, res) {
     })
 })
 
-router.get('/shop', function (req, res) {
-    res.render('shop')
-})
-
 router.get('/sprite', (req, res) => {
     res.render('sprite')
 })
