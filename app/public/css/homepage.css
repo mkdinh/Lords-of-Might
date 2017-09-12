@@ -39,6 +39,11 @@ button{
     border: 1px solid #060669;
 }
 
+button:hover{
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #3f3fa7;
+}
+
 .nav-btns {
 
     margin-right: 20px; 
@@ -59,9 +64,12 @@ button{
 }
 
 .slider{
+
     margin-top: 50px;
     height: 600px;
 }
+
+
 
 .slides{
     height: 600px;
@@ -69,6 +77,7 @@ button{
 
 /* The Modal (background) */
 .modal {
+    z-index: 999;
     border-color: black;
     border-width: 10px;
     border-style: double;
@@ -76,7 +85,7 @@ button{
     border-bottom-right-radius: 25%;
     display: none; /* Hidden by default */
     max-height: calc(100% - 100px);
-  	position: fixed;
+  	position: absolute;
     top: 50%;
     left: 50%;
   	transform: translate(-50%, -50%);
@@ -124,13 +133,3 @@ button{
     cursor: pointer;
 }
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top: -300px; opacity: 0} 
-    to {top: 0; opacity: 1}
-}
-
-@keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
-}
