@@ -32,7 +32,12 @@ button{
     outline: none;
     border-radius: 15px;
     background-color: #3f3fa7;
-    border: 1px solid white;
+    border: 1px solid #060669;
+}
+
+button:hover{
+	background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #3f3fa7;
 }
 
 .material-icons {
@@ -40,7 +45,8 @@ button{
 }
 
 #canvas {
-	border-width: 20px;
+	background-color: #060669;
+	border-width: 10px;
 	border-style: double;
 	border-color: #3f3fa7;
 	height: 400px;
