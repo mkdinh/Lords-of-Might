@@ -33,7 +33,6 @@ if(!JSON.parse(localStorage.getItem('user'))){
     // ------------------------------------------------------------------
 
     Client.userInfoDB = function(user){
-        console.log(user.equipments)
         setTimeout(function(){
             Client.socket.emit('user',user);
         },1000)
@@ -52,7 +51,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
         // parse data from object
         var userInfo = data.user;
         var otherPlayers = data.others;
-        console.log(data)
+        // console.log(data)
         // push data into game object
         LoM.Town.userInfo = userInfo;
         LoM.playerArray = otherPlayers;
@@ -82,16 +81,11 @@ if(!JSON.parse(localStorage.getItem('user'))){
     }
 
     Client.socket.on('change-state',function(user){
-
-        var userID = user.id;
-        var state = user.world.state;
-        LoM.playerMaster[userID] = user;
-
-        setTimeout(function(){
-            console.log(LoM.eventActive.state)
+            var userID = user.id;
+            var state = user.world.state;
+            LoM.playerMaster[userID] = user;
+            LoM.user.getInventory();
             LoM.game.state.start(state);
-        },500);
-
     })
 
     Client.socket.on('player-changed-state',function(player){

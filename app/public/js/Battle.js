@@ -64,11 +64,12 @@ LoM.Battle = {
             LoM.Battle.createInitiator(battleInfo.initiator)
             LoM.Battle.createReceiver(battleInfo.receiver)
             battleUpdate(battleInfo.initiator,battleInfo.receiver);
+            initialized = true;
         },1000)
         
     },
     update: function(){
-        if(initiatorReady && receiverReady){
+        if(initiatorReady && receiverReady && initialized){
             if(this.state.turn === user.id ){
                 $(".action-btn").prop("disabled", false);
                 $('.battle-options').fadeIn();
@@ -77,45 +78,55 @@ LoM.Battle = {
                 $('.battle-options').fadeOut();
             }
 
-            console.log(this.state)
-            var attackerID = this.state.roleID.attacker;
-                var attackerHP = this.state.player[attackerID].battle.hp;
-                var attackerMP = this.state.player[attackerID].battle.mp;
+                var userHP = this.state.player[user.id].battle.hp;
+                var userMP = this.state.player[user.id].battle.mp;
 
-            var defenderID = this.state.roleID.defender;
-                var defenderHP = this.state.player[defenderID].battle.hp;
-                var defenderMP = this.state.player[defenderID].battle.mp;
+                var enemyHP = this.state.player[enemy.id].battle.hp;
+                var enemyMP = this.state.player[enemy.id].battle.mp;
+            
+            $("#"+user.id+'-hp').html("HP:"+ userHP)
+            $("#"+user.id+'-mp').html("MP:"+ userMP)
 
-            $("#"+attackerID+'-hp').html("HP:"+ attackerHP)
-            $("#"+attackerID+'-mp').html("MP:"+ attackerMP)
+            $("#"+enemy.id+'-hp').html("HP:"+ enemyHP)
+            $("#"+enemy.id+'-mp').html("MP:"+ enemyMP)
 
-            $("#"+defenderID+'-hp').html("HP:"+ defenderHP)
-            $("#"+defenderID+'-mp').html("MP:"+ defenderMP)
-
-            if(attackerHP <= 0){
+            if(userHP <= 0){
 
                 var battle = this;
                 initialized = false;
 
-                setTimeout(function(){
-                    battle.spriteMap[attackerID].animations.play('die',10, false)
-                    var body = defenderID + " WON!"
-                    announcement(body)
-                    gameOver()
-                    removeInteractionDisplay()
-                },2000)
+                battle.spriteMap[user.id].animations.play('die',10, false)
+                    
+                $.ajax({
+                    url: '/game/battle/lose/'+user.id+'?_method=PUT',
+                    type: 'POST',
+                    success: function(){    
+                        var body = enemy.name + " WON!"
+                        LoM.userInfo.game_state.lose++
+                        announcement(body)
+                        gameOver()
+                        removeInteractionDisplay()
+                    }
+                })
+
             }
-
-            if(defenderHP <= 0){
+            
+            if(enemyHP <= 0){
                 var battle = this;
                 initialized = false;
 
-                setTimeout(function(){
-                    battle.spriteMap[defenderID].animations.play('die',10, false)
-                    var body = attackerID + " WON!"
-                    announcement(body)
-                    gameOver()
-                },2000)
+                battle.spriteMap[enemy.id].animations.play('die',10, false)
+                $.ajax({
+                    url: '/game/battle/win/'+user.id+'?_method=PUT',
+                    type: 'POST',
+                    success: function(){    
+                        var body = user.name + " WON!"
+                        LoM.userInfo.game_state.win++
+                        announcement(body)
+                        gameOver()
+                        removeInteractionDisplay()
+                    }
+                })
             }
         }
     },
@@ -124,7 +135,6 @@ LoM.Battle = {
     },
 
     createInitiator: function(info){
-        console.log(info)
         var sprite =  this.add.sprite(LoM.Battle.offsetX +175, 230, info.sprite);
         sprite.frame = 40;
         sprite.scale.x = 1;
@@ -138,15 +148,17 @@ LoM.Battle = {
         };
         
         var spell = info.equipments.spell;
+        console.log(spell)
         battleInfo.initiator.spell = {
             name: spell.name,
             type: spell.type,
             damage: [spell.min_damage,spell.max_damage],
-            mp: 110
+            mp: spell.mp
         };
         
         battleInfo.initiator.battle = {
             hp: info.modified_stats.hp,
+            // hp:1,
             mp: info.modified_stats.mp
         }
         
@@ -178,11 +190,12 @@ LoM.Battle = {
             name: spell.name,
             type: spell.type,
             damage: [spell.min_damage,spell.max_damage],
-            mp: 35
+            mp: spell.mp
         };
 
         battleInfo.receiver.battle = {
             hp: info.modified_stats.hp,
+            // hp:1,
             mp: info.modified_stats.mp
         }
         
@@ -207,7 +220,6 @@ LoM.Battle = {
             this.tweenMap[info.id] = {}
             var spell = sprite.animations.add('spell',[39,40,41,42,43,44,44,44,44,44,44,44,44,43,42,41,40,39],true)
             spell.onStart.add(function(){
-                console.log(info)
                 var fireball = LoM.Battle.add.sprite(LoM.Battle.offsetX  + 170,190, info.equipments.spell.type)
                 var genBall = fireball.animations.add('genBall',[1,2,3,4,5],1000, false)
                 var shootBall = fireball.animations.add('shootBall',[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],5000, true)
@@ -444,7 +456,6 @@ LoM.Battle = {
 
     attack: function(state){
         // performing old state request
-        console.log(state)
         var attackerID = state.roleID.attacker;
         var defenderID = state.roleID.defender;
         var weapon = state.player[attackerID].weapon.type;

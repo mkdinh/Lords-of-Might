@@ -81,6 +81,18 @@ LoM.interaction = {
             LoM.eventActive.state = true
         }
     },
+    trainerInteractions: function(player,building){
+        var state = LoM.userInfo.world.state;
+        if(!LoM.eventActive.state){
+            // announcement('New Shop! Open Soon!')
+            LoM.playerMaster[LoM.userInfo.id].world.state = "Shop"
+            var user = LoM.playerMaster[LoM.userInfo.id]
+
+            // LoM.eventActive.state = true;
+            Client.changeState(user);
+            LoM.eventActive.state = true
+        }
+    },
 
     innInteractions: function(player,building){
         var state = LoM.userInfo.world.state;

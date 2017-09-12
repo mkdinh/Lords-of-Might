@@ -9,7 +9,6 @@ module.exports = function(io){
         // HANDLIGN BATTLE ACTIONS
 
         socket.on('battleAction', function(state){
-            console.log('action on server',state.action)
             switch(state.action){
                 case 'attack':
                     attackCallback(state)
@@ -24,11 +23,7 @@ module.exports = function(io){
         })
 
         socket.on('actionCompleted', function(state){
-            // console.log(state)
-            // console.log('action completed, start next user turn')
-            // console.log(battleInfo)
-            var room = state.room;
-            // console.log(data)
+            var room = state.room; 
             socket.to(room).emit('your-turn',{});
         })  
     })    
@@ -61,8 +56,10 @@ module.exports = function(io){
         var attacker = state.player[attackerID];
         var defender = state.player[defenderID];
         var room = state.room;
-
-        var spellPoints = randomInt(attacker.spell.damage[0],attacker.spell.damage[1]);
+        console.log(attacker)
+        var spellDamage = [attacker.equipments.spell.damage_min, attacker.equipments.spell.damage_max]
+        console.log(spellDamage)
+        var spellPoints = randomInt(spellDamage[0], spellDamage[1]);
         defender.battle.hp -= spellPoints;
         attacker.battle.mp -= attacker.spell.mp;
         // emit signal to battling player

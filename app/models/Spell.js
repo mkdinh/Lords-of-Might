@@ -21,6 +21,10 @@ module.exports = (sequelize,DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        mp:{
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         pic: {
             type: DataTypes.STRING,
         }
