@@ -45,10 +45,10 @@ button:hover{
 }
 
 #canvas {
-	background-color: #060669;
+	background-image: url(/img/woodback.jpg);
 	border-width: 10px;
 	border-style: double;
-	border-color: #3f3fa7;
+	border-color: grey;
 	height: 400px;
 	margin-top: 100px;
 	margin-left: 100px;
