@@ -15,11 +15,9 @@
 
 <body>
 
-    <!--
-<div class="row">
-    <h1 style="text-align: center; margin-top: 30px;">WHAT WOULD YOU LIKE TO BUY?</h1>
-</div>
--->
+    <audio autoplay loop>
+      <source src="/audio/shop-music.mp3" type="audio/mpeg" />
+    </audio>
 
     <div class="row">
 
@@ -35,79 +33,46 @@
 
             <!-- List of items to buy at the shop-->
             <div id="items">
-                <p>SWORDS :</p>
-                <select>
-                <option value="volvo">Main-Gauche</option>
-                  <option value="saab">Footmans Sword</option>
-                  <option value="mercedes">Cutlass</option>
-                  <option value="audi">Great Sword</option>
-                </select>
-
-                <p>AXES : </p>
-                <select>
-                    <option value="volvo">Hatchet</option>
-                  <option value="saab">Felling Axe</option>
-                  <option value="mercedes">War Axe</option>
-                  <option value="audi">Great Axe</option>
-                </select>
-
-                <p>BOWS & CROSSBOWS :</p>
-                <select>
-                    <option value="volvo">Horse Bow</option>
-                  <option value="saab">Horn Bow </option>
-                  <option value="mercedes">Long Bow</option>
-                  <option value="audi">Great Bow</option>
-                </select>
-
-                <p>BOOTS: </p>
-                <select>
-                    <option value="volvo">Carbatine</option>
-                  <option value="saab">Clog</option>
-                  <option value="mercedes">Corked</option>
-                  <option value="audi">Great Boots</option>
-                </select>
-
-                <!--
-<select>
-                  <option value="volvo">Cloaks</option>
-                  <option value="volvo">Volvo
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-
-<select>
-                  <option value="volvo">Caps</option>
-                  <option value="volvo">Volvo
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-
-<select>
-                  <option value="volvo">Antidote</option>
-                  <option value="volvo">Volvo
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
--->
-
+                <div id="left" style="float: left;">
+                    <div>
+                        <input id="sword" type="submit" value="SWORDS" />
+                    </div>
+                    <div>
+                        <input id="helmet" type="submit" value="HELMETS" />
+                    </div>
+                    <div>
+                        <input id="legs" type="submit" value="LEGS" />
+                    </div>
+                    <div>
+                        <input id="boots" type="submit" value="BOOTS" />
+                    </div>
+                    <div>
+                        <input id="armor" type="submit" value="ARMOR" />
+                    </div>
+                    <div>
+                        <input id="health" type="submit" value="POTION" />
+                    </div>
+                </div>
+                <div id="right" style="float:right; text-align: center;">
+                    <div id="itemHere">
+                    </div>
+                    <img id="chest" src="img/chest.png" />
+                </div>
             </div>
+
         </div>
-    </div>
 
-    <!-- Foundation JQuery-->
-    <script src="css/foundation/js/vendor/jquery.js"></script>
+        <!-- Foundation JQuery-->
+        <script src="css/foundation/js/vendor/jquery.js"></script>
 
-    <!-- Foundation JavaScript-->
-    <script src="css/foundation/js/vendor/foundation.min.js"></script>
+        <!-- Foundation JavaScript-->
+        <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
-    <script>
-        $(document).foundation();
+        <script>
+            $(document).foundation();
 
-    </script>
-    <script src='/js/shop.js'></script>
+        </script>
+        <script src='/js/buy-shop.js'></script>
 
 </body>
 

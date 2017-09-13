@@ -12,6 +12,11 @@ router.get('/signUp', function (req, res) {
     res.render('signUp')
 })
 
+router.get('/shop', function (req, res) {
+    res.render('shop')
+})
+
+
 router.get('/user', function (req, res) {
      var isLoggedIn = !!req.user;
     console.log(req.user)
