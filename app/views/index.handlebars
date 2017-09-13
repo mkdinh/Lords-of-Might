@@ -30,7 +30,38 @@
       <source src="/audio/overworld.mp3" type="audio/mpeg" />
     </audio>
 
-<
+<div class="modal fade" id="login-modal" role="dialog">
+    <!-- <div class="modal-dialog">  -->
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+        </div>
+        <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                <input type="text" class="form-control" id="login-username" placeholder="Who goes there?">
+              </div>
+              <div class="form-group">
+                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                <input type="text" class="form-control" id="login-password" placeholder="What is the magic word?">
+                </div>
+            </form>
+            <div class="row">
+              <div class="col s6">
+                <button type="submit" id="ml-btn"> Login</button>
+              </div>
+              <div class="col s6">
+                <button type="button" id="mc-btn" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+
+
+
+
 <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo"><h2>LORDS OF MIGHT</h2></a>
@@ -41,7 +72,7 @@
         </li>
           </button>
         <li>
-          <button class="nav-btns" onclick="document.getElementById('signup-modal').style.display='block'" id="login-btn">
+          <button class="nav-btns" onclick="document.getElementById('login-modal').style.display='block'" id="login-btn">
             Login
           </button>
         </li>
@@ -78,39 +109,10 @@
     </ul>
   </div>
 
-<div class="row">
 
-<div class="modal fade" id="signup-modal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-        </div>
-        <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
-            <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-              <input type="text" class="form-control" id="usrname" placeholder="What is your name, peasant?">
-            </div>
-            <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="text" class="form-control" id="psw" placeholder="What is the magic word?">
-          </form>
-          <div class="row">
-            <div class="col s6">
-              <button type="submit" id="ml-btn"> Login</button>
-            </div>
-            <div class="col s6">
-              <button type="button" id="mc-btn" data-dismiss="modal">Cancel</button>
-            </div>
-            </div>
-       
-        </div>
-     </div>
-    </div>
-    </div>
-  </div>
+
+
+
 <p>A Flipped Scripts creation, 2017. </p>
 
 
@@ -122,8 +124,12 @@
         $('.slider').slider();
 
          $("#login-btn").click(function(){
-        $("#signup-modal").modal();
+        $("#login-modal").modal();
       });
+         $('#mc-btn').click(function(){
+             $('#login-modal').modal().hide();
+         });
+        
 
 });   
   
