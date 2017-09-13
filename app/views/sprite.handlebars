@@ -24,23 +24,29 @@
     </head>
 
 <body>
-        <embed src="/audio/custom_theme.mp3"
-        loop="true" 
-        autoplay="false" 
-        width="0" no
-        height="0">
-    </embed>
+    <audio autoplay loop>
+        <source src="/audio/create_signup.mp3" type="audio/mpeg" />
+    </audio>
+      
 <div class="row">
-            <h2 style="text-align: center;">Create Your Character</h2>
+            <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
         <div class="col s6">
         
         
             <h4>Body Type</h4>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/light.png">
+                <i class="small material-icons">accessibility</i>Human</button>
                 <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png"><i class="small material-icons">accessibility</i>Skeleton</button>
                 <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">
-                <i class="small material-icons">accessibility</i>Orc</button>
-                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/darkelf.png">
-                <i class="small material-icons">accessibility</i>Gollem</button>
+                <i class="small material-icons">accessibility</i>Orc
+                </button>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/light.png">
+                <i class="small material-icons">accessibility</i>Human Female
+                </button>
+                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/orc.png">
+                <i class="small material-icons">accessibility</i>Orc Female
+                </button>
+                
 
             <h4>Headgear</h4>
                 <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>
@@ -55,6 +61,7 @@
 
             <h4>Accessories</h4>
                 <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'><i class="small material-icons">add</i>Chest Protector</button>
+                <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/belt/metal/female/bronze.png" id='add-torso'><i class="small material-icons">add</i>Belt Protector</button>
                 <button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'><i class="small material-icons">add</i>Lower Body</button>
 
             <h4>Weapon</h4>

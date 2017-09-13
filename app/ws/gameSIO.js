@@ -77,8 +77,7 @@ module.exports = function(io){
         socket.on('battle-accept', function(battleInfo){
             var room = randomInt(1,10000);
             var initiator_socketID = server.battleInfo.initiator.socketIO.id;
-            console.log(battleInfo)
-            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-accepted',{receiver: battleInfo.receiver})
+            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-accepted', battleInfo)
             server.battleInfo.room = room;
             
             socket.join(room,function(){
@@ -106,7 +105,6 @@ module.exports = function(io){
             // console.log(socketID)
             // io.sockets.connected
             if(Object.keys(socket.player).length !== 0){
-                console.log(socket.player)
                 io.emit('remove',{state: socket.player.world.state, id: socket.player.id})
             }
         })
@@ -119,7 +117,6 @@ module.exports = function(io){
             var player = io.sockets.connected[socketID].player;
             if(!player.id){
                 delete io.sockets.connected[socketID]
-                // console.log('empty object deleted')
             }else{
                 players.push(player)       
             }

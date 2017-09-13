@@ -18,16 +18,33 @@ LoM.interaction = {
         }
         
         if(LoM.eventActive.state === false){
-            console.log('hey')
+            console.log(npc)
             switch(npc.data.name){
                 case 'Mysterious Stranger':
                     LoM.eventActive.state = true
-                    return
-                
+                    break
+
                 case 'Shop Owner':
-                    console.log('talk to shop owner')
+                    var profile = "<img class='npc-profile' src='img/npc/profile-1.png' />"
+                    $('.npc-interaction').append(profile)
+                    $('.npc-profile').fadeIn(1000,function(){
+                        var text = $('<div class="npc-message">')
+                        text.append('<h5>Welcome to my Shop!</h5>'
+                        +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the knee</p>'
+                        +'<p>Now I just look cool in my golden armour and run the store, you want to check out the goods?</p>'
+                        +'</div>')
+                        shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/'>Shop</a>"
+                        $('.npc-interaction').append(text);
+                        text.append(shop)
+
+                        text.fadeIn(function(){
+                            setTimeout(function(){
+                                $('#shop-btn').animate({opacity: 1},1000)
+                            },1000)
+                        })
+                    });
                     LoM.eventActive.state = true
-                    return           
+                    break       
             }
             LoM.eventActive.state = true;
         }
@@ -39,8 +56,8 @@ LoM.interaction = {
         if(LoM.eventActive.state === false){
             if(target.data.id !== this.userInfo.id){
                 
-                LoM[state].battleInfo.initiator = LoM.playerMaster[LoM.userInfo.id]
-                LoM[state].battleInfo.receiver = LoM.playerMaster[target.data.id]
+                LoM.battleInfo.initiator = LoM.userInfo;
+                LoM.battleInfo.receiver = LoM.playerMaster[target.data.id]
                 genBattleInteraction()
                 // setTimeout(function(){removeInteractionDisplay()},10000)
             }else{
@@ -61,15 +78,27 @@ LoM.interaction = {
     },
     
     wallCollisions: function(){
-        var state = LoM.userInfo.world.state;
+            // var state = LoM.userInfo.world.state;
 
-        if(!LoM.eventActive.state){
-            console.log('hit a wall')
-            LoM.eventActive.state = true
-        }
+            // if(!LoM.eventActive.state){
+            //     console.log('hit a wall')
+            //     LoM.eventActive.state = true
+            // }
     },
 
     shopInteractions: function(player,building){
+        var state = LoM.userInfo.world.state;
+        if(!LoM.eventActive.state){
+            // announcement('New Shop! Open Soon!')
+            LoM.playerMaster[LoM.userInfo.id].world.state = "Shop"
+            var user = LoM.playerMaster[LoM.userInfo.id]
+
+            // LoM.eventActive.state = true;
+            Client.changeState(user);
+            LoM.eventActive.state = true
+        }
+    },
+    trainerInteractions: function(player,building){
         var state = LoM.userInfo.world.state;
         if(!LoM.eventActive.state){
             // announcement('New Shop! Open Soon!')

@@ -5,8 +5,10 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
-const models = require('../models');
-const User = models.User;
+const db = require('../models');
+const multer  = require('multer');
+const upload = multer();
+const User = db.User;
 
 
 // CONFIGURE LOCAL STRATEGIES FOR PASSWORD AUTHENTICATION
@@ -93,13 +95,28 @@ router.get('/', require('connect-ensure-login').ensureLoggedIn('login'), functio
    }
 });
 
-router.post('/new', (req,res) => {
+router.post('/new', upload.single('profile'), (req,res) => {
     var newUser = {
-        username: req.body.username,
-        password: User.generateHash(req.body.password)
+        username: req.body.user.username,
+        password: User.generateHash(req.body.user.password),
+        name: req.body.user.name,
+        profile: req.body.user.profile
     }
 
-    User.create(newUser).then(() => {
+    var sprite = {
+        body: req.body.sprite.body,
+        head: req.body.sprite.head,
+        torso: req.body.sprite.torso,
+        leg: req.body.sprite.leg,
+        weapon: req.body.sprite.spell.weapon
+    };
+
+    User.create(newUser, {
+        include: [
+            {model: db.Sprite},
+            {model: db.Game_State},
+            {model: db.Inventory},
+    ]}).then((user) => {
         res.redirect('/user');
     })
 }); 

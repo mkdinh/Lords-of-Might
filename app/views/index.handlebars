@@ -5,7 +5,7 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial scale=1.0">
 
-	<title>Lords of Might</title>
+	<title>LORDS OF MIGHT</title>
 	
 	
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -25,17 +25,15 @@
 
 </head>
 <body>
- <embed src="/audio/conan.mp3"
-    loop="true" 
-    autoplay="false" 
-    width="0" no
-    height="0">
-</embed> 
 
-<!-- Row class no "Containers" in FOundation-->
+    <audio autoplay loop>
+      <source src="/audio/overworld.mp3" type="audio/mpeg" />
+    </audio>
+
+<
 <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo"><h2>Lords of Might</h2></a>
+      <a href="#" class="brand-logo"><h2>LORDS OF MIGHT</h2></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
           <button class="nav-btns" id="sign-btn">
@@ -43,7 +41,7 @@
         </li>
           </button>
         <li>
-          <button class="nav-btns" id="login-btn">
+          <button class="nav-btns" onclick="document.getElementById('signup-modal').style.display='block'" id="login-btn">
             Login
           </button>
         </li>
@@ -51,7 +49,8 @@
     </div>
   </nav>
 
-<div class="slider">
+<div class="row">
+  <div class="slider">
     <ul class="slides">
       <li>
         <img src="/img/medieval-characters.jpg"> 
@@ -79,117 +78,56 @@
       </li>
     </ul>
   </div>
-<!-- Main Carousel Div -->
-<!-- <div class="carousel carousel-slider duration">
-    <a class="carousel-item" href="#one!">
-      <img src="/img/medieval-characters.jpg" style="height: 500px;"></a>
-    <a class="carousel-item" href="#two!">
-      <img src="/img/weapons-pic.jpg" style="height: 500px;"></a>
-    <a class="carousel-item" href="#three!">
-      <img src="/img/duel.jpg" style="height: 500px;"></a>
-    <a class="carousel-item" href="#four!">
-      <img src="/img/victory.jpg" style="height: 500px;"></a>
-  </div> -->
 
 <div class="row">
 
+<div class="modal fade" id="signup-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" id="usrname" placeholder="What is your name, peasant?">
+            </div>
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="text" class="form-control" id="psw" placeholder="What is the magic word?">
+          </form>
+          <div class="row">
+            <div class="col s6">
+              <button type="submit" id="ml-btn"> Login</button>
+            </div>
+            <div class="col s6">
+              <button type="button" id="mc-btn" data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+       
+        </div>
+     </div>
+    </div>
+    </div>
+  </div>
 <p>A Flipped Scripts creation, 2017. </p>
 
-<!-- The Modal -->
-<div id="signup-modal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-      <form>
-          <div class="row">
-              <div class="medium-6 columns">
-                  <label><h4 style="color: white">Username</h4>
-                      <input type="text" id='signup-username' value='foobar@gmail.com' placeholder="What is your name, Peasant?">
-                  </label>
-              </div>
-          </div>
-          <div class="row">
-              <div class="medium-6 columns">
-                  <label><h4 style="color: white">Password</h4>
-                      <input type="text" id='signup-password' value='foobar' placeholder="You must use the Magic word">
-                  </label>
-                  <a class="button" id="signup-submit">Enter</a>
-              </div>
-          </div>
-      </form>
-  </div>
-</div>
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
- 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-      <form>
-          <div class="row">
-              <div class="medium-6 columns">
-                  <label><h4 style="color: white">Username</h4>
-                      <input type="text" id='login-username' value='foobar@gmail.com' placeholder="What is your name, Peasant?">
-                  </label>
-              </div>
-          </div>
-          <div class="row">
-              <div class="medium-6 columns">
-                  <label><h4 style="color: white">Password</h4>
-                      <input type="text" id='login-password' value='foobar' placeholder="You must use the Magic word">
-                  </label>
-                  <a class="button" id="login-submit">Enter</a>
-              </div>
-          </div>
-      </form>
-  </div>
-</div>
-
-
-    <script>
+     <script>
 
       $(document).ready(function(){
 
         $('.slider').slider();
-      // $('.carousel.carousel-slider').carousel({fullWidth: true});
 
-      // $('.carousel').carousel({dist:0});
-      //   window.setInterval(function(){$('.carousel').carousel('next')},3000)
-// 
+         $("#login-btn").click(function(){
+        $("#signup-modal").modal();
+      });
 
-
-      // Get the modal
-      var modal = document.getElementById('myModal');
-
-      // Get the button that opens the modal
-      var btn = document.getElementById("login-btn");
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-
-      // When the user clicks on the button, open the modal 
-      btn.onclick = function() {
-          modal.style.display = "block";  
-      }
-
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-          modal.style.display = "none";
-      }
-
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
-});
-      
-
-
-
+});   
+  
   </script>
   <script src='/js/index.js'></script>
 </body>

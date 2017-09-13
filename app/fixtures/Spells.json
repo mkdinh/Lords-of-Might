@@ -8,6 +8,7 @@
             "level": 1,
             "damage_min": 10,
             "damage_max": 30,
+            "mp": 35,
             "pic": "/img/spells/ice.png"
         }
     },
@@ -20,6 +21,7 @@
             "level": 1,
             "damage_min": 10,
             "damage_max": 30,
+            "mp": 35,
             "pic": "/img/spells/poison.png"
         }
     },
@@ -32,6 +34,7 @@
             "level": 1,
             "damage_min": 10,
             "damage_max": 30,
+            "mp": 35,
             "pic": "/img/spells/fire.png"
         }
     },
@@ -44,6 +47,7 @@
             "level": 1,
             "damage_min": 10,
             "damage_max": 30,
+            "mp": 35,
             "pic": "/img/spells/shadow.png"
         }
     }  
