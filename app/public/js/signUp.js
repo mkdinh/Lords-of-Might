@@ -66,22 +66,23 @@ $(document).ready(function () {
 
                 $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
             });
+
             $("#picTwo").click(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id='submitProfile' type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
             });
             $("#picThree").click(function () {
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id='submitProfile' type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
             });
             $("#picFour").click(function () {
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id='submitProfile' type=submit value=Ready? />");
-                
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
+
             });
 
 
@@ -101,29 +102,29 @@ $(document).ready(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
                     $("#picTwo").click(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
                     $("#picThree").click(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
                     $("#picFour").click(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
-                        
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
+
                     });
 
                 });
@@ -146,28 +147,28 @@ $(document).ready(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
             });
             $("#picTwo").click(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
             });
             $("#picThree").click(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
             });
             $("#picFour").click(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
             });
 
@@ -187,28 +188,28 @@ $(document).ready(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
                     $("#picTwo").click(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
                     $("#picThree").click(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
                     $("#picFour").click(function () {
 
                         $("#submitProfile").remove();
 
-                        $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
 
                     });
 
@@ -220,20 +221,10 @@ $(document).ready(function () {
 
         //hide 
 
-        $("#signup-wrapper").on('click','#submitProfile',function (ev) {
-            ev.preventDefault();
-            console.log('yo');
-
+        $("#signup-wrapper").on('click', '#submitProfile', function (ev) {
+            $("#signup-wrapper").hide();
+            $("#charCreate").show();
         });
-
-    });
-
-
-    //hide 
-
-    $("#submitProfile").click(function () {
-
-        console.log('hello');
 
     });
 
