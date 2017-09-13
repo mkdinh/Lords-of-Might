@@ -142,11 +142,15 @@ LoM.user = {
         LoM.user.updateProfile();
     },
     updateProfile: function(){
+        let name = LoM.userInfo.name;
+        let level = 1
         let profile = LoM.userInfo.profile;
         let win = LoM.userInfo.game_state.win;
         let lose = LoM.userInfo.game_state.lose;
 
+        $('#user-name').html(name)
         $('#user-profile').html("<img class='profile-img' src='"+profile+"'/>")
+        $('#user-level').html('(' + level + ')')
         $('#user-win').html(win)
         $('#user-lose').html(lose)
     }

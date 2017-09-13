@@ -1,5 +1,4 @@
 var LoM = LoM || {};
-var battleInfo = {};
 var user;
 var enemy;
 var room;
@@ -11,6 +10,7 @@ LoM.Battle = function(){};
 
 LoM.Battle = {
     preload: function(){
+        loadingGIF();
 
         var width = 25*32;
         var height = 16*32;
@@ -25,19 +25,19 @@ LoM.Battle = {
         this.backgroundSprite.scale.x = 1
         this.backgroundSprite.scale.y = 1
 
-        battleInfo = LoM.Town.battleInfo;
+        LoM.battleInfo;
+        user = LoM.userInfo;
+        
+        room =LoM.battleInfo.room;
+        delete LoM.battleInfo['room']
 
-        user = LoM.Town.userInfo;
-        room = battleInfo.room;
-        delete battleInfo['room']
-
-        for(role in battleInfo){
-            if(battleInfo[role].id === user.id){
-                battleInfo[role].controller = 'user';
+        for(role in LoM.battleInfo){
+            if(LoM.battleInfo[role].id === user.id){
+                LoM.battleInfo[role].controller = 'user';
                 user.control = role
             }else{
-                battleInfo[role].controller = 'enemy',
-                enemy = battleInfo[role];
+                LoM.battleInfo[role].controller = 'enemy',
+                enemy = LoM.battleInfo[role];
                 enemy.control = role
                 
             }
@@ -56,15 +56,19 @@ LoM.Battle = {
                     attacker: user.id,
                     defender: enemy.id,
                 },
-            turn: battleInfo.initiator.id,
+            turn: LoM.battleInfo.initiator.id,
             room: room
         }
 
+        // console.log(battleInfo.receiver)
         setTimeout(function(){
-            LoM.Battle.createInitiator(battleInfo.initiator)
-            LoM.Battle.createReceiver(battleInfo.receiver)
-            battleUpdate(battleInfo.initiator,battleInfo.receiver);
-            initialized = true;
+            LoM.Battle.createInitiator(LoM.battleInfo.initiator)
+            LoM.Battle.createReceiver(LoM.battleInfo.receiver)
+            battleUpdate(LoM.battleInfo.initiator, LoM.battleInfo.receiver);
+            $('.progress').fadeOut(function(){
+                $('.progress').remove();
+                initialized = true;
+            })
         },1000)
         
     },
@@ -84,11 +88,11 @@ LoM.Battle = {
                 var enemyHP = this.state.player[enemy.id].battle.hp;
                 var enemyMP = this.state.player[enemy.id].battle.mp;
             
-            $("#"+user.id+'-hp').html("HP:"+ userHP)
-            $("#"+user.id+'-mp').html("MP:"+ userMP)
+            $("#"+user.id+'-hp').html("HP: "+ userHP)
+            $("#"+user.id+'-mp').html("MP: "+ userMP)
 
-            $("#"+enemy.id+'-hp').html("HP:"+ enemyHP)
-            $("#"+enemy.id+'-mp').html("MP:"+ enemyMP)
+            $("#"+enemy.id+'-hp').html("HP: "+ enemyHP)
+            $("#"+enemy.id+'-mp').html("MP: "+ enemyMP)
 
             if(userHP <= 0){
 
@@ -96,16 +100,25 @@ LoM.Battle = {
                 initialized = false;
 
                 battle.spriteMap[user.id].animations.play('die',10, false)
-                    
+                
                 $.ajax({
                     url: '/game/battle/lose/'+user.id+'?_method=PUT',
                     type: 'POST',
-                    success: function(){    
+                    success: function(rewards){    
+                        console.log(rewards)
                         var body = enemy.name + " WON!"
                         LoM.userInfo.game_state.lose++
                         announcement(body)
-                        gameOver()
-                        removeInteractionDisplay()
+
+                        setTimeout(function(){
+                            Materialize.toast('+ ' + rewards.exp + ' Exp', 2000) // 4000 is the duration of the toast
+                            Materialize.toast('+ ' + rewards.gold + ' Gold', 2000,'',function(){
+                                console.log('hey')
+                                gameOver()
+                                removeInteractionDisplay()
+                            }) 
+                        },5000)
+
                     }
                 })
 
@@ -119,12 +132,19 @@ LoM.Battle = {
                 $.ajax({
                     url: '/game/battle/win/'+user.id+'?_method=PUT',
                     type: 'POST',
-                    success: function(){    
+                    success: function(rewards){    
                         var body = user.name + " WON!"
-                        LoM.userInfo.game_state.win++
                         announcement(body)
-                        gameOver()
-                        removeInteractionDisplay()
+                        console.log(user)
+                        LoM.userInfo.game_state.win++
+
+                        setTimeout(function(){
+                            Materialize.toast('+ ' + rewards.exp + ' Exp', 2000) // 4000 is the duration of the toast
+                            Materialize.toast('+ ' + rewards.gold + ' Gold', 2000,'',function(){
+                                gameOver()
+                                removeInteractionDisplay()
+                            }) 
+                        },5000)
                     }
                 })
             }
@@ -135,37 +155,38 @@ LoM.Battle = {
     },
 
     createInitiator: function(info){
+        // console.log(info)
         var sprite =  this.add.sprite(LoM.Battle.offsetX +175, 230, info.sprite);
         sprite.frame = 40;
         sprite.scale.x = 1;
         sprite.scale.y = 1;
 
         sprite.data.position = "initiator";
-        battleInfo.initiator.position = "initiator";
-        battleInfo.initiator.weapon = {
-            type: info.equipments.weapon.class,
-            damage: [(info.modified_stats.attack/3), (info.modified_stats.attack + info.equipments.weapon.attack)/2]
+        LoM.battleInfo.initiator.position = "initiator";
+        LoM.battleInfo.initiator.weapon = {
+            type: info.equipments['slot-6'].class,
+            damage: [(info.modified_stats.attack/3), (info.modified_stats.attack + info.equipments['slot-6'].attack)/2]
         };
         
         var spell = info.equipments.spell;
-        console.log(spell)
-        battleInfo.initiator.spell = {
+        LoM.battleInfo.initiator.spell = {
             name: spell.name,
             type: spell.type,
             damage: [spell.min_damage,spell.max_damage],
             mp: spell.mp
         };
         
-        battleInfo.initiator.battle = {
-            hp: info.modified_stats.hp,
-            // hp:1,
-            mp: info.modified_stats.mp
+        LoM.battleInfo.initiator.battle = {
+            // hp: info.modified_stats.hp,
+            hp: 1,
+            mp: info.modified_stats.mp,
+            potion: 1
         }
         
         this.addBattleAnimations(sprite,info)
 
         this.spriteMap[info.id] = sprite
-        this.state.player[info.id] = battleInfo.initiator;
+        this.state.player[info.id] = LoM.battleInfo.initiator;
 
         initiatorReady = true;
     },
@@ -177,26 +198,27 @@ LoM.Battle = {
         sprite.scale.y = 1;
         
         sprite.data.position = "receiver";
-        battleInfo.receiver.position = "receiver";
-        // battleInfo.receiver.turn  = false;
-        battleInfo.receiver.weapon = {
-            type: info.equipments.weapon.class,
-            damage: [(info.modified_stats.attack/3), (info.modified_stats.attack + info.equipments.weapon.attack)/2]
+        LoM.battleInfo.receiver.position = "receiver";
+        // LoM.battleInfo.receiver.turn  = false;
+        LoM.battleInfo.receiver.weapon = {
+            type: info.equipments['slot-6'].class,
+            damage: [(info.modified_stats.attack/3), (info.modified_stats.attack + info.equipments['slot-6'].attack)/2]
         };
-        
+        // console.log(info)
         var spell = info.equipments.spell;
 
-        battleInfo.receiver.spell = {
+        LoM.battleInfo.receiver.spell = {
             name: spell.name,
             type: spell.type,
             damage: [spell.min_damage,spell.max_damage],
             mp: spell.mp
         };
 
-        battleInfo.receiver.battle = {
-            hp: info.modified_stats.hp,
-            // hp:1,
-            mp: info.modified_stats.mp
+        LoM.battleInfo.receiver.battle = {
+            // hp: info.modified_stats.hp,
+            hp: 1,
+            mp: info.modified_stats.mp,
+            potion: 1
         }
         
 
@@ -204,7 +226,7 @@ LoM.Battle = {
         this.addBattleAnimations(sprite,info)
 
         this.spriteMap[info.id] = sprite;  
-        this.state.player[info.id] = battleInfo.receiver; 
+        this.state.player[info.id] = LoM.battleInfo.receiver; 
 
         receiverReady = true;
         
@@ -252,7 +274,7 @@ LoM.Battle = {
             })
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
 
-            switch(info.equipments.weapon.class){
+            switch(info.equipments['slot-6'].class){
                 case 'sword':
                 var sword = sprite.animations.add('sword',[195,196,197,198,199,200,199,198,197,196,195],true);
                     sprite.animations._anims.sword.onComplete.add(function(){
@@ -359,7 +381,7 @@ LoM.Battle = {
 
                     tweenBall.onComplete.add(function(){
                         fireball.animations.stop();
-                        console.log('exploded')
+                        // console.log('exploded')
                         fireball.animations.play('explode',25, false)
                         explodeBall.onComplete.add(function(){
                             fireball.kill()
@@ -376,7 +398,7 @@ LoM.Battle = {
             var left = sprite.animations.add('left',[117,118,119,120,121,122,123,124],true);
             var right = sprite.animations.add('right',[144,145,146,147,148],true);
 
-            switch(info.equipments.weapon.class){
+            switch(info.equipments['slot-6'].class){
 
                 case "sword":                    
                     var sword = sprite.animations.add('sword',[169,170,171,172,173,174,173,172,171,170,169],true);
@@ -389,7 +411,7 @@ LoM.Battle = {
                                 sprite.animations.stop();
                                 sprite.animations.play('left',50,false)
                                 sprite.frame = 13;
-                                console.log('sword slash!')
+                                // console.log('sword slash!')
                             })
                         })
 

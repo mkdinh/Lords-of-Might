@@ -29,7 +29,8 @@ LoM.Town = {
 	    this.time.advancedTiming = true;
         this.time.desiredFps = 40;
         this.time.suggestedFps = 40;
-        $("body").css('background-color','#000000')
+        $("body").css('background-color','#000000');
+        this.stage.backgroundColor = '#000000';
         // setting object reference to be used in other functions object
         game = this;
 

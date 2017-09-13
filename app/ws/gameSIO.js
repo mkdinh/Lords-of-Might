@@ -77,7 +77,7 @@ module.exports = function(io){
         socket.on('battle-accept', function(battleInfo){
             var room = randomInt(1,10000);
             var initiator_socketID = server.battleInfo.initiator.socketIO.id;
-            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-accepted',{receiver: battleInfo.receiver})
+            socket.to(server.battleInfo.initiator.socketIO.id).emit('battle-accepted', battleInfo)
             server.battleInfo.room = room;
             
             socket.join(room,function(){

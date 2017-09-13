@@ -54,12 +54,12 @@ $('.battle-btn').on('click', function(){
 
 $('.interaction').on('click','#battle-request', function(ev){
     ev.preventDefault();
-    Client.battleRequest();
+    Client.battleRequest(LoM.battleInfo);
 })
 
 $('.interaction').on('click','#battle-accept', function(ev){
     ev.preventDefault();
-    Client.battleAccept(LoM.Town.battleInfo);
+    Client.battleAccept(LoM.battleInfo);
 })
 
 
@@ -106,18 +106,20 @@ function addBattleButton(){
 
     attack = "<button class='action-btn waves-effect waves-light btn' id='attack-btn'>Attack</button>"
     spell = "<button class='action-btn waves-effect waves-light btn' id='spell-btn'>Spell</button>"
+
     health = "<button class='action-btn waves-effect waves-light btn' id='health-btn'>Potion</button>"
 
     $('.battle-options').append(attack,spell,health)
 }
 
 function gameOver(){
+    $('.battle-options').remove();
     var button = $("<button class='action-btn waves-effect waves-light btn' id='battle-return'>");
     button.text('Return');
-    $('battle-options').empty();
-    $('.battle-options').append(button);
-    $('.battle-options').fadeIn();
+    $('#game').append(button);
+    button.fadeIn();
 }
+
 
 var enableSubmit = function(ele) {
     $(ele).removeAttr("disabled");
@@ -156,13 +158,23 @@ $('.battle-options').on('click','#spell-btn', function(ev){
 $('.battle-options').on('click','#health-btn', function(ev){
     ev.preventDefault();
     var state = LoM.Battle.state;
+    var player = state.player[LoM.userInfo.id];
+    player.battle.potion--;
+    
+    if(player.battle.potion === 0){
+        announcement("You ran out of potion");
+        $('#health-btn').remove();
+    }
+
     state.action = 'potion';
-
     Client.battleAction(state);
-})
+});
 
-$('.battle-options').on('click','#battle-return', function(){
-    $('#battle-return').prop('disabled',true)
+$('#game').on('click','#battle-return', function(){
+    $(this).prop('disabled',true);
+    $(this).fadeOut(function(){
+        $(this).remove();
+    })
     announcement('Returning to town!')
     removeBattleInteractions();
     setTimeout(function(){
@@ -295,4 +307,27 @@ $('#private-message-input').on('keypress', function(ev){
         $('#private-message-input').val('');
     }
 })
-    
+
+
+// function loadingGIF(){
+//     $('.load-gif').append('<div class="preloader-wrapper active">'
+//         +   '<div class="spinner-layer spinner-blue-only">'
+//         +   '<div class="circle-clipper left">'
+//         +       '<div class="circle"></div>'
+//         +   '</div><div class="gap-patch">'
+//         +       '<div class="circle"></div>'
+//         +   '</div><div class="circle-clipper right">'
+//         +       '<div class="circle"></div>'
+//         +   '</div>'
+//         +   '</div>'
+//         +'</div>'
+//     )
+// }
+
+function loadingGIF(){
+    $('#load-gif').append('<div class="progress">'
+        +'<div class="indeterminate"></div>'
+        +'</div>  '
+    )
+    $('.progress').fadeIn('slow')
+}

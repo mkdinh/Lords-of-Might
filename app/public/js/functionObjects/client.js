@@ -57,7 +57,10 @@ if(!JSON.parse(localStorage.getItem('user'))){
         LoM.playerArray = otherPlayers;
         // console.log(userInfo)
         // start game with current game state
-        LoM.game.state.start(userInfo.world.state)
+        $('.progress').fadeOut('slow',function(){
+            $('.progress').remove();
+            LoM.game.state.start(userInfo.world.state)
+        })
     })
 
 
@@ -69,13 +72,13 @@ if(!JSON.parse(localStorage.getItem('user'))){
     })
 
     Client.socket.on('remove',function(data){
-        console.log('removed',data.id)
+        // console.log('removed',data.id)
         LoM.player.remove(data)
 
     })
 
     Client.changeState = function(user){
-        console.log(user)
+        // console.log(user)
         LoM.eventActive.state = true;
         this.socket.emit('change-state',user)
     }
@@ -84,30 +87,29 @@ if(!JSON.parse(localStorage.getItem('user'))){
             var userID = user.id;
             var state = user.world.state;
             LoM.playerMaster[userID] = user;
-            LoM.user.getInventory();
+            if(state !== 'Battle'){
+                LoM.user.getInventory();
+            }
             LoM.game.state.start(state);
     })
 
     Client.socket.on('player-changed-state',function(player){
-        // for(key in LoM.playerMaster){
-        //     console.log(key,LoM.playerMaster[key].world.state)
-        // }
-        
+
         var user = LoM.playerMaster[LoM.userInfo.id];
-        console.log(user.world.state)
+        // console.log(user.world.state)
         LoM.playerMaster[player.id] = player;
         // if user state is not equal to play state, remove player sprite
         if(user.world.state !== 'Battle'){
             // if incoming player state is not Battle
             if(user.world.state !== player.world.state){
                 LoM[user.world.state].spriteMap.players[player.id].kill()
-                console.log('kill sprite')
+                // console.log('kill sprite')
                 // update player changes on playerMaster
-                console.log(LoM.playerMaster[player.id])
+                // console.log(LoM.playerMaster[player.id])
             }else if(user.world.state === player.world.state){
             //else if user state is equal to player state, add player sprite
                 LoM.player.add(player)
-                console.log('player added')
+                // console.log('player added')
             }
         }
         
@@ -118,36 +120,40 @@ if(!JSON.parse(localStorage.getItem('user'))){
     // ------------------------------------------------------------------
 
     // initiator sent battle request to server with battle infomation
-    Client.battleRequest = function(){
+    Client.battleRequest = function(battleInfo){
         $('#battle-request').fadeOut(function(){
-            console.log(game.battleInfo)
-            console.log('battle request sent')
-            Client.socket.emit('battle-request', game.battleInfo)
+            // console.log('battle request sent')
+            Client.socket.emit('battle-request', battleInfo)
         })
     }
 
     Client.socket.on('battle-requested',function(battleInfo){
-        game.battleInfo = battleInfo;
-        console.log(battleInfo)
+        LoM.battleInfo = battleInfo;
+        // console.log(battleInfo)
         genBattleInteraction()
         // console.log('battle request received')
         $('#battle-request').remove();
         $('#battle-accept').fadeIn();
         $('#battle-decline').fadeIn();
-        var body = game.battleInfo.initiator.name + ' requested a battle'
+        var body = LoM.battleInfo.initiator.name + ' requested a battle'
         announcement(body)
     })
 
     Client.battleAccept = function(battleInfo){
-        console.log(battleInfo)
+        LoM.battleInfo = battleInfo;
+        LoM.battleInfo.receiver = LoM.userInfo;
+        // console.log(LoM.userInfo)
+        // console.log(LoM.battleInfo)
+
         // send accept information to server
         this.socket.emit('battle-accept',battleInfo)
         removeInteractionDisplay()
     }
 
     Client.socket.on('battle-accepted',function(battleInfo){
-        console.log(battleInfo)
-        var body = game.battleInfo.receiver.id + ' has accept your invitation! Good luck on the battlefield!'
+        // console.log(battleInfo)
+        LoM.battleInfo = battleInfo
+        var body = LoM.battleInfo.receiver.name + ' has accept your invitation! Good luck on the battlefield!'
         announcement(body)
         // battleInfo.receiver.id)
         // go to phraser and go to battle phrase with challenger
@@ -160,13 +166,12 @@ if(!JSON.parse(localStorage.getItem('user'))){
     }
 
     Client.socket.on('battle-declined',function(data){
-        // var body = game.battleInfo.receiver.id + ' has declined your invitation'
-        // announcement(body)
-        // $('#battle')
+        var body = LoM.battleInfo.receiver.name + ' has declined your invitation'
+        announcement(body)
     })
 
     Client.socket.on('battle-room',function(instance){
-        game.battleInfo.room = instance.room;
+        LoM.battleInfo.room = instance.room;
         var body = 'Joining room: ' + instance.room
         announcement(body)
         setTimeout(function(){
@@ -174,7 +179,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
             // LoM.game.state.start('Battle')
             LoM.playerMaster[LoM.userInfo.id].world.state = "Battle"
             var user = LoM.playerMaster[LoM.userInfo.id]
-            console.log('exiting Shop')
+            // console.log('exiting Shop')
             Client.changeState(user);
         },5000)
         // $('#battle')
@@ -207,13 +212,13 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
     Client.actionCompleted = function(state){
         if(user.id === state.roleID.attacker){
-            console.log('action completed')
+            // console.log('action completed')
             this.socket.emit('actionCompleted', state)
         }
     }
 
     Client.socket.on('your-turn',function(state){
-        console.log(user.id,'your turn')
+        // console.log(user.id,'your turn')
         LoM.Battle.state.turn = user.id;
     })
 }

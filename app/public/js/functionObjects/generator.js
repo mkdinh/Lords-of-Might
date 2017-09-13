@@ -58,11 +58,11 @@ LoM.generator = {
         LoM[state].spriteMap.tileMap[key].setCollision(tileArray,true,layer,true);
 
         LoM[state].spriteMap.collisions[key] = LoM[state].spriteMap.tileMap[key].createLayer(layer)
-        LoM[state].spriteMap.collisions[key].debug = true
+        // LoM[state].spriteMap.collisions[key].debug = true
         LoM[state].spriteMap.collisions[key].data = {}
         LoM[state].spriteMap.collisions[key].data['role'] = key
         LoM[state].spriteMap.tileMap[key].createLayer(layer);
-        // setting collision data
+        // setting collision data   
         LoM[state].spriteMap.collisions[key].data['onCollide'] = interaction; 
         
         // render all other layer once
