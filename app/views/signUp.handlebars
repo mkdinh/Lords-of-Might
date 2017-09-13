@@ -4,16 +4,30 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/signUp.css" />
+    <link rel="stylesheet" href="/css/sprite.css" />
     <!-- Lord of Might Font-->
     <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
     <title>Sign Up - Lords of Might</title>
+    <style>
+        button {
+            font-size: 25px
+        }
+
+    </style>
 </head>
 
 <body>
+
+    <audio autoplay loop>
+        <source src="/audio/create_signup.mp3" type="audio/mpeg" />
+    </audio>
+
 
     <div class="row">
         <div id='signup-wrapper'>
@@ -26,7 +40,7 @@
                         <input type=text>
                     </div>
                 </div>
-                 <div>
+                <div>
                     <label>FULL NAME:</label>
                     <div id="createName">
                         <input type=text>
@@ -50,17 +64,93 @@
         </div>
     </div>
 
-    <!-- Foundation JQuery-->
-    <script src="css/foundation/js/vendor/jquery.js"></script>
 
-    <!-- Foundation JavaScript-->
-    <script src="css/foundation/js/vendor/foundation.min.js"></script>
+    <div id="charCreate" style="display: none;">
 
-    <script>
-        $(document).foundation();
+        <div class="row">
+            <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
+            <div class="col s6">
+                <h4>Body Type</h4>
+                <a class='dropdown-button btn dropbtn' href='#' data-activates='dropdown1'>Select</a>
+                <!-- Dropdown Structure -->
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li>
+                        <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/light.png">
+                Human</button></a>
+                    </li>
+                    <li>
+                        <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button></li>
 
-    </script>
+                    <li>
+                        <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">Orc
+                </button>
+                    </li>
+                    <li class="divider"></li>
+                    <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/light.png">Human Female
+                </button>
+                    <li><button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/orc.png">Orc Female
+                </button></li>
+                </ul>
+
+
+                <h4>Headgear</h4>
+                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown2'>Select</a>
+                <ul id='dropdown2' class='dropdown-content'>
+                    <li> <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>Chainmail
+                </button>
+                    </li>
+                    <li><button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png" id='add-head'>Cap
+                </button>
+                    </li>
+                    <li><button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png" id='add-head'>Hat</button>
+                    </li>
+                    <li><button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png" id='add-head'>
+                Silver Helmet</button>
+                    </li>
+                </ul>
+                <h4>Accessories</h4>
+                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown3'>Select</a>
+                <ul id='dropdown3' class='dropdown-content'>
+
+                    <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Chest Protector</button>
+                    </li>
+                    <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/belt/metal/female/bronze.png" id='add-torso'>Bronze Belt</button>
+                    </li>
+                    <li><button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Lower Body</button>
+                    </li>
+                </ul>
+                <h4>Weapon</h4>
+                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown4'>Select</a>
+                <ul id='dropdown4' class='dropdown-content'>
+                    <li>
+                        <button type='submit' class='add-button' data-part='weapon' data-link='img/sprites/lpc/weapons/both_hand/spear.jpg' id='add-weapon'>Spear</button>
+                    </li>
+                </ul>
+                <h4>Modify</h4>
+                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown5'>Select</a>
+                <ul id='dropdown5' class='dropdown-content'>
+                    <li><button type='submit' id='undo-head'>Undo head</button>
+                    </li>
+                    <li><button type='submit' id='undo-torso'>Undo torso</button>
+                    </li>
+                    <li><button type='submit' id='undo-legs'>Undo legs</button>
+                    </li>
+                    <li><button type='submit' id='undo-weapon'>Undo weapon</button>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col s6">
+                <canvas id='canvas' width='250' height='250'></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
     <script src='/js/signUp.js'></script>
+    <script src='/js/sprite.js'></script>
 
 </body>
 
