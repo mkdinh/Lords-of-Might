@@ -125,16 +125,6 @@ $(document).ready(function () {
 
                     });
 
-
-
-                    //hide 
-
-                    $("#submitProfile").click(function () {
-
-                        console.log('yo');
-
-                    });
-
                 });
 
             }
@@ -231,5 +221,12 @@ $(document).ready(function () {
     });
 
 
+    //hide 
+
+    $("#submitProfile").click(function () {
+
+        console.log('hello');
+
+    });
 
 });
