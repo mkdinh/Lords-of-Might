@@ -50,11 +50,11 @@ input {
 }
 
 #male:hover {
-   background-color: rgba(6, 6, 105, 0.8);
+    background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid #3f3fa7;
 }
 
-#female{
+#female {
     margin: 10px;
     padding: 20px;
     outline: none;
@@ -62,6 +62,7 @@ input {
     background-color: #3f3fa7;
     border: 1px solid #060669;
 }
+
 #female:hover {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid #3f3fa7;
@@ -71,7 +72,10 @@ input {
     padding: 10px;
 }
 
-#picOne, #picTwo, #picThree, #picFour {
+#picOne,
+#picTwo,
+#picThree,
+#picFour {
     height: 100px;
     width: 100px;
     margin: 10px;
@@ -81,23 +85,29 @@ input {
 
 #picOne:hover {
     border: 1px solid white;
-
 }
-
 
 #picTwo:hover {
     border: 1px solid white;
-
 }
-
 
 #picThree:hover {
     border: 1px solid white;
-
 }
-
 
 #picFour:hover {
     border: 1px solid white;
+}
 
+#submitProfile {
+    padding: 20px;
+    outline: none;
+    border-radius: 15px;
+    background-color: #3f3fa7;
+    border: 1px solid #060669;
+}
+
+#submitProfile:hover {
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #3f3fa7;
 }
