@@ -65,7 +65,7 @@
         <div id="createSprite" class="row">
             <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
 
-            <div class='col s7'>
+            <div class='col s6 offset-s1' id='sprite-selection'>
 
                 <div class="input-field row">
                     <select id='body'>
@@ -106,7 +106,7 @@
                         <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\teal_pants_male.png"><a>Teal Pants</a></option>
                         <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\white_pants_male.png"><a>White Pants</a></option>
                     </select>
-                    <label>Pants</label>
+                    <label>Legs</label>
                 </div>
 
                 <div class="input-field row">
@@ -116,7 +116,7 @@
                         <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\maroon_shoes_male.png"><a>Maroon Shoes</a></option>
 
                     </select>
-                    <label>Pants</label>
+                    <label>Feets</label>
                 </div>
 
                 <div class="input-field row">
@@ -124,7 +124,18 @@
                         <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\sword.png"><a>Sword</a></option>
                         <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\spear_male.png"><a>Spear</a></option>
                     </select>
-                    <label>Pants</label>
+                    <label>Weapon</label>
+                </div>
+
+
+                <div class="input-field row">
+                    <select id='weapon'>
+                        <option data-part='spell' data-link="img\spells\fire.png"><a>Fireball</a></option>
+                        <option data-part='spell' data-link="img\spells\ice.png"><a>Ice Blast</a></option>
+                        <option data-part='spell' data-link="img\spells\poison.png"><a>Poison Discharge</a></option>
+                        <option data-part='spell' data-link="img\spells\shadow.png"><a>Shadow Bomb</a></option>
+                    </select>
+                    <label>Spells</label>
                 </div>
 
 
@@ -132,7 +143,12 @@
             </div>
 
             <div class="col s5 valign-wrapper" id='preview'>
-                <canvas id='canvas' width='250' height='250'></canvas>
+                <div id='canvas-wrapper'>
+                    <canvas id='canvas' width='250' height='250'></canvas>
+                    <div>
+                        <a class="waves-effect waves-light btn" id="create">Create</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
