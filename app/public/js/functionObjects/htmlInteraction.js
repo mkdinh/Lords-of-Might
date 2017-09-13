@@ -329,3 +329,14 @@ function loadingGIF(){
     )
     $('.progress').fadeIn('slow')
 }
+
+function createDialog(order,dialog){
+    var div = $('<p>');
+    div.addClass('npc-dialog');
+    div.append(dialog);
+    $('.npc-message').append(div)
+    setTimeout(function(){
+        $(div).animate({opacity:1},'slow')
+    },order*500)
+    
+}

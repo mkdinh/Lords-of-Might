@@ -61,7 +61,8 @@ LoM.player = {
         sprite.body.maxVelocity.y = 100;
         sprite.body.bounce.x = 0;
         sprite.body.bounce.y = 0;
-
+        sprite.body.collideWorldBounds = true;
+        
         // Setting player physics
         sprite.body.collideWorldBounds = true;
         

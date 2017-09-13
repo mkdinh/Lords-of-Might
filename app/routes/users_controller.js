@@ -86,10 +86,16 @@ passport.deserializeUser(function(id, done) {
 
 // SETTING ROUTERS
 // --------------------------------------------------------------------------
-
-router.get('/', require('connect-ensure-login').ensureLoggedIn('login'), function (req, res, next) {
+// require('connect-ensure-login').ensureLoggedIn('login')
+router.get('/:userId', function (req, res, next) {
     if (req.user) {
-        res.render('index');
+        db.User.find({
+            where: {id: req.params.userId},
+            include: [db.Stats]
+        }).then(user => {
+            console.log(user)
+            res.render('userPage',{user:user});
+        })
    } else {
         res.redirect('/');
    }

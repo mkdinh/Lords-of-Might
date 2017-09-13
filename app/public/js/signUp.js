@@ -64,23 +64,24 @@ $(document).ready(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
             });
             $("#picTwo").click(function () {
 
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<input id='submitProfile' type=submit value=Ready? />");
             });
             $("#picThree").click(function () {
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<input id='submitProfile' type=submit value=Ready? />");
             });
             $("#picFour").click(function () {
                 $("#submitProfile").remove();
 
-                $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
+                $("#signup-wrapper").append("<input id='submitProfile' type=submit value=Ready? />");
+                
             });
 
 
@@ -122,18 +123,9 @@ $(document).ready(function () {
                         $("#submitProfile").remove();
 
                         $("#signup-wrapper").append("<input id=submitProfile type=submit value=Ready? />");
-
+                        
                     });
 
-
-
-                    //hide 
-
-                    $("#submitProfile").click(function () {
-
-                        console.log('yo');
-
-                    });
 
                 });
 
@@ -227,6 +219,13 @@ $(document).ready(function () {
 
         });
 
+        //hide 
+
+        $("#signup-wrapper").on('click','#submitProfile',function (ev) {
+            ev.preventDefault();
+            console.log('yo');
+
+        });
 
     });
 

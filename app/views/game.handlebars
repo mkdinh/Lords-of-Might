@@ -60,10 +60,14 @@
             </div>
 
             <div id="user-stats" class="tab-item col s12">
-              <div id='user-callsign'>
-                <span id='user-name'></span>  <span id='user-level'></span>
+              <div id='user-callsign' class='row valign-wrapper'>
+              <div id='user-profile' class='col s6'></div>
+                <div class='col s6'>
+                  <div><span id='user-name' class='truncate'></span></div>
+                  <div>Level: <span id='user-level'></span></div>
+                  <div id='user-progress'>Exp: <span id='user-exp'></div>
+                </div>
               </div>
-              <div id='user-profile'></div>
               
               <table class='striped'>
                 <tbody>

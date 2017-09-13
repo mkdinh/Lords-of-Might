@@ -17,29 +17,30 @@ var socket;
 //     })
 // }
 
-console.log(localStorage)
+// console.log(localStorage)
 // login persistence with localstorage
-if(localStorage.hasOwnProperty('user')){
-    var user = JSON.parse(localStorage.getItem('user'));
+// if(localStorage.hasOwnProperty('user')){
+//     var user = JSON.parse(localStorage.getItem('user'));
     
-    var loginInfo = {
-        username: user.username,
-        password: user.password
-    }
+//     var loginInfo = {
+//         username: user.username,
+//         password: user.password
+//     }
     
-    $.ajax({
-        method: 'POST',
-        url: '/users/login',
-        data: loginInfo,
-        success: function(res){
-            alert('Auto Login!')
-        }
-    })
-}
+//     $.ajax({
+//         method: 'POST',
+//         url: '/users/login',
+//         data: loginInfo,
+//         success: function(res){
+//             alert('Auto Login!')
+//         }
+//     })
+// }
 
 // on click submit, send form to server and authenticate with passport.js and initialize io
 $('#login-submit').on('click', function(ev){
     ev.preventDefault();
+
     var loginInfo = {
         username: $('#login-username').val().trim(),
         password: $('#login-password').val().trim()
@@ -48,19 +49,19 @@ $('#login-submit').on('click', function(ev){
     $.ajax({
         method: 'POST',
         url: '/users/login',
+        dataType: 'json',
         data: loginInfo,
         success: function(res){
             console.log(res)
-            loginInfo.user_id = res.id
+            loginInfo.user_id = res.id;
             localStorage.setItem('user',JSON.stringify(loginInfo));
-            // initalizeIOConn();
-            window.location.replace('/user')
+            window.location.replace('/users/'+loginInfo.user_id)
         },
         error:  function(xhr, status, error) {
             console.log(xhr)
             var err = xhr.responseJSON.message;
             alert(err);
-          }
+        }
     })
 })
 

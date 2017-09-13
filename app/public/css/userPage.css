@@ -28,12 +28,12 @@ body {
 }
 
 #button-container {
-    padding: 20px;
+    padding: 0px;
+    margin-top: 20px
 }
 
 #fight {
     color: white;
-    margin-top: 40px;
     margin-left: 150px;
     font-size: 40px;
     font-family: 'Metamorphous', cursive;
@@ -71,8 +71,8 @@ body {
 }
 
 #statContainer {
-    margin: 30px;
-    margin-top: 40px;
+    margin: 10px;
+    margin-top: 20px;
     color: white;
     font-family: 'Metamorphous', cursive;
 }
@@ -84,16 +84,13 @@ body {
     padding: 20px;
     width: 36%;
     float: left;
-    height: 380px;
     margin-left: 40px;
 }
 
 #image-container {
-    background: url('../img/test-image.jpg')no-repeat center;
     background-color: rgba(6, 6, 105, 0.8);
     border-radius: 20px;
     border: 1px solid #3f3fa7;
-    margin-left: 620px;
-    padding: 40px;
+    margin-left: 550px;
     height: 380px;
 }
