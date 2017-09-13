@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/signUp.css" />
-    <link rel="stylesheet" href="/css/sprite.css" />
     <!-- Lord of Might Font-->
     <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
     <title>Sign Up - Lords of Might</title>
@@ -24,133 +23,121 @@
 
 <body>
 
-    <audio autoplay loop>
+    {{!-- <audio autoplay loop>
         <source src="/audio/create_signup.mp3" type="audio/mpeg" />
-    </audio>
-
-
-    <div class="row">
-        <div id='signup-wrapper'>
+    </audio> --}}
+    <div class='container'>
+        <div class='row' id='signup-wrapper'>
             <h1>JOIN LORDS OF MIGHT</h1>
+            
+            <div id='new-user-info'>
+                <label>EMAIL:</label>
+                <div id="user-email">
+                    <input type=text>
+                </div>
 
-            <form action="/users/new" method="post" autocomplete="off">
-                <div>
-                    <label>EMAIL:</label>
-                    <div id="createEmail">
-                        <input type=text>
-                    </div>
-                </div>
-                <div>
-                    <label>FULL NAME:</label>
-                    <div id="createName">
-                        <input type=text>
-                    </div>
-                </div>
                 <div>
                     <label>CREATE A USERNAME:</label>
-                    <div id="createNickname">
+                    <div id="user-name">
                         <input type=text>
                     </div>
                 </div>
                 <div>
                     <label>MAKE A PASSWORD:</label>
-                    <div id="createPass">
+                    <div id="user-password">
                         <input type=password>
                     </div>
                 </div>
                 <div>
-                    <input class="three" id="button" type="submit" value="NEXT" />
+                    <a class="waves-effect waves-light btn" id="button"> Next</a>
                 </div>
+            </div>
+
+            <div id='sexContainer'>
+                <p>CHOOSE YOUR CHARACTER PROFILE</p>
+                <a class="waves-effect waves-light btn" id="male">Male</a>OR  <a class="waves-effect waves-light btn" id="female">Female</a>
+                <div id='picContainer'>
+                    <div id='picture'></div>
+                </div>
+            </div>
         </div>
-    </div>
 
-
-    <div id="charCreate" style="display: none;">
-
-        <div class="row">
+        <div id="createSprite" class="row">
             <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
-            <div class="col s6">
-                <h4>Body Type</h4>
-                <a class='dropdown-button btn dropbtn' href='#' data-activates='dropdown1'>Select</a>
-                <!-- Dropdown Structure -->
-                <ul id='dropdown1' class='dropdown-content'>
-                    <li>
-                        <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/light.png">
-                Human</button></a>
-                    </li>
-                    <li>
-                        <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button></li>
 
-                    <li>
-                        <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">Orc
-                </button>
-                    </li>
-                    <li class="divider"></li>
-                    <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/light.png">Human Female
-                </button>
-                    <li><button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/orc.png">Orc Female
-                </button></li>
-                </ul>
+            <div class='col s7'>
+
+                <div class="input-field row">
+                    <select id='body'>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/male/light.png"><a>Human</a></option>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png"><a>Skeleton</a></option>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/male/orc.png"><a>Orc</a></option>
+                        {{!-- <option data-part="body" data-link="/img/sprites/lpc/body/female/light.png"><a>Human Female</a></option>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/female/orc.png"><a>Orc Female</a></option> --}}
+                    </select>
+                    <label>Body Type</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='head'>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png"><a>Chainmail</a></option>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png"><a>Cap</a></option>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png"><a>Hat</a></option>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png"><a>Silver Helmet</a></option>
+                    </select>
+                    <label>Head Type</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='torso'>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\leather/chest_male.png"><a>Leather</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/brown_longsleeve.png"><a>Brown Shirt</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/maroon_longsleeve.png"><a>Maroon Shirt</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/teal_longsleeve.png"><a>Teal Shirt</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/white_longsleeve.png"><a>White Shirt</a></option>
+                    </select>
+                    <label>Torso</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='leg'>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\red_pants_male.png"><a>Red Pants</a></option>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\magenta_pants_male.png"><a>Magenta Pants</a></option>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\teal_pants_male.png"><a>Teal Pants</a></option>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\white_pants_male.png"><a>White Pants</a></option>
+                    </select>
+                    <label>Pants</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='feet'>
+                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\black_shoes_male.png"><a>Black Shoes</a></option>
+                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\brown_shoes_male.png"><a>Brown Shoes</a></option>
+                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\maroon_shoes_male.png"><a>Maroon Shoes</a></option>
+
+                    </select>
+                    <label>Pants</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='weapon'>
+                        <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\sword.png"><a>Sword</a></option>
+                        <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\spear_male.png"><a>Spear</a></option>
+                    </select>
+                    <label>Pants</label>
+                </div>
 
 
-                <h4>Headgear</h4>
-                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown2'>Select</a>
-                <ul id='dropdown2' class='dropdown-content'>
-                    <li> <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>Chainmail
-                </button>
-                    </li>
-                    <li><button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png" id='add-head'>Cap
-                </button>
-                    </li>
-                    <li><button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png" id='add-head'>Hat</button>
-                    </li>
-                    <li><button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png" id='add-head'>
-                Silver Helmet</button>
-                    </li>
-                </ul>
-                <h4>Accessories</h4>
-                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown3'>Select</a>
-                <ul id='dropdown3' class='dropdown-content'>
-
-                    <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Chest Protector</button>
-                    </li>
-                    <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/belt/metal/female/bronze.png" id='add-torso'>Bronze Belt</button>
-                    </li>
-                    <li><button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Lower Body</button>
-                    </li>
-                </ul>
-                <h4>Weapon</h4>
-                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown4'>Select</a>
-                <ul id='dropdown4' class='dropdown-content'>
-                    <li>
-                        <button type='submit' class='add-button' data-part='weapon' data-link='img/sprites/lpc/weapons/both_hand/spear.jpg' id='add-weapon'>Spear</button>
-                    </li>
-                </ul>
-                <h4>Modify</h4>
-                <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown5'>Select</a>
-                <ul id='dropdown5' class='dropdown-content'>
-                    <li><button type='submit' id='undo-head'>Undo head</button>
-                    </li>
-                    <li><button type='submit' id='undo-torso'>Undo torso</button>
-                    </li>
-                    <li><button type='submit' id='undo-legs'>Undo legs</button>
-                    </li>
-                    <li><button type='submit' id='undo-weapon'>Undo weapon</button>
-                    </li>
-                </ul>
 
             </div>
 
-            <div class="col s6">
+            <div class="col s5 valign-wrapper" id='preview'>
                 <canvas id='canvas' width='250' height='250'></canvas>
             </div>
-
         </div>
-
     </div>
 
     <script src='/js/signUp.js'></script>
-    <script src='/js/sprite.js'></script>
 
 </body>
 

@@ -19,8 +19,7 @@
     <nav class="top-bar" id="navDiv">
 
         <div class="top-bar-left">
-            WELCOME USERNAME!
-            <div id="username"></div>
+            WELCOME <span id="username">{{user.name}}!</span>
         </div>
 
         <button class="top-bar-right" id="logout-btn">
@@ -32,6 +31,8 @@
     <!--fight or shop-->
     <div class='container'>
         <div id="button-container" class='row'> 
+            <a id='index' class="waves-effect waves-light btn" href='/'>Main</a>
+
             <a id='fight' class="waves-effect waves-light btn" href='/game'>Game</a>
 
             <a id='shop' class="waves-effect waves-light btn" href='/shop'>Shop</a>

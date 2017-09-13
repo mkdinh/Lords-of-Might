@@ -17,6 +17,10 @@ body {
     font-size: 30px;
 }
 
+#username{
+    text-transform: uppercase;
+}
+
 #logoutButton {
     border-left: 1px solid white;
     border-right: 1px solid white;
@@ -50,16 +54,10 @@ body {
     outline: none;
 }
 
-#shop:hover {
+.btn:hover{
     background-color: #060669;
     border: 1px solid #3f3fa7;
-    color: #7979e0;
-}
-
-#fight:hover {
-    background-color: #060669;
-    border: 1px solid #3f3fa7;
-    color: #7979e0;
+    color: #7979e0;  
 }
 
 #user-info {
