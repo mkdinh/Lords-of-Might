@@ -15,6 +15,10 @@
 
 <body>
 
+    <audio autoplay loop>
+      <source src="/audio/shop-music.mp3" type="audio/mpeg" />
+    </audio>
+
     <div class="row">
 
         <!-- main content container-->
@@ -45,25 +49,30 @@
                     <div>
                         <input id="armor" type="submit" value="ARMOR" />
                     </div>
+                    <div>
+                        <input id="health" type="submit" value="POTION" />
+                    </div>
                 </div>
                 <div id="right" style="float:right; text-align: center;">
+                    <div id="itemHere">
+                    </div>
                     <img id="chest" src="img/chest.png" />
                 </div>
             </div>
-            
+
         </div>
 
-    <!-- Foundation JQuery-->
-    <script src="css/foundation/js/vendor/jquery.js"></script>
+        <!-- Foundation JQuery-->
+        <script src="css/foundation/js/vendor/jquery.js"></script>
 
-    <!-- Foundation JavaScript-->
-    <script src="css/foundation/js/vendor/foundation.min.js"></script>
+        <!-- Foundation JavaScript-->
+        <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
-    <script>
-        $(document).foundation();
+        <script>
+            $(document).foundation();
 
-    </script>
-    <script src='/js/buy-shop.js'></script>
+        </script>
+        <script src='/js/buy-shop.js'></script>
 
 </body>
 

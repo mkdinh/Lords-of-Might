@@ -63,6 +63,7 @@ h1 {
     background-color: rgba(6, 6, 105, 0.8);
 }
 
+
 /*right side box design*/
 
 #left {
@@ -76,67 +77,88 @@ h1 {
     width: 58%;
 }
 
+#itemHere {
+    padding: 20px;
+    position: absolute;
+    z-index: 1;
+    margin-left: 110px;
+    margin-top: 80px;
+}
+
+img {
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
 #chest {
     height: 320px;
     width: 310px;
+    border: none;
 }
+
 
 /*Buttons DESIGN*/
 
 #sword {
     border: 1px solid #3f3fa7;
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
     border-radius: 15px;
-    margin: 10px;
+    margin: 5px;
     outline: none;
     background-color: white;
-
 }
 
 #helmet {
     border: 1px solid #3f3fa7;
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
     border-radius: 15px;
-    margin: 10px;
+    margin: 5px;
     outline: none;
     background-color: white;
-
 }
 
 #legs {
     border: 1px solid #3f3fa7;
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
     border-radius: 15px;
-    margin: 10px;
+    margin: 5px;
     outline: none;
     background-color: white;
-
 }
 
 #boots {
     border: 1px solid #3f3fa7;
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
     border-radius: 15px;
-    margin: 10px;
+    margin: 5px;
     outline: none;
     background-color: white;
-
 }
 
 #armor {
     border: 1px solid #3f3fa7;
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
     border-radius: 15px;
-    margin: 10px;
+    margin: 5px;
     outline: none;
     background-color: white;
-
 }
+
+#health {
+    border: 1px solid #3f3fa7;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 15px;
+    margin: 5px;
+    outline: none;
+    background-color: white;
+}
+
 
 /*buttons hover design*/
 
@@ -144,35 +166,120 @@ h1 {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid white;
     color: white;
-
 }
 
 #helmet:hover {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid white;
     color: white;
-
 }
 
 #legs:hover {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid white;
     color: white;
-
 }
 
 #boots:hover {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid white;
     color: white;
-
 }
 
 #armor:hover {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid white;
     color: white;
+}
 
+#health:hover {
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid white;
+    color: white;
 }
 
 
+/*Items design*/
+
+#swordItem {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: white;
+    padding: 5px;
+    margin: 2px;
+}
+
+#swordItem:hover {
+    width: 100px;
+    height: 100px;
+}
+
+#helmetItem {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: white;
+    padding: 5px;
+    margin: 2px;
+}
+
+#helmetItem:hover {
+    width: 100px;
+    height: 100px;
+}
+
+#legItem {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: white;
+    padding: 5px;
+    margin: 2px;
+}
+
+#legItem:hover {
+    width: 100px;
+    height: 100px;
+}
+
+#bootsItem {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: white;
+    padding: 5px;
+    margin: 2px;
+}
+
+#bootsItem:hover {
+    width: 100px;
+    height: 100px;
+}
+
+#armorItem {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: white;
+    padding: 5px;
+    margin: 2px;
+}
+
+#armorItem:hover {
+    width: 100px;
+    height: 100px;
+}
+
+#healthItem {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: white;
+    padding: 5px;
+}
+
+#healthItem:hover {
+    width: 100px;
+    height: 100px;
+}
