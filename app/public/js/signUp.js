@@ -28,6 +28,8 @@ var female = [
     }
 ];
 
+$(document).ready(function(){
+
 //once user clicks the next button
 
 $("#button").click(function () {
@@ -36,36 +38,39 @@ $("#button").click(function () {
     $( "label" ).remove();
     $( "#createName" ).remove();
     $( "#createPass" ).remove();
+    $( "#createNickname" ).remove();
+    $( "#createEmail" ).remove();
     $(".three").remove();
     
     //creating new divs and ids
-    $( "#signup-wrapper" ).append( "<div id=sexContainer>" + "<input id=male type=submit value=MALE >OR " + 
+    $( "#signup-wrapper" ).append( "<div id=sexContainer>" + "<p>CHOOSE YOUR CHARACTER PROFILE" + "</p>"+
+                                    "<input id=male type=submit value=MALE >OR " + 
                                     "<input id=female type=submit value=FEMALE >" + "<div id=picContainer>" +
-                                    "<p>CHOOSE YOUR CHARACTER PROFILE" + "</p>"+ "<img id=picOne>" + 
-                                    "<img id=picTwo>" + "<img id=picThree>" + "<img id=picFour>" +
-                                    "</div>" );
+                                    "<div id=picture>" + "</div>" +"</div>");
     
     
       //once user clicks the male button
      $("#male").click(function(){
         
-        $("#picOne").attr("src", male[0].image);
-        $("#picTwo").attr("src", male[1].image);
-        $("#picThree").attr("src", male[2].image);
-        $("#picFour").attr("src", male[3].image);
-        
-        
+        $( "#picture" ).empty();
+         
+        $('#picture').prepend('<img id="picFour" src=' + male[3].image  +' />')        
+        $('#picture').prepend('<img id="picThree" src=' + male[2].image  +' />')
+        $('#picture').prepend('<img id="picTwo" src=' + male[1].image  +' />')
+        $('#picture').prepend('<img id="picOne" src=' + male[0].image  +' />')
+         
+         
         $("#picOne").click(function(){
-            console.log("Pic One");
+            console.log("Pic One male");
         });
         $("#picTwo").click(function(){
-            console.log("Pic Two");
+            console.log("Pic Two male");
         });
         $("#picThree").click(function(){
-            console.log("Pic Three");
+            console.log("Pic Three male");
         });
         $("#picFour").click(function(){
-            console.log("Pic Four");
+            console.log("Pic Four male");
         });
          
          
@@ -73,24 +78,25 @@ $("#button").click(function () {
                
                   $("#female").click(function(){
     
+                    $( "#picture" ).empty();
 
-                    $("#picOne").attr("src", female[0].image);
-                    $("#picTwo").attr("src", female[1].image);
-                    $("#picThree").attr("src", female[2].image);
-                    $("#picFour").attr("src", female[3].image);
+                    $('#picture').prepend('<img id="picFour" src=' + female[3].image  +' />')        
+                    $('#picture').prepend('<img id="picThree" src=' + female[2].image  +' />')
+                    $('#picture').prepend('<img id="picTwo" src=' + female[1].image  +' />')
+                    $('#picture').prepend('<img id="picOne" src=' + female[0].image  +' />')
 
 
                     $("#picOne").click(function(){
-                        console.log("Pic One");
+                        console.log("Pic One female");
                     });
                     $("#picTwo").click(function(){
-                        console.log("Pic Two");
+                        console.log("Pic Two female");
                     });
                     $("#picThree").click(function(){
-                        console.log("Pic Three");
+                        console.log("Pic Three female");
                     });
                     $("#picFour").click(function(){
-                        console.log("Pic Four");
+                        console.log("Pic Four female");
                     });
 
                 });
@@ -103,47 +109,49 @@ $("#button").click(function () {
     //once user clicks the female button
      $("#female").click(function(){
         
-        
-        $("#picOne").attr("src", female[0].image);
-        $("#picTwo").attr("src", female[1].image);
-        $("#picThree").attr("src", female[2].image);
-        $("#picFour").attr("src", female[3].image);
-        
+        $( "#picture" ).empty();
+
+        $('#picture').prepend('<img id="picFour" src=' + female[3].image  +' />')        
+        $('#picture').prepend('<img id="picThree" src=' + female[2].image  +' />')
+        $('#picture').prepend('<img id="picTwo" src=' + female[1].image  +' />')
+        $('#picture').prepend('<img id="picOne" src=' + female[0].image  +' />')
         
         $("#picOne").click(function(){
-            console.log("Pic One");
+            console.log("Pic One female");
         });
         $("#picTwo").click(function(){
-            console.log("Pic Two");
+            console.log("Pic Two female");
         });
         $("#picThree").click(function(){
-            console.log("Pic Three");
+            console.log("Pic Three female");
         });
         $("#picFour").click(function(){
-            console.log("Pic Four");
+            console.log("Pic Four female");
         });
          
           if ($('#picContainer').contents().length !== 0) {
                
                   $("#male").click(function(){
 
-                    $("#picOne").attr("src", male[0].image);
-                    $("#picTwo").attr("src", male[1].image);
-                    $("#picThree").attr("src", male[2].image);
-                    $("#picFour").attr("src", male[3].image);
+                    $( "#picture" ).empty();
+
+                    $('#picture').prepend('<img id="picFour" src=' + male[3].image  +' />')        
+                    $('#picture').prepend('<img id="picThree" src=' + male[2].image  +' />')
+                    $('#picture').prepend('<img id="picTwo" src=' + male[1].image  +' />')
+                    $('#picture').prepend('<img id="picOne" src=' + male[0].image  +' />')
 
 
                     $("#picOne").click(function(){
-                        console.log("Pic One");
+                        console.log("Pic One male");
                     });
                     $("#picTwo").click(function(){
-                        console.log("Pic Two");
+                        console.log("Pic Two male");
                     });
                     $("#picThree").click(function(){
-                        console.log("Pic Three");
+                        console.log("Pic Three male");
                     });
                     $("#picFour").click(function(){
-                        console.log("Pic Four");
+                        console.log("Pic Four male");
                     });
 
                 });
@@ -154,3 +162,6 @@ $("#button").click(function () {
           
         
 });
+    
+});
+
