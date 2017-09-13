@@ -109,8 +109,23 @@ h4 {
     color: white;
 }
 
+#sprite-selection{
+    text-align: center
+}
+
+.select-wrapper input.select-dropdown,.input-field.row{
+    width: 100%;
+    margin: 1rem;
+}
+
 #preview{
-    height: 100%
+    height: 85vh;
+    text-align: center;
+}
+
+#canvas-wrapper{
+    display: block;
+    margin: auto
 }
 
 canvas{
@@ -118,7 +133,8 @@ canvas{
     border-width: 10px;
     border-style: double;
     border-color: grey;
-    height: 400px;
+    height: 300px;
     border-bottom-left-radius: 45%;
     border-bottom-right-radius: 45%;
+    margin-bottom: 2rem
 }
