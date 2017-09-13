@@ -29,7 +29,7 @@ var socket;
     
 //     $.ajax({
 //         method: 'POST',
-//         url: '/users/login',
+//         url: '/user/login',
 //         data: loginInfo,
 //         success: function(res){
 //             alert('Auto Login!')
@@ -48,14 +48,14 @@ $('#login-submit').on('click', function(ev){
     
     $.ajax({
         method: 'POST',
-        url: '/users/login',
+        url: '/user/login',
         dataType: 'json',
         data: loginInfo,
         success: function(res){
             console.log(res)
             loginInfo.user_id = res.id;
             localStorage.setItem('user',JSON.stringify(loginInfo));
-            window.location.replace('/users/'+loginInfo.user_id)
+            window.location.replace('/user/')
         },
         error:  function(xhr, status, error) {
             console.log(xhr)

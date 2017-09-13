@@ -16,7 +16,7 @@
 <body>
 
     <!--navbar-->
-    <div class="top-bar" id="navDiv">
+    <nav class="top-bar" id="navDiv">
 
         <div class="top-bar-left">
             WELCOME USERNAME!
@@ -27,45 +27,57 @@
             LOGOUT
         </button>
 
-    </div>
+    </nav>
 
     <!--fight or shop-->
-    <div id="button-container">
-        <button id="fight">
-            <a href='/game'>FIGHT</a>
-        </button>
+    <div class='container'>
+        <div id="button-container" class='row'> 
+            <a id='fight' class="waves-effect waves-light btn" href='/game'>Game</a>
 
-        <button id="shop">
-            SHOP
-        </button>
-    </div>
-
-    <!-- character image-->
-    <div class="row" id="statContainer">
-        <div id="userStat">
-            <p style="border-bottom: 1px solid white;">Attributes</p>
-            <p>HP : {{user.Stat.hp}}</p>
-            <p>MP : {{user.Stat.mp}}</p>
-            <p>Attack : {{user.Stat.attack}}</p>
-            <p>Defend : {{user.Stat.defense}}</p>
-            <p>Agility : {{user.Stat.agility}}</p>
-            <p>Recovery : {{user.Stat.recovery}}</p>
-            {{!-- <p style="border-top: 1px solid white;"> </p>
-            <p style="text-align: center; ">HINT</p>
-            <p style="text-align: center;">VISIT THE SHOP TO INCREASE YOUR PLAYER ATTRIBUTES!</p> --}}
+            <a id='shop' class="waves-effect waves-light btn" href='/shop'>Shop</a>
         </div>
-        <div id="image-container">
+
+        <!-- character image-->
+        <div class="row valign-wrapper" id="user-info">
+            <div id="userStat" class='col s8'>
+                <h3>Attributes</h3>
+                <hr>
+                <table class='striped'>
+                <tbody>
+                  <tr>
+                    <td><span class='stats-item'>HP</span></td>
+                    <td><span id='user-hp'>{{user.Stat.hp}}</span></td>
+                    <td><span class='stats-item'>MP</span></td>
+                    <td><span id='user-mp'>{{user.Stat.mp}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='stats-item'>Attack</span></td>
+                    <td><span id='user-attack'>{{user.Stat.attack}}</span></td>
+                    <td><span class='stats-item'>Defense</span></td>
+                    <td><span id='user-defense'>{{user.Stat.defense}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='stats-item'>Agility</span></td>
+                    <td><span id='user-agility'>{{user.Stat.agility}}</span></td>
+                    <td><span class='stats-item'>Recovery</span></td>
+                    <td><span id='user-recovery'>{{user.Stat.recovery}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class='stats-item'>Win</span></td>
+                    <td><span id='user-win'>{{user.Game_State.win}}</span></td>
+                    <td><span class='stats-item'>Lose</span></td>
+                    <td><span id='user-lose'>{{user.Game_State.lose}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="profile-container" class='col s4'>
+                <img src='/img/profilePics/monsters/{{user.profile}}'/>
+            </div>
         </div>
     </div>
-
-    <!-- Foundation JQuery-->
-    <script src="css/foundation/js/vendor/jquery.js"></script>
-
-    <!-- Foundation JavaScript-->
-    <script src="css/foundation/js/vendor/foundation.min.js"></script>
 
     <script>
-        $(document).foundation();
 
         $('#logout-btn').on('click', function(){
 

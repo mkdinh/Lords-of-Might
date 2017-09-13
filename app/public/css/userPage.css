@@ -3,6 +3,10 @@ body {
     -webkit-background-size: cover;
 }
 
+.container{
+    width: 50%
+}
+
 #navDiv {
     padding-left: 20px;
     padding-right: 20px;
@@ -29,32 +33,20 @@ body {
 
 #button-container {
     padding: 0px;
-    margin-top: 20px
+    margin-top: 20px;
+    text-align: center;
 }
 
-#fight {
-    color: white;
-    margin-left: 150px;
-    font-size: 40px;
-    font-family: 'Metamorphous', cursive;
-    padding: 20px;
-    background-color: rgba(6, 6, 105, 0.8);
+.btn{
+    height: auto;
+    padding: 1rem 2rem;
+    margin: 1rem;
     border: 1px solid #3f3fa7;
-    border-radius: 20px;
-    width: 200px;
-    outline: none;
-}
-
-#shop {
+    background-color: rgba(6, 6, 105, 0.8);
     color: white;
     font-size: 40px;
-    margin-left: 100px;
     font-family: 'Metamorphous', cursive;
-    border: 1px solid #3f3fa7;
-    padding: 20px;
-    background-color: rgba(6, 6, 105, 0.8);
     border-radius: 20px;
-    width: 200px;
     outline: none;
 }
 
@@ -70,27 +62,33 @@ body {
     color: #7979e0;
 }
 
-#statContainer {
-    margin: 10px;
-    margin-top: 20px;
+#user-info {
     color: white;
+    background-color: rgba(6, 6, 105, 0.8);
     font-family: 'Metamorphous', cursive;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #3f3fa7;
 }
 
 #userStat {
-    background-color: rgba(6, 6, 105, 0.8);
-    border-radius: 20px;
-    border: 1px solid #3f3fa7;
-    padding: 20px;
-    width: 36%;
-    float: left;
-    margin-left: 40px;
 }
 
-#image-container {
-    background-color: rgba(6, 6, 105, 0.8);
-    border-radius: 20px;
-    border: 1px solid #3f3fa7;
-    margin-left: 550px;
-    height: 380px;
+table tbody tr:nth-child(even),table.striped>tbody>tr:nth-child(odd),table tbody{
+    background-color: rgba(0,0,0,0);
+    border: 0px solid black;
+    color: white;
+}
+
+#profile-container {
+    text-align:center;
+}
+
+#crop{
+    height: 64px;
+    width: 64px;
+    overflow: hidden;
+}
+
+#sprite{
 }

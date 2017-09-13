@@ -28,14 +28,13 @@ LoM.interaction = {
                     $('.npc-profile').fadeIn(500,function(){
                         var wrapper = $('<div class="npc-message">')
                         $('.npc-interaction').append(wrapper)
-                        $('.npc-message').fadeIn(750,function(){
-                            var dialog0 = $('<h5 class="npc-dialog">');
-                            dialog0.text("Tell me...");
-                            $('.npc-message').append(dialog0)
-                            dialog0.animate({opacity:1},'slow');
-                            var dialog1 = 'Have you heard the tragedy of darth plagueis the wise?';
-                            createDialog(1,dialog1)
-                        })
+                        $('.npc-message').fadeIn(500,function(){})
+                        var dialog0 = $('<h5 class="npc-dialog">');
+                        dialog0.text("Tell me...");
+                        $('.npc-message').append(dialog0)
+                        dialog0.animate({opacity:1},'slow');
+                        var dialog1 = 'Have you heard the tragedy of darth plagueis the wise?';
+                        createDialog(1,dialog1)
                     })
                     break
 

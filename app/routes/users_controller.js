@@ -33,16 +33,16 @@ function(username, password, done) {
             // console.log(user.get({plain:true}).password)
             return(done(null,user))
 
-            // user.comparePassword(password, function (err,isMatch) {
-            //     if (err) { return done(err); }
-            //     if(!isMatch){
-            //         // console.log('incorrect password')
-            //         return done(null, false, { message: 'Incorrect password.' });
-            //     } else {
-            //         console.log('logged in!')
-            //         return done(null, user);
-            //     }
-            // });
+            user.comparePassword(password, function (err,isMatch) {
+                if (err) { return done(err); }
+                if(!isMatch){
+                    // console.log('incorrect password')
+                    return done(null, false, { message: 'Incorrect password.' });
+                } else {
+                    console.log('logged in!')
+                    return done(null, user);
+                }
+            });
             
         })
         .catch((err) => {
@@ -87,13 +87,13 @@ passport.deserializeUser(function(id, done) {
 // SETTING ROUTERS
 // --------------------------------------------------------------------------
 // require('connect-ensure-login').ensureLoggedIn('login')
-router.get('/:userId', function (req, res, next) {
+router.get('/', function (req, res, next) {
+    console.log('user page',req.user)
     if (req.user) {
         db.User.find({
-            where: {id: req.params.userId},
-            include: [db.Stats]
+            where: {id: req.user.id},
+            include: [db.Stats, db.Game_State]
         }).then(user => {
-            console.log(user)
             res.render('userPage',{user:user});
         })
    } else {

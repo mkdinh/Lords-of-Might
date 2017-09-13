@@ -417,6 +417,12 @@ canvas{
   margin:0 
 }
 
+input[type=text]:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid #191974;
+  -webkit-box-shadow: 0 1px 0 0 #191974;
+  box-shadow: 0 1px 0 0 #191974;
+}
+
 input[type=text]:not(.browser-default){
   padding: 0 1rem;
 }
