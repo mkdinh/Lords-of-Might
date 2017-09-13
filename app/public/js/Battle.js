@@ -111,6 +111,9 @@ LoM.Battle = {
                         announcement(body)
 
                         setTimeout(function(){
+                            LoM.userInfo.game_state.gold += rewards.gold;
+                            LoM.userInfo.game_state.exp += rewards.exp;
+
                             Materialize.toast('+ ' + rewards.exp + ' Exp', 2000) // 4000 is the duration of the toast
                             Materialize.toast('+ ' + rewards.gold + ' Gold', 2000,'',function(){
                                 console.log('hey')
@@ -140,6 +143,9 @@ LoM.Battle = {
                         LoM.userInfo.game_state.win++
 
                         setTimeout(function(){
+                            LoM.userInfo.game_state.gold += rewards.gold;
+                            LoM.userInfo.game_state.exp += rewards.exp;
+
                             Materialize.toast('+ ' + rewards.exp + ' Exp', 2000) // 4000 is the duration of the toast
                             Materialize.toast('+ ' + rewards.gold + ' Gold', 2000,'',function(){
                                 gameOver()
