@@ -106,7 +106,7 @@ LoM.Battle = {
                     type: 'POST',
                     success: function(rewards){    
                         console.log(rewards)
-                        var body = enemy.name + " WON!"
+                        var body = enemy.name + " Win!"
                         LoM.userInfo.game_state.lose++
                         announcement(body)
 
@@ -133,7 +133,7 @@ LoM.Battle = {
                     url: '/game/battle/win/'+user.id+'?_method=PUT',
                     type: 'POST',
                     success: function(rewards){    
-                        var body = user.name + " WON!"
+                        var body = user.name + " Win!"
                         announcement(body)
                         console.log(user)
                         LoM.userInfo.game_state.win++
@@ -499,5 +499,12 @@ LoM.Battle = {
         this.spriteMap[attackerID].animations.play('potion', 10,  false)
         setTimeout(function(){Client.actionCompleted(state)},2000)
     }
+}
+
+function resetBattleInfo(){
+    LoM.battleInfo = {};
+    initiatorReady = receiverReady = initialized = false;
+    delete LoM.userInfo.battle;
+    $('.battle-info').empty();
 }
 

@@ -11,12 +11,14 @@ LoM.user = {
             url: "/game/inventories/"+LoM.userInfo.id,
             type: "GET",
             success: function(userInfo){
+                console.log('get inventories')
                 LoM.userInfo.inventory = userInfo.inventory;
                 LoM.userInfo.equipments = userInfo.equipped;
                 LoM.user.updateInventory();
                 LoM.user.updateEquipments();
                 LoM.user.updateStats();
                 LoM.user.updateSpells();
+                fn()
             }
         })
     },
@@ -88,22 +90,22 @@ LoM.user = {
 
     updateSpells: function(equipped){
         // convert spell array into object
-        var equipped = LoM.userInfo.equipments;
-        var spellObj = {};   
+        var equipped = LoM.userInfo.equipments; 
         // equipping spell
         var spells = LoM.userInfo.spells;
         for( i = 0; i < spells.length; i++){
 
             let spellInfo  = spells[i].Spell;
             let spellName  = spellInfo.name;
-                spellObj[spellName] = spellInfo;
+                // spellObj[spellName] = spellInfo;
 
             if(spells[i].equipped){
                 equipped["spell"] = spells[i].Spell;
                 $('#equip-spell').html(spellName)
             }
-
-            LoM.userInfo.spells = spellObj
+            console.log('equipping spells')
+            console.log(equipped)
+            // LoM.userInfo.spells = spellObj
             // console.log(spellObj)
         }       
     },

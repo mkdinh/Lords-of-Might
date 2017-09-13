@@ -67,7 +67,7 @@ canvas{
 }
 
 .progress .indeterminate{
- background-color: #3f3fa7;
+ background-color: #ff8f00;
 }
 
 .interaction{
@@ -80,7 +80,9 @@ canvas{
   z-index: 5
 }
 
+
 .announcement{
+  font-family: 'Varela Round', sans-serif;
   text-align: center;
   font-size: 40px;
   color: #bf4231;
@@ -230,6 +232,44 @@ canvas{
   background-color: #383866
 }
 
+
+/* SHOP STATE */
+.npc-interaction {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 6
+}
+
+.npc-profile {
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display:none;
+}
+
+.npc-message{
+  max-width: 40%;
+  font-size: 1rem;
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  background-color: rgba(0,0,0,.75);
+  padding: 0 2rem;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 20px;
+  display:none;
+}
+
+#shop-btn{
+  background-color: #ffc107;
+  opacity: 0
+}
+
 /* CHAT BOXES */
 #sidebar{
   position:relative;
@@ -263,7 +303,8 @@ canvas{
   text-align: center;
   font-weight: bold;
   font-size: 1.5rem;
-  color: #ff6f00
+  color: #ff6f00;
+  font-family: 'Varela Round', sans-serif;
 }
 
 #user-name,#user-level{

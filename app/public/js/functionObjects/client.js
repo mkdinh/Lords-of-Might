@@ -88,9 +88,12 @@ if(!JSON.parse(localStorage.getItem('user'))){
             var state = user.world.state;
             LoM.playerMaster[userID] = user;
             if(state !== 'Battle'){
-                LoM.user.getInventory();
+                LoM.user.getInventory(function(){
+                        LoM.game.state.start(state)
+                });
+            }else{
+                LoM.game.state.start(state);
             }
-            LoM.game.state.start(state);
     })
 
     Client.socket.on('player-changed-state',function(player){

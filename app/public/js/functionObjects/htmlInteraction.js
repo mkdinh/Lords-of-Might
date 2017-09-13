@@ -22,15 +22,6 @@ function genBattleInteraction(){
     option.fadeIn();
 }
 
-
-function removeInteractionDisplay(){
-    $('.interaction').fadeOut(function(){
-        $('.interaction').empty();
-    });
-    
-    // $('.announcement').empty();
-}
-
 function announcement(body){
     var announcement = $('.announcement');
     announcement.empty();
@@ -103,7 +94,7 @@ function addBattleButton(){
     var attack;
     var spell;
     var health;
-
+    
     attack = "<button class='action-btn waves-effect waves-light btn' id='attack-btn'>Attack</button>"
     spell = "<button class='action-btn waves-effect waves-light btn' id='spell-btn'>Spell</button>"
 
@@ -113,7 +104,7 @@ function addBattleButton(){
 }
 
 function gameOver(){
-    $('.battle-options').remove();
+    $('.battle-options').empty();
     var button = $("<button class='action-btn waves-effect waves-light btn' id='battle-return'>");
     button.text('Return');
     $('#game').append(button);
@@ -180,7 +171,8 @@ $('#game').on('click','#battle-return', function(){
     setTimeout(function(){
         // LoM.game.state.start('Town')
         LoM.playerMaster[LoM.userInfo.id].world.state = "Town";
-        var user = LoM.playerMaster[LoM.userInfo.id]
+        var user = LoM.playerMaster[LoM.userInfo.id];
+        resetBattleInfo();
         Client.changeState(user);
     },3000)
     
@@ -254,6 +246,12 @@ $('#user-stats-tab').on('click', function(){
     // LoM.user.getInventory();
     // console.log('update stats')
 });
+
+// SHOP 
+
+// $('.npc-interaction').on('click','#shop-btn',function(){
+//     alert('going shopping!')
+// })
 
 
 
