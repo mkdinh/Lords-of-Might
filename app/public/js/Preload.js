@@ -9,9 +9,9 @@ LoM.Preload = function(){};
 LoM.Preload = {
     preload: function(){
         // show logo in loading screen
-        this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo') 
-        this.splash.anchor.setTo(0.5);
-    
+        // this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo')
+        this.game.add.tileSprite(0 ,0, width, height, 'boot-bg'); 
+        // this.splash.anchor.setTo(0.5);
     for(id in LoM.playerDB){
         LoM.Preload.load.spritesheet('sprite-'+id,'img/players/'+id+'.png',64,64,273)
     }
@@ -63,7 +63,6 @@ LoM.Preload = {
             velocity: {x:0,y:0},
             sprite: 'sprite-'+userID,
             based_stats: userDB.Stat,
-            modified_stats: userDB.Stat,
             inventory: userDB.Inventories,
             equipments: {},
             spritesheet: {

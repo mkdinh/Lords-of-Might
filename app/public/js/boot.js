@@ -1,5 +1,6 @@
 var LoM = LoM || {};
 var game;
+var userInfo = {};
 LoM.playerDB = {};
 LoM.playerControl = {};
 LoM.eventActive = {state: false};
@@ -13,13 +14,12 @@ LoM.Boot = function(){};
 LoM.Boot.prototype = {
     preload: function(){
         // assets for loading screen
-        this.load.image('logo','/img/preloadBG.jpg')
-    
-       // load game assets
-       $.ajax({
-        url: '/game/all',
-        method: "GET",
-        success: function(playerDB){
+        this.load.image('boot-bg','img/backgrounds/bg-5.jpg')
+        // load game assets
+        $.ajax({
+            url: '/game/all',
+            method: "GET",
+            success: function(playerDB){
     
             // console.log(playerDB)
             // for each player, load the info into a LoM key called LoM.playerDB
