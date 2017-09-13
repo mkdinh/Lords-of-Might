@@ -150,7 +150,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
         // send accept information to server
         this.socket.emit('battle-accept',battleInfo)
-        removeInteractionDisplay()
+        removeInteraction('.interaction')
     }
 
     Client.socket.on('battle-accepted',function(battleInfo){
@@ -165,7 +165,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
     Client.battleDecline = function(){
         this.socket.emit('battle-decline',{})
-        removeInteractionDisplay()
+        removeInteraction('.interaction')
     }
 
     Client.socket.on('battle-declined',function(data){
@@ -178,7 +178,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
         var body = 'Joining room: ' + instance.room
         announcement(body)
         setTimeout(function(){
-            removeInteractionDisplay()
+            removeInteraction('.interaction')
             // LoM.game.state.start('Battle')
             LoM.playerMaster[LoM.userInfo.id].world.state = "Battle"
             var user = LoM.playerMaster[LoM.userInfo.id]

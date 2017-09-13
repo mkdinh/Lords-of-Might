@@ -77,7 +77,8 @@ router.put('/battle/win/:userid', (req,res) => {
     db.Game_State.find({where: {UserId: req.params.userid}}).then(user => {
         user.increment({
             'win': 1,
-            'gold': gold
+            'gold': gold,
+            'exp': exp
         }).then((user) => {
             var rewards = {
                 gold: gold,
@@ -96,7 +97,8 @@ router.put('/battle/lose/:userid', (req,res) => {
     db.Game_State.find({where: {UserId: req.params.userid}}).then(user => {
         user.increment({
             'win': 1,
-            'gold': gold
+            'gold': gold,
+            'exp': exp
         }).then((user) => {
             var rewards = {
                 gold: gold,

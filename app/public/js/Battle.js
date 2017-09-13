@@ -106,7 +106,7 @@ LoM.Battle = {
                     type: 'POST',
                     success: function(rewards){    
                         console.log(rewards)
-                        var body = enemy.name + " Win!"
+                        var body = enemy.name + " win!"
                         LoM.userInfo.game_state.lose++
                         announcement(body)
 
@@ -115,7 +115,8 @@ LoM.Battle = {
                             Materialize.toast('+ ' + rewards.gold + ' Gold', 2000,'',function(){
                                 console.log('hey')
                                 gameOver()
-                                removeInteractionDisplay()
+                                removeInteraction('.battle-info')
+                                removeInteraction('.battle-options')
                             }) 
                         },5000)
 
@@ -133,7 +134,7 @@ LoM.Battle = {
                     url: '/game/battle/win/'+user.id+'?_method=PUT',
                     type: 'POST',
                     success: function(rewards){    
-                        var body = user.name + " Win!"
+                        var body = user.name + " win!"
                         announcement(body)
                         console.log(user)
                         LoM.userInfo.game_state.win++
@@ -142,7 +143,8 @@ LoM.Battle = {
                             Materialize.toast('+ ' + rewards.exp + ' Exp', 2000) // 4000 is the duration of the toast
                             Materialize.toast('+ ' + rewards.gold + ' Gold', 2000,'',function(){
                                 gameOver()
-                                removeInteractionDisplay()
+                                removeInteraction('.battle-info')
+                                removeInteraction('.battle-options')
                             }) 
                         },5000)
                     }
