@@ -4,7 +4,7 @@ body {
 }
 
 .container{
-    width: 50%
+    width: 60%
 }
 
 #navDiv {
@@ -60,7 +60,7 @@ body {
     color: #7979e0;  
 }
 
-h3{
+h3,h5{
     font-family: 'Metamorphous', cursive;
 }
 

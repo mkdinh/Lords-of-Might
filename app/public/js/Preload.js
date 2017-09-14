@@ -13,7 +13,7 @@ LoM.Preload = {
         this.game.add.tileSprite(0 ,0, width, height, 'boot-bg'); 
         // this.splash.anchor.setTo(0.5);
     for(id in LoM.playerDB){
-        LoM.Preload.load.spritesheet('sprite-'+id,'img/players/'+id+'.png',64,64,273)
+        LoM.Preload.load.spritesheet('user-'+id,'img/users/user-'+id+'.png',64,64,273)
     }
     // load spells
     var spellType = ['fire','ice','poison',"shadow"]
@@ -61,7 +61,7 @@ LoM.Preload = {
                 state: userDB.Game_State.state
             },
             velocity: {x:0,y:0},
-            sprite: 'sprite-'+userID,
+            sprite: 'user-'+userID,
             based_stats: userDB.Stat,
             inventory: userDB.Inventories,
             equipments: {},
@@ -71,6 +71,7 @@ LoM.Preload = {
                 head: parsePNG(sprite.head),
                 torso: parsePNG(sprite.torso),
                 leg: parsePNG(sprite.leg),
+                feet: parsePNG(sprite.feet),
                 body: parsePNG(sprite.body)
             }
         }
@@ -141,10 +142,13 @@ LoM.playerControl.controlInput = function(worldX,worldY){
 }
 
 var parsePNG = function(url){
+    console.log(url)
+    if(url !== null){
     var parsedURL = url.split('/')
     var imgFile = parsedURL[parsedURL.length-1];
     var filename = imgFile.split('.')[0];
     return filename;
+    }
 }
 
 function randomInt (low,high){

@@ -37,6 +37,12 @@ var socket;
 //     })
 // }
 
+// INITIALIZE MODAL
+//------------------------------------------------------------------------
+$('.modal').modal();
+
+// LOGIN
+//------------------------------------------------------------------------
 // on click submit, send form to server and authenticate with passport.js and initialize io
 $('#ml-btn').on('click', function(ev){
     ev.preventDefault();

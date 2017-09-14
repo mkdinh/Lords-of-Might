@@ -82,7 +82,7 @@ $(document).ready(function () {
                 // draw on canvas in specific order
                 //  add link to image
                 img.onload = function() {
-                    ctx.drawImage(img,0,128,64,64,0,0,256,256);
+                    ctx.drawImage(img,0,0,832,1344,0,0,832,1344);
                 }
                 img.src = newUser.sprite[part]
                 }
@@ -102,28 +102,21 @@ $(document).ready(function () {
     })
 
     $('#create').on('click', function(){
-        console.log(newUser)
+        var imgData = getImageData();
+        newUser.spritesheet = imgData;
+
         $.ajax({
             url: '/user/new',
             method: 'POST',
             dataType: 'json',
             data: {newUser: JSON.stringify(newUser)},
             success: function(user){
-                console.log(user)
-                var login = {
-                    username: user.username,
-                    password: newUser.password
+                var loginInfo = {
+                    username: newUser.username,
+                    password: newUser.password,
+                    user_id: user.id
                 }
-
-                $.ajax({
-                    url: '/user/login',
-                    method: "POST",
-                    dataType: 'json',
-                    data: login,
-                    success: function(){
-                        window.location.replace('/user')
-                    }
-                })
+                autoLogin(loginInfo)
             },
             error: function(xhr,status,error){
                 console.log(error)
@@ -131,7 +124,33 @@ $(document).ready(function () {
         })
     })
 
+    function getImageData(){
+        var sprite = document.getElementById('canvas');
+        // var ctx = sprite.getContext('2d')
+        // var width = 832;
+        // var height= 1344;
+        // var imgData = ctx.getImageData(0,0,width,height);
+        var rawData = sprite.toDataURL('image/png')
+        var imgData = rawData.replace(/^data:image\/png;base64,/, "");
+        // asArray = new Uint8Array(data.length);   
+        // var blob = new Blob( [ asArray.buffer ], {type: "image/png"} ); 
+        // console.log(blob)
+        return imgData;
+    }
+
 });
+
+function autoLogin(info){
+    $.ajax({
+        url: '/user/login',
+        method: 'POST',
+        data: info,
+        success: function(){
+            localStorage.setItem('user',JSON.stringify(info));
+            window.location.replace("/user")
+        }
+    })
+}
 
 
 
