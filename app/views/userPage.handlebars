@@ -22,9 +22,9 @@
             WELCOME <span id="username">{{user.name}}!</span>
         </div>
 
-        <button class="top-bar-right" id="logout-btn">
+        <a class="top-bar-right waves-effect waves-light" id="logout-btn">
             LOGOUT
-        </button>
+        </a>
 
     </nav>
 
@@ -42,6 +42,7 @@
         <div class="row valign-wrapper" id="user-info">
             <div id="userStat" class='col s8'>
                 <h3>Attributes</h3>
+                <h5>id: {{user.id}}</h5>
                 <hr>
                 <table class='striped'>
                 <tbody>
@@ -73,7 +74,7 @@
               </table>
             </div>
             <div id="profile-container" class='col s4'>
-                <img src='/img/profilePics/monsters/{{user.profile}}'/>
+                <img class='card' id='#profile-img' src='/img/profilePics/{{user.profile}}'/>
             </div>
         </div>
     </div>
@@ -83,10 +84,9 @@
         $('#logout-btn').on('click', function(){
 
             $.ajax({
-                url: '/users/logout',
+                url: '/user/logout',
                 method: 'POST',
                 success: function(res){
-                    alert(res.message);
                     window.location.replace('/');
                 }
             })

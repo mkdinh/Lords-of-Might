@@ -6,15 +6,19 @@ module.exports = (sequelize,DataTypes) => {
         },
         head: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         leg: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
+        },
+        feet: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         torso: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         weapon: {
             type: DataTypes.STRING,

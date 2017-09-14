@@ -6,8 +6,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 const db = require('../models');
-const multer  = require('multer');
-const upload = multer();
+const path = require('path');
 const User = db.User;
 
 
@@ -36,7 +35,7 @@ function(username, password, done) {
             user.comparePassword(password, function (err,isMatch) {
                 if (err) { return done(err); }
                 if(!isMatch){
-                    // console.log('incorrect password')
+                    console.log('incorrect password')
                     return done(null, false, { message: 'Incorrect password.' });
                 } else {
                     console.log('logged in!')
@@ -47,7 +46,7 @@ function(username, password, done) {
         })
         .catch((err) => {
             if (err) {
-                // console.log(err);
+                console.log(err);
                 return done(err); 
             }
        });
@@ -66,7 +65,8 @@ function(username, password, done) {
 // deserializing.
 
 passport.serializeUser(function(user, done) {
-    // console.log('serializing')
+    console.log(user)
+    console.log('serializing')
     return done(null, user.id);
 });
 
@@ -101,31 +101,42 @@ router.get('/', function (req, res, next) {
    }
 });
 
-router.post('/new', upload.single('profile'), (req,res) => {
+router.post('/new', (req,res,next) => {
+
+    var userData = JSON.parse(req.body.newUser)
     var newUser = {
-        username: req.body.user.username,
-        password: User.generateHash(req.body.user.password),
-        name: req.body.user.name,
-        profile: req.body.user.profile
+        username: userData.username,
+        password: User.generateHash(userData.password),
+        name: userData.name,
+        profile: userData.profile,
+        Game_State: [{}],
+        Stat: [{}],
+        Sprite: userData.sprite,
+        Inventories: [{ItemId: userData.item_inventory},{ItemId: 2}, {ItemId: 3}],
+        Spell_Inventories: [{SpellId: userData.spell_inventory, equipped: true}]
     }
 
-    var sprite = {
-        body: req.body.sprite.body,
-        head: req.body.sprite.head,
-        torso: req.body.sprite.torso,
-        leg: req.body.sprite.leg,
-        weapon: req.body.sprite.spell.weapon
-    };
 
-    User.create(newUser, {
-        include: [
-            {model: db.Sprite},
-            {model: db.Game_State},
-            {model: db.Inventory},
-    ]}).then((user) => {
-        res.redirect('/user');
-    })
-}); 
+    db.User.create(newUser,{include: [db.Game_State, db.Stats, db.Sprite, db.Inventory, db.Spell_Inventory]}).then((user) => {
+       
+        require("fs").appendFile(path.join(__dirname,"../public/img/users/user-"+user.id+".png"), userData.spritesheet, 'base64', function(err) {
+            res.json(user)
+            // var loginInfo = {
+            //     username: userData.username,
+            //     password: userData.password,
+            //     id: user.id
+            // }
+
+            // passport.authenticate('local', function(err, loginInfo, info) {
+            //     req.logIn(loginInfo, function(err) {
+            //         if (err) { console.log(err); return}
+            //         res.redirect('/user')
+            //     })
+            // })(req, res, next);
+
+        });
+    });
+})
 
 router.get('/login', function (req, res) {
     res.render('login');
@@ -153,6 +164,5 @@ router.post('/logout', function (req, res) {
     req.logout();
     res.send({message: "Successfully signed out!"})
 });
-
 
 module.exports = router;

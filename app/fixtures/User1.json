@@ -5,7 +5,7 @@
             "username": "foobar@gmail.com",
             "password": "foobar",
             "name": "foozy",
-            "profile": "orc.jpg",
+            "profile": "/monsters/orc.jpg",
             "online": false
         }
     },

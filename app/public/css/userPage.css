@@ -4,7 +4,7 @@ body {
 }
 
 .container{
-    width: 50%
+    width: 60%
 }
 
 #navDiv {
@@ -60,6 +60,10 @@ body {
     color: #7979e0;  
 }
 
+h3,h5{
+    font-family: 'Metamorphous', cursive;
+}
+
 #user-info {
     color: white;
     background-color: rgba(6, 6, 105, 0.8);
@@ -67,6 +71,10 @@ body {
     padding: 2rem;
     border-radius: 20px;
     border: 1px solid #3f3fa7;
+}
+
+.stats-item{
+    font-weight: bold
 }
 
 #userStat {
@@ -80,6 +88,11 @@ table tbody tr:nth-child(even),table.striped>tbody>tr:nth-child(odd),table tbody
 
 #profile-container {
     text-align:center;
+}
+
+.card{
+    margin: 0 auto;
+    width: 75%
 }
 
 #crop{
