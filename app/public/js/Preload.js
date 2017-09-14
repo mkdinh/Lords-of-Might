@@ -13,7 +13,7 @@ LoM.Preload = {
         this.game.add.tileSprite(0 ,0, width, height, 'boot-bg'); 
         // this.splash.anchor.setTo(0.5);
     for(id in LoM.playerDB){
-        LoM.Preload.load.spritesheet('sprite-'+id,'img/players/'+id+'.png',64,64,273)
+        LoM.Preload.load.spritesheet('user-'+id,'img/users/user-'+id+'.png',64,64,273)
     }
     // load spells
     var spellType = ['fire','ice','poison',"shadow"]
@@ -61,7 +61,7 @@ LoM.Preload = {
                 state: userDB.Game_State.state
             },
             velocity: {x:0,y:0},
-            sprite: 'sprite-'+userID,
+            sprite: 'user-'+userID,
             based_stats: userDB.Stat,
             inventory: userDB.Inventories,
             equipments: {},

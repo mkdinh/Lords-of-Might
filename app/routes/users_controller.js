@@ -7,7 +7,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 const db = require('../models');
 const multer  = require('multer');
-const upload = multer();
+const path = require('path');
+const upload = multer({
+    dest: path.join(__dirname,'app/public/img/users/')
+    }).single('profile');
 const User = db.User;
 
 
@@ -101,7 +104,7 @@ router.get('/', function (req, res, next) {
    }
 });
 
-router.post('/new', upload.single('profile'), (req,res,next) => {
+router.post('/new', (req,res,next) => {
 
     var userData = JSON.parse(req.body.newUser)
     var newUser = {
@@ -138,7 +141,7 @@ router.post('/new', upload.single('profile'), (req,res,next) => {
                             //     console.log('hey')
                             //     res.redirect('/user');
                             // })
-                        })
+                        })  
                     })
                 })
             })
@@ -173,5 +176,28 @@ router.post('/logout', function (req, res) {
     res.send({message: "Successfully signed out!"})
 });
 
+router.post('/profile', function(req,res){
+    var imgData = req.body.profile;
+    var userId = req.body.userId;
+
+    require("fs").appendFile(path.join(__dirname,"../public/img/users/user-"+userId+".png"), imgData, 'base64', function(err) {
+       res.json({success: 'uploaded sprite!'})
+    });
+})
 
 module.exports = router;
+
+// ,
+// onFileUploadStart: function (file) {
+//     console.log(file.originalname + ' is starting ...')
+// },
+// limits: {
+//     files: 1
+// },
+// onFileUploadComplete: function (file) {
+//     console.log(file.fieldname + ' uploaded to  ' + file.path)
+//     imageUploaded=true;
+//     console.log(req.files);
+//     res.redirect('/user');
+// }
+// }

@@ -125,10 +125,7 @@ h4 {
 
 #canvas-wrapper{
     display: block;
-    margin: auto
-}
-
-canvas{
+    margin: 0;
     background-image: url(/img/woodback.jpg);
     border-width: 10px;
     border-style: double;
@@ -136,5 +133,8 @@ canvas{
     height: 300px;
     border-bottom-left-radius: 45%;
     border-bottom-right-radius: 45%;
-    margin-bottom: 2rem
+}
+
+#create-btn-wrapper{
+    margin-top: 50%
 }
