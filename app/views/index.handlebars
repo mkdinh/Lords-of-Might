@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial scale=1.0">
 
-	<title>LORDS OF MIGHT</title>
-	
-	
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+
+    <title>LORDS OF MIGHT</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -18,7 +19,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/homepage.css" />
     <!-- Lord of Might Font-->
-    
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
 
@@ -31,109 +32,156 @@
       <source src="/audio/conan.mp3" type="audio/mpeg" />
     </audio> -->
 
-<div class="modal fade" id="login-modal" role="dialog">
-    <!-- <div class="modal-dialog">  -->
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-        </div>
-        <div class="modal-body">
-            <form role="form">
-              <div class="form-group">
-                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                <input type="text" class="form-control" id="login-username" placeholder="Who goes there?">
-              </div>
-              <div class="form-group">
-                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                <input type="text" class="form-control" id="login-password" placeholder="What is the magic word?">
-                </div>
-            </form>
-            <div class="row">
-              <div class="col s6">
-                <button type="submit" id="ml-btn"> Login</button>
-              </div>
-              <div class="col s6">
-                <button type="button" class="close" id="mc-btn">Cancel</button>
-              </div>
+    <div class="modal fade" id="login-modal" role="dialog">
+        <!-- <div class="modal-dialog">  -->
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
             </div>
-          </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input type="text" class="form-control" id="login-username" placeholder="Who goes there?">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                        <input type="text" class="form-control" id="login-password" placeholder="What is the magic word?">
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col s6">
+                        <button type="submit" id="ml-btn"> Login</button>
+                    </div>
+                    <div class="col s6">
+                        <button type="button" id="mc-btn" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
-  </div>
+    </div>
 
 
 
 
-<nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo"><h2>LORDS OF MIGHT</h2></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <button class="nav-btns" id="sign-btn">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">
+                <h2>LORDS OF MIGHT</h2>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <button class="nav-btns" id="sign-btn">
             <a href="/signUp" style="font-size: 24px;">Sign Up</a>
         </li>
           </button>
-        <li>
-          <button class="nav-btns" onclick="document.getElementById('login-modal').style.display='block'" id="login-btn">
+                    <li>
+                        <button class="nav-btns" onclick="document.getElementById('login-modal').style.display='block'" id="login-btn">
             Login
           </button>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-<div class="row">
-  <div class="slider">
-    <ul class="slides">
-      <li>
-        <img src="/img/medieval-characters.jpg"> 
-        <div class="caption center-align">
-          <h3>Choose Your Character</h3>
+                    </li>
+            </ul>
         </div>
-      </li>
-      <li>
-        <img src="/img/weapons-pic.jpg" style="height: 850px;">
-        <div class="caption left-align">
-          <h3>Select Your Weapons</h3>
+    </nav>
+
+    <div class="row">
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="/img/medieval-characters.jpg">
+                    <div class="caption center-align">
+                        <h3>Choose Your Character</h3>
+                    </div>
+                </li>
+                <li>
+                    <img src="/img/weapons-pic.jpg" style="height: 850px;">
+                    <div class="caption left-align">
+                        <h3>Select Your Weapons</h3>
+                    </div>
+                </li>
+                <li>
+                    <img src="/img/duel.jpg" style="height: 800px;">
+                    <div class="caption right-align">
+                        <h3 style="color: black;">Battle Your Enemies</h3>
+                    </div>
+                </li>
+                <li>
+                    <img src="/img/victory.jpg">
+                    <div class="caption center-align">
+                        <h3 style="color: black;">Conquer the Land!</h3>
+                    </div>
+                </li>
+            </ul>
+            </di <p>A Flipped Scripts creation, 2017. </p>
         </div>
-      </li>
-      <li>
-        <img src="/img/duel.jpg" style="height: 800px;"> 
-        <div class="caption right-align">
-          <h3 style="color: black;">Battle Your Enemies</h3>
-        </div>
-      </li>
-      <li>
-        <img src="/img/victory.jpg">
-        <div class="caption center-align">
-          <h3 style="color: black;">Conquer the Land!</h3>
-        </div>
-      </li>
-    </ul>
-  </div>
-  
-<p>A Flipped Scripts creation, 2017. </p>
-</div>
+        <!-- The Modal -->
+        <div id="signup-modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form>
+                    <div class="row">
+                        <div class="medium-6 columns">
+                            <label><h4 style="color: white">Username</h4>
+                      <input type="text" id='signup-username' value='foobar@gmail.com' placeholder="What is your name, Peasant?">
+                  </label>
+                        </div>
+                    </div>
 
-<script src='/js/index.js'></script>
+                    <div class="row">
 
-     <script>
+                        <div class="modal fade" id="signup-modal" role="dialog">
+                            <div class="modal-dialog">
 
-      $(document).ready(function(){
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="padding:35px 50px;">
+                                    </div>
+                                    <div class="modal-body" style="padding:40px 50px;">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                                                <input type="text" class="form-control" id="login-username" value='foobar@gmail.com' placeholder="What is your name, peasant?">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                                                <input type="text" class="form-control" id="login-password" value='123456' placeholder="What is the magic word?">
+                                        </form>
 
-        $('.slider').slider();
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <button type="submit" id="login-submit"> Login</button>
+                                            </div>
+                                            <div class="col s6">
+                                                <button type="button" id="mc-btn" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
 
-         $("#login-btn").click(function(){
-        $("#login-modal").modal();
-      });
-         $('#mc-btn').click(function(){
-             document.getElementById('login-modal').style.display='none';
-         });
-        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-});   
-  
-  </script>
-      
+                        <p>A Flipped Scripts creation, 2017. </p>
+
+
+
+                        <script>
+                            $(document).ready(function() {
+
+
+                                $('.slider').slider();
+
+                                $("#login-btn").click(function() {
+                                    $("#login-modal").modal();
+                                });
+                                $('#mc-btn').click(function() {
+                                    $('#login-modal').modal().hide();
+                                });
+
+
+
 </body>
 
 </html>
