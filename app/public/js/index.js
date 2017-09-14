@@ -38,7 +38,7 @@ var socket;
 // }
 
 // on click submit, send form to server and authenticate with passport.js and initialize io
-$('#login-submit').on('click', function(ev){
+$('#ml-btn').on('click', function(ev){
     ev.preventDefault();
 
     var loginInfo = {
