@@ -6,8 +6,8 @@ $(document).ready(function () {
     // INITIALIZE MATERIALS CSS
     $('select').material_select();
 
-    $('#signup-wrapper').fadeIn('slow');
-    // $("#createSprite").fadeIn('slow');
+    // $('#signup-wrapper').fadeIn('slow');
+    $("#createSprite").fadeIn('slow');
     var male = ["/male/bald_head.jpeg","/male/tormund.jpg","/monsters/orc.jpg", "/monsters/skeleton.jpg"];
     
     var female = ["/female/female-knight.png", "/female/female_archer.png", "/female/female_fighter2.jpg", "/monsters/female-orc.jpg"];

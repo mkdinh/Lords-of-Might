@@ -3,6 +3,11 @@ body {
     -webkit-background-size: cover;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
 h1,
 label,
 input {
@@ -110,20 +115,24 @@ h4 {
 }
 
 #sprite-selection{
-    text-align: center
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .select-wrapper input.select-dropdown,.input-field.row{
     width: 100%;
-    margin: 1rem;
+    margin: 0.60rem auto;
 }
+
+#preview-wrapper{
+    height: 75vh;
+    text-align: center;
+    display:block;
+    padding-left: 2rem;
+}
+
 
 #preview{
-    height: 85vh;
-    text-align: center;
-}
-
-#canvas-wrapper{
     display: block;
     margin: 0;
     background-image: url(/img/woodback.jpg);
@@ -131,10 +140,16 @@ h4 {
     border-style: double;
     border-color: grey;
     height: 300px;
-    border-bottom-left-radius: 45%;
-    border-bottom-right-radius: 45%;
+    /* border-bottom-left-radius: 45%;
+    border-bottom-right-radius: 45%; */
+    overflow: scroll;
+    margin-top: 3rem;
+}
+
+#canvas-wrapper{
+    overflow: hidden;
 }
 
 #create-btn-wrapper{
-    margin-top: 50%
+    margin-top: 5%
 }
