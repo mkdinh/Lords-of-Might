@@ -24,6 +24,8 @@ body{
 .row .col{
   padding: 0
 }
+
+
 #game {
   position:relative;
   margin: 5% auto;
@@ -42,25 +44,52 @@ canvas{
 
 }
 
+#toast-container {
+  bottom: auto !important;
+  left: auto !important;
+  top: 5%;
+  right:30%;  
+}
+
+#load-gif{
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  left: 25%;
+  top: 45%;
+  text-align: center;
+}
+
+.progress{
+  margin: 0;
+  background-color: white;
+  display: none;
+}
+
+.progress .indeterminate{
+ background-color: #ff8f00;
+}
 
 .interaction{
   margin: auto;
   display: none;
   position: absolute;
-  bottom: 5%;
+  bottom: 45%;
   width: 100%;
-  height: 5%;
+  height: 10%;
   z-index: 5
 }
 
+
 .announcement{
+  font-family: 'Varela Round', sans-serif;
   text-align: center;
   font-size: 40px;
   color: #bf4231;
   position: absolute;
-  bottom: 50%;
+  top: 5%;
   width: 100%;
-  height: 5%;
+  height: 10%;
 }
 
 .announcement-item{
@@ -75,7 +104,29 @@ canvas{
 .battle-btn{
   margin: 10px;
 }
+
 #battle-accept,#battle-decline{display:none}
+
+#battle-request{
+  background-color: #9e9e9e;
+}
+#battle-request:hover,#battle-request:focus{
+  background-color: #283593 ;
+}
+
+#battle-accept{
+  background-color: #9e9e9e;
+}
+#battle-accept:hover,#battle-accept:focus{
+  background-color: #2e7d32;
+}
+
+#battle-decline{
+  background-color: #9e9e9e;
+}
+#battle-decline:hover, #battle-decline:focus{
+  background-color: #ef6c00;
+}
 
 .battle-info{
   position: absolute;
@@ -84,15 +135,6 @@ canvas{
   width: 90%;
   height: 30%;
   display:none;
-}
-
-
-#battle-options-btn{
-  /* float: right;
-  margin: 0 5%;
-  font-size: 1rem;
-  width: 32px;
-  height: 32px */
 }
 
 .battle-options{
@@ -104,6 +146,23 @@ canvas{
   height:20%;
   width: 90%;
   display:none
+}
+
+
+#battle-return{
+  position: absolute;
+  width: 20%;
+  height: 10%;
+  left: 40%;
+  top: 45%;
+  font-size: 1.5rem;
+  background-color: #000;
+  display:none;
+  transition: background-color 1s
+}
+
+#battle-return:hover{
+  background-color: #444444
 }
 
 .stats-wrapper{
@@ -122,7 +181,7 @@ canvas{
 
 .stats-hp{
   border: 1px solid black;
-  background-color: #bf4231;
+  background-color: #b71c1c;
   font-size: 1.2rem;
   font-weight: bold;
   padding: .3rem 1rem;
@@ -131,7 +190,7 @@ canvas{
 
 .stats-mp{
   border: 1px solid black;
-  background-color: #191974;
+  background-color: #4a148c;
   font-size: 1.2rem;
   font-weight: bold;
   padding: .3rem 1rem;
@@ -143,11 +202,80 @@ canvas{
   font-size: 1rem;
   text-align: center;
   margin: .5rem;  
-  background-color: #303074 
+}
+
+#attack-btn{
+  background-color: #33691e
+}
+
+#attack-btn:hover,#attack-btn:focus{
+  background-color: #689f38 
+}
+
+#spell-btn{
+  background-color: #4a148c
+}
+
+#spell-btn:hover,#spell-btn:focus{
+  background-color: #673ab7 
+}
+
+#health-btn{
+  background-color: #b71c1c
+}
+
+#health-btn:hover,#health-btn:focus{
+  background-color: #ff1744 
 }
 
 .action-btn:hover,.action-btn:active,.action-btn:focus{
   background-color: #383866
+}
+
+
+/* SHOP STATE */
+.npc-interaction {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+  display:none;
+}
+
+.npc-profile {
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display:none;
+}
+
+.npc-message{
+  max-width: 40%;
+  font-size: 1rem;
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  background-color: rgba(0,0,0,.75);
+  padding: 0 2rem;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 20px;
+  display:none;
+}
+
+.npc-dialog{
+  opacity: 0
+}
+
+#shop-btn{
+  background-color: #ffc107;
+  opacity: 0
+}
+#shop-btn:hover, #shop-btn:focus{
+  background-color: #fdde6a;
 }
 
 /* CHAT BOXES */
@@ -178,6 +306,28 @@ canvas{
   font-size: .8rem;
 }
 
+#user-callsign{
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+#user-progress{
+  font-family: 'Varela Round', sans-serif;
+  font-size: 0.75rem;
+}
+
+#user-level{
+  font-size: 1rem;
+}
+
+#user-name{
+  font-size: 2rem;
+  color: #ff6f00;
+}
+
 #user-stats,#user-equipments,#user-inventories{
   padding: 1rem;
   height: 59vh;
@@ -195,15 +345,15 @@ canvas{
   text-align: center;
   margin: 0.5rem;
   width: 50px;
-  transition: border 0.2s
+  transition: border 0.1s
 }
 
 .invent-item:hover{
-  border: 2px solid red
+  opacity: 0.5
 }
 
 .invent-item.equipped{
-  border: 2px solid green
+  border: 3px solid #558b2f 
 }
 
 #user-currency{
@@ -225,14 +375,15 @@ canvas{
 
 .profile-img{
   position: relative;
-  max-width: 33%;
-  margin: 1rem auto;
+  max-width: 50%;
+  margin: auto;
   display: block
 }
 
 .stats-item,  .equip-item{
   font-weight: bold;
   font-size: .9rem;
+  color: #673ab7
 }
 
 #global-message-box,#private-message-box{
@@ -264,6 +415,12 @@ canvas{
   padding: 1.5rem 0.5rem;
   font-size: .75rem; 
   margin:0 
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid #191974;
+  -webkit-box-shadow: 0 1px 0 0 #191974;
+  box-shadow: 0 1px 0 0 #191974;
 }
 
 input[type=text]:not(.browser-default){

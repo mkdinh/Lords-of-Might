@@ -18,16 +18,46 @@ LoM.interaction = {
         }
         
         if(LoM.eventActive.state === false){
-            console.log('hey')
+            $('.npc-interaction').css('display','inline')
+
             switch(npc.data.name){
+
                 case 'Mysterious Stranger':
-                    LoM.eventActive.state = true
-                    return
-                
+                    var profile = "<img class='npc-profile' src='img/npc/profile-2.png' />"
+                    $('.npc-interaction').append(profile)
+                    $('.npc-profile').fadeIn(500,function(){
+                        var wrapper = $('<div class="npc-message">')
+                        $('.npc-interaction').append(wrapper)
+                        $('.npc-message').fadeIn(500,function(){})
+                        var dialog0 = $('<h5 class="npc-dialog">');
+                        dialog0.text("Tell me...");
+                        $('.npc-message').append(dialog0)
+                        dialog0.animate({opacity:1},'slow');
+                        var dialog1 = 'Have you heard the tragedy of darth plagueis the wise?';
+                        createDialog(1,dialog1)
+                    })
+                    break
+
                 case 'Shop Owner':
-                    console.log('talk to shop owner')
-                    LoM.eventActive.state = true
-                    return           
+                    var profile = "<img class='npc-profile' src='img/npc/profile-1.png' />"
+                    $('.npc-interaction').append(profile)
+                    $('.npc-profile').fadeIn(750,function(){
+                        var text = $('<div class="npc-message">')
+                        text.append('<h5>Welcome to my Shop!</h5>'
+                        +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the pinkie toe.</p>'
+                        +'<p>Now I just look cool in my golden armour and run the store, you want to check out the goods?</p>'
+                        +'</div>')
+                        shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/shop'>Shop</a>"
+                        $('.npc-interaction').append(text);
+                        text.append(shop)
+
+                        text.fadeIn(function(){
+                            setTimeout(function(){
+                                $('#shop-btn').animate({opacity: 1},500)
+                            },500)
+                        })
+                    });
+                    break       
             }
             LoM.eventActive.state = true;
         }
@@ -39,12 +69,12 @@ LoM.interaction = {
         if(LoM.eventActive.state === false){
             if(target.data.id !== this.userInfo.id){
                 
-                LoM[state].battleInfo.initiator = LoM.playerMaster[LoM.userInfo.id]
-                LoM[state].battleInfo.receiver = LoM.playerMaster[target.data.id]
+                LoM.battleInfo.initiator = LoM.userInfo;
+                LoM.battleInfo.receiver = LoM.playerMaster[target.data.id]
                 genBattleInteraction()
                 // setTimeout(function(){removeInteractionDisplay()},10000)
             }else{
-                removeInteractionDisplay()
+                removeInteraction()
                 console.log('why keep hitting yourself?')
                 return;
             }
@@ -61,12 +91,12 @@ LoM.interaction = {
     },
     
     wallCollisions: function(){
-        var state = LoM.userInfo.world.state;
+            // var state = LoM.userInfo.world.state;
 
-        if(!LoM.eventActive.state){
-            console.log('hit a wall')
-            LoM.eventActive.state = true
-        }
+            // if(!LoM.eventActive.state){
+            //     console.log('hit a wall')
+            //     LoM.eventActive.state = true
+            // }
     },
 
     shopInteractions: function(player,building){

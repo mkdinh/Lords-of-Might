@@ -3,6 +3,10 @@ body {
     -webkit-background-size: cover;
 }
 
+.container{
+    width: 50%
+}
+
 #navDiv {
     padding-left: 20px;
     padding-right: 20px;
@@ -11,6 +15,10 @@ body {
     font-family: 'Metamorphous', cursive;
     border-bottom: 1px solid #3f3fa7;
     font-size: 30px;
+}
+
+#username{
+    text-transform: uppercase;
 }
 
 #logoutButton {
@@ -28,72 +36,57 @@ body {
 }
 
 #button-container {
-    padding: 20px;
+    padding: 0px;
+    margin-top: 20px;
+    text-align: center;
 }
 
-#fight {
+.btn{
+    height: auto;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    border: 1px solid #3f3fa7;
+    background-color: rgba(6, 6, 105, 0.8);
     color: white;
-    margin-top: 40px;
-    margin-left: 150px;
     font-size: 40px;
     font-family: 'Metamorphous', cursive;
-    padding: 20px;
-    background-color: rgba(6, 6, 105, 0.8);
-    border: 1px solid #3f3fa7;
     border-radius: 20px;
-    width: 200px;
     outline: none;
 }
 
-#shop {
-    color: white;
-    font-size: 40px;
-    margin-left: 100px;
-    font-family: 'Metamorphous', cursive;
+.btn:hover{
+    background-color: #060669;
     border: 1px solid #3f3fa7;
-    padding: 20px;
+    color: #7979e0;  
+}
+
+#user-info {
+    color: white;
     background-color: rgba(6, 6, 105, 0.8);
-    border-radius: 20px;
-    width: 200px;
-    outline: none;
-}
-
-#shop:hover {
-    background-color: #060669;
-    border: 1px solid #3f3fa7;
-    color: #7979e0;
-}
-
-#fight:hover {
-    background-color: #060669;
-    border: 1px solid #3f3fa7;
-    color: #7979e0;
-}
-
-#statContainer {
-    margin: 30px;
-    margin-top: 40px;
-    color: white;
     font-family: 'Metamorphous', cursive;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #3f3fa7;
 }
 
 #userStat {
-    background-color: rgba(6, 6, 105, 0.8);
-    border-radius: 20px;
-    border: 1px solid #3f3fa7;
-    padding: 20px;
-    width: 36%;
-    float: left;
-    height: 380px;
-    margin-left: 40px;
 }
 
-#image-container {
-    background: url('../img/test-image.jpg')no-repeat center;
-    background-color: rgba(6, 6, 105, 0.8);
-    border-radius: 20px;
-    border: 1px solid #3f3fa7;
-    margin-left: 620px;
-    padding: 40px;
-    height: 380px;
+table tbody tr:nth-child(even),table.striped>tbody>tr:nth-child(odd),table tbody{
+    background-color: rgba(0,0,0,0);
+    border: 0px solid black;
+    color: white;
+}
+
+#profile-container {
+    text-align:center;
+}
+
+#crop{
+    height: 64px;
+    width: 64px;
+    overflow: hidden;
+}
+
+#sprite{
 }

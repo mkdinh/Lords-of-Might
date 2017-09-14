@@ -7,6 +7,7 @@ LoM.eventActive = {state: false};
 LoM.playerMaster = {};
 LoM.spriteMaster = {};
 LoM.userInfo = {};
+LoM.battleInfo = {};
 
 LoM.Boot = function(){};
 
@@ -15,6 +16,7 @@ LoM.Boot.prototype = {
     preload: function(){
         // assets for loading screen
         this.load.image('boot-bg','img/backgrounds/bg-5.jpg')
+        loadingGIF()
         // load game assets
         $.ajax({
             url: '/game/all',

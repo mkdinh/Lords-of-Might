@@ -5,8 +5,10 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
-const models = require('../models');
-const User = models.User;
+const db = require('../models');
+const multer  = require('multer');
+const upload = multer();
+const User = db.User;
 
 
 // CONFIGURE LOCAL STRATEGIES FOR PASSWORD AUTHENTICATION
@@ -31,16 +33,16 @@ function(username, password, done) {
             // console.log(user.get({plain:true}).password)
             return(done(null,user))
 
-            // user.comparePassword(password, function (err,isMatch) {
-            //     if (err) { return done(err); }
-            //     if(!isMatch){
-            //         // console.log('incorrect password')
-            //         return done(null, false, { message: 'Incorrect password.' });
-            //     } else {
-            //         console.log('logged in!')
-            //         return done(null, user);
-            //     }
-            // });
+            user.comparePassword(password, function (err,isMatch) {
+                if (err) { return done(err); }
+                if(!isMatch){
+                    // console.log('incorrect password')
+                    return done(null, false, { message: 'Incorrect password.' });
+                } else {
+                    console.log('logged in!')
+                    return done(null, user);
+                }
+            });
             
         })
         .catch((err) => {
@@ -84,22 +86,43 @@ passport.deserializeUser(function(id, done) {
 
 // SETTING ROUTERS
 // --------------------------------------------------------------------------
-
-router.get('/', require('connect-ensure-login').ensureLoggedIn('login'), function (req, res, next) {
+// require('connect-ensure-login').ensureLoggedIn('login')
+router.get('/', function (req, res, next) {
+    console.log('user page',req.user)
     if (req.user) {
-        res.render('index');
+        db.User.find({
+            where: {id: req.user.id},
+            include: [db.Stats, db.Game_State]
+        }).then(user => {
+            res.render('userPage',{user:user});
+        })
    } else {
         res.redirect('/');
    }
 });
 
-router.post('/new', (req,res) => {
+router.post('/new', upload.single('profile'), (req,res) => {
     var newUser = {
-        username: req.body.username,
-        password: User.generateHash(req.body.password)
+        username: req.body.user.username,
+        password: User.generateHash(req.body.user.password),
+        name: req.body.user.name,
+        profile: req.body.user.profile
     }
 
-    User.create(newUser).then(() => {
+    var sprite = {
+        body: req.body.sprite.body,
+        head: req.body.sprite.head,
+        torso: req.body.sprite.torso,
+        leg: req.body.sprite.leg,
+        weapon: req.body.sprite.spell.weapon
+    };
+
+    User.create(newUser, {
+        include: [
+            {model: db.Sprite},
+            {model: db.Game_State},
+            {model: db.Inventory},
+    ]}).then((user) => {
         res.redirect('/user');
     })
 }); 

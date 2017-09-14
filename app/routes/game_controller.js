@@ -70,20 +70,48 @@ router.put('/inventories/:id', (req,res) => {
 })
 
 router.put('/battle/win/:userid', (req,res) => {
+
+    var gold = randomInt(100,200);
+    var exp = randomInt(200,300);
+
     db.Game_State.find({where: {UserId: req.params.userid}}).then(user => {
-        user.increment('win').then((user) => {
-            res.json(user)
+        user.increment({
+            'win': 1,
+            'gold': gold,
+            'exp': exp
+        }).then((user) => {
+            var rewards = {
+                gold: gold,
+                exp: exp
+            }
+            res.json(rewards)
         })
     })
 })
 
 router.put('/battle/lose/:userid', (req,res) => {
+    
+    var gold = randomInt(50,100);
+    var exp = randomInt(200,300);
+
     db.Game_State.find({where: {UserId: req.params.userid}}).then(user => {
-        user.increment('lose').then((user) => {
-            res.json(user)
+        user.increment({
+            'win': 1,
+            'gold': gold,
+            'exp': exp
+        }).then((user) => {
+            var rewards = {
+                gold: gold,
+                exp: exp
+            }
+            res.json(rewards)
         })
     })
 })
+
+function randomInt (low,high){
+    return Math.floor(Math.random() * (high - low) + low);
+}
 
 
 module.exports = router;

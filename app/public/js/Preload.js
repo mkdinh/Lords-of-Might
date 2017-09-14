@@ -76,9 +76,6 @@ LoM.Preload = {
         }
 
         LoM.userInfo = user;
-        LoM.user.getInventory();
-
-
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------
         LoM.cursor = LoM.game.input.keyboard.createCursorKeys();  
@@ -95,9 +92,9 @@ LoM.Preload = {
             $('#sidebar').fadeIn()
             },300
         )
-
-        Client.userInfoDB(user);
-  
+        LoM.user.getInventory(function(){
+            Client.userInfoDB(user);
+        })
     }
 }
 
@@ -117,11 +114,12 @@ LoM.playerControl.eventListener = function(worldX,worldY){
              var distance = Math.sqrt( Math.pow(dX, 2) + Math.pow(dY, 2));
              if(distance > 20){
                  LoM.eventActive.state = false;
+                 removeInteraction('.interaction')
+                 removeInteraction('.npc-interaction')
                  LoM.eventActive.player = {};
                  LoM.eventActive.target = {};
                  LoM.eventActive.lastLocationSaved = false;
                  console.log('reset event')
-                 removeInteractionDisplay()
              }
          }
      }
@@ -153,6 +151,14 @@ function randomInt (low,high){
     return Math.floor(Math.random() * (high - low) + low);
 }
 
+
+function removeInteraction(div){
+    
+    $(div).fadeOut(function(){
+        $(div).empty();
+    });
+    console.log('hey')
+}
 
 
 var updateStats = function(){

@@ -8,70 +8,57 @@ label,
 input {
     font-family: 'Metamorphous', cursive;
     color: white;
+    text-align:center;
 }
 
 #signup-wrapper {
     border: 1px solid #3f3fa7;
     border-radius: 30px;
-    margin-top: 160px;
-    margin-left: 370px;
-    margin-right: 370px;
-    padding: 30px;
+    margin-top: 4rem;
     background-color: rgba(6, 6, 105, 0.8);
     text-align: center;
     color: white;
     font-family: 'Metamorphous', cursive;
+    display: none;
+    padding: 2rem 4rem;
 }
 
-#button {
-    padding: 20px;
-    outline: none;
-    border-radius: 15px;
-    background-color: #3f3fa7;
-    border: 1px solid #060669;
+#new-user-info{
 }
 
-#button:hover {
-    background-color: rgba(6, 6, 105, 0.8);
+.btn{
+    height: auto;
+    padding: 1rem 2rem;
+    margin: 1rem;
     border: 1px solid #3f3fa7;
+    background-color: rgba(6, 6, 105, 0.8);
+    color: white;
+    font-size: 40px;
+    font-family: 'Metamorphous', cursive;
+    border-radius: 20px;
+    outline: none;
+}
+
+.btn:hover{
+    background-color: #060669;
+    border: 1px solid #3f3fa7;
+    color: #7979e0;  
 }
 
 #sexContainer {
     padding: 10px;
+    display: none;
 }
 
-#male {
-    margin: 10px;
-    padding: 20px;
-    outline: none;
-    border-radius: 15px;
-    background-color: #3f3fa7;
-    border: 1px solid #060669;
-}
-
-#male:hover {
-   background-color: rgba(6, 6, 105, 0.8);
-    border: 1px solid #3f3fa7;
-}
-
-#female{
-    margin: 10px;
-    padding: 20px;
-    outline: none;
-    border-radius: 15px;
-    background-color: #3f3fa7;
-    border: 1px solid #060669;
-}
-#female:hover {
-    background-color: rgba(6, 6, 105, 0.8);
-    border: 1px solid #3f3fa7;
+#male, #female{
+    width: 33%;
 }
 
 #picContainer {
     padding: 10px;
 }
 
-#picOne, #picTwo, #picThree, #picFour {
+.profile-pic{
     height: 100px;
     width: 100px;
     margin: 10px;
@@ -79,25 +66,75 @@ input {
     border-radius: 20px;
 }
 
-#picOne:hover {
-    border: 1px solid white;
-
+.profile-pic:hover{
+    border: 2px solid white;
+    opacity: 0.5
 }
 
-
-#picTwo:hover {
-    border: 1px solid white;
-
+#submitProfile {
+    padding: 20px;
+    outline: none;
+    border-radius: 15px;
+    background-color: #3f3fa7;
+    border: 1px solid #060669;
+    color: white;
 }
 
-
-#picThree:hover {
-    border: 1px solid white;
-
+#submitProfile:hover {
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #3f3fa7;
 }
 
+#createSprite{
+    display: none;
+}
 
-#picFour:hover {
+#testing {
     border: 1px solid white;
+    background-color: blue;
+}
 
+/* SPRITE SECTION */
+
+h2 {
+    font-family: 'Metamorphous', cursive;
+    color: #3f3fa7;
+    font-size: 50px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    margin-bottom: 0px;
+}
+
+h4 {
+    font-family: 'Metamorphous', cursive;
+    color: white;
+}
+
+#sprite-selection{
+    text-align: center
+}
+
+.select-wrapper input.select-dropdown,.input-field.row{
+    width: 100%;
+    margin: 1rem;
+}
+
+#preview{
+    height: 85vh;
+    text-align: center;
+}
+
+#canvas-wrapper{
+    display: block;
+    margin: auto
+}
+
+canvas{
+    background-image: url(/img/woodback.jpg);
+    border-width: 10px;
+    border-style: double;
+    border-color: grey;
+    height: 300px;
+    border-bottom-left-radius: 45%;
+    border-bottom-right-radius: 45%;
+    margin-bottom: 2rem
 }

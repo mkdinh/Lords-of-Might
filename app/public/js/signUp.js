@@ -1,156 +1,89 @@
-var male = [
-    {
-        image: "img/profilePics/male/bald_head.jpeg"
-    },
-    {
-        image: "img/profilePics/male/tormund.jpg"
-    },
-    {
-        image: "img/profilePics/monsters/orc.jpg"
-    },
-    {
-        image: "img/profilePics/monsters/skeleton.jpg"
-    }
-];
 
-var female = [
-    {
-        image: "img/profilePics/female/female-knight.png"
-    },
-    {
-        image: "img/profilePics/female/female_archer.png"
-    },
-    {
-        image: "img/profilePics/female/female_fighter2.jpg"
-    },
-    {
-        image: "img/profilePics/monsters/female-orc.jpg"
-    }
-];
 
-//once user clicks the next button
-
-$("#button").click(function () {
+$(document).ready(function () {
     
-    //removes initial divs and tags
-    $( "label" ).remove();
-    $( "#createName" ).remove();
-    $( "#createPass" ).remove();
-    $(".three").remove();
-    
-    //creating new divs and ids
-    $( "#signup-wrapper" ).append( "<div id=sexContainer>" + "<input id=male type=submit value=MALE >OR " + 
-                                    "<input id=female type=submit value=FEMALE >" + "<div id=picContainer>" +
-                                    "<p>CHOOSE YOUR CHARACTER PROFILE" + "</p>"+ "<img id=picOne>" + 
-                                    "<img id=picTwo>" + "<img id=picThree>" + "<img id=picFour>" +
-                                    "</div>" );
-    
-    
-      //once user clicks the male button
-     $("#male").click(function(){
-        
-        $("#picOne").attr("src", male[0].image);
-        $("#picTwo").attr("src", male[1].image);
-        $("#picThree").attr("src", male[2].image);
-        $("#picFour").attr("src", male[3].image);
-        
-        
-        $("#picOne").click(function(){
-            console.log("Pic One");
-        });
-        $("#picTwo").click(function(){
-            console.log("Pic Two");
-        });
-        $("#picThree").click(function(){
-            console.log("Pic Three");
-        });
-        $("#picFour").click(function(){
-            console.log("Pic Four");
-        });
-         
-         
-          if ($('#picContainer').contents().length !== 0) {
-               
-                  $("#female").click(function(){
-    
+    // INITIALIZE MATERIALS CSS
+    $('select').material_select();
 
-                    $("#picOne").attr("src", female[0].image);
-                    $("#picTwo").attr("src", female[1].image);
-                    $("#picThree").attr("src", female[2].image);
-                    $("#picFour").attr("src", female[3].image);
+    $('#signup-wrapper').fadeIn('slow');
+    // $("#createSprite").fadeIn('slow');
+    var male = ["/male/bald_head.jpeg","/male/tormund.jpg","/monsters/orc.jpg", "/monsters/skeleton.jpg"];
+    
+    var female = ["/female/female-knight.png", "/female/female_archer.png", "/female/female_fighter2.jpg", "/monsters/female-orc.jpg"];
 
+    //once user clicks the next button
 
-                    $("#picOne").click(function(){
-                        console.log("Pic One");
-                    });
-                    $("#picTwo").click(function(){
-                        console.log("Pic Two");
-                    });
-                    $("#picThree").click(function(){
-                        console.log("Pic Three");
-                    });
-                    $("#picFour").click(function(){
-                        console.log("Pic Four");
-                    });
+    $("#button").click(function () {
 
-                });
-              
+        //removes initial divs and tags
+        $('#new-user-info').css('display','none');
+        $('#sexContainer').fadeIn('slow');
+
+        //once user clicks the female button
+        $("#female").click(function(){
+            $("#picture").empty();
+            for(i = 0; i < female.length; i++){
+                $('#picture').prepend('<img data-pic="'+ female[i] +'" class="profile-pic" src="img/profilePics' + female[i] + '"/>')
             }
-         
- 
-    });
-    
-    //once user clicks the female button
-     $("#female").click(function(){
         
-        
-        $("#picOne").attr("src", female[0].image);
-        $("#picTwo").attr("src", female[1].image);
-        $("#picThree").attr("src", female[2].image);
-        $("#picFour").attr("src", female[3].image);
-        
-        
-        $("#picOne").click(function(){
-            console.log("Pic One");
-        });
-        $("#picTwo").click(function(){
-            console.log("Pic Two");
-        });
-        $("#picThree").click(function(){
-            console.log("Pic Three");
-        });
-        $("#picFour").click(function(){
-            console.log("Pic Four");
-        });
-         
-          if ($('#picContainer').contents().length !== 0) {
-               
-                  $("#male").click(function(){
+        }) 
 
-                    $("#picOne").attr("src", male[0].image);
-                    $("#picTwo").attr("src", male[1].image);
-                    $("#picThree").attr("src", male[2].image);
-                    $("#picFour").attr("src", male[3].image);
-
-
-                    $("#picOne").click(function(){
-                        console.log("Pic One");
-                    });
-                    $("#picTwo").click(function(){
-                        console.log("Pic Two");
-                    });
-                    $("#picThree").click(function(){
-                        console.log("Pic Three");
-                    });
-                    $("#picFour").click(function(){
-                        console.log("Pic Four");
-                    });
-
-                });
-              
+        $("#male").click(function(){
+            $("#picture").empty();
+            for(i = 0; i < male.length; i++){
+                $('#picture').prepend('<img data-pic="'+ male[i] +'" class="profile-pic" src="img/profilePics' + male[i] + '"/>')
             }
-         
+        })
+
+        $('#sexContainer').on('click', '.profile-pic', function(){
+            $('#picContainer').empty();
+            $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
+        })
+
+        //hide 
+
+        $("#signup-wrapper").on('click', '#submitProfile', function (ev) {
+            $("#signup-wrapper").hide();
+            $("#createSprite").fadeIn('slow');
+        });
+
     });
-          
-        
+
 });
+
+var sprite = {
+}
+// 
+// get link
+$('select').on('change', function(){
+    console.log($(this).children(':selected').attr('data-link'))
+    var path = $(this).children(':selected').attr('data-link');
+    var part = $(this).children(':selected').attr('data-part');
+    console.log(path)
+    var ctx = document.getElementById('canvas').getContext('2d');
+    // append link to obj
+    sprite[part] = path;
+    var order = ['body','leg','torso','head','feet'];
+
+    // clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    order.forEach(function(part){
+        if(sprite[part] === undefined){
+            console.log('no part')
+        }else{
+            console.log(part)
+            //  create new image
+            var img = new Image();
+    
+            // draw on canvas in specific order
+            //  add link to image
+            img.onload = function() {
+                ctx.drawImage(img,0,128,64,64,0,0,256,256);
+            }
+            img.src = sprite[part]
+            }
+    })
+})
+
+

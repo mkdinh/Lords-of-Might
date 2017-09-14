@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../models');
 
 router.get('/', (req, res) => {
     // var isLoggedIn = !!req.user;
@@ -12,14 +13,19 @@ router.get('/signUp', function (req, res) {
     res.render('signUp')
 })
 
-router.get('/user', function (req, res) {
-     var isLoggedIn = !!req.user;
-    console.log(req.user)
-    res.render('userPage',{
-        loggedIn: isLoggedIn,
-        user: req.user
-    })
+router.get('/shop', function (req, res) {
+    res.render('shop')
 })
+
+
+// router.get('/user', function (req, res) {
+//      var isLoggedIn = !!req.user;
+    
+//     res.render('userPage',{
+//         loggedIn: isLoggedIn,
+//         user: req.user
+//     })
+// })
 
 router.get('/sprite', (req, res) => {
     res.render('sprite')
