@@ -101,29 +101,48 @@ router.get('/', function (req, res, next) {
    }
 });
 
-router.post('/new', upload.single('profile'), (req,res) => {
+router.post('/new', upload.single('profile'), (req,res,next) => {
+
+    var userData = JSON.parse(req.body.newUser)
     var newUser = {
-        username: req.body.user.username,
-        password: User.generateHash(req.body.user.password),
-        name: req.body.user.name,
-        profile: req.body.user.profile
+        username: userData.username,
+        password: User.generateHash(userData.password),
+        name: userData.name,
+        profile: userData.profile
     }
 
-    var sprite = {
-        body: req.body.sprite.body,
-        head: req.body.sprite.head,
-        torso: req.body.sprite.torso,
-        leg: req.body.sprite.leg,
-        weapon: req.body.sprite.spell.weapon
-    };
+    var sprite = userData.sprite;
+    var weapon = {ItemId: userData.item_inventory};
+    var spell = {SpellId: userData.spell_inventory};
 
-    User.create(newUser, {
-        include: [
-            {model: db.Sprite},
-            {model: db.Game_State},
-            {model: db.Inventory},
-    ]}).then((user) => {
-        res.redirect('/user');
+    db.User.create(newUser).then((user) => {
+        var id = user.get('id');
+        sprite.UserId = id;
+        weapon.UserId = id;
+        spell.UserId = id;
+
+        db.Game_State.create({UserId: id}).then(login => {
+            db.Stats.create({UserId: id}).then(stats => {
+                db.Sprite.create(sprite).then(sprite =>{
+                    db.Inventory.create(weapon).then(weapon =>{
+                        db.Spell_Inventory.create(spell).then(spell =>{
+
+                            // var login = {
+                            //     username: user.get('username'),
+                            //     password: user.get('password')
+                            // }
+
+                            res.json(user)
+                            // req.login(login, function(err){
+                            //     if (err) { return res.status(500).send({error:err}) }
+                            //     console.log('hey')
+                            //     res.redirect('/user');
+                            // })
+                        })
+                    })
+                })
+            })
+        })
     })
 }); 
 

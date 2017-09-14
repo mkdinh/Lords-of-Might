@@ -32,20 +32,20 @@
             
             <div id='new-user-info'>
                 <label>EMAIL:</label>
-                <div id="user-email">
-                    <input type=text>
+                <div>
+                    <input  id="user-email" type=text>
                 </div>
 
                 <div>
                     <label>CREATE A USERNAME:</label>
-                    <div id="user-name">
-                        <input type=text>
+                    <div>
+                        <input id="user-name" type=text>
                     </div>
                 </div>
                 <div>
                     <label>MAKE A PASSWORD:</label>
-                    <div id="user-password">
-                        <input type=password>
+                    <div >
+                        <input id="user-password" type=password>
                     </div>
                 </div>
                 <div>
@@ -90,50 +90,48 @@
 
                 <div class="input-field row">
                     <select id='torso'>
-                        <option data-part='torso' data-link="\img\sprites\lpc\torso\leather/chest_male.png"><a>Leather</a></option>
-                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/brown_longsleeve.png"><a>Brown Shirt</a></option>
-                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/maroon_longsleeve.png"><a>Maroon Shirt</a></option>
-                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/teal_longsleeve.png"><a>Teal Shirt</a></option>
-                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/white_longsleeve.png"><a>White Shirt</a></option>
+                        <option data-part='torso' data-link="/img/sprites/lpc/torso/leather/chest_male.png"><a>Leather</a></option>
+                        <option data-part='torso' data-link="/img/sprites/lpc/torso/shirts/longsleeve/male/brown_longsleeve.png"><a>Brown Shirt</a></option>
+                        <option data-part='torso' data-link="/img/sprites/lpc/torso/shirts/longsleeve/male/maroon_longsleeve.png"><a>Maroon Shirt</a></option>
+                        <option data-part='torso' data-link="/img/sprites/lpc/torso/shirts/longsleeve/male/teal_longsleeve.png"><a>Teal Shirt</a></option>
+                        <option data-part='torso' data-link="/img/sprites/lpc/torso/shirts/longsleeve/male/white_longsleeve.png"><a>White Shirt</a></option>
                     </select>
                     <label>Torso</label>
                 </div>
 
                 <div class="input-field row">
                     <select id='leg'>
-                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\red_pants_male.png"><a>Red Pants</a></option>
-                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\magenta_pants_male.png"><a>Magenta Pants</a></option>
-                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\teal_pants_male.png"><a>Teal Pants</a></option>
-                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\white_pants_male.png"><a>White Pants</a></option>
+                        <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/red_pants_male.png"><a>Red Pants</a></option>
+                        <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/magenta_pants_male.png"><a>Magenta Pants</a></option>
+                        <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/teal_pants_male.png"><a>Teal Pants</a></option>
+                        <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/white_pants_male.png"><a>White Pants</a></option>
                     </select>
                     <label>Legs</label>
                 </div>
 
                 <div class="input-field row">
                     <select id='feet'>
-                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\black_shoes_male.png"><a>Black Shoes</a></option>
-                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\brown_shoes_male.png"><a>Brown Shoes</a></option>
-                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\maroon_shoes_male.png"><a>Maroon Shoes</a></option>
-
+                        <option data-part='feet' data-link="img/sprites/lpc/feet/shoes/male/black_shoes_male.png"><a>Black Shoes</a></option>
+                        <option data-part='feet' data-link="img/sprites/lpc/feet/shoes/male/brown_shoes_male.png"><a>Brown Shoes</a></option>
+                        <option data-part='feet' data-link="img/sprites/lpc/feet/shoes/male/maroon_shoes_male.png"><a>Maroon Shoes</a></option>
                     </select>
                     <label>Feets</label>
                 </div>
 
                 <div class="input-field row">
-                    <select id='weapon'>
-                        <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\sword.png"><a>Sword</a></option>
-                        <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\spear_male.png"><a>Spear</a></option>
+                    <select id='weapon-select'>
+                        <option data-part='weapon' data-item="1" data-link="img/sprites/lpc/weapons/right hand/male/sword.png"><a>Sword</a></option>
+                        <option data-part='weapon' data-item="6" data-link="img/sprites/lpc/weapons/right hand/male/spear_male.png"><a>Spear</a></option>
                     </select>
                     <label>Weapon</label>
                 </div>
 
-
                 <div class="input-field row">
-                    <select id='weapon'>
-                        <option data-part='spell' data-link="img\spells\fire.png"><a>Fireball</a></option>
-                        <option data-part='spell' data-link="img\spells\ice.png"><a>Ice Blast</a></option>
-                        <option data-part='spell' data-link="img\spells\poison.png"><a>Poison Discharge</a></option>
-                        <option data-part='spell' data-link="img\spells\shadow.png"><a>Shadow Bomb</a></option>
+                    <select id='spell-select'>
+                        <option data-part='spell' data-spell='3' data-link="img/spells/fire.png"><a>Fireball</a></option>
+                        <option data-part='spell' data-spell='1' data-link="img/spells/ice.png"><a>Ice Blast</a></option>
+                        <option data-part='spell' data-spell='2' data-link="img/spells/poison.png"><a>Poison Discharge</a></option>
+                        <option data-part='spell' data-spell='4' data-link="img/spells/shadow.png"><a>Shadow Bomb</a></option>
                     </select>
                     <label>Spells</label>
                 </div>

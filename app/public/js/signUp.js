@@ -1,7 +1,8 @@
 
 
 $(document).ready(function () {
-    
+    var newUser = {};
+
     // INITIALIZE MATERIALS CSS
     $('select').material_select();
 
@@ -11,9 +12,13 @@ $(document).ready(function () {
     
     var female = ["/female/female-knight.png", "/female/female_archer.png", "/female/female_fighter2.jpg", "/monsters/female-orc.jpg"];
 
-    //once user clicks the next button
+    //once newUser clicks the next button
 
     $("#button").click(function () {
+
+        newUser.username = $('#user-email').val().trim();
+        newUser.password = $('#user-password').val().trim();
+        newUser.name = $('#user-name').val().trim();
 
         //removes initial divs and tags
         $('#new-user-info').css('display','none');
@@ -36,6 +41,7 @@ $(document).ready(function () {
         })
 
         $('#sexContainer').on('click', '.profile-pic', function(){
+            newUser.profile = $(this).attr('data-pic');
             $('#picContainer').empty();
             $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
         })
@@ -49,41 +55,84 @@ $(document).ready(function () {
 
     });
 
+    newUser.sprite = {}
+    // 
+    // get link
+    $('select').on('change', function(){
+        console.log($(this).children(':selected').attr('data-link'))
+        var path = $(this).children(':selected').attr('data-link');
+        var part = $(this).children(':selected').attr('data-part');
+        console.log(path)
+        var ctx = document.getElementById('canvas').getContext('2d');
+        // append link to obj
+        newUser.sprite[part] = path;
+        var order = ['body','leg','torso','head','feet'];
+
+        // clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        order.forEach(function(part){
+            if(newUser.sprite[part] === undefined){
+                console.log('no part')
+            }else{
+                console.log(part)
+                //  create new image
+                var img = new Image();
+        
+                // draw on canvas in specific order
+                //  add link to image
+                img.onload = function() {
+                    ctx.drawImage(img,0,128,64,64,0,0,256,256);
+                }
+                img.src = newUser.sprite[part]
+                }
+        })
+    })
+
+
+    // COMPILING USER INFO
+    $('#weapon-select').on('change', function(){
+        weapon = $(this).children(':selected').attr('data-item');
+        newUser.item_inventory = weapon
+    })
+
+    $('#spell-select').on('change', function(){
+        spell = $(this).children(':selected').attr('data-spell');
+        newUser.spell_inventory = spell
+    })
+
+    $('#create').on('click', function(){
+        console.log(newUser)
+        $.ajax({
+            url: '/user/new',
+            method: 'POST',
+            dataType: 'json',
+            data: {newUser: JSON.stringify(newUser)},
+            success: function(user){
+                console.log(user)
+                var login = {
+                    username: user.username,
+                    password: newUser.password
+                }
+
+                $.ajax({
+                    url: '/user/login',
+                    method: "POST",
+                    dataType: 'json',
+                    data: login,
+                    success: function(){
+                        window.location.replace('/user')
+                    }
+                })
+            },
+            error: function(xhr,status,error){
+                console.log(error)
+            }
+        })
+    })
+
 });
 
-var sprite = {
-}
-// 
-// get link
-$('select').on('change', function(){
-    console.log($(this).children(':selected').attr('data-link'))
-    var path = $(this).children(':selected').attr('data-link');
-    var part = $(this).children(':selected').attr('data-part');
-    console.log(path)
-    var ctx = document.getElementById('canvas').getContext('2d');
-    // append link to obj
-    sprite[part] = path;
-    var order = ['body','leg','torso','head','feet'];
 
-    // clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-    order.forEach(function(part){
-        if(sprite[part] === undefined){
-            console.log('no part')
-        }else{
-            console.log(part)
-            //  create new image
-            var img = new Image();
-    
-            // draw on canvas in specific order
-            //  add link to image
-            img.onload = function() {
-                ctx.drawImage(img,0,128,64,64,0,0,256,256);
-            }
-            img.src = sprite[part]
-            }
-    })
-})
 
 
