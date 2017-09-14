@@ -153,12 +153,11 @@ function randomInt (low,high){
 
 
 function removeInteraction(div){
-    console.log(div)
+    
     $(div).fadeOut(function(){
         $(div).empty();
     });
     console.log('hey')
-    $(div).fadeIn();
 }
 
 

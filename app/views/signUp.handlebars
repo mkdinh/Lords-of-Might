@@ -4,63 +4,155 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/signUp.css" />
     <!-- Lord of Might Font-->
     <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
     <title>Sign Up - Lords of Might</title>
+    <style>
+        button {
+            font-size: 25px
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <div class="row">
-        <div id='signup-wrapper'>
+    {{!-- <audio autoplay loop>
+        <source src="/audio/create_signup.mp3" type="audio/mpeg" />
+    </audio> --}}
+    <div class='container'>
+        <div class='row' id='signup-wrapper'>
             <h1>JOIN LORDS OF MIGHT</h1>
+            
+            <div id='new-user-info'>
+                <label>EMAIL:</label>
+                <div id="user-email">
+                    <input type=text>
+                </div>
 
-            <form action="/users/new" method="post" autocomplete="off">
-                <div>
-                    <label>EMAIL:</label>
-                    <div id="createEmail">
-                        <input type=text>
-                    </div>
-                </div>
-                 <div>
-                    <label>FULL NAME:</label>
-                    <div id="createName">
-                        <input type=text>
-                    </div>
-                </div>
                 <div>
                     <label>CREATE A USERNAME:</label>
-                    <div id="createNickname">
+                    <div id="user-name">
                         <input type=text>
                     </div>
                 </div>
                 <div>
                     <label>MAKE A PASSWORD:</label>
-                    <div id="createPass">
+                    <div id="user-password">
                         <input type=password>
                     </div>
                 </div>
                 <div>
-                    <input class="three" id="button" type="submit" value="NEXT" />
+                    <a class="waves-effect waves-light btn" id="button"> Next</a>
                 </div>
-            </form>
+            </div>
+
+            <div id='sexContainer'>
+                <p>CHOOSE YOUR CHARACTER PROFILE</p>
+                <a class="waves-effect waves-light btn" id="male">Male</a>OR  <a class="waves-effect waves-light btn" id="female">Female</a>
+                <div id='picContainer'>
+                    <div id='picture'></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="createSprite" class="row">
+            <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
+
+            <div class='col s6 offset-s1' id='sprite-selection'>
+
+                <div class="input-field row">
+                    <select id='body'>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/male/light.png"><a>Human</a></option>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png"><a>Skeleton</a></option>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/male/orc.png"><a>Orc</a></option>
+                        {{!-- <option data-part="body" data-link="/img/sprites/lpc/body/female/light.png"><a>Human Female</a></option>
+                        <option data-part="body" data-link="/img/sprites/lpc/body/female/orc.png"><a>Orc Female</a></option> --}}
+                    </select>
+                    <label>Body Type</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='head'>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png"><a>Chainmail</a></option>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png"><a>Cap</a></option>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png"><a>Hat</a></option>
+                        <option data-part="head" data-link="/img/sprites/lpc/head/helms/male/metal_helm_male.png"><a>Silver Helmet</a></option>
+                    </select>
+                    <label>Head Type</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='torso'>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\leather/chest_male.png"><a>Leather</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/brown_longsleeve.png"><a>Brown Shirt</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/maroon_longsleeve.png"><a>Maroon Shirt</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/teal_longsleeve.png"><a>Teal Shirt</a></option>
+                        <option data-part='torso' data-link="\img\sprites\lpc\torso\shirts/longsleeve/male/white_longsleeve.png"><a>White Shirt</a></option>
+                    </select>
+                    <label>Torso</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='leg'>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\red_pants_male.png"><a>Red Pants</a></option>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\magenta_pants_male.png"><a>Magenta Pants</a></option>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\teal_pants_male.png"><a>Teal Pants</a></option>
+                        <option data-part='leg' data-link="img\sprites\lpc\legs\pants\male\white_pants_male.png"><a>White Pants</a></option>
+                    </select>
+                    <label>Legs</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='feet'>
+                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\black_shoes_male.png"><a>Black Shoes</a></option>
+                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\brown_shoes_male.png"><a>Brown Shoes</a></option>
+                        <option data-part='feet' data-link="img\sprites\lpc\feet\shoes\male\maroon_shoes_male.png"><a>Maroon Shoes</a></option>
+
+                    </select>
+                    <label>Feets</label>
+                </div>
+
+                <div class="input-field row">
+                    <select id='weapon'>
+                        <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\sword.png"><a>Sword</a></option>
+                        <option data-part='weapon' data-link="img\sprites\lpc\weapons\right hand\male\spear_male.png"><a>Spear</a></option>
+                    </select>
+                    <label>Weapon</label>
+                </div>
+
+
+                <div class="input-field row">
+                    <select id='weapon'>
+                        <option data-part='spell' data-link="img\spells\fire.png"><a>Fireball</a></option>
+                        <option data-part='spell' data-link="img\spells\ice.png"><a>Ice Blast</a></option>
+                        <option data-part='spell' data-link="img\spells\poison.png"><a>Poison Discharge</a></option>
+                        <option data-part='spell' data-link="img\spells\shadow.png"><a>Shadow Bomb</a></option>
+                    </select>
+                    <label>Spells</label>
+                </div>
+
+
+
+            </div>
+
+            <div class="col s5 valign-wrapper" id='preview'>
+                <div id='canvas-wrapper'>
+                    <canvas id='canvas' width='250' height='250'></canvas>
+                    <div>
+                        <a class="waves-effect waves-light btn" id="create">Create</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Foundation JQuery-->
-    <script src="css/foundation/js/vendor/jquery.js"></script>
-
-    <!-- Foundation JavaScript-->
-    <script src="css/foundation/js/vendor/foundation.min.js"></script>
-
-    <script>
-        $(document).foundation();
-
-    </script>
     <script src='/js/signUp.js'></script>
 
 </body>

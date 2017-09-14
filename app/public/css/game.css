@@ -240,7 +240,8 @@ canvas{
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 6
+  z-index: 6;
+  display:none;
 }
 
 .npc-profile {
@@ -265,9 +266,16 @@ canvas{
   display:none;
 }
 
+.npc-dialog{
+  opacity: 0
+}
+
 #shop-btn{
   background-color: #ffc107;
   opacity: 0
+}
+#shop-btn:hover, #shop-btn:focus{
+  background-color: #fdde6a;
 }
 
 /* CHAT BOXES */
@@ -302,13 +310,22 @@ canvas{
   width: 100%;
   text-align: center;
   font-weight: bold;
-  font-size: 1.5rem;
-  color: #ff6f00;
+  margin-bottom: 10px;
   font-family: 'Varela Round', sans-serif;
 }
 
-#user-name,#user-level{
- 
+#user-progress{
+  font-family: 'Varela Round', sans-serif;
+  font-size: 0.75rem;
+}
+
+#user-level{
+  font-size: 1rem;
+}
+
+#user-name{
+  font-size: 2rem;
+  color: #ff6f00;
 }
 
 #user-stats,#user-equipments,#user-inventories{
@@ -328,15 +345,15 @@ canvas{
   text-align: center;
   margin: 0.5rem;
   width: 50px;
-  transition: border 0.2s
+  transition: border 0.1s
 }
 
 .invent-item:hover{
-  border: 2px solid red
+  opacity: 0.5
 }
 
 .invent-item.equipped{
-  border: 2px solid green
+  border: 3px solid #558b2f 
 }
 
 #user-currency{
@@ -358,8 +375,8 @@ canvas{
 
 .profile-img{
   position: relative;
-  max-width: 33%;
-  margin: 1rem auto;
+  max-width: 50%;
+  margin: auto;
   display: block
 }
 
@@ -398,6 +415,12 @@ canvas{
   padding: 1.5rem 0.5rem;
   font-size: .75rem; 
   margin:0 
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid #191974;
+  -webkit-box-shadow: 0 1px 0 0 #191974;
+  box-shadow: 0 1px 0 0 #191974;
 }
 
 input[type=text]:not(.browser-default){

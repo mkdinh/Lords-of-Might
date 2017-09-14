@@ -1,47 +1,44 @@
-body{
-	font-family: 'Metamorphous', cursive;
-	background: url("../img/preloadBG.jpg")no-repeat center center fixed;
+body {
+    font-family: 'Metamorphous', cursive;
+    background: url("../img/preloadBG.jpg")no-repeat center center fixed;
     -webkit-background-size: cover;
 }
 
-
-
 h2 {
-	font-family: 'Metamorphous', cursive;
-	color: #3f3fa7;
-	font-size: 70px;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-	margin-bottom: 0px;
+    font-family: 'Metamorphous', cursive;
+    color: #3f3fa7;
+    font-size: 70px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    margin-bottom: 0px;
 }
 
-h4{
-    font-family: 'Metamorphous', cursive;	
-	color:white;
+h4 {
+    font-family: 'Metamorphous', cursive;
+    color: white;
 }
-
 
 p {
-	color: white;
+    color: white;
 }
 
-button{
-	color: white;
-	padding: 5px;
-	margin-bottom: 5px;
-	margin-top: 5px;
+button {
+    color: white;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     outline: none;
     border-radius: 15px;
     background-color: #3f3fa7;
     border: 1px solid #060669;
 }
 
-button:hover{
-	background-color: rgba(6, 6, 105, 0.8);
+button:hover {
+    background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid #3f3fa7;
 }
 
 .material-icons {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 #canvas {
@@ -56,30 +53,31 @@ button:hover{
 	padding-top: 10px;
 	border-bottom-left-radius: 45%;
 	border-bottom-right-radius: 45%;
-
 }
 
+
+
 /* Style The Dropdown Button */
+
 .dropbtn {
     color: white;
-	padding: 5px;
-	margin-bottom: 5px;
-	margin-top: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     outline: none;
     border-radius: 15px;
     background-color: #3f3fa7;
     border: 1px solid #060669;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
+
 .dropdown-content {
-    display: none;
+    
     position: absolute;
     background-color: grey;
     min-width: 160px;
@@ -88,7 +86,7 @@ button:hover{
     border-radius: 5%;
 }
 
-/* Links inside the dropdown */
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -96,15 +94,23 @@ button:hover{
     display: block;
 }
 
+
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
 
 /* Show the dropdown menu on hover */
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
+
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+

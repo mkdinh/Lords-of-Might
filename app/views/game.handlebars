@@ -1,16 +1,8 @@
 
   <head>
         <meta charset="UTF-8">
-        <!-- Style -->
         <!-- Compiled and minified CSS -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Varela+Round" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="/css/game.css">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         
         <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
         <link rel='stylesheet' type='text/css' href='css/game.css'>
@@ -60,10 +52,14 @@
             </div>
 
             <div id="user-stats" class="tab-item col s12">
-              <div id='user-callsign'>
-                <span id='user-name'></span>  <span id='user-level'></span>
+              <div id='user-callsign' class='row valign-wrapper'>
+              <div id='user-profile' class='col s6'></div>
+                <div class='col s6'>
+                  <div><span id='user-name' class='truncate'></span></div>
+                  <div>Level: <span id='user-level'></span></div>
+                  <div id='user-progress'>Exp: <span id='user-exp'></div>
+                </div>
               </div>
-              <div id='user-profile'></div>
               
               <table class='striped'>
                 <tbody>

@@ -18,32 +18,45 @@ LoM.interaction = {
         }
         
         if(LoM.eventActive.state === false){
-            console.log(npc)
+            $('.npc-interaction').css('display','inline')
+
             switch(npc.data.name){
+
                 case 'Mysterious Stranger':
-                    LoM.eventActive.state = true
+                    var profile = "<img class='npc-profile' src='img/npc/profile-2.png' />"
+                    $('.npc-interaction').append(profile)
+                    $('.npc-profile').fadeIn(500,function(){
+                        var wrapper = $('<div class="npc-message">')
+                        $('.npc-interaction').append(wrapper)
+                        $('.npc-message').fadeIn(500,function(){})
+                        var dialog0 = $('<h5 class="npc-dialog">');
+                        dialog0.text("Tell me...");
+                        $('.npc-message').append(dialog0)
+                        dialog0.animate({opacity:1},'slow');
+                        var dialog1 = 'Have you heard the tragedy of darth plagueis the wise?';
+                        createDialog(1,dialog1)
+                    })
                     break
 
                 case 'Shop Owner':
                     var profile = "<img class='npc-profile' src='img/npc/profile-1.png' />"
                     $('.npc-interaction').append(profile)
-                    $('.npc-profile').fadeIn(1000,function(){
+                    $('.npc-profile').fadeIn(750,function(){
                         var text = $('<div class="npc-message">')
                         text.append('<h5>Welcome to my Shop!</h5>'
-                        +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the knee</p>'
+                        +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the pinkie toe.</p>'
                         +'<p>Now I just look cool in my golden armour and run the store, you want to check out the goods?</p>'
                         +'</div>')
-                        shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/'>Shop</a>"
+                        shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/shop'>Shop</a>"
                         $('.npc-interaction').append(text);
                         text.append(shop)
 
                         text.fadeIn(function(){
                             setTimeout(function(){
-                                $('#shop-btn').animate({opacity: 1},1000)
-                            },1000)
+                                $('#shop-btn').animate({opacity: 1},500)
+                            },500)
                         })
                     });
-                    LoM.eventActive.state = true
                     break       
             }
             LoM.eventActive.state = true;
@@ -61,7 +74,7 @@ LoM.interaction = {
                 genBattleInteraction()
                 // setTimeout(function(){removeInteractionDisplay()},10000)
             }else{
-                removeInteractionDisplay()
+                removeInteraction()
                 console.log('why keep hitting yourself?')
                 return;
             }

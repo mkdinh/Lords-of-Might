@@ -149,11 +149,13 @@ LoM.user = {
         let profile = LoM.userInfo.profile;
         let win = LoM.userInfo.game_state.win;
         let lose = LoM.userInfo.game_state.lose;
+        let exp = LoM.userInfo.game_state.exp;
 
         $('#user-name').html(name)
-        $('#user-profile').html("<img class='profile-img' src='"+profile+"'/>")
-        $('#user-level').html('(' + level + ')')
+        $('#user-profile').html("<img class='profile-img card' src='/img/profilePics/monsters/"+ LoM.userInfo.profile +"'/>")
+        $('#user-level').html(level)
         $('#user-win').html(win)
         $('#user-lose').html(lose)
+        $('#user-exp').html(exp)
     }
 }

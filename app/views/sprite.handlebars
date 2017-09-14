@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-        <!-- Materialize CSS -->
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/sprite.css"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/sprite.css" />
+    <!-- Lords of Might Font-->
+    <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+    <title>Customization - Lords of Might</title>
+    <style>
+        button {
+            font-size: 25px
+        }
 
-        <!-- Lords of Might Font-->
-        <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
-
-        <title>Customization - Lords of Might</title>
-        <style>
-            button {
-                font-size: 25px
-            }
-        </style>
-    </head>
+    </style>
+</head>
 
 <body>
     <audio autoplay loop>
         <source src="/audio/create_signup.mp3" type="audio/mpeg" />
     </audio>
+
       
 <div class="row">
     <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
@@ -37,7 +36,7 @@
             <a class='dropdown-button btn dropbtn' href='#' data-activates='dropdown1'>Select</a>
 
             <!-- Dropdown Structure -->
-            <ul id='dropdown1' class='dropdown-content'>
+        <ul id='dropdown1' class='dropdown-content'>
             <li>
             <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/light.png">
                 Human</button></a></li>
@@ -54,7 +53,7 @@
                 </button>
             <li><button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/orc.png">Orc Female
                 </button></li>
-            </ul>
+        </ul>
             
             
             <h4>Headgear</h4>
@@ -76,8 +75,8 @@
                 </li>
             </ul>
 
-
             <h4>Accessories</h4>
+
 
             <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown3'>Select</a>
 
@@ -114,17 +113,15 @@
             </li>
             <li><button type='submit' id='undo-weapon'>Undo weapon</button>
             </li>
-
             </ul>
-        
+
         </div>
-        
+
         <div class="col s6">
-
-        <canvas id='canvas' width='250' height='250'></canvas>
-
+            <canvas id='canvas' width='250' height='250'></canvas>
         </div>
 
+</div>
 
             
 </div>
@@ -135,6 +132,9 @@
         
             $('.dropdown-button').dropdown('open')
          </script>
+
+    </div>
+
 </body>
 
 </html>
