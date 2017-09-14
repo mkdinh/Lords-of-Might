@@ -6,11 +6,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 const db = require('../models');
-const multer  = require('multer');
 const path = require('path');
-const upload = multer({
-    dest: path.join(__dirname,'app/public/img/users/')
-    }).single('profile');
 const User = db.User;
 
 
@@ -39,7 +35,7 @@ function(username, password, done) {
             user.comparePassword(password, function (err,isMatch) {
                 if (err) { return done(err); }
                 if(!isMatch){
-                    // console.log('incorrect password')
+                    console.log('incorrect password')
                     return done(null, false, { message: 'Incorrect password.' });
                 } else {
                     console.log('logged in!')
@@ -50,7 +46,7 @@ function(username, password, done) {
         })
         .catch((err) => {
             if (err) {
-                // console.log(err);
+                console.log(err);
                 return done(err); 
             }
        });
@@ -69,7 +65,8 @@ function(username, password, done) {
 // deserializing.
 
 passport.serializeUser(function(user, done) {
-    // console.log('serializing')
+    console.log(user)
+    console.log('serializing')
     return done(null, user.id);
 });
 
@@ -111,43 +108,35 @@ router.post('/new', (req,res,next) => {
         username: userData.username,
         password: User.generateHash(userData.password),
         name: userData.name,
-        profile: userData.profile
+        profile: userData.profile,
+        Game_State: [{}],
+        Stat: [{}],
+        Sprite: userData.sprite,
+        Inventories: [{ItemId: userData.item_inventory},{ItemId: 2}, {ItemId: 3}],
+        Spell_Inventories: [{SpellId: userData.spell_inventory, equipped: true}]
     }
 
-    var sprite = userData.sprite;
-    var weapon = {ItemId: userData.item_inventory};
-    var spell = {SpellId: userData.spell_inventory};
 
-    db.User.create(newUser).then((user) => {
-        var id = user.get('id');
-        sprite.UserId = id;
-        weapon.UserId = id;
-        spell.UserId = id;
+    db.User.create(newUser,{include: [db.Game_State, db.Stats, db.Sprite, db.Inventory, db.Spell_Inventory]}).then((user) => {
+       
+        require("fs").appendFile(path.join(__dirname,"../public/img/users/user-"+user.id+".png"), userData.spritesheet, 'base64', function(err) {
+            res.json(user)
+            // var loginInfo = {
+            //     username: userData.username,
+            //     password: userData.password,
+            //     id: user.id
+            // }
 
-        db.Game_State.create({UserId: id}).then(login => {
-            db.Stats.create({UserId: id}).then(stats => {
-                db.Sprite.create(sprite).then(sprite =>{
-                    db.Inventory.create(weapon).then(weapon =>{
-                        db.Spell_Inventory.create(spell).then(spell =>{
+            // passport.authenticate('local', function(err, loginInfo, info) {
+            //     req.logIn(loginInfo, function(err) {
+            //         if (err) { console.log(err); return}
+            //         res.redirect('/user')
+            //     })
+            // })(req, res, next);
 
-                            // var login = {
-                            //     username: user.get('username'),
-                            //     password: user.get('password')
-                            // }
-
-                            res.json(user)
-                            // req.login(login, function(err){
-                            //     if (err) { return res.status(500).send({error:err}) }
-                            //     console.log('hey')
-                            //     res.redirect('/user');
-                            // })
-                        })  
-                    })
-                })
-            })
-        })
-    })
-}); 
+        });
+    });
+})
 
 router.get('/login', function (req, res) {
     res.render('login');
@@ -176,28 +165,4 @@ router.post('/logout', function (req, res) {
     res.send({message: "Successfully signed out!"})
 });
 
-router.post('/profile', function(req,res){
-    var imgData = req.body.profile;
-    var userId = req.body.userId;
-
-    require("fs").appendFile(path.join(__dirname,"../public/img/users/user-"+userId+".png"), imgData, 'base64', function(err) {
-       res.json({success: 'uploaded sprite!'})
-    });
-})
-
 module.exports = router;
-
-// ,
-// onFileUploadStart: function (file) {
-//     console.log(file.originalname + ' is starting ...')
-// },
-// limits: {
-//     files: 1
-// },
-// onFileUploadComplete: function (file) {
-//     console.log(file.fieldname + ' uploaded to  ' + file.path)
-//     imageUploaded=true;
-//     console.log(req.files);
-//     res.redirect('/user');
-// }
-// }

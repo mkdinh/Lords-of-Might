@@ -6,8 +6,8 @@ $(document).ready(function () {
     // INITIALIZE MATERIALS CSS
     $('select').material_select();
 
-    // $('#signup-wrapper').fadeIn('slow');
-    $("#createSprite").fadeIn('slow');
+    $('#signup-wrapper').fadeIn('slow');
+    // $("#createSprite").fadeIn('slow');
     var male = ["/male/bald_head.jpeg","/male/tormund.jpg","/monsters/orc.jpg", "/monsters/skeleton.jpg"];
     
     var female = ["/female/female-knight.png", "/female/female_archer.png", "/female/female_fighter2.jpg", "/monsters/female-orc.jpg"];
@@ -102,39 +102,21 @@ $(document).ready(function () {
     })
 
     $('#create').on('click', function(){
+        var imgData = getImageData();
+        newUser.spritesheet = imgData;
+
         $.ajax({
             url: '/user/new',
             method: 'POST',
             dataType: 'json',
             data: {newUser: JSON.stringify(newUser)},
             success: function(user){
-
-                var imgData = getImageData();
-                console.log(imgData)
-                $.ajax({
-                    url: '/user/profile',
-                    method: "POST",
-                    dataType: 'json',
-                    data: {profile: imgData,userId: user.id},
-                    success: function(){
-           
-                        var login = {
-                            username: user.username,
-                            password: newUser.password
-                        }
-
-                        $.ajax({
-                            url: '/user/login',
-                            method: "POST",
-                            dataType: 'json',
-                            data: login,
-                            success: function(){
-                                window.location.replace('/user')
-                            }
-                        })
-
-                    }
-                })
+                var loginInfo = {
+                    username: newUser.username,
+                    password: newUser.password,
+                    user_id: user.id
+                }
+                autoLogin(loginInfo)
             },
             error: function(xhr,status,error){
                 console.log(error)
@@ -157,6 +139,18 @@ $(document).ready(function () {
     }
 
 });
+
+function autoLogin(info){
+    $.ajax({
+        url: '/user/login',
+        method: 'POST',
+        data: info,
+        success: function(){
+            localStorage.setItem('user',JSON.stringify(info));
+            window.location.replace("/user")
+        }
+    })
+}
 
 
 
