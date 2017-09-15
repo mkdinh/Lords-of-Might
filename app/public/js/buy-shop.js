@@ -108,7 +108,7 @@ $("#boots").click(function () {
 
     })
 
-    $(".bootItem").click(function () {
+    $(".bootsItem").click(function () {
 
         if ($('#buyItem').contents().length === 0) {
 

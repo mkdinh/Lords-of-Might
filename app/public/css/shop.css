@@ -51,6 +51,7 @@ h1 {
 #buyItem {
     margin-bottom: 15px;
     height: 80px;
+    pointer-events: none;
 }
 
 #home {
