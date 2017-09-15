@@ -94,24 +94,23 @@ require(path.join(__dirname, './app/ws/battleSIO.js'))(io);
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
 var restart = false;
-<<<<<<< HEAD
+<< << << < HEAD
 //var restart = true;
 if (restart) {
     db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {
             raw: true
         })
         .then(function (result) {
-            db.sequelize.sync({
-                force: true
-            }).then(() => {
-                //from file 
-                sequelize_fixtures.loadFiles(['./app/fixtures/User1.json', './app/fixtures/User2.json', './app/fixtures/Items.json', './app/fixtures/Spells.json'], db).then(function () {
-                    server.listen(port, () => {
-                        console.log('listen to port', port)
-                    })
-=======
-// var restart = true;
-
+                db.sequelize.sync({
+                        force: true
+                    }).then(() => {
+                            //from file 
+                            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json', './app/fixtures/User2.json', './app/fixtures/Items.json', './app/fixtures/Spells.json'], db).then(function () {
+                                        server.listen(port, () => {
+                                                console.log('listen to port', port)
+                                            }) ===
+                                            === =
+                                        // var restart = true;
 if(restart){
     db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
     .then(function(result){
