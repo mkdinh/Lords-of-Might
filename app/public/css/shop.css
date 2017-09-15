@@ -266,7 +266,7 @@ img {
 
 /*Items design*/
 
-#swordItem {
+.swordItem {
     width: 64px;
     height: 64px;
     border: none;
@@ -275,7 +275,7 @@ img {
     margin: 2px;
 }
 
-#helmetItem {
+.helmetItem {
     width: 64px;
     height: 64px;
     border: none;
@@ -284,7 +284,7 @@ img {
     margin: 2px;
 }
 
-#legItem {
+.legItem {
     width: 64px;
     height: 64px;
     border: none;
@@ -293,7 +293,7 @@ img {
     margin: 2px;
 }
 
-#bootsItem {
+.bootsItem {
     width: 64px;
     height: 64px;
     border: none;
@@ -302,7 +302,7 @@ img {
     margin: 2px;
 }
 
-#armorItem {
+.armorsItem {
     width: 64px;
     height: 64px;
     border: none;
@@ -314,31 +314,31 @@ img {
 
 /*Items hover design*/
 
-#swordItem:hover {
+.swordItem:hover {
     border: solid #3f3fa7;
     width: 62px;
     height: 62px;
 }
 
-#legItem:hover {
+.legItem:hover {
     border: solid #3f3fa7;
     width: 62px;
     height: 62px;
 }
 
-#bootsItem:hover {
+.bootsItem:hover {
     border: solid #3f3fa7;
     width: 62px;
     height: 62px;
 }
 
-#armorItem:hover {
+.armorsItem:hover {
     border: solid #3f3fa7;
     width: 62px;
     height: 62px;
 }
 
-#helmetItem:hover {
+.helmetItem:hover {
     border: solid #3f3fa7;
     width: 62px;
     height: 62px;
