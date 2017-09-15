@@ -16,11 +16,13 @@ $("#sword").click(function () {
     $("#itemHere").empty();
 
     swordsArray.forEach(function (item) {
-        $('#itemHere').append('<img id=swordItem src="/img/items/item-' + item + '.png"/>')
+        $('#itemHere').append('<img class=swordItem src="/img/items/item-' + item + '.png"/>')
 
         if (true) {
-            $("#swordItem").click(function () {
-                console.log($(this).attr('src'))
+            $(".swordItem").click(function () {
+
+                $("#buyItem").append($(this))
+
             });
         }
     })
@@ -39,7 +41,17 @@ $("#helmet").click(function () {
     $("#itemHere").empty();
 
     helmetsArray.forEach(function (item) {
-        $('#itemHere').append('<img id=helmetItem src="/img/items/item-' + item + '.png"/>')
+        $('#itemHere').append('<img class=helmetItem src="/img/items/item-' + item + '.png"/>')
+
+        if (true) {
+
+            $(".helmetItem").click(function () {
+
+                $("#buyItem").append($(this))
+
+            });
+        }
+
     })
 })
 
@@ -53,7 +65,16 @@ $("#legs").click(function () {
     $("#itemHere").empty();
 
     legsArray.forEach(function (item) {
-        $('#itemHere').append('<img id=legItem src="/img/items/item-' + item + '.png"/>')
+        $('#itemHere').append('<img class=legItem src="/img/items/item-' + item + '.png"/>')
+
+        if (true) {
+            $(".legItem").click(function () {
+
+                $("#buyItem").append($(this))
+
+            });
+        }
+
     })
 
 });
@@ -68,7 +89,15 @@ $("#boots").click(function () {
     $("#itemHere").empty();
 
     bootsArray.forEach(function (item) {
-        $('#itemHere').append('<img id=legItem src="/img/items/item-' + item + '.png"/>')
+        $('#itemHere').append('<img class=bootsItem src="/img/items/item-' + item + '.png"/>')
+
+        if (true) {
+            $(".bootsItem").click(function () {
+
+                $("#buyItem").append($(this))
+
+            });
+        }
     })
 
 });
@@ -83,7 +112,15 @@ $("#armor").click(function () {
     $("#itemHere").empty();
 
     armorsArray.forEach(function (item) {
-        $('#itemHere').append('<img id=legItem src="/img/items/item-' + item + '.png"/>')
+        $('#itemHere').append('<img class=armorsItem src="/img/items/item-' + item + '.png"/>')
+
+        if (true) {
+            $(".armorsItem").click(function () {
+
+                $("#buyItem").append($(this))
+
+            });
+        }
     })
 
 
