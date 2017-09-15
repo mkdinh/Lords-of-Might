@@ -2,6 +2,7 @@ body{
 	font-family: 'Metamorphous', cursive;
 	background: url("../img/preloadBG.jpg")no-repeat center center fixed;
     -webkit-background-size: cover;
+    overflow:hidden;
 }
 
 nav{
@@ -18,7 +19,7 @@ h2 {
 }
 
 h3{ 
-    color: black;
+    color: white;
     text-align: center;
     
 }
@@ -29,40 +30,21 @@ h4{
 
 
 p {
+    margin-top: .5rem;
     text-align: center;
 	color: white;
 }
 
-
-button:hover{
-    background-color: rgba(6, 6, 105, 0.8);
-    border: 1px solid #3f3fa7;
+nav ul a.btn{
+    background-color: #3f3fa7;
+    margin-top: 2.5rem;
+    margin-right:1rem;
+    font-size: 25px;
+    /* border: 1px solid #060669; */
 }
 
-.nav-btns {
-    background-color: #3f3fa7;
-    border-radius: 25%;
-    margin-right: 20px; 
-    font-size: 25px;
-    border: 1px solid #060669;
-}
-
-#login-btn {
-    margin-top: 35px;
-    background-color: #3f3fa7;
-    border-radius: 25%;
-    margin-right: 20px; 
-    font-size: 25px;
-    border: 1px solid #060669;
-}
-
-#sign-btn {
-    margin-top: 35px;
-    background-color: #3f3fa7;
-    border-radius: 25%;
-    margin-right: 20px; 
-    font-size: 25px;
-    border: 1px solid #060669;
+.btn:hover,.btn:focus{
+    background-color: #060669
 }
 
 

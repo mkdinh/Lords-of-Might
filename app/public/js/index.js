@@ -71,6 +71,30 @@ $('#ml-btn').on('click', function(ev){
     })
 })
 
+$('#game-btn').on('click',function(ev){
+    ev.preventDefault();
+
+    if(localStorage.hasOwnProperty('user')){
+        var user = JSON.parse(localStorage.getItem('user'));
+        
+        var loginInfo = {
+            username: user.username,
+            password: user.password
+        }
+        
+        $.ajax({
+            method: 'POST',
+            url: '/user/login',
+            data: loginInfo,
+            success: function(res){
+                window.location.replace('/user')
+            }
+        })
+    }else{
+        alert('You need to sign in!')
+    }
+})
+
 // SOCKET MESSAGING LOGICS
 // ---------------------------------------------------------------------
 

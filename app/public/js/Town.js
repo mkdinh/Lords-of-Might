@@ -24,6 +24,7 @@ LoM.Town = {
         // GAME VIEWS INITIALIZATION
         // -----------------------------------------------------------
         // setting updating frequency to lighten load on socket IO
+        this.world.setBounds(0, 0, 950, 1583)
 	    this.time.advancedTiming = true;
         this.time.desiredFps = 40;
         this.time.suggestedFps = 40;
