@@ -4,7 +4,8 @@
         "data": {
             "username": "foobar@gmail.com",
             "password": "foobar",
-            "name": "foozy",
+            "name": "Mikey",
+            "status": "Moderator",
             "profile": "/monsters/orc.jpg",
             "online": false
         }

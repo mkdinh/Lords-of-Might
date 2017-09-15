@@ -40,8 +40,12 @@ module.exports = function(io){
         var room = state.room;
 
         // attack logic here with data
-        
-        var attackPoints = randomInt(attacker.weapon.damage[0],attacker.weapon.damage[1]);
+        var attackMod = randomInt(50,100);
+        attackMod = attackMod/100;
+        var attackMin = attacker.weapon.damage[0] + (attacker.based_stats.attack *  attackMod);
+        var attackMax =attacker.weapon.damage[1] + (attacker.based_stats.attack * attackMod)
+
+        var attackPoints = randomInt(attackMin,attackMax);
         defender.battle.hp -= attackPoints;
 
         // emit signal to battling player
