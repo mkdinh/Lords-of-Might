@@ -47,8 +47,22 @@ button:hover{
     border: 1px solid #060669;
 }
 
+#login-btn {
+    margin-top: 35px;
+    background-color: #3f3fa7;
+    border-radius: 25%;
+    margin-right: 20px; 
+    font-size: 25px;
+    border: 1px solid #060669;
+}
+
 #sign-btn {
-    margin-right: 30px;
+    margin-top: 35px;
+    background-color: #3f3fa7;
+    border-radius: 25%;
+    margin-right: 20px; 
+    font-size: 25px;
+    border: 1px solid #060669;
 }
 
 
@@ -63,6 +77,11 @@ button:hover{
 }
 .modal{
     max-height: 100%;
+    top: 0% !important;
+}
+
+.modal-content{
+    margin-top: 5rem !important;
 }
 
 
@@ -86,10 +105,11 @@ button:hover{
 
 /* Modal Content/Box */
 .modal-content {
+    margin-top: 50px;
     height: 450px;
     background-image: url(/img/woodback.jpg);
     margin: 5px auto; /* 15% from the top and centered */
-    border: 2px solid lightgrey;
+    border: 2px solid #4e342e;
     width: 350px; /* Could be more or less, depending on screen size */
     border-bottom-left-radius: 40%;
     border-bottom-right-radius: 40%;
@@ -114,7 +134,7 @@ input{
 }
 
 
-  .modal-footer {
+.modal-footer {
       background-color: #f9f9f9;
   }
 
@@ -151,15 +171,6 @@ input{
 }
 
 
-/*Media Screens*/
-@media screen and (min-width: 960px){
-
-}
-
-@media screen and (min-width: 768px){
- 
-}
-
-@media screen and (min-width: 640px){
-    
+element.style{
+    top:0%;
 }

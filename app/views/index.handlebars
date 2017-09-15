@@ -27,18 +27,19 @@
 
 <body>
 
+    <!-- Music -->
     <!-- <audio autoplay loop>
       <source src="/audio/conan.mp3" type="audio/mpeg" />
     </audio> -->
 
-<div class="modal fade" id="login-modal" role="dialog">
-    <!-- <div class="modal-dialog">  -->
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
+ 
+
+  <!-- Modal -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+    <div class="modal-header" style="padding:35px 50px;">
         </div>
-        <div class="modal-body">
-            <form role="form">
+      <form role="form">
               <div class="form-group">
                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
                 <input type="text" class="form-control" id="login-username" placeholder="Who goes there?">
@@ -48,7 +49,7 @@
                 <input type="text" class="form-control" id="login-password" placeholder="What is the magic word?">
                 </div>
             </form>
-            <div class="row">
+          <div class="row">
               <div class="col s6">
                 <button type="submit" id="ml-btn"> Login</button>
               </div>
@@ -56,31 +57,26 @@
                 <button type="button" class="close" id="mc-btn">Cancel</button>
               </div>
             </div>
-          </div>
-        </div>
+    </div>
+    
   </div>
 
-
-
-
+<!-- Navigation -->
 <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo"><h2>LORDS OF MIGHT</h2></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
-          <button class="nav-btns" id="sign-btn">
-            <a href="/signUp" style="font-size: 24px;">Sign Up</a>
-        </li>
-          </button>
+        <a class="waves-effect waves-light btn modal-trigger" href="/signUp" id="sign-btn">Sign up</a>
+         </li>
         <li>
-          <button class="nav-btns" onclick="document.getElementById('login-modal').style.display='block'" id="login-btn">
-            Login
-          </button>
+        <a class="waves-effect waves-light btn modal-trigger" href="#login-modal" id="login-btn">Login</a>
         </li>
       </ul>
     </div>
   </nav>
 
+<!-- Slider -->
 <div class="row">
   <div class="slider">
     <ul class="slides">
@@ -114,6 +110,7 @@
 <p>A Flipped Scripts creation, 2017. </p>
 </div>
 
+<!-- Jquery/Materialize -->
 <script src='/js/index.js'></script>
 
      <script>
@@ -126,7 +123,10 @@
         $("#login-modal").modal();
       });
          $('#mc-btn').click(function(){
-             document.getElementById('login-modal').style.display='none';
+          var snd = new Audio("/audio/axe slash.wav");
+            snd.play();
+            snd.currentTime=0;
+             $('#login-modal').modal('close');
          });
         
 
