@@ -80,13 +80,13 @@ if(!JSON.parse(localStorage.getItem('user'))){
     Client.changeState = function(user){
         // console.log(user)
         LoM.eventActive.state = true;
-        initialized = false;
         this.socket.emit('change-state',user)
     }
 
     Client.socket.on('change-state',function(user){
             var userID = user.id;
             var state = user.world.state;
+            initialized = false;
             LoM.playerMaster[userID] = user;
             if(state !== 'Battle'){
                 LoM.user.getInventory(function(){

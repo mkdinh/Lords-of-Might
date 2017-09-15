@@ -32,7 +32,7 @@ LoM.user = {
             var linkWrapper = $("<a>");
             linkWrapper.attr('href','#/')
             var pic = $('<img>'); 
-            pic.attr('src','img/Items/item-' + inv[i].Item.id + '.png')
+            pic.attr('src','img/items/item-' + inv[i].Item.id + '.png')
             pic.attr('data-item-id',inv[i].Item.id)
             pic.attr('data-invent-id',inv[i].id)
             pic.attr('data-array-index', i )
