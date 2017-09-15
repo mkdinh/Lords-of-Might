@@ -70,19 +70,21 @@ h1 {
     padding: 20px;
     border-right: 1px solid #3f3fa7;
     width: 40%;
+    margin-top: 40px;
 }
 
 #right {
     padding: 30px;
     width: 58%;
+    position: relative;
 }
 
 #itemHere {
     padding: 20px;
     position: absolute;
     z-index: 1;
-    margin-left: 110px;
     margin-top: 80px;
+    width: 100%;
 }
 
 img {
@@ -92,7 +94,7 @@ img {
 
 #chest {
     height: 320px;
-    width: 310px;
+    width: 100%;
     border: none;
 }
 
@@ -107,6 +109,8 @@ img {
     margin: 5px;
     outline: none;
     background-color: white;
+    width: 70%;
+    text-align: center;
 }
 
 #helmet {
@@ -117,6 +121,8 @@ img {
     margin: 5px;
     outline: none;
     background-color: white;
+    width: 70%;
+    text-align: center;
 }
 
 #legs {
@@ -127,6 +133,8 @@ img {
     margin: 5px;
     outline: none;
     background-color: white;
+    width: 70%;
+    text-align: center;
 }
 
 #boots {
@@ -137,6 +145,8 @@ img {
     margin: 5px;
     outline: none;
     background-color: white;
+    width: 70%;
+    text-align: center;
 }
 
 #armor {
@@ -147,6 +157,8 @@ img {
     margin: 5px;
     outline: none;
     background-color: white;
+    width: 70%;
+    text-align: center;
 }
 
 #health {
@@ -157,6 +169,8 @@ img {
     margin: 5px;
     outline: none;
     background-color: white;
+    width: 70%;
+    text-align: center;
 }
 
 

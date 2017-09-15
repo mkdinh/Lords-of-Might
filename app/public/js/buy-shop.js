@@ -7,423 +7,76 @@ var chest = [
     }
 ]
 
-
-var items = [
-    {
-        image: "img/items/item-1.png"
-    },
-    {
-        image: "img/items/item-2.png"
-    },
-    {
-        image: "img/items/item-3.png"
-    },
-    {
-        image: "img/items/item-4.png"
-    },
-    {
-        image: "img/items/item-5.png"
-    },
-    {
-        image: "img/items/item-6.png"
-    },
-    {
-        image: "img/items/item-7.png"
-    },
-    {
-        image: "img/items/item-8.png"
-    },
-    {
-        image: "img/items/item-9.png"
-    },
-    {
-        image: "img/items/health.png"
-    }
-]
-
-
-//if user clicks the button SWORDS first//
-
 $("#sword").click(function () {
 
     $("#chest").attr('src', chest[0].image);
 
+    var swordsArray = [1, 10, 15, 6, 11, 12, 13, 14, 18];
+
     $("#itemHere").empty();
 
-    $('#itemHere').prepend('<img id=swordItem src=' + items[0].image + ' />')
-    $('#itemHere').prepend('<img id=swordItem src=' + items[5].image + ' />')
+    swordsArray.forEach(function (item) {
+        $('#itemHere').append('<img id=swordItem src="/img/items/item-' + item + '.png"/>')
+    })
 
-    if ($('#itemHere').contents().length !== 0) {
+})
 
-        $("#helmet").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=helmetItem src=' + items[4].image + ' />')
-
-        })
-
-        $("#legs").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=legItem  src=' + items[2].image + ' />')
-            $('#itemHere').prepend('<img id=legItem  src=' + items[7].image + ' />')
-
-        });
-
-        $("#boots").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[3].image + ' />')
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[8].image + ' />')
-
-        });
-
-        $("#armor").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=armorItem src=' + items[1].image + ' />')
-            $('#itemHere').prepend('<img id=armorItem src=' + items[6].image + ' />')
-
-
-        });
-
-        $("#health").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=healthItem src=' + items[9].image + ' />')
-
-        });
-
-
-    };
-
-
-});
-
-//if user clicks the button HELMETS first//
 
 $("#helmet").click(function () {
 
     $("#chest").attr('src', chest[0].image);
 
+    var helmetsArray = [21, 22];
+
     $("#itemHere").empty();
 
-    $('#itemHere').prepend('<img id=helmetItem src=' + items[4].image + ' />')
-
-    if ($('#itemHere').contents().length !== 0) {
-
-        $("#sword").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=swordItem src=' + items[0].image + ' />')
-            $('#itemHere').prepend('<img id=swordItem src=' + items[5].image + ' />')
-
-        });
-
-
-        $("#legs").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=legItem  src=' + items[2].image + ' />')
-            $('#itemHere').prepend('<img id=legItem  src=' + items[7].image + ' />')
-
-        });
-
-        $("#boots").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[3].image + ' />')
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[8].image + ' />')
-
-        });
-
-        $("#armor").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=armorItem src=' + items[1].image + ' />')
-            $('#itemHere').prepend('<img id=armorItem src=' + items[6].image + ' />')
-
-        });
-
-        $("#health").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=healthItem src=' + items[9].image + ' />')
-
-
-        });
-
-
-    };
-
-
-});
-
-//if user clicks the button LEGS first//
+    helmetsArray.forEach(function (item) {
+        $('#itemHere').append('<img id=helmetItem src="/img/items/item-' + item + '.png"/>')
+    })
+})
 
 $("#legs").click(function () {
 
     $("#chest").attr('src', chest[0].image);
 
+
+    var legsArray = [3, 8, 16];
+
     $("#itemHere").empty();
 
-    $('#itemHere').prepend('<img id=legItem  src=' + items[2].image + ' />')
-    $('#itemHere').prepend('<img id=legItem  src=' + items[7].image + ' />')
-
-    if ($('#itemHere').contents().length !== 0) {
-
-        $("#sword").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=swordItem src=' + items[0].image + ' />')
-            $('#itemHere').prepend('<img id=swordItem src=' + items[5].image + ' />')
-
-        });
-
-
-        $("#helmet").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=helmetItem src=' + items[4].image + ' />')
-
-        });
-
-        $("#boots").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[3].image + ' />')
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[8].image + ' />')
-
-        });
-
-        $("#armor").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=armorItem src=' + items[1].image + ' />')
-            $('#itemHere').prepend('<img id=armorItem src=' + items[6].image + ' />')
-
-        });
-
-        $("#health").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=healthItem src=' + items[9].image + ' />')
-
-
-        });
-
-
-    };
-
+    legsArray.forEach(function (item) {
+        $('#itemHere').append('<img id=legItem src="/img/items/item-' + item + '.png"/>')
+    })
 
 });
-
-//if user clicks the button BOOTS first//
 
 $("#boots").click(function () {
 
     $("#chest").attr('src', chest[0].image);
 
+
+    var bootsArray = [4, 9, 17];
+
     $("#itemHere").empty();
 
-    $('#itemHere').prepend('<img id=bootsItem src=' + items[3].image + ' />')
-    $('#itemHere').prepend('<img id=bootsItem src=' + items[8].image + ' />')
-
-    if ($('#itemHere').contents().length !== 0) {
-
-        $("#sword").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=swordItem src=' + items[0].image + ' />')
-            $('#itemHere').prepend('<img id=swordItem src=' + items[5].image + ' />')
-
-        });
-
-
-        $("#helmet").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=helmetItem src=' + items[4].image + ' />')
-
-        });
-
-        $("#legs").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=legItem  src=' + items[2].image + ' />')
-            $('#itemHere').prepend('<img id=legItem  src=' + items[7].image + ' />')
-
-        });
-
-        $("#armor").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=armorItem src=' + items[1].image + ' />')
-            $('#itemHere').prepend('<img id=armorItem src=' + items[6].image + ' />')
-
-        });
-
-        $("#health").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=healthItem src=' + items[9].image + ' />')
-
-
-        });
-
-
-
-    };
-
+    bootsArray.forEach(function (item) {
+        $('#itemHere').append('<img id=legItem src="/img/items/item-' + item + '.png"/>')
+    })
 
 });
-
-//if user clicks the button ARMOR first//
 
 $("#armor").click(function () {
 
     $("#chest").attr('src', chest[0].image);
 
-    $("#itemHere").empty();
+    var armorsArray = [2, 7, 19, 20];
 
-    $('#itemHere').prepend('<img id=armorItem src=' + items[1].image + ' />')
-    $('#itemHere').prepend('<img id=armorItem src=' + items[6].image + ' />')
-
-    if ($('#itemHere').contents().length !== 0) {
-
-        $("#sword").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=swordItem src=' + items[0].image + ' />')
-            $('#itemHere').prepend('<img id=swordItem src=' + items[5].image + ' />')
-
-        });
-
-
-        $("#helmet").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=helmetItem src=' + items[4].image + ' />')
-
-        });
-
-        $("#legs").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=legItem  src=' + items[2].image + ' />')
-            $('#itemHere').prepend('<img id=legItem  src=' + items[7].image + ' />')
-
-        });
-
-        $("#boots").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[3].image + ' />')
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[8].image + ' />')
-
-
-        });
-
-        $("#health").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=healthItem src=' + items[9].image + ' />')
-
-
-        });
-
-
-    };
-
-
-});
-
-//if user clicks the button ARMOR first//
-
-$("#health").click(function () {
-
-    $("#chest").attr('src', chest[0].image);
 
     $("#itemHere").empty();
 
-    $('#itemHere').prepend('<img id=healthItem src=' + items[9].image + ' />')
-
-    if ($('#itemHere').contents().length !== 0) {
-
-        $("#sword").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=swordItem src=' + items[0].image + ' />')
-            $('#itemHere').prepend('<img id=swordItem src=' + items[5].image + ' />')
-
-        });
-
-
-        $("#helmet").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=helmetItem src=' + items[4].image + ' />')
-
-        });
-
-        $("#legs").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=legItem  src=' + items[2].image + ' />')
-            $('#itemHere').prepend('<img id=legItem  src=' + items[7].image + ' />')
-
-        });
-
-        $("#boots").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[3].image + ' />')
-            $('#itemHere').prepend('<img id=bootsItem src=' + items[8].image + ' />')
-
-
-        });
-
-        $("#armor").click(function () {
-
-            $("#itemHere").empty();
-
-            $('#itemHere').prepend('<img id=armorItem src=' + items[1].image + ' />')
-            $('#itemHere').prepend('<img id=armorItem src=' + items[6].image + ' />')
-
-
-        });
-
-
-    };
+    armorsArray.forEach(function (item) {
+        $('#itemHere').append('<img id=legItem src="/img/items/item-' + item + '.png"/>')
+    })
 
 
 });

@@ -34,7 +34,7 @@
             "sell": 10
         }
     },
-        {
+    {
         "model": "Item",
         "data": {
             "name": "Leather Pants",
@@ -118,7 +118,7 @@
             "sell": 10
         }
     },
-        {
+    {
         "model": "Item",
         "data": {
             "name": "Chain Mail Pants",
@@ -130,7 +130,7 @@
             "defense": 15,
             "recovery": 0,
             "hp": 25,
-            "mp":20,
+            "mp": 20,
             "buy": 10,
             "sell": 5
         }
@@ -155,16 +155,224 @@
     {
         "model": "Item",
         "data": {
-            "name": "Health Potion",
-            "type": "consumable",
-            "class": "potion",
-            "slot": "4",
-            "attack": 0,
-            "agility": 0,
+            "name": "Golden Sword",
+            "type": "weapon",
+            "class": "sword",
+            "slot": 6,
+            "attack": 45,
+            "agility": 25,
             "defense": 0,
-            "recovery": 10,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 15,
+            "buy": 55,
+            "sell": 35
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Golden Axe",
+            "type": "weapon",
+            "class": "Axe",
+            "slot": 6,
+            "attack": 45,
+            "agility": 15,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 20,
+            "buy": 45,
+            "sell": 30
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Wooden Axe",
+            "type": "weapon",
+            "class": "Axe",
+            "slot": 6,
+            "attack": 15,
+            "agility": 5,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 10,
             "buy": 10,
             "sell": 5
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Silver Spear",
+            "type": "weapon",
+            "class": "spear",
+            "slot": 6,
+            "attack": 25,
+            "agility": 9,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 20,
+            "buy": 20,
+            "sell": 15
+
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Golden Spear",
+            "type": "weapon",
+            "class": "spear",
+            "slot": 6,
+            "attack": 40,
+            "agility": 15,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 20,
+            "buy": 25,
+            "sell": 20
+
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Legendary Sword",
+            "type": "weapon",
+            "class": "sword",
+            "slot": 6,
+            "attack": 50,
+            "agility": 35,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 35,
+            "buy": 65,
+            "sell": 55
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Realm Protector Pants",
+            "type": "armour",
+            "class": "metal",
+            "slot": 3,
+            "attack": 0,
+            "agility": 15,
+            "defense": 20,
+            "recovery": 0,
+            "hp": 35,
+            "mp": 20,
+            "buy": 15,
+            "sell": 8
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Realm Protector Boots",
+            "type": "armour",
+            "class": "matal",
+            "slot": "4",
+            "attack": 0,
+            "agility": 10,
+            "defense": 15,
+            "recovery": 0,
+            "hp": 10,
+            "mp": 10,
+            "buy": 15,
+            "sell": 10
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Realm Protector Axe",
+            "type": "weapon",
+            "class": "Axe",
+            "slot": 6,
+            "attack": 20,
+            "agility": 10,
+            "defense": 0,
+            "recovery": 0,
+            "hp": 0,
+            "mp": 15,
+            "buy": 15,
+            "sell": 8
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Golden Tunics",
+            "type": "armour",
+            "class": "leather",
+            "slot": 2,
+            "attack": 0,
+            "agility": 20,
+            "defense": 20,
+            "recovery": 0,
+            "hp": 30,
+            "mp": 25,
+            "buy": 25,
+            "sell": 20
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Realm Protector Tunics",
+            "type": "armour",
+            "class": "leather",
+            "slot": 2,
+            "attack": 0,
+            "agility": 15,
+            "defense": 15,
+            "recovery": 0,
+            "hp": 28,
+            "mp": 22,
+            "buy": 15,
+            "sell": 15
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Silver Helmet",
+            "type": "armour",
+            "class": "leather",
+            "slot": 3,
+            "attack": 0,
+            "agility": 5,
+            "defense": 10,
+            "recovery": 0,
+            "hp": 10,
+            "mp": 10,
+            "buy": 10,
+            "sell": 5
+        }
+    },
+    {
+        "model": "Item",
+        "data": {
+            "name": "Chain Helmet",
+            "type": "armour",
+            "class": "leather",
+            "slot": 3,
+            "attack": 0,
+            "agility": 15,
+            "defense": 15,
+            "recovery": 0,
+            "hp": 15,
+            "mp": 15,
+            "buy": 15,
+            "sell": 8
         }
     }
 ]
