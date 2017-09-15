@@ -89,6 +89,25 @@ router.put('/battle/win/:userid', (req,res) => {
     })
 })
 
+router.get('/shop/all', (req,res) => {
+    db.Item.findAll({}).then((items) => {
+        res.json(items)
+    })
+})
+
+router.post('/shop/:id', (req,res) => {
+    var user_id = req.body.user_id;
+    var item_id = req.params.id;
+    var cost = req.body.cost;
+
+    db.Inventory.create({Itemid: item_id, userId: id}).then(() => {
+        db.Game_State.find({where: {UserId: id}}).then((game_state) => {
+            game_state.decrement('gold', cost)
+            res.json({success: 'success'})
+        })
+    })
+})
+
 router.put('/battle/lose/:userid', (req,res) => {
     
     var gold = randomInt(50,100);
@@ -112,6 +131,7 @@ router.put('/battle/lose/:userid', (req,res) => {
 function randomInt (low,high){
     return Math.floor(Math.random() * (high - low) + low);
 }
+
 
 
 module.exports = router;
