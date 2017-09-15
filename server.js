@@ -110,6 +110,7 @@ if(restart){
                 })
             })
         })
+    })
 } else {
 
     db.sequelize.sync(
