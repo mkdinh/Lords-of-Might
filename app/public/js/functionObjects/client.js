@@ -17,7 +17,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
     Client.socket.on('global-message', function(message){
         var globalMessages = $('#global-messages')
-        var user = LoM.userInfo.name;
+        var user = message.name;
         var body = message.body;
 
         var message = '<p class="message-text">'+ user + ': ' + body + '</p>'
@@ -40,7 +40,20 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
 
     Client.socket.on('render-user', function(data){
-        LoM.player.add(data.new)
+
+    var user_id = data.new.id;
+        console.log('new-user')
+    if(LoM.game.cache.checkImageKey('user-'+user_id) === false){
+        console.log(user_id)
+            LoM.game.load.spritesheet('user-'+user_id,'img/users/user-'+user_id+'.png',64,64,273)
+            LoM.game.load.start(); 
+            LoM.game.load.onLoadComplete.add(function(){
+                console.log('add freshly created player!')
+                LoM.player.add(data.new)
+            }, this);
+        }else{
+            LoM.player.add(data.new)
+        }
     })
 
     Client.move = function(movement){
@@ -88,11 +101,13 @@ if(!JSON.parse(localStorage.getItem('user'))){
             var state = user.world.state;
             initialized = false;
             LoM.playerMaster[userID] = user;
+
             if(state !== 'Battle'){
                 LoM.user.getInventory(function(){
-                        LoM.game.state.start(state)
+                    LoM.game.state.start(state)
                 });
             }else{
+
                 LoM.game.state.start(state);
             }
     })

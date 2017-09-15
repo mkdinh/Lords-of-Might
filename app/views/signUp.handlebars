@@ -23,16 +23,15 @@
 
 <body>
     <!-- Music -->
-     <audio autoplay loop>
+     {{!-- <audio autoplay loop>
         <source src="/audio/create_signup.mp3" type="audio/mpeg" />
-    </audio>
+    </audio> --}}
 
     <div class='container'>
         <div class='row' id='signup-wrapper'>
             <h1>JOIN LORDS OF MIGHT</h1>
-            
             <div id='new-user-info'>
-                <label>EMAIL:</label>
+                <label>INSERT AN EMAIL:</label>
                 <div>
                     <input  id="user-email" type=text>
                 </div>
@@ -71,7 +70,7 @@
 
                 <div class="input-field row">
                     <select id='body'>
-                        <option selected='selected' hidden>Select a skin</option>
+                        <option selected='selected' disabled>Select a skin</option>
                         <option data-part="body" data-link="/img/sprites/lpc/body/male/light.png"><a>Human</a></option>
                         <option data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png"><a>Skeleton</a></option>
                         <option data-part="body" data-link="/img/sprites/lpc/body/male/orc.png"><a>Orc</a></option>
@@ -83,7 +82,7 @@
 
                 <div class="input-field row">
                     <select id='head'>
-                        <option selected='selected' hidden>Select a headgear</option>
+                        <option disabled selected='selected'>Select a headgear</option>
                         <option data-part="head" data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png"><a>Chainmail</a></option>
                         <option data-part="head" data-link="/img/sprites/lpc/head/caps/male/leather_cap_male.png"><a>Cap</a></option>
                         <option data-part="head" data-link="/img/sprites/lpc/head/helms/male/chainhat_male.png"><a>Hat</a></option>
@@ -94,7 +93,7 @@
 
                 <div class="input-field row">
                     <select id='torso'>
-                        <option selected='selected' hidden>Select a torso</option>
+                        <option selected='selected' disabled>Select a torso</option>
                         <option data-part='torso' data-link="/img/sprites/lpc/torso/leather/chest_male.png"><a>Leather</a></option>
                         <option data-part='torso' data-link="/img/sprites/lpc/torso/shirts/longsleeve/male/brown_longsleeve.png"><a>Brown Shirt</a></option>
                         <option data-part='torso' data-link="/img/sprites/lpc/torso/shirts/longsleeve/male/maroon_longsleeve.png"><a>Maroon Shirt</a></option>
@@ -106,7 +105,7 @@
 
                 <div class="input-field row">
                     <select id='leg'>
-                        <option selected='selected' hidden>Select a pair of pants</option>
+                        <option selected='selected' disabled>Select a pair of pants</option>
                         <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/red_pants_male.png"><a>Red Pants</a></option>
                         <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/magenta_pants_male.png"><a>Magenta Pants</a></option>
                         <option data-part='leg' data-link="img/sprites/lpc/legs/pants/male/teal_pants_male.png"><a>Teal Pants</a></option>
@@ -117,7 +116,7 @@
 
                 <div class="input-field row">
                     <select id='feet'>
-                        <option selected hidden>pick some shoes!</option>
+                        <option selected='selected' disabled>pick some shoes!</option>
                         <option data-part='feet' data-link="img/sprites/lpc/feet/shoes/male/black_shoes_male.png"><a>Black Shoes</a></option>
                         <option data-part='feet' data-link="img/sprites/lpc/feet/shoes/male/brown_shoes_male.png"><a>Brown Shoes</a></option>
                         <option data-part='feet' data-link="img/sprites/lpc/feet/shoes/male/maroon_shoes_male.png"><a>Maroon Shoes</a></option>
@@ -127,7 +126,7 @@
 
                 <div class="input-field row">
                     <select id='weapon-select'>
-                        <option selected='selected' hidden>Select a weapon</option>
+                        <option selected='selected' disabled>Select a weapon</option>
                         <option data-part='weapon' data-item="1" data-link="img/sprites/lpc/weapons/right hand/male/sword.png"><a>Sword</a></option>
                         <option data-part='weapon' data-item="6" data-link="img/sprites/lpc/weapons/right hand/male/spear_male.png"><a>Spear</a></option>
                     </select>
@@ -136,7 +135,7 @@
 
                 <div class="input-field row">
                     <select id='spell-select'>
-                        <option selected='selected' hidden>Pick a spell</option>
+                        <option selected='selected' disabled>Pick a spell</option>
                         <option data-part='spell' data-spell='3' data-link="img/spells/fire.png"><a>Fireball</a></option>
                         <option data-part='spell' data-spell='1' data-link="img/spells/ice.png"><a>Ice Blast</a></option>
                         <option data-part='spell' data-spell='2' data-link="img/spells/poison.png"><a>Poison Discharge</a></option>

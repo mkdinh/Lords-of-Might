@@ -7,15 +7,6 @@
 
 	<title>LORDS OF MIGHT</title>
 	
-	
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/homepage.css" />
     <!-- Lord of Might Font-->
     
@@ -28,9 +19,9 @@
 <body>
 
     <!-- Music -->
-    <audio autoplay loop>
+    {{!-- <audio autoplay loop>
       <source src="/audio/conan.mp3" type="audio/mpeg" />
-    </audio>
+    </audio> --}}
 
  
 
@@ -39,14 +30,14 @@
     <div class="modal-content">
     <div class="modal-header" style="padding:35px 50px;">
         </div>
-      <form role="form">
+      <form role="form" id='login-form'>
               <div class="form-group">
                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Email</label>
                 <input type="text" class="form-control" id="login-username" placeholder="Who goes there?">
               </div>
               <div class="form-group">
                 <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                <input type="text" class="form-control" id="login-password" placeholder="What is the magic word?">
+                <input class="form-control" type='password' id="login-password" placeholder="What is the magic word?">
                 </div>
             </form>
           <div class="row">
@@ -67,10 +58,13 @@
       <a href="#" class="brand-logo"><h2>LORDS OF MIGHT</h2></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
-        <a class="waves-effect waves-light btn modal-trigger" href="/signUp" id="sign-btn">Sign up</a>
+            <a class="waves-effect waves-light btn" href="/user" id="game-btn">Lobby</a>
          </li>
         <li>
-        <a class="waves-effect waves-light btn modal-trigger" href="#login-modal" id="login-btn">Login</a>
+            <a class="waves-effect waves-light btn" href="/signUp" id="sign-btn">Sign up</a>
+         </li>
+        <li>
+            <a class="waves-effect waves-light btn modal-trigger" href="#login-modal" id="login-btn">Login</a>
         </li>
       </ul>
     </div>

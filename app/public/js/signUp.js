@@ -21,14 +21,17 @@ $(document).ready(function () {
         newUser.name = $('#user-name').val().trim();
 
         if( !isValidEmailAddress(newUser.username) ) {
-            alert('Your email need to be in a valid format')
+            Materialize.toast("Your email need to be in valid format", 2000, 'indigo darken-4') 
             return
         }else if(newUser.password.length <6){
-            alert('Your password need to be greater than 6 characters')
+            Materialize.toast("Your password need to be greater than 6 characters", 2000, 'indigo darken-4') 
             return
         }else if(newUser.name.length === 0){
-            alert('What do you call yourself?')
+            Materialize.toast("What do you call yourself?", 2000, 'indigo darken-4') 
             return
+        }else if(newUser.name.length > 12){
+            Materialize.toast("Your name need to be less than 12 characters", 2000, 'indigo darken-4')
+            return 
         }
 
         //removes initial divs and tags
@@ -115,14 +118,14 @@ $(document).ready(function () {
     $('#create').on('click', function(){
 
         if(newUser.sprite.body === undefined){
-            alert('You need a select a skin!')
+            Materialize.toast("Can't have a floating hat, select a body!", 2000, 'indigo darken-4') 
         }
         else if(newUser.item_inventory === undefined){
-            alert('You need a select a weapon!')
+            Materialize.toast("Can't fight without a weapon!", 2000, 'indigo darken-4') 
         }else if(newUser.spell_inventory === undefined){
-            alert('You need a select a spell')
+            Materialize.toast("You gonna want to cast some magic", 2000, 'indigo darken-4') 
         }else if(newUser.sprite.leg === undefined){
-            alert('For the love of god put on some pants')   
+            Materialize.toast("For the love of god put on some pants", 2000, 'indigo darken-4') 
         }else{
             var imgData = getImageData();
             newUser.spritesheet = imgData;

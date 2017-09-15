@@ -431,4 +431,5 @@ input[type=text]:not(.browser-default){
   position: absolute;
   bottom: 0;
   left: 0;
+  width: 90%
 }

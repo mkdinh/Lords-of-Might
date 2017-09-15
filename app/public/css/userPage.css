@@ -4,7 +4,8 @@ body {
 }
 
 .container{
-    width: 60%
+    width: 60%;
+    display:none;
 }
 
 #navDiv {
@@ -43,18 +44,18 @@ body {
 
 .btn{
     height: auto;
-    padding: 1rem 2rem;
-    margin: 1rem;
+    padding: .5rem 2rem;
+    margin: .5rem 1rem;
     border: 1px solid #3f3fa7;
     background-color: rgba(6, 6, 105, 0.8);
     color: white;
-    font-size: 40px;
+    font-size: 2rem;
     font-family: 'Metamorphous', cursive;
     border-radius: 20px;
     outline: none;
 }
 
-.btn:hover{
+.btn:hover,.btn:focus{
     background-color: #060669;
     border: 1px solid #3f3fa7;
     color: #7979e0;  

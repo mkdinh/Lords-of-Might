@@ -16,10 +16,10 @@
 <body>
 
 <!-- Music -->
-<audio autoplay loop>
+{{!-- <audio autoplay loop>
       <source src="/audio/create_signup.mp3" type="audio/mpeg" />
       <source src="/audio/battle.mp3" type="audio/mpeg" />
-    </audio>
+</audio> --}}
 
 
     <!--navbar-->
@@ -49,6 +49,7 @@
         <div class="row valign-wrapper" id="user-info">
             <div id="userStat" class='col s8'>
                 <h3>Attributes</h3>
+                <h5>Status: {{user.status}}</h5>
                 <h5>id: {{user.id}}</h5>
                 <hr>
                 <table class='striped'>
@@ -88,12 +89,15 @@
 
     <script>
 
+        $('.container').fadeIn('slow')
+
         $('#logout-btn').on('click', function(){
 
             $.ajax({
                 url: '/user/logout',
                 method: 'POST',
                 success: function(res){
+                    localStorage.removeItem('user')
                     window.location.replace('/');
                 }
             })

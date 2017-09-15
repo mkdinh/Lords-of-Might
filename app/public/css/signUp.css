@@ -19,7 +19,7 @@ input {
 #signup-wrapper {
     border: 1px solid #3f3fa7;
     border-radius: 30px;
-    margin-top: 4rem;
+    margin-top: 2rem;
     background-color: rgba(6, 6, 105, 0.8);
     text-align: center;
     color: white;
@@ -44,7 +44,7 @@ input {
     outline: none;
 }
 
-.btn:hover{
+.btn:hover,.btn:focus{
     background-color: #060669;
     border: 1px solid #3f3fa7;
     color: #7979e0;  
@@ -152,4 +152,19 @@ h4 {
 
 #create-btn-wrapper{
     margin-top: 5%
+}
+
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){
+    border-bottom: 1px solid #cfd8dc;
+    -webkit-box-shadow: 0 1px 0 0 #cfd8dc;
+    box-shadow: 0 1px 0 0 #cfd8dc;
+}
+
+.dropdown-content li>a, .dropdown-content li>span{
+    color: #060669
+}
+
+.dropdown-content{
+    background-color: rgba(255,255,255,0.75)
 }

@@ -9,8 +9,12 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 len: [6,50],
                 isEmail : true
-            }
-            
+            }        
+        },
+        status:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'User'
         },
         password: {
             type: DataTypes.STRING,
@@ -36,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-        }
+        },
         
     })
 

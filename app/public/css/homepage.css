@@ -2,6 +2,7 @@ body{
 	font-family: 'Metamorphous', cursive;
 	background: url("../img/preloadBG.jpg")no-repeat center center fixed;
     -webkit-background-size: cover;
+    overflow:hidden;
 }
 
 nav{
@@ -18,7 +19,7 @@ h2 {
 }
 
 h3{ 
-    color: black;
+    color: white;
     text-align: center;
     
 }
@@ -29,40 +30,21 @@ h4{
 
 
 p {
+    margin-top: .5rem;
     text-align: center;
 	color: white;
 }
 
-
-button:hover{
-    background-color: rgba(6, 6, 105, 0.8);
-    border: 1px solid #3f3fa7;
+nav ul a.btn{
+    background-color: #3f3fa7;
+    margin-top: 2.5rem;
+    margin-right:1rem;
+    font-size: 25px;
+    /* border: 1px solid #060669; */
 }
 
-.nav-btns {
-    background-color: #3f3fa7;
-    border-radius: 25%;
-    margin-right: 20px; 
-    font-size: 25px;
-    border: 1px solid #060669;
-}
-
-#login-btn {
-    margin-top: 35px;
-    background-color: #3f3fa7;
-    border-radius: 25%;
-    margin-right: 20px; 
-    font-size: 25px;
-    border: 1px solid #060669;
-}
-
-#sign-btn {
-    margin-top: 35px;
-    background-color: #3f3fa7;
-    border-radius: 25%;
-    margin-right: 20px; 
-    font-size: 25px;
-    border: 1px solid #060669;
+.btn:hover,.btn:focus{
+    background-color: #060669
 }
 
 
@@ -117,17 +99,23 @@ button:hover{
 
 .modal-header{
 
-      height: 20px;
-      background-image: url(/img/metaltexture.jpg);
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
+    height: 20px;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+    background-image: url(/img/metaltexture.jpg);
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
+}
 
-  label {
+#login-form{
+    margin-top: 1rem;
+}
+
+label {
     font-size: 13px;
-
-  }
+}
 
 input{
     color: white;
@@ -173,4 +161,11 @@ input{
 
 element.style{
     top:0%;
+}
+
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){
+    border-bottom: 1px solid white;
+    -webkit-box-shadow: 0 1px 0 0 white;
+    box-shadow: 0 1px 0 0 white;
 }
