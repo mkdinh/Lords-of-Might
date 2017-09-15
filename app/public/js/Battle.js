@@ -431,7 +431,8 @@ LoM.Battle = {
                         break;
                 
                 case "spear":
-                     var spear = sprite.animations.add('spear',[221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221],true);
+                // 221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221
+                     var spear = sprite.animations.add('spear',[66,67,68,69,70,71,72,73],true);
             
                     sprite.animations._anims.spear.onComplete.add(function(){
                         sprite.animations.play('right',10, true);

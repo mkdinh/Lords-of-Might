@@ -56,6 +56,7 @@ LoM.Town = {
         // -----------------------------------------------------------------------
         
         // set collision events for the game for user interactions with an array of tile index
+
         LoM.generator.genLayerCollisions('Houses','wallCollisions',
             [124,104,84,64,44,45,46,47,48,49,50,69,89,109,129,149,169,148,147,146,145,344,324,304,284,264,244,225,206,227,248,269,289,309,329,349,368,327,326,325,1612,1613,1592,1572,1552,1532,1512,1493,1474,1475,1496,1517,1537,1557,1577,1597,1617],
             LoM.interaction.wallCollisions
@@ -73,6 +74,11 @@ LoM.Town = {
             [355,356,357],
             LoM.interaction.trainerInteractions
         )
+
+        LoM.generator.genLayerCollisions('castle-entrance','castleInteractions',
+        [550],
+        LoM.interaction.castleInteractions
+         );     
 
         // generate all online users accessing the game
         // use initial array if playerMaster is empty, else use playerMaster object
