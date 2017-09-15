@@ -2,7 +2,6 @@ var LoM = LoM || {};
 var user;
 var enemy;
 var room;
-var initialized = false;
 var initiatorReady = receiverReady = false;
 
 // loading game assets
@@ -511,7 +510,7 @@ LoM.Battle = {
 
 function resetBattleInfo(){
     LoM.battleInfo = {};
-    initiatorReady = receiverReady = initialized = false;
+    initiatorReady = receiverReady = false;
     delete LoM.userInfo.battle;
     $('.battle-info').empty();
 }

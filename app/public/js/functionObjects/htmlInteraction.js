@@ -45,12 +45,20 @@ $('.battle-btn').on('click', function(){
 
 $('.interaction').on('click','#battle-request', function(ev){
     ev.preventDefault();
-    Client.battleRequest(LoM.battleInfo);
+    if(LoM.userInfo.equipments['slot-6'] === undefined){
+        announcement('You going empty handed into a sword fight! Equip a weapon!')
+    }else{
+        Client.battleRequest(LoM.battleInfo);
+    }
 })
 
 $('.interaction').on('click','#battle-accept', function(ev){
     ev.preventDefault();
-    Client.battleAccept(LoM.battleInfo);
+    if(LoM.userInfo.equipments['slot-6'] === undefined){
+        announcement('You going empty handed into a sword fight! Equip a weapon!')
+    }else{
+        Client.battleAccept(LoM.battleInfo);
+    }
 })
 
 

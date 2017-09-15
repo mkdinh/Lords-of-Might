@@ -4,8 +4,6 @@
 // setting up rpg canvas by declaring single rpg state with div id='rpg'
 
 var LoM = LoM || {};
-var initialized = false;
-var chatActive = false;
 
 LoM.Town = function(){};
 

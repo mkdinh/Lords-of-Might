@@ -27,35 +27,41 @@
         <source src="/audio/create_signup.mp3" type="audio/mpeg" />
     </audio>
 
-    <div class="row">
-        <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
+      
+<div class="row">
+    <h2 style="text-align: center;">CREATE YOUR CHARACTER</h2>
         <div class="col s6">
             <h4>Body Type</h4>
+
             <a class='dropdown-button btn dropbtn' href='#' data-activates='dropdown1'>Select</a>
+
             <!-- Dropdown Structure -->
-            <ul id='dropdown1' class='dropdown-content'>
-                <li>
-                    <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/light.png">
-                Human</button></a>
-                </li>
-                <li>
-                    <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button></li>
+        <ul id='dropdown1' class='dropdown-content'>
+            <li>
+            <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/light.png">
+                Human</button></a></li>
 
-                <li>
-                    <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">Orc
+            <li>
+            <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/skeleton.png">Skeleton</button></li>
+            
+            <li>
+            <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/male/orc.png">Orc
+                </button>    
+            </li>
+            <li class="divider"></li>
+            <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/light.png">Human Female
                 </button>
-                </li>
-                <li class="divider"></li>
-                <button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/light.png">Human Female
-                </button>
-                <li><button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/orc.png">Orc Female
+            <li><button type="submit" class="add-button" data-part="body" data-link="/img/sprites/lpc/body/female/orc.png">Orc Female
                 </button></li>
-            </ul>
-
-
+        </ul>
+            
+            
             <h4>Headgear</h4>
-            <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown2'>Select</a>
-            <ul id='dropdown2' class='dropdown-content'>
+
+             <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown2'>Select</a>
+
+             <ul id='dropdown2' class='dropdown-content'>
+
                 <li> <button type='submit' class='add-button' data-part='head' data-link="/img/sprites/lpc/head/hoods/male/chain_hood_male.png" id='add-head'>Chainmail
                 </button>
                 </li>
@@ -68,35 +74,45 @@
                 Silver Helmet</button>
                 </li>
             </ul>
-            <h4>Accessories</h4>
-            <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown3'>Select</a>
-            <ul id='dropdown3' class='dropdown-content'>
 
-                <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Chest Protector</button>
-                </li>
-                <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/belt/metal/female/bronze.png" id='add-torso'>Bronze Belt</button>
-                </li>
+            <h4>Accessories</h4>
+
+
+            <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown3'>Select</a>
+
+             <ul id='dropdown3' class='dropdown-content'>
+    
+               <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/torso/plate/chest_male.png" id='add-torso'>Chest Protector</button>
+               </li>
+               <li> <button type='submit' class='add-button' data-part='torso' data-link="img/sprites/lpc/belt/metal/female/bronze.png" id='add-torso'>Bronze Belt</button>
+               </li>
                 <li><button type='submit' class='add-button' data-part='leg' data-link="img/sprites/lpc/legs/armor/male/metal_pants_male.png" id='add-legs'>Lower Body</button>
                 </li>
             </ul>
+
             <h4>Weapon</h4>
+
             <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown4'>Select</a>
-            <ul id='dropdown4' class='dropdown-content'>
+
+             <ul id='dropdown4' class='dropdown-content'>
                 <li>
-                    <button type='submit' class='add-button' data-part='weapon' data-link='img/sprites/lpc/weapons/both_hand/spear.jpg' id='add-weapon'>Spear</button>
+                <button type='submit' class='add-button' data-part='weapon' data-link='img/sprites/lpc/weapons/both_hand/spear.jpg' id='add-weapon'>Spear</button>
                 </li>
             </ul>
-            <h4>Modify</h4>
+
+        <h4>Modify</h4>
             <a class='dropdown-button btn dropbtn' id="dropdown" href='#' data-activates='dropdown5'>Select</a>
-            <ul id='dropdown5' class='dropdown-content'>
-                <li><button type='submit' id='undo-head'>Undo head</button>
-                </li>
-                <li><button type='submit' id='undo-torso'>Undo torso</button>
-                </li>
-                <li><button type='submit' id='undo-legs'>Undo legs</button>
-                </li>
-                <li><button type='submit' id='undo-weapon'>Undo weapon</button>
-                </li>
+
+             <ul id='dropdown5' class='dropdown-content'>
+
+            <li><button type='submit' id='undo-head'>Undo head</button>
+            </li>
+            <li><button type='submit' id='undo-torso'>Undo torso</button>
+            </li>
+            <li><button type='submit' id='undo-legs'>Undo legs</button>
+            </li>
+            <li><button type='submit' id='undo-weapon'>Undo weapon</button>
+            </li>
             </ul>
 
         </div>
@@ -105,15 +121,20 @@
             <canvas id='canvas' width='250' height='250'></canvas>
         </div>
 
+</div>
+
+            
+</div>
+
+
+        <script src='/js/sprite.js'> </script>
+         <script>
+        
+            $('.dropdown-button').dropdown('open')
+         </script>
+
     </div>
-    <script src='/js/sprite.js'>
 
-
-    </script>
-    <script>
-        $('.dropdown-button').dropdown('open')
-
-    </script>
 </body>
 
 </html>
