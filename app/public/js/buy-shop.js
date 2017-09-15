@@ -17,7 +17,15 @@ $("#sword").click(function () {
 
     swordsArray.forEach(function (item) {
         $('#itemHere').append('<img id=swordItem src="/img/items/item-' + item + '.png"/>')
+
+        if (true) {
+            $("#swordItem").click(function () {
+                console.log($(this.item))
+            });
+        }
     })
+
+
 
 })
 

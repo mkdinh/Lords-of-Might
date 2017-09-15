@@ -29,6 +29,13 @@ h1 {
     float: left;
 }
 
+#checkContainer {
+    margin-top: 180px;
+    height: 150px;
+    text-align: center;
+    padding: 10px;
+}
+
 #items {
     margin: 10px;
     margin-left: 640px;
@@ -39,6 +46,19 @@ h1 {
 
 #charName {
     text-align: center;
+}
+
+#buyItem {
+    margin-bottom: 15px;
+    height: 80px;
+}
+
+#home {
+    margin-top: 10px;
+    margin-left: 350px;
+    text-align: center;
+    padding: 10px;
+    width: 10%;
 }
 
 
@@ -100,6 +120,25 @@ img {
 
 
 /*Buttons DESIGN*/
+
+#home {
+    font-size: 20px;
+    border-radius: 15px;
+    outline: none;
+    background-color: white;
+    border: 1px solid white;
+    color: #060669;
+}
+
+#checkout {
+    background-color: white;
+    border: 1px solid white;
+    color: #060669;
+    font-size: 20px;
+    border-radius: 15px;
+    padding: 8px;
+    outline: none;
+}
 
 #sword {
     border: 1px solid #3f3fa7;
@@ -176,6 +215,18 @@ img {
 
 /*buttons hover design*/
 
+#checkout:hover {
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid #cc6666;
+    color: #cc6666;
+}
+
+#home:hover {
+    background-color: rgba(6, 6, 105, 0.8);
+    border: 1px solid white;
+    color: white;
+}
+
 #sword:hover {
     background-color: rgba(6, 6, 105, 0.8);
     border: 1px solid white;
@@ -224,11 +275,6 @@ img {
     margin: 2px;
 }
 
-#swordItem:hover {
-    width: 100px;
-    height: 100px;
-}
-
 #helmetItem {
     width: 64px;
     height: 64px;
@@ -236,11 +282,6 @@ img {
     background: white;
     padding: 5px;
     margin: 2px;
-}
-
-#helmetItem:hover {
-    width: 100px;
-    height: 100px;
 }
 
 #legItem {
@@ -252,11 +293,6 @@ img {
     margin: 2px;
 }
 
-#legItem:hover {
-    width: 100px;
-    height: 100px;
-}
-
 #bootsItem {
     width: 64px;
     height: 64px;
@@ -264,11 +300,6 @@ img {
     background: white;
     padding: 5px;
     margin: 2px;
-}
-
-#bootsItem:hover {
-    width: 100px;
-    height: 100px;
 }
 
 #armorItem {
@@ -280,20 +311,35 @@ img {
     margin: 2px;
 }
 
+
+/*Items hover design*/
+
+#swordItem:hover {
+    border: solid #3f3fa7;
+    width: 62px;
+    height: 62px;
+}
+
+#legItem:hover {
+    border: solid #3f3fa7;
+    width: 62px;
+    height: 62px;
+}
+
+#bootsItem:hover {
+    border: solid #3f3fa7;
+    width: 62px;
+    height: 62px;
+}
+
 #armorItem:hover {
-    width: 100px;
-    height: 100px;
+    border: solid #3f3fa7;
+    width: 62px;
+    height: 62px;
 }
 
-#healthItem {
-    width: 64px;
-    height: 64px;
-    border: none;
-    background: white;
-    padding: 5px;
-}
-
-#healthItem:hover {
-    width: 100px;
-    height: 100px;
+#helmetItem:hover {
+    border: solid #3f3fa7;
+    width: 62px;
+    height: 62px;
 }
