@@ -99,6 +99,20 @@ LoM.interaction = {
             // }
     },
 
+    castleInteractions: function(player,building){
+        console.log('castle')
+        var state = LoM.userInfo.world.state;
+        if(!LoM.eventActive.state){
+            // announcement('New Shop! Open Soon!')
+            LoM.playerMaster[LoM.userInfo.id].world.state = "Castle"
+            var user = LoM.playerMaster[LoM.userInfo.id]
+
+            // LoM.eventActive.state = true;
+            Client.changeState(user);
+            LoM.eventActive.state = true
+        }
+    },
+
     shopInteractions: function(player,building){
         var state = LoM.userInfo.world.state;
         if(!LoM.eventActive.state){

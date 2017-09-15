@@ -35,11 +35,17 @@ p {
 	color: white;
 }
 
+nav ul{
+    margin-right: 3rem;
+}
+
 nav ul a.btn{
     background-color: #3f3fa7;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
     margin-right:1rem;
     font-size: 25px;
+    height: auto;
     /* border: 1px solid #060669; */
 }
 

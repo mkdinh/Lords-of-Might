@@ -36,7 +36,7 @@ LoM.generator = {
             }
         };
 
-        // this.spriteMap.layers.children.forEach(function(layer){
+        // LoM[state].spriteMap.layers.children.forEach(function(layer){
         //     layer.debug = true;
         // })
     },
