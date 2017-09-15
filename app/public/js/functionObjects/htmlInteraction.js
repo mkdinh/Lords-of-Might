@@ -1,9 +1,6 @@
 
 // Initializing Materialize
-
-
-        
-
+    
 // create interaction div
 function genBattleInteraction(){
 
@@ -310,9 +307,10 @@ $('#global-message-input').on('keypress', function(ev){
 $('#private-message-input').on('keypress', function(ev){
     if(ev.which === 13){
         var message = {
-            body: $('#global-message-input').val().trim(),
+            body: $('#private-message-input').val().trim(),
             user: LoM.userInfo.id,
-            room: LoM.Battle.battleInfo.room
+            name: LoM.userInfo.name,
+            room: room
         };
 
         Client.sendPrivateMessage(message)

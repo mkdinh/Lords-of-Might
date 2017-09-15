@@ -60,7 +60,6 @@ module.exports = function(io){
         })
         
         socket.on('change-state', function(user){
-            console.log(user.world)
             // db.Game_State.update({})
             // broadcast new player to all current players
             socket.broadcast.emit('player-changed-state',user)

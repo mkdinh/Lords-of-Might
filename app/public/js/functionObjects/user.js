@@ -11,7 +11,7 @@ LoM.user = {
             url: "/game/inventories/"+LoM.userInfo.id,
             type: "GET",
             success: function(userInfo){
-                console.log('get inventories')
+                // console.log('get inventories')
                 LoM.userInfo.inventory = userInfo.inventory;
                 LoM.userInfo.equipments = userInfo.equipped;
                 LoM.user.updateInventory();
@@ -32,11 +32,30 @@ LoM.user = {
             var linkWrapper = $("<a>");
             linkWrapper.attr('href','#/')
             var pic = $('<img>'); 
-            pic.attr('src','img/items/item-' + inv[i].Item.id + '.png')
-            pic.attr('data-item-id',inv[i].Item.id)
-            pic.attr('data-invent-id',inv[i].id)
-            pic.attr('data-array-index', i )
-            pic.attr('data-item-slot',inv[i].Item.slot)
+            pic.addClass('tooltipped');
+
+            var itemStats = "<p>HP:     <span class='item-stat right'>"+inv[i].Item.hp+"</span></p>"
+                        + "<p>MP:       <span class='item-stat right'>"+inv[i].Item.mp+"</span></p>"
+                        + "<p>Attack:   <span class='item-stat right'>"+inv[i].Item.attack+"</span></p>"
+                        + "<p>Defense:  <span class='item-stat right'>"+inv[i].Item.defense+"</span></p>"
+                        + "<p>Agility:  <span class='item-stat right'>"+inv[i].Item.agility+"</span></p>"
+                        + "<p>Recovery: <span class='item-stat right'>"+inv[i].Item.recovery+"</span></p>"
+
+            pic.attr({
+                'src':'img/items/item-' + inv[i].Item.id + '.png',
+                'data-item-id': inv[i].Item.id,
+                'data-invent-id': inv[i].id,
+                'data-array-index': i,
+                'data-item-slot': inv[i].Item.slot,
+                'data-position':'bottom',
+                'data-delay': '50',
+                'data-tooltip': itemStats
+        })
+            // pic.attr('src','img/items/item-' + inv[i].Item.id + '.png')
+            // pic.attr('data-item-id',inv[i].Item.id)
+            // pic.attr('data-invent-id',inv[i].id)
+            // pic.attr('data-array-index', i )
+            // pic.attr('data-item-slot',inv[i].Item.slot)
             if(inv[i].equipped){
                 pic.addClass('invent-item equipped');
             }else{
@@ -44,6 +63,7 @@ LoM.user = {
             }
             linkWrapper.append(pic)
             $('#inventory-space').append(linkWrapper)
+            $('.tooltipped').tooltip({delay: 50,  html: true});
         }
         $("#user-gold-amount").html(LoM.userInfo.game_state.gold)
         $("#invent-space-available").html('space: ' + inv.length + "/10")
@@ -52,7 +72,7 @@ LoM.user = {
     updateEquipments: function(){
         equipped = LoM.userInfo.equipments;
         // var equipped = LoM.userInfo.equipments;
-        console.log(equipped)
+        // console.log(equipped)
 
         // // equipping to slot
         let allType = ['quest','head','torso','leg','feet','hand','weapon','consumable'];
@@ -73,7 +93,7 @@ LoM.user = {
         //     }
         // }
             // console.log('update equipments', equipped)
-            console.log(equipped)
+            // console.log(equipped)
             for(i = 0; i < allType.length; i++){
                 if(equipped['slot-'+i] === undefined){
                     $('#equip-'+allType[i]).html("Not Equipped")
@@ -103,8 +123,8 @@ LoM.user = {
                 equipped["spell"] = spells[i].Spell;
                 $('#equip-spell').html(spellName)
             }
-            console.log('equipping spells')
-            console.log(equipped)
+            // console.log('equipping spells')
+            // console.log(equipped)
             // LoM.userInfo.spells = spellObj
             // console.log(spellObj)
         }       
@@ -115,15 +135,15 @@ LoM.user = {
         var modified_stats = LoM.userInfo.modified_stats;
         var based_stats = LoM.userInfo.based_stats;
         var equipped = LoM.userInfo.equipments;
-        console.log(equipped);
-        console.log(based_stats)
+        // console.log(equipped);
+        // console.log(based_stats)
         var allAttr = ["hp","mp","attack","defense","agility","recovery"];
 
         // reset modified stats to base stats so calculated stats doesnt get add onto current modifed states
         for(attr in based_stats){
             modified_stats[attr] =  based_stats[attr]
         }
-        console.log(modified_stats)
+        // console.log(modified_stats)
         
         for(item in equipped){
             if(item !== 'spell'){

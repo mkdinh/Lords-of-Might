@@ -101,6 +101,19 @@ router.get('/', function (req, res, next) {
    }
 });
 
+router.post('/email', (req,res) => {
+    var email = req.body.email;
+
+    db.User.find({"where": {username: email}})
+    .then(user => {
+        if(!user){
+            res.json({available: true})
+        }else{
+            res.json({available: false})
+        }
+    })
+})
+
 router.post('/new', (req,res,next) => {
 
     var userData = JSON.parse(req.body.newUser)

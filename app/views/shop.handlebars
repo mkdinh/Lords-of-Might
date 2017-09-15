@@ -19,65 +19,75 @@
       <source src="/audio/shop-music.mp3" type="audio/mpeg" />
     </audio> --}}
 
-    <div class="row">
+    <div class="container">
 
         <!-- main content container-->
-        <div id="pageContainer">
+        <div id="pageContainer" class='row'>
 
             <h1 style="text-align: center;">WHAT WOULD YOU LIKE TO BUY?</h1>
 
             <!-- user profile picture-->
-            <div id="userProfile">
+            <div id="userProfile" class='col s4'>
                 <p id="charName">USERNAME</p>
-
+                <p>Gold: <span id='user-gold'></span></p>
+                <p>Space: <span id='user-invent-space'></span></p>
                 <div id="checkContainer">
-                    <p>MY NEW ITEMS</p>
-                    <div id="buyItem"></div>
-                    <input id="checkout" type="submit" value="CHECKOUT">
+                    <p>ITEM INFO</p>
+                    <div id="buyItem">
+                        <div id='item-info'>
+                            <span id='item-pic' class='left'></span>
+                            <span id='item-name' class='right'></span>
+                        </div>
+                        <table class=''>
+                            <tbody>
+                                <tr>
+                                    <td><span class='stats-item'>HP</span></td>
+                                    <td><span class='stat' id='user-hp'></span></td>
+                                    <td><span class='stats-item'>MP</span></td>
+                                    <td><span class='stat' id='user-mp'></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class='stats-item'>Attack</span></td>
+                                    <td><span class='stat' id='user-attack'></span></td>
+                                    <td><span class='stats-item'>Defense</span></td>
+                                    <td><span class='stat' id='user-defense'></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class='stats-item'>Agility</span></td>
+                                    <td><span class='stat' id='user-agility'></span></td>
+                                    <td><span class='stats-item'>Recovery</span></td>
+                                    <td><span class='stat' id='user-recovery'></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
 
             <!-- List of items to buy at the shop-->
-            <div id="items">
-                <div id="left" style="float: left;">
-                    <div>
-                        <input id="sword" type="submit" value="SWORDS" />
-                    </div>
-                    <div>
-                        <input id="helmet" type="submit" value="HELMETS" />
-                    </div>
-                    <div>
-                        <input id="legs" type="submit" value="PANTS" />
-                    </div>
-                    <div>
-                        <input id="boots" type="submit" value="BOOTS" />
-                    </div>
-                    <div>
-                        <input id="armor" type="submit" value="ARMOR" />
-                    </div>
+            <div id="items" class='col s8'>
+                <div class='row all-cat'>
+                        <a id="sword" class='cat-btn waves-effect waves-light btn' type="submit" value="SWORDS" /> Swords <a/>
+                        <a id="helmet"  class='cat-btn waves-effect waves-light btn'  type="submit" value="HELMETS" />Helmets</a>
+                        <a id="legs"  class='cat-btn waves-effect waves-light btn'  type="submit" value="PANTS" />Pants</a>
+                        <a id="boots"  class='cat-btn waves-effect waves-light btn'  type="submit" value="BOOTS" />Boots</a>
+                        <a id="armor" class='cat-btn waves-effect waves-light btn'  type="submit" value="ARMOR" />Armour</a>
                 </div>
-                <div id="right" style="float:right; text-align: center;">
+                <div class='row shop-inventory'>
                     <div id="itemHere">
                     </div>
-                    <img id="chest" src="img/chest.png" />
                 </div>
+
+                <div class='action-btn-wrapper'>
+                    <a class="action-btn waves-effect waves-light btn">BUY</a>
+                    <a class="action-btn waves-effect waves-light btn" href='/user'>LOBBY</a>
+                </div>
+
             </div>
 
-            <input id="home" type="submit" value="HOME">
-
-
         </div>
-
-        <!-- Foundation JQuery-->
-        <script src="css/foundation/js/vendor/jquery.js"></script>
-
-        <!-- Foundation JavaScript-->
-        <script src="css/foundation/js/vendor/foundation.min.js"></script>
-
-        <script>
-            $(document).foundation();
-
-        </script>
+    </div>
         <script src='/js/buy-shop.js'></script>
 
 </body>

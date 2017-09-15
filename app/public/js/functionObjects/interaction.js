@@ -41,22 +41,24 @@ LoM.interaction = {
                 case 'Shop Owner':
                     var profile = "<img class='npc-profile' src='img/npc/profile-1.png' />"
                     $('.npc-interaction').append(profile)
-                    $('.npc-profile').fadeIn(750,function(){
-                        var text = $('<div class="npc-message">')
-                        text.append('<h5>Welcome to my Shop!</h5>'
-                        +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the pinkie toe.</p>'
-                        +'<p>Now I just look cool in my golden armour and run the store, you want to check out the goods?</p>'
-                        +'</div>')
-                        shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/shop'>Shop</a>"
-                        $('.npc-interaction').append(text);
-                        text.append(shop)
+                    setTimeout(function(){
+                        $('.npc-profile').fadeIn(750,function(){
+                            var text = $('<div class="npc-message">')
+                            text.append('<h5>Welcome to my Shop!</h5>'
+                            +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the pinkie toe.</p>'
+                            +'<p>Now I just look cool in my golden armour and run the store, you want to check out the goods?</p>'
+                            +'</div>')
+                            shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/shop'>Shop</a>"
+                            $('.npc-interaction').append(text);
+                            text.append(shop)
 
-                        text.fadeIn(function(){
-                            setTimeout(function(){
-                                $('#shop-btn').animate({opacity: 1},500)
-                            },500)
-                        })
-                    });
+                            text.fadeIn(function(){
+                                setTimeout(function(){
+                                    $('#shop-btn').animate({opacity: 1},500)
+                                },500)
+                            })
+                        });
+                    },300);
                     break       
             }
             LoM.eventActive.state = true;

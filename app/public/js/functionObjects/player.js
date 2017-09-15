@@ -12,7 +12,13 @@ LoM.player = {
 
         switch(dbInfo.world.state){
             case 'Town':
-                sprite =  LoM[state].add.sprite(dbInfo.world.x, dbInfo.world.y, dbInfo.sprite);
+                if(dbInfo.role === "player"){
+                    randX = randomInt(300,600);
+                    randY = randomInt(800,1200)
+                    sprite =  LoM[state].add.sprite(randX, randY, dbInfo.sprite);
+                }else{
+                    sprite =  LoM[state].add.sprite(dbInfo.world.x, dbInfo.world.y, dbInfo.sprite);
+                }
                 break
             case 'Shop':
                 if(dbInfo.role === "player"){
@@ -93,6 +99,7 @@ LoM.player = {
             LoM[state].world.bringToTop(LoM[state].groupMap.npcs);
             
         }else{
+            // console.log(state)
             LoM[state].groupMap.players.add(sprite)
             LoM[state].world.bringToTop(LoM[state].groupMap.players);
             LoM.spriteMaster[dbInfo.id] = sprite;
@@ -120,8 +127,8 @@ LoM.player = {
     },
     
     remove: function(player){
-        console.log(player)
-        console.log(LoM.spriteMaster)
+        // console.log(player)
+        // console.log(LoM.spriteMaster)
         if(player.id !== undefined && LoM.spriteMaster[player.id] !== undefined){
             console.log(player)
             LoM[player.state].spriteMap.players[player.id].kill();
@@ -163,6 +170,11 @@ LoM.player = {
     getCoordinates: function(layer,pointer){
         // Client.sendClick(pointer.worldX,pointer.worldY);
     }
+}
+
+
+function randomInt (low,high){
+    return Math.floor(Math.random() * (high - low) + low);
 }
 
 // combine playerControll and Town

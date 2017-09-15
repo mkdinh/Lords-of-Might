@@ -106,6 +106,7 @@ LoM.Shop = {
             // change state from Shop to Town
             this.physics.arcade.collide(LoM.spriteMaster[LoM.userInfo.id], this.layerMap.door,function(player,building){
                 if(!LoM.eventActive.state){
+                    // LoM.userInfo.world.state = 'Town'
                     LoM.playerMaster[LoM.userInfo.id].world.state = "Town"
                     var user = LoM.playerMaster[LoM.userInfo.id]
                     console.log('exiting Shop')

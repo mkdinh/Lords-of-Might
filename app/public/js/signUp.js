@@ -34,39 +34,49 @@ $(document).ready(function () {
             return 
         }
 
-        //removes initial divs and tags
-        $('#new-user-info').css('display','none');
-        $('#sexContainer').fadeIn('slow');
+        $.ajax({
+            url: '/user/email',
+            method: 'POST',
+            data: {email: newUser.username},
+            success: function(email){
+                if(!email.available){
+                    Materialize.toast("Your email is already in the system!", 2000, 'indigo darken-4') 
+                }else{
+                    //removes initial divs and tags
+                    $('#new-user-info').css('display','none');
+                    $('#sexContainer').fadeIn('slow');
 
-        //once user clicks the female button
-        $("#female").click(function(){
-            $("#picture").empty();
-            for(i = 0; i < female.length; i++){
-                $('#picture').prepend('<img data-pic="'+ female[i] +'" class="profile-pic" src="img/profilePics' + female[i] + '"/>')
-            }
-        
-        }) 
+                    //once user clicks the female button
+                    $("#female").click(function(){
+                        $("#picture").empty();
+                        for(i = 0; i < female.length; i++){
+                            $('#picture').prepend('<img data-pic="'+ female[i] +'" class="profile-pic" src="img/profilePics' + female[i] + '"/>')
+                        }
+                    
+                    }) 
 
-        $("#male").click(function(){
-            $("#picture").empty();
-            for(i = 0; i < male.length; i++){
-                $('#picture').prepend('<img data-pic="'+ male[i] +'" class="profile-pic" src="img/profilePics' + male[i] + '"/>')
+                    $("#male").click(function(){
+                        $("#picture").empty();
+                        for(i = 0; i < male.length; i++){
+                            $('#picture').prepend('<img data-pic="'+ male[i] +'" class="profile-pic" src="img/profilePics' + male[i] + '"/>')
+                        }
+                    })
+
+                    $('#sexContainer').on('click', '.profile-pic', function(){
+                        newUser.profile = $(this).attr('data-pic');
+                        $('#picContainer').empty();
+                        $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
+                    })
+
+                    //hide 
+
+                    $("#signup-wrapper").on('click', '#submitProfile', function (ev) {
+                        $("#signup-wrapper").hide();
+                        $("#createSprite").fadeIn('slow');
+                    });
+                }
             }
         })
-
-        $('#sexContainer').on('click', '.profile-pic', function(){
-            newUser.profile = $(this).attr('data-pic');
-            $('#picContainer').empty();
-            $("#signup-wrapper").append("<button id='submitProfile' type=submit>Ready</button>");
-        })
-
-        //hide 
-
-        $("#signup-wrapper").on('click', '#submitProfile', function (ev) {
-            $("#signup-wrapper").hide();
-            $("#createSprite").fadeIn('slow');
-        });
-
     });
 
     newUser.sprite = {}

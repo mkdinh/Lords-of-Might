@@ -91,7 +91,7 @@ LoM.Preload = {
                 },200);
 
             $('#sidebar').fadeIn()
-            },300
+            },100
         )
         LoM.user.getInventory(function(){
             Client.userInfoDB(user);
@@ -120,7 +120,7 @@ LoM.playerControl.eventListener = function(worldX,worldY){
                  LoM.eventActive.player = {};
                  LoM.eventActive.target = {};
                  LoM.eventActive.lastLocationSaved = false;
-                 console.log('reset event')
+                //  console.log('reset event')
              }
          }
      }
@@ -142,7 +142,7 @@ LoM.playerControl.controlInput = function(worldX,worldY){
 }
 
 var parsePNG = function(url){
-    console.log(url)
+    // console.log(url)
     if(url !== null){
     var parsedURL = url.split('/')
     var imgFile = parsedURL[parsedURL.length-1];
@@ -161,7 +161,7 @@ function removeInteraction(div){
     $(div).fadeOut(function(){
         $(div).empty();
     });
-    console.log('hey')
+    // console.log('hey')
 }
 
 

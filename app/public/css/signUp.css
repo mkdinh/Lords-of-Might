@@ -1,12 +1,16 @@
 body {
     background: url("../img/preloadBG.jpg")no-repeat center center fixed;
     -webkit-background-size: cover;
+    -ms-overflow-style: none;
+    overflow: auto;
+    overflow: -moz-scrollbars-none;
 }
 
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
 }
+
 
 h1,
 label,
