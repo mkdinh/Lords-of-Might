@@ -80,6 +80,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
     Client.changeState = function(user){
         // console.log(user)
         LoM.eventActive.state = true;
+        initialized = false;
         this.socket.emit('change-state',user)
     }
 
