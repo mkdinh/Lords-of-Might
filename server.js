@@ -94,34 +94,22 @@ require(path.join(__dirname, './app/ws/battleSIO.js'))(io);
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
 var restart = false;
-<< << << < HEAD
 //var restart = true;
+
 if (restart) {
     db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {
             raw: true
         })
         .then(function (result) {
-                db.sequelize.sync({
-                        force: true
-                    }).then(() => {
-                            //from file 
-                            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json', './app/fixtures/User2.json', './app/fixtures/Items.json', './app/fixtures/Spells.json'], db).then(function () {
-                                        server.listen(port, () => {
-                                                console.log('listen to port', port)
-                                            }) ===
-                                            === =
-                                        // var restart = true;
-if(restart){
-    db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
-    .then(function(result){
-        db.sequelize.sync(
-            {force: true}   
-        ).then(() => {
-        //from file 
-            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json','./app/fixtures/User2.json','./app/fixtures/Items.json','./app/fixtures/Spells.json'], db).then(function(){
-                server.listen(port, () => {
-                console.log('listen to port',port)
->>>>>>> 4a998333f74a3b5d892798d0d2c0095c5c938398
+            db.sequelize.sync({
+                force: true
+            }).then(() => {
+                //from file 
+                sequelize_fixtures.loadFiles(['./app/fixtures/User1.json', './app/fixtures/User2.json', './app/fixtures/Items.json', './app/fixtures/Spells.json'], db).then(function () {
+                    server.listen(port, () => {
+                        console.log('listen to port', port)
+
+                    })
                 })
             })
         })
