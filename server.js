@@ -26,7 +26,7 @@ const sequelize_fixtures = require('sequelize-fixtures');
 //     });
 // })
 
-    
+
 
 
 // INITIALIZING SERVER
@@ -40,7 +40,7 @@ app.engine('handlebars', hdbs({
 
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'app/views/'));
-app.set( 'port', ( process.env.PORT || 3030 ))
+app.set('port', (process.env.PORT || 3030))
 // app.set('trust proxy', 1) // trust first proxy 
 app.use(cookieParser('keyboard cat'))
 app.use(session({
@@ -59,8 +59,14 @@ app.use(express.static(path.join(__dirname, '/app/public/')));
 
 
 
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 10000000000000000000}));
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
+app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 10000000000000000000
+}));
 
 
 // INTIALIZING ROUTERS
@@ -88,30 +94,31 @@ require(path.join(__dirname, './app/ws/battleSIO.js'))(io);
 // STARTING DB AND SERVER
 // -------------------------------------------------------------
 var restart = false;
-var restart = true;
-
-if(restart){
-db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {raw: true})
-    .then(function(result){
-        db.sequelize.sync(
-            {force: true}   
-        ).then(() => {
-        //from file 
-            sequelize_fixtures.loadFiles(['./app/fixtures/User1.json','./app/fixtures/User2.json','./app/fixtures/Items.json','./app/fixtures/Spells.json'], db).then(function(){
-                server.listen(port, () => {
-                console.log('listen to port',port)
+//var restart = true;
+if (restart) {
+    db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {
+            raw: true
+        })
+        .then(function (result) {
+            db.sequelize.sync({
+                force: true
+            }).then(() => {
+                //from file 
+                sequelize_fixtures.loadFiles(['./app/fixtures/User1.json', './app/fixtures/User2.json', './app/fixtures/Items.json', './app/fixtures/Spells.json'], db).then(function () {
+                    server.listen(port, () => {
+                        console.log('listen to port', port)
+                    })
                 })
-             })
-         })
-    })
-}else{
+            })
+        })
+} else {
 
     db.sequelize.sync(
         // {force: true}   
     ).then(() => {
         server.listen(port, () => {
-            console.log('listen to port',port)
+            console.log('listen to port', port)
         })
     })
-    
+
 }
