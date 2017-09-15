@@ -128,7 +128,7 @@ LoM.player = {
 
     // retrieve proper sprite movement
     move: function(dirInfo){
-        if(initialized){
+        if(initialized && LoM.playerMaster[dirInfo.player.id] !== undefined){
             var state = dirInfo.player.world.state;
             var id = LoM.userInfo.id;
                 // console.log(state,id)

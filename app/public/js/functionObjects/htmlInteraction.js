@@ -40,7 +40,6 @@ function announcement(body){
 
 $('.battle-btn').on('click', function(){
     $('.fixed-action-btn.toolbar').closeToolbar();
-    console.log('hey')
 })
 
 $('.interaction').on('click','#battle-request', function(ev){
