@@ -128,28 +128,29 @@ LoM.player = {
 
     // retrieve proper sprite movement
     move: function(dirInfo){
-        // console.log(dirInfo)
-        var state = dirInfo.player.world.state;
-        var id = LoM.userInfo.id;
-            // console.log(state,id)
-        if(state === LoM.playerMaster[id].world.state){
+        if(initialized){
+            var state = dirInfo.player.world.state;
+            var id = LoM.userInfo.id;
+                // console.log(state,id)
+            if(state === LoM.playerMaster[id].world.state){
 
-            var player = LoM.spriteMaster[dirInfo.player.id];
-            player.body.velocity.x = dirInfo.player.velocity.x;
-            player.body.velocity.y = dirInfo.player.velocity.y;
-            
-            //  update player position
-            LoM.playerMaster[dirInfo.player.id].world.x = dirInfo.player.world.x;
-            //  update player position
-            LoM.playerMaster[dirInfo.player.id].world.y = dirInfo.player.world.y;
+                var player = LoM.spriteMaster[dirInfo.player.id];
+                player.body.velocity.x = dirInfo.player.velocity.x;
+                player.body.velocity.y = dirInfo.player.velocity.y;
+                
+                //  update player position
+                LoM.playerMaster[dirInfo.player.id].world.x = dirInfo.player.world.x;
+                //  update player position
+                LoM.playerMaster[dirInfo.player.id].world.y = dirInfo.player.world.y;
 
-            // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
+                // console.log(dirInfo.player.world.x,dirInfo.player.world.y)
 
-            // play animation
-            if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
-                player.animations.stop()
-            }else{
-                player.animations.play(dirInfo.dir,10,false)
+                // play animation
+                if(dirInfo.player.velocity.x === 0 && dirInfo.player.velocity.y === 0){
+                    player.animations.stop()
+                }else{
+                    player.animations.play(dirInfo.dir,10,false)
+                }
             }
         }
     },

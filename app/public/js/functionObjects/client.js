@@ -17,7 +17,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
 
     Client.socket.on('global-message', function(message){
         var globalMessages = $('#global-messages')
-        var user = LoM.userInfo.name;
+        var user = message.name;
         var body = message.body;
 
         var message = '<p class="message-text">'+ user + ': ' + body + '</p>'

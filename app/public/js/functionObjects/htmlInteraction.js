@@ -286,7 +286,8 @@ $('#global-message-input').on('keypress', function(ev){
     if(ev.which === 13){
         var message = {
             body: $('#global-message-input').val().trim(),
-            user: LoM.userInfo.id
+            user: LoM.userInfo.id,
+            name: LoM.userInfo.name
         };
         $.ajax({
             url: 'messages/new',
