@@ -67,18 +67,23 @@ LoM.player = {
         sprite.body.collideWorldBounds = true;
         
         // setting display label
-        var style = { font: "12px Arial", fill: "#000000",align:'center',boundsAlignH:'center', backgroundColor:'rgba(255,255,255,.3)'};
-
-        if(dbInfo.role === 'player'){ 
-            var label = LoM[state].add.text(0, 0,dbInfo.name, style); 
-            label.anchor.set(0.5)
-            label.position.x += ((sprite.width/2)+(sprite.width - label.width)/2)
-            // label.position.x -= label.width * 0.5;
-            // label.position.y -= label.height * 0.5;
+        console.log(dbInfo)
+        if(dbInfo.role === 'player'){
+            if(dbInfo.status === 'Moderator'){
+                var style = { font: "12px Arial", fill: "#ffb300", backgroundColor:'rgba(0,0,0,.5)', wordWrap: true, wordWrapWidth: sprite.width, align: "center"};
+                var label = LoM[state].add.text(0, 0,"  "+dbInfo.name+"  ", style);
+                var xoffset = (sprite.width-label.width)/(-100)
+                label.anchor.set(xoffset, 0.5)
+            }else if(dbInfo.status === 'User'){
+                var style = { font: "12px Arial", fill: "#000000", backgroundColor:'rgba(255,255,255,.5)',wordWrap: true, wordWrapWidth: sprite.width, align: "center"};
+                var label = LoM[state].add.text(0, 0,+" "+dbInfo.name+" ", style); 
+                label.anchor.set(-.5, 0.5)
+            }
         }else{
-            var label= LoM[state].add.text(0,0,dbInfo.name, style);
-            label.anchor.set(0.5)
-            label.position.x += ((sprite.width)+(sprite.width - label.width)/2)
+            var style = { font: "12px Arial", fill: "#fafafa",align:'center', backgroundColor:'rgba(43,43,43,.5)'};
+            var label= LoM[state].add.text(0,0," "+dbInfo.name+" ", style);
+            var xoffset = (sprite.width-label.width)/(-200)
+            label.anchor.set(xoffset, 0.5)
         }
 
         sprite.addChild(label);

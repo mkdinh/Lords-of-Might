@@ -53,6 +53,7 @@ LoM.Preload = {
             name: userDB.name,
             online: true,
             role: 'player',
+            status: userDB.status,
             spells: userDB.Spell_Inventories,
             game_state: userDB.Game_State,
             world:{
