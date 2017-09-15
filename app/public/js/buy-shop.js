@@ -16,20 +16,25 @@ $("#sword").click(function () {
     $("#itemHere").empty();
 
     swordsArray.forEach(function (item) {
+
         $('#itemHere').append('<img class=swordItem src="/img/items/item-' + item + '.png"/>')
 
-        if (true) {
-            $(".swordItem").click(function () {
+    });
 
-                $("#buyItem").append($(this))
+    $(".swordItem").click(function () {
 
-            });
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
         }
-    })
+    });
+
+});
 
 
-
-})
 
 
 $("#helmet").click(function () {
@@ -43,16 +48,21 @@ $("#helmet").click(function () {
     helmetsArray.forEach(function (item) {
         $('#itemHere').append('<img class=helmetItem src="/img/items/item-' + item + '.png"/>')
 
-        if (true) {
-
-            $(".helmetItem").click(function () {
-
-                $("#buyItem").append($(this))
-
-            });
-        }
-
     })
+
+    $(".helmetItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+        }
+    });
+
+
 })
 
 $("#legs").click(function () {
@@ -67,15 +77,20 @@ $("#legs").click(function () {
     legsArray.forEach(function (item) {
         $('#itemHere').append('<img class=legItem src="/img/items/item-' + item + '.png"/>')
 
-        if (true) {
-            $(".legItem").click(function () {
-
-                $("#buyItem").append($(this))
-
-            });
-        }
-
     })
+
+    $(".legItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+        }
+    });
+
 
 });
 
@@ -91,14 +106,20 @@ $("#boots").click(function () {
     bootsArray.forEach(function (item) {
         $('#itemHere').append('<img class=bootsItem src="/img/items/item-' + item + '.png"/>')
 
-        if (true) {
-            $(".bootsItem").click(function () {
-
-                $("#buyItem").append($(this))
-
-            });
-        }
     })
+
+    $(".bootItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+        }
+    });
+
 
 });
 
@@ -114,14 +135,20 @@ $("#armor").click(function () {
     armorsArray.forEach(function (item) {
         $('#itemHere').append('<img class=armorsItem src="/img/items/item-' + item + '.png"/>')
 
-        if (true) {
-            $(".armorsItem").click(function () {
-
-                $("#buyItem").append($(this))
-
-            });
-        }
     })
+
+
+    $(".armorsItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+        }
+    });
 
 
 });
