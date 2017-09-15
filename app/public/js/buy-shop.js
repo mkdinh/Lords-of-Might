@@ -20,7 +20,7 @@ $("#sword").click(function () {
 
         if (true) {
             $("#swordItem").click(function () {
-                console.log($(this.item))
+                console.log($(this).attr('src'))
             });
         }
     })
