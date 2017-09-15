@@ -77,7 +77,7 @@ $(document).ready(function () {
         var ctx = document.getElementById('canvas').getContext('2d');
         // append link to obj
         newUser.sprite[part] = path;
-        var order = ['body','leg','torso','head','feet'];
+        var order = ['body','leg','torso','head','feet','weapon'];
 
         // clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height)
