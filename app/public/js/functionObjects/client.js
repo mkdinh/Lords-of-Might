@@ -101,11 +101,13 @@ if(!JSON.parse(localStorage.getItem('user'))){
             var state = user.world.state;
             initialized = false;
             LoM.playerMaster[userID] = user;
+
             if(state !== 'Battle'){
                 LoM.user.getInventory(function(){
-                        LoM.game.state.start(state)
+                    LoM.game.state.start(state)
                 });
             }else{
+
                 LoM.game.state.start(state);
             }
     })

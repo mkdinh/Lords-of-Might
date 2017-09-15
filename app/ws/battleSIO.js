@@ -41,12 +41,15 @@ module.exports = function(io){
 
         // attack logic here with data
         var attackMod = randomInt(50,100);
+        var defenseMod = randomInt(20,50);
         attackMod = attackMod/100;
-        var attackMin = attacker.weapon.damage[0] + (attacker.based_stats.attack *  attackMod);
-        var attackMax =attacker.weapon.damage[1] + (attacker.based_stats.attack * attackMod)
+        defenseMod = defenseMod/100;
 
+        var attackMin = parseInt(attacker.weapon.damage[0] + (attacker.based_stats.attack *  attackMod));
+        var attackMax = parseInt(attacker.weapon.damage[1] + (attacker.based_stats.attack * attackMod))
         var attackPoints = randomInt(attackMin,attackMax);
-        defender.battle.hp -= attackPoints;
+        console.log(attackPoints)
+        defender.battle.hp -= parseInt( attackPoints - (defender.modified_stats.defense * defenseMod) );
 
         // emit signal to battling player
         io.in(room).emit('battleReaction',state)

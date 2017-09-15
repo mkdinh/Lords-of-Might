@@ -184,8 +184,8 @@ LoM.Battle = {
         };
         
         LoM.battleInfo.initiator.battle = {
-            // hp: info.modified_stats.hp,
-            hp: 1,
+            hp: info.modified_stats.hp,
+            // hp: 1,
             mp: info.modified_stats.mp,
             potion: 1
         }
@@ -222,8 +222,8 @@ LoM.Battle = {
         };
 
         LoM.battleInfo.receiver.battle = {
-            // hp: info.modified_stats.hp,
-            hp: 1,
+            hp: info.modified_stats.hp,
+            // hp: 1,
             mp: info.modified_stats.mp,
             potion: 1
         }

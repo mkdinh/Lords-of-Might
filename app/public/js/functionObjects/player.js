@@ -76,7 +76,7 @@ LoM.player = {
                 label.anchor.set(xoffset, 0.5)
             }else if(dbInfo.status === 'User'){
                 var style = { font: "12px Arial", fill: "#000000", backgroundColor:'rgba(255,255,255,.5)',wordWrap: true, wordWrapWidth: sprite.width, align: "center"};
-                var label = LoM[state].add.text(0, 0,+" "+dbInfo.name+" ", style); 
+                var label = LoM[state].add.text(0, 0," "+dbInfo.name+" ", style); 
                 label.anchor.set(-.5, 0.5)
             }
         }else{

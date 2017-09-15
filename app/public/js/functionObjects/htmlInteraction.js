@@ -288,15 +288,21 @@ $('#global-message-input').on('keypress', function(ev){
             user: LoM.userInfo.id,
             name: LoM.userInfo.name
         };
-        $.ajax({
-            url: 'messages/new',
-            method: 'POST',
-            data: message,
-            success: function(){
-                Client.sendGlobalMessage(message)
-                $('#global-message-input').val('');
-            }
-        })
+        
+        if(message.body.length < 100){
+            $.ajax({
+                url: 'messages/new',
+                method: 'POST',
+                data: message,
+                success: function(){
+                    Client.sendGlobalMessage(message)
+                    $('#global-message-input').val('');
+                }
+            })
+        }else{
+            announcement('Your text message is too long')
+            $('#global-message-input').val('');
+        }
     }
 })
 
