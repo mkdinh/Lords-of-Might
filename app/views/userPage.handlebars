@@ -97,6 +97,7 @@
                 url: '/user/logout',
                 method: 'POST',
                 success: function(res){
+                    localStorage.removeItem('user')
                     window.location.replace('/');
                 }
             })

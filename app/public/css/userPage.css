@@ -55,7 +55,7 @@ body {
     outline: none;
 }
 
-.btn:hover{
+.btn:hover,.btn:focus{
     background-color: #060669;
     border: 1px solid #3f3fa7;
     color: #7979e0;  
