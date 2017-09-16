@@ -103,6 +103,7 @@ LoM.Town = {
             }
         }
 
+        // generate npc on town map
         var sprite2Info = {
             id: '1',
             sprite: "npc-1",
@@ -112,15 +113,12 @@ LoM.Town = {
             world: {x: 390,y:280,state:'Town'}
         }
 
-
+        // create a sprite with npc info
         LoM.player.add(sprite2Info);
         this.sprite2 = this.groupMap.npcs['sample'];
 
         // after all players is load for the current user, the game start
         // this prevent update from running before all the players is loaded
-        
-
-        LoM.Town.clickLayer.events.onInputUp.add(LoM.player.getCoordinates, this);
         initialized = true;
     },
 

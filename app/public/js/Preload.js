@@ -22,6 +22,7 @@ LoM.Preload = {
         LoM.Preload.load.spritesheet(spell,'img/spells/'+spell+'.png',126,124,38);
     })
 
+    // load static images and tilesheet for the game
     this.load.image('battleBG','/img/battleBG.png')
     this.load.image('health','/img/items/health.png',64,64)
     this.load.tilemap('map', 'img/map/example_map.json', null, Phaser.Tilemap.TILED_JSON);
@@ -76,7 +77,9 @@ LoM.Preload = {
             }
         }
 
+        // update userInfo inside game object with newest data
         LoM.userInfo = user;
+
         // ENABLE KEYBOARD INPUT
         // --------------------------------------------------------------
         LoM.cursor = LoM.game.input.keyboard.createCursorKeys();  
@@ -85,6 +88,7 @@ LoM.Preload = {
         LoM.game.input.keyboard.addKey(Phaser.Keyboard.S)
         LoM.game.input.keyboard.addKey(Phaser.Keyboard.D)
         
+        // set a timeout on sidebar UI to prevent a lag in fadeIn jquery
         setTimeout(function(){
             setTimeout(function(){
                 $('ul.tabs').tabs()
@@ -93,15 +97,19 @@ LoM.Preload = {
             $('#sidebar').fadeIn()
             },100
         )
+        // update inventory of the user and send the information to start the game
         LoM.user.getInventory(function(){
             Client.userInfoDB(user);
         })
     }
 }
 
+// listen to active event such as npc interactions or user interactions
+// this is used to reset event to prevent multiple collisions 
 LoM.playerControl.eventListener = function(worldX,worldY){
-     //  if no event is active
+     //  if event is activated
      if(LoM.eventActive.state){
+        //  save the last location
          if(!LoM.eventActive.lastLocationSaved){
              LoM.eventActive.lastLocation = {
                  x: LoM.spriteMaster[LoM.userInfo.id].x,
@@ -109,6 +117,8 @@ LoM.playerControl.eventListener = function(worldX,worldY){
              } 
              LoM.eventActive.lastLocationSaved = true
          }else{
+            //  determine when the sprite is 20px away from the last location and change event active to false
+            // remove all interactions div and changes display to none, also reset eventListener booleans to false 
              var lastLocation = LoM.eventActive.lastLocation
              var dX = worldX - lastLocation.x;
              var dY = worldY - lastLocation.y;
@@ -126,6 +136,7 @@ LoM.playerControl.eventListener = function(worldX,worldY){
      }
 };
 
+// listen to player input to send to socket.io
 LoM.playerControl.controlInput = function(worldX,worldY){
 
     if(LoM.game.input.keyboard.isDown(Phaser.Keyboard.W)){  
@@ -141,6 +152,7 @@ LoM.playerControl.controlInput = function(worldX,worldY){
     }
 }
 
+// parse out png file to get only the file name
 var parsePNG = function(url){
     // console.log(url)
     if(url !== null){
@@ -151,26 +163,16 @@ var parsePNG = function(url){
     }
 }
 
+// generate random integer between low and high
 function randomInt (low,high){
     return Math.floor(Math.random() * (high - low) + low);
 }
 
-
+// fadeout and empty interaction div contents
 function removeInteraction(div){
     
     $(div).fadeOut(function(){
         $(div).empty();
     });
     // console.log('hey')
-}
-
-
-var updateStats = function(){
-    let stats = ['attack','defense','agility','hp','mp']
-    let inventory = LoM.userInfo.inventory
-    for(i = 0; i < inventory.length; i++){
-        switch(iventory.item.slot){
-            case 1:
-        }
-    }
 }

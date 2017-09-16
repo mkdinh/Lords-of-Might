@@ -1,23 +1,14 @@
 // DECLARE GLOBAL VARIABLES
 // ---------------------------------------------------------------------
-var socket;
+// var socket;
 
+// INITIALIZE MODAL
+//------------------------------------------------------------------------
+$('.modal').modal();
 
-// SERVER CONNECTION TO SOCKET.IO
+// AUTO LOGIN WITH LOCALSTORAGE
 // ---------------------------------------------------------------------
 
-// intializze socket.io upon onnection
-// function initalizeIOConn(){
-//     socket = io.connect('http://localhost:3000');
-
-//     socket.on('connect', function(data) {
-//         socket.on('broadcast', function(message) {
-//             $('#messages').append('<p>'+message+'<p>')
-//         });
-//     })
-// }
-
-// console.log(localStorage)
 // login persistence with localstorage
 if(localStorage.hasOwnProperty('user')){
     var user = JSON.parse(localStorage.getItem('user'));
@@ -37,9 +28,7 @@ if(localStorage.hasOwnProperty('user')){
     })
 }
 
-// INITIALIZE MODAL
-//------------------------------------------------------------------------
-$('.modal').modal();
+
 
 // LOGIN
 //------------------------------------------------------------------------
@@ -94,6 +83,21 @@ $('#game-btn').on('click',function(ev){
         Materialize.toast("You need to sign in!", 2000, 'indigo darken-4') 
     }
 })
+
+
+// SERVER CONNECTION TO SOCKET.IO
+// ---------------------------------------------------------------------
+
+// intializze socket.io upon onnection
+// function initalizeIOConn(){
+//     socket = io.connect('http://localhost:3000');
+
+//     socket.on('connect', function(data) {
+//         socket.on('broadcast', function(message) {
+//             $('#messages').append('<p>'+message+'<p>')
+//         });
+//     })
+// }
 
 // SOCKET MESSAGING LOGICS
 // ---------------------------------------------------------------------

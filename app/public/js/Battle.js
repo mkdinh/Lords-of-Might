@@ -1,8 +1,14 @@
+// DECLARING GLOBAL VARIABLES
+// ---------------------------------------------------------------------
 var LoM = LoM || {};
 var user;
 var enemy;
 var room;
 var initiatorReady = receiverReady = false;
+
+
+// INITIALIZING LOM.BATTLE OBJECT
+// ---------------------------------------------------------------------
 
 // loading game assets
 LoM.Battle = function(){};
