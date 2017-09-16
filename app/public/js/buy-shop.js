@@ -1,7 +1,21 @@
-var shopInvent = {}
-
+var shopInvent = {};
+var userInvent = {};
 var user = JSON.parse(localStorage.getItem('user'));
 var id = user.user_id;
+
+$.ajax({
+    url: '/game/inventories/'+id,
+    method: 'GET',
+    success: function(user){
+        console.log(user.inventory)
+        for(i = 0; i < user.inventory.length; i++){
+            var inventId = user.inventory[i].id;
+            console.log(inventId)
+            userInvent[inventId] = user.inventory[i]
+        }
+        console.log(userInvent)
+    }
+})
 
 var selected;
 
@@ -89,9 +103,16 @@ $("#itemHere").on('click',".item", function () {
 $('#buy-item').on('click', function(){
     var userGold = $('#user-gold').text();
     var cost = shopInvent[selected].buy;
+    console.log(selected)
+    for(inventItem in userInvent){
+        console.log(userInvent[inventItem].ItemId)
+        if(userInvent[inventItem].ItemId === parseInt(selected)){
+            Materialize.toast("You already purchase this item", 2000) 
+            return
+        }
+    }
 
     if(userGold-cost >= 0){
-
         var shopData = {
             cost: cost
         }
