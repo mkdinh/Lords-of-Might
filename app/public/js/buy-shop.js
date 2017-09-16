@@ -28,7 +28,7 @@ $("#sword").click(function () {
             $(this).detach().appendTo("#buyItem");
 
         } else {
-            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
         }
     });
 
@@ -58,7 +58,7 @@ $("#helmet").click(function () {
 
         } else {
 
-            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
         }
     });
 
@@ -87,7 +87,7 @@ $("#legs").click(function () {
 
         } else {
 
-            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
         }
     });
 
@@ -116,7 +116,7 @@ $("#boots").click(function () {
 
         } else {
 
-            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
         }
     });
 
@@ -146,7 +146,7 @@ $("#armor").click(function () {
 
         } else {
 
-            Materialize.toast("Don't get stingy, only one item at a time.", 1500)
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
         }
     });
 
