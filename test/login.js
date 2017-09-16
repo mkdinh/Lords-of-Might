@@ -40,8 +40,10 @@ describe("Lords of Might", function(){
                 expect(url).to.equal(userPage);
                 done()
             }) 
+            
     })
 
+    
     // it('should sign me up', function(done){
     //     Nightmare({show: false})
     //         .goto('https://stormy-citadel-20684.herokuapp.com/')
