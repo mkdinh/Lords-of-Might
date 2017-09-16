@@ -25,8 +25,26 @@ $("#sword").click(function () {
     swordsArray.forEach(function (item) {
         $('#itemHere').append('<img class="item tooltipped" data-delay="50" data-position="bottom" data-tooltip="'+ shopInvent[item].buy +' gold" data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     });
+<<<<<<< HEAD
 
     $('.tooltipped').tooltip({delay: 50});
+=======
+<<<<<<< HEAD
+
+    $(".swordItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
+        }
+    });
+
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
+>>>>>>> c20fc8ea5e78fac862286885b636c33a6d75719b
 });
 
 
@@ -36,6 +54,23 @@ $("#helmet").click(function () {
     helmetsArray.forEach(function (item) {
         $('#itemHere').append('<img class="item tooltipped" data-delay="50" data-position="bottom" data-tooltip="'+ shopInvent[item].buy +' gold"  data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+<<<<<<< HEAD
+
+    $(".helmetItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
+        }
+    });
+
+
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 })
 
 $("#legs").click(function () {
@@ -44,6 +79,23 @@ $("#legs").click(function () {
     legsArray.forEach(function (item) {
         $('#itemHere').append('<img class="item tooltipped" data-delay="50" data-position="bottom" data-tooltip="'+ shopInvent[item].buy +' gold"  data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+<<<<<<< HEAD
+
+    $(".legItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
+        }
+    });
+
+
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 });
 
 $("#boots").click(function () {
@@ -52,6 +104,23 @@ $("#boots").click(function () {
     bootsArray.forEach(function (item) {
         $('#itemHere').append('<img class="item tooltipped" data-delay="50" data-position="bottom" data-tooltip="'+ shopInvent[item].buy +' gold"  data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+<<<<<<< HEAD
+
+    $(".bootsItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
+        }
+    });
+
+
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 });
 
 $("#armor").click(function () {
@@ -63,11 +132,25 @@ $("#armor").click(function () {
 })
 
 
+<<<<<<< HEAD
+    $(".armorsItem").click(function () {
+
+        if ($('#buyItem').contents().length === 0) {
+
+            $(this).detach().appendTo("#buyItem");
+
+        } else {
+
+            Materialize.toast("Don't get greedy, only one item at a time.", 1500)
+        }
+    });
+=======
 $("#itemHere").on('click',".item", function () {
     $('#checkContainer').animate({opacity: 1}, 'fast')
     $('.stat').empty();
     $('#item-pic').empty();
     $('#item-name').empty();
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 
     var src = $(this).attr('src')
     var id = $(this).attr('data-id');
