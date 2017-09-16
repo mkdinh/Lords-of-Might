@@ -203,9 +203,13 @@ $('#user-inventories').on('click',".invent-item",function(ev){
 
     // unequip the item if it is equip
     if($(this).hasClass('equipped')){
-        equipped = {equipped: 0};
+        equipped = {
+            equipped: 0
+        };
     }else{
-        equipped = {equipped: 1};
+        equipped = {
+            equipped: 1
+        };
     }
     // console.log(equipped)
     // perform an ajax call to change the equip state on server,
@@ -222,17 +226,47 @@ $('#user-inventories').on('click',".invent-item",function(ev){
                 // equip item
                 inventory[itemIndex].equipped = true;
                 // replace or add new item slot to equipped
-                equipments['slot-'+itemSlot] = inventory[itemIndex].Item;
+                if(equipments['slot-'+itemSlot] === undefined){
+                    equipments['slot-'+itemSlot] = inventory[itemIndex].Item;
+                }else{
+                    var item_id = equipments['slot-'+itemSlot].id;
+                    // loop through inventory
+                    for(i = 0; i < LoM.userInfo.inventory.length; i++){
+                        // if inventory item id is equal to previous item id;
+                        if(LoM.userInfo.inventory[i].Item.id === item_id){
+
+                            var invent_id = LoM.userInfo.inventory[i].id;
+                            var arrayIndex = i
+                            $.ajax({
+                                url: 'game/inventories/'+invent_id+'?_method=PUT',
+                                type: "POST",
+                                dataType: 'json',
+                                data: {equipped: 0},
+                                success: function(res){
+                                    console.log(inventory,i)
+                                    inventory[arrayIndex].equipped = false;
+                                    $('#invent-'+arrayIndex).removeClass('equipped') 
+                                    equipments['slot-'+itemSlot] = inventory[itemIndex].Item;
+    
+                                    // run updateEquipments function
+                                    LoM.user.updateEquipments();
+                                    // run updateStats function
+                                    LoM.user.updateStats();
+                                }
+                            })
+                        }
+                    }
+                }
 
             }else{
                 $(item).removeClass('equipped');
                 inventory[itemIndex].equipped = false;
                 delete equipments['slot-'+itemSlot];
+                // run updateEquipments function
+                LoM.user.updateEquipments();
+                // run updateStats function
+                LoM.user.updateStats();
             }
-            // run updateEquipments function
-            LoM.user.updateEquipments();
-            // run updateStats function
-            LoM.user.updateStats();
         }
     })
 });

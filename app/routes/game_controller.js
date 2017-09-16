@@ -62,11 +62,11 @@ router.put('/inventories/:id', (req,res) => {
     // grab data from req.body
     var inventId = req.params.id;
     var equipped = req.body;
+    
     // perform sequelize update on item id
     db.Inventory.update(equipped, {where: {id: inventId}}).then( () =>{
         res.json(equipped)
-    })
-    
+    }) 
 })
 
 router.put('/battle/win/:userid', (req,res) => {
@@ -96,14 +96,14 @@ router.get('/shop/all', (req,res) => {
 })
 
 router.post('/shop/:id', (req,res) => {
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var item_id = req.params.id;
     var cost = req.body.cost;
 
-    db.Inventory.create({Itemid: item_id, userId: id}).then(() => {
-        db.Game_State.find({where: {UserId: id}}).then((game_state) => {
+    db.Inventory.create({ItemId: item_id, UserId: user_id}).then(() => {
+        db.Game_State.find({where: {UserId: user_id}}).then((game_state) => {
             game_state.decrement('gold', cost)
-            res.json({success: 'success'})
+            res.json({cost: cost})
         })
     })
 })

@@ -23,8 +23,8 @@
 
             <!-- user profile picture-->
             <div id="userProfile" class='col s4'>
-                <p id="charName">USERNAME</p>
-                <p>Gold: <span id='user-gold'></span></p>
+                <h4 id="charName">{{user.name}}</h4>
+                <p>Gold: <span id='user-gold'>{{user.Game_State.gold}}</span></p>
                 {{!-- <p>Space: <span id='user-invent-space'></span></p> --}}
                 <div id="checkContainer">
                     <p>ITEM INFO</p>

@@ -14,7 +14,13 @@ router.get('/signUp', function (req, res) {
 })
 
 router.get('/shop', function (req, res) {
-    res.render('shop')
+    if(req.user){
+        db.User.find({where: {id: req.user.id}, include: [db.Inventory, db.Game_State]}).then((user) => {
+            res.render('shop',{user: user})
+        })
+    }else{
+        res.redirect('/')
+    }
 })
 
 

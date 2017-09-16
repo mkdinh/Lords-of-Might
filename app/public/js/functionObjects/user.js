@@ -49,7 +49,8 @@ LoM.user = {
                 'data-item-slot': inv[i].Item.slot,
                 'data-position':'bottom',
                 'data-delay': '50',
-                'data-tooltip': itemStats
+                'data-tooltip': itemStats,
+                'id': 'invent-'+ i
         })
             // pic.attr('src','img/items/item-' + inv[i].Item.id + '.png')
             // pic.attr('data-item-id',inv[i].Item.id)
