@@ -10,8 +10,14 @@ module.exports = function(io){
         // -----------------------------------------------------------------
           
         client.on('global-message', function(message) {
+            console.log('global')
                 io.sockets.emit('global-message', message)  
         });
+
+        client.on('private-message', function(message) {
+            console.log('private')
+            io.in(message.room).emit('private-message', message)  
+    });
 
         // HANDLING PRIVATE MESSAGING
         // -----------------------------------------------------------------

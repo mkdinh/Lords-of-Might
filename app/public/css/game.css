@@ -427,6 +427,18 @@ input[type=text]:not(.browser-default){
   padding: 0 1rem;
 }
 
+.material-tooltip > .backdrop{}
+
+.material-tooltip > span{
+  font-size: 0.60rem;
+  text-align: left;
+  line-height: 0.5rem;
+}
+
+.item-stat{
+  padding-left: 0.5rem; 
+}
+
 #global-message-input,#private-message-input{
   position: absolute;
   bottom: 0;

@@ -10,6 +10,8 @@ LoM.Battle = function(){};
 LoM.Battle = {
     preload: function(){
         loadingGIF();
+        $('#global-message-box').css('display','none');;
+        $('#private-message-box').fadeIn();
 
         var width = 25*32;
         var height = 16*32;
@@ -305,8 +307,8 @@ LoM.Battle = {
                 break;
             
             case "spear":
-
-                var spear = sprite.animations.add('spear',[247,248,249,250,251,252,253,254,255,255,254,253,252,251,250,249,248,247],true);
+            // 247,248,249,250,251,252,253,254,255,255,254,253,252,251,250,249,248,247
+                var spear = sprite.animations.add('spear',[92,93,94,95,96,97,98,98,97,96,95,94,93,92],true);
                 
                     sprite.animations._anims.spear.onComplete.add(function(){
                         sprite.animations.play('left',10, true);
@@ -432,7 +434,7 @@ LoM.Battle = {
                 
                 case "spear":
                 // 221,222,223,224,225,226,227,228,229,229,228,227,226,225,224,223,222,221
-                     var spear = sprite.animations.add('spear',[66,67,68,69,70,71,72,73],true);
+                     var spear = sprite.animations.add('spear',[66,67,68,69,70,71,72,72,71,70,69,68,67,66],true);
             
                     sprite.animations._anims.spear.onComplete.add(function(){
                         sprite.animations.play('right',10, true);
@@ -514,5 +516,7 @@ function resetBattleInfo(){
     initiatorReady = receiverReady = false;
     delete LoM.userInfo.battle;
     $('.battle-info').empty();
+    $('#global-message-box').fadeIn();
+    $('#private-message-box').css('display','none');
+    $('#private-messages').empty();
 }
-

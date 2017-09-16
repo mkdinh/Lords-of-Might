@@ -28,6 +28,25 @@ if(!JSON.parse(localStorage.getItem('user'))){
         
     })
 
+    Client.sendPrivateMessage = function(message){
+        Client.socket.emit('private-message',message)
+    }
+
+    Client.socket.on('private-message', function(message){
+        console.log(message)
+        var privateMessages = $('#private-messages')
+        var user = message.name;
+        var body = message.body;
+
+        var message = '<p class="message-text">'+ user + ': ' + body + '</p>'
+
+        privateMessages.append(message)
+
+        $('#private-messages')[0].scrollTop = $('#global-messages')[0].scrollHeight;
+        
+    })
+
+
 
     // HANDLING GAME CONNECTION
     // ------------------------------------------------------------------
@@ -85,9 +104,7 @@ if(!JSON.parse(localStorage.getItem('user'))){
     })
 
     Client.socket.on('remove',function(data){
-        // console.log('removed',data.id)
         LoM.player.remove(data)
-
     })
 
     Client.changeState = function(user){
@@ -99,9 +116,11 @@ if(!JSON.parse(localStorage.getItem('user'))){
     Client.socket.on('change-state',function(user){
             var userID = user.id;
             var state = user.world.state;
+            // console.log(LoM.userInfo.world.state,state)
+            // LoM.userInfo.world.state = state ;
             initialized = false;
             LoM.playerMaster[userID] = user;
-
+            // return
             if(state !== 'Battle'){
                 LoM.user.getInventory(function(){
                     LoM.game.state.start(state)
@@ -195,7 +214,6 @@ if(!JSON.parse(localStorage.getItem('user'))){
         announcement(body)
         setTimeout(function(){
             removeInteraction('.interaction')
-            // LoM.game.state.start('Battle')
             LoM.playerMaster[LoM.userInfo.id].world.state = "Battle"
             var user = LoM.playerMaster[LoM.userInfo.id]
             // console.log('exiting Shop')

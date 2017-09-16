@@ -1,25 +1,26 @@
-var chest = [
-    {
-        image: "img/open-chest.png"
-    },
-    {
-        image: "img/chest.png"
-    }
-]
+var shopInvent = {}
+
+$(document).ready(function(){
+    $.ajax({
+        url: 'game/shop/all',
+        method: 'GET',
+        success: function(items){
+            // console.log(items)
+            for(i = 0; i < items.length; i++){
+                var itemId = items[i].id
+                shopInvent[itemId] = items[i];
+            }
+        }
+    })
+})
 
 $("#sword").click(function () {
-
-    $("#chest").attr('src', chest[0].image);
-
     var swordsArray = [1, 10, 15, 6, 11, 12, 13, 14, 18];
-
     $("#itemHere").empty();
-
     swordsArray.forEach(function (item) {
-
-        $('#itemHere').append('<img class=swordItem src="/img/items/item-' + item + '.png"/>')
-
+        $('#itemHere').append('<img class="item" data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     });
+<<<<<<< HEAD
 
     $(".swordItem").click(function () {
 
@@ -32,23 +33,18 @@ $("#sword").click(function () {
         }
     });
 
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 });
 
 
-
-
 $("#helmet").click(function () {
-
-    $("#chest").attr('src', chest[0].image);
-
     var helmetsArray = [21, 22];
-
     $("#itemHere").empty();
-
     helmetsArray.forEach(function (item) {
-        $('#itemHere').append('<img class=helmetItem src="/img/items/item-' + item + '.png"/>')
-
+        $('#itemHere').append('<img class="item" data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+<<<<<<< HEAD
 
     $(".helmetItem").click(function () {
 
@@ -63,21 +59,17 @@ $("#helmet").click(function () {
     });
 
 
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 })
 
 $("#legs").click(function () {
-
-    $("#chest").attr('src', chest[0].image);
-
-
     var legsArray = [3, 8, 16];
-
     $("#itemHere").empty();
-
     legsArray.forEach(function (item) {
-        $('#itemHere').append('<img class=legItem src="/img/items/item-' + item + '.png"/>')
-
+        $('#itemHere').append('<img class="item" data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+<<<<<<< HEAD
 
     $(".legItem").click(function () {
 
@@ -92,21 +84,17 @@ $("#legs").click(function () {
     });
 
 
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 });
 
 $("#boots").click(function () {
-
-    $("#chest").attr('src', chest[0].image);
-
-
     var bootsArray = [4, 9, 17];
-
     $("#itemHere").empty();
-
     bootsArray.forEach(function (item) {
-        $('#itemHere').append('<img class=bootsItem src="/img/items/item-' + item + '.png"/>')
-
+        $('#itemHere').append('<img class="item" data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+<<<<<<< HEAD
 
     $(".bootsItem").click(function () {
 
@@ -121,23 +109,20 @@ $("#boots").click(function () {
     });
 
 
+=======
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 });
 
 $("#armor").click(function () {
-
-    $("#chest").attr('src', chest[0].image);
-
     var armorsArray = [2, 7, 19, 20];
-
-
     $("#itemHere").empty();
-
     armorsArray.forEach(function (item) {
-        $('#itemHere').append('<img class=armorsItem src="/img/items/item-' + item + '.png"/>')
-
+        $('#itemHere').append('<img class="item" data-id="'+item+'" src="/img/items/item-' + item + '.png"/>')
     })
+})
 
 
+<<<<<<< HEAD
     $(".armorsItem").click(function () {
 
         if ($('#buyItem').contents().length === 0) {
@@ -149,6 +134,16 @@ $("#armor").click(function () {
             Materialize.toast("Don't get greedy, only one item at a time.", 1500)
         }
     });
+=======
+$("#itemHere").on('click',".item", function () {
+    $('#checkContainer').animate({opacity: 1}, 'fast')
+    $('.stat').empty();
+    $('#item-pic').empty();
+    $('#item-name').empty();
+>>>>>>> b63a1855684d15ecd9f41d1c9eb0e7b795231bc3
 
+    var src = $(this).attr('src')
 
+    $('#item-pic').append('<img src="'+src+'"/>');
 });
+

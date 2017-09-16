@@ -91,7 +91,7 @@ $('#game-btn').on('click',function(ev){
             }
         })
     }else{
-        alert('You need to sign in!')
+        Materialize.toast("You need to sign in!", 2000, 'indigo darken-4') 
     }
 })
 
