@@ -19,23 +19,23 @@ var socket;
 
 // console.log(localStorage)
 // login persistence with localstorage
-// if(localStorage.hasOwnProperty('user')){
-//     var user = JSON.parse(localStorage.getItem('user'));
+if(localStorage.hasOwnProperty('user')){
+    var user = JSON.parse(localStorage.getItem('user'));
     
-//     var loginInfo = {
-//         username: user.username,
-//         password: user.password
-//     }
+    var loginInfo = {
+        username: user.username,
+        password: user.password
+    }
     
-//     $.ajax({
-//         method: 'POST',
-//         url: '/user/login',
-//         data: loginInfo,
-//         success: function(res){
-//             alert('Auto Login!')
-//         }
-//     })
-// }
+    $.ajax({
+        method: 'POST',
+        url: '/user/login',
+        data: loginInfo,
+        success: function(res){
+            Materialize.toast("Logged In", 2000) 
+        }
+    })
+}
 
 // INITIALIZE MODAL
 //------------------------------------------------------------------------

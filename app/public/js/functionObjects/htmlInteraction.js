@@ -138,7 +138,7 @@ $('.battle-options').on('click','#spell-btn', function(ev){
     var currentMP = state.player[LoM.userInfo.id].battle.mp;
     var spellcost = spell.mp;
     var newMP = currentMP - spellcost;
-    console.log(state)
+    // console.log(state)
 
     if(newMP < 0){
         var body = "You do not have enough MP"
@@ -219,7 +219,7 @@ $('#user-inventories').on('click',".invent-item",function(ev){
         dataType: 'json',
         data: equipped,
         success: function(res){
-            console.log(res)
+            // console.log(res)
             // on success remove equip class if return false
             if(parseInt(res.equipped) === 1){
                 $(item).addClass('equipped');
@@ -243,7 +243,7 @@ $('#user-inventories').on('click',".invent-item",function(ev){
                                 dataType: 'json',
                                 data: {equipped: 0},
                                 success: function(res){
-                                    console.log(inventory,i)
+                                    // console.log(inventory,i)
                                     inventory[arrayIndex].equipped = false;
                                     $('#invent-'+arrayIndex).removeClass('equipped') 
                                     equipments['slot-'+itemSlot] = inventory[itemIndex].Item;
@@ -274,11 +274,11 @@ $('#user-inventories').on('click',".invent-item",function(ev){
 
 // SHOP 
 
-('.npc-interaction').on('click','.page-btn', function(){
-    console.log('hey')
-    var audio = $("#overworld")[0];
-    audio.pause();
-})
+// $('.npc-interaction').on('click','.page-btn', function(){
+//     console.log('hey')
+//     var audio = $("#overworld")[0];
+//     audio.pause();
+// })
 
 
 

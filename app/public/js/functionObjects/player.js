@@ -73,11 +73,11 @@ LoM.player = {
         sprite.body.collideWorldBounds = true;
         
         // setting display label
-        console.log(dbInfo)
+        // console.log(dbInfo)
         if(dbInfo.role === 'player'){
             if(dbInfo.status === 'Moderator'){
-                var style = { font: "12px Arial", fill: "#ffb300", backgroundColor:'rgba(0,0,0,.5)', wordWrap: true, wordWrapWidth: sprite.width, align: "center"};
-                var label = LoM[state].add.text(0, 0,"  "+dbInfo.name+"  ", style);
+                var style = { font: "10px Arial", fill: "#ffb300", backgroundColor:'rgba(0,0,0,.5)', wordWrap: true, wordWrapWidth: sprite.width, align: "center"};
+                var label = LoM[state].add.text(0, 0,dbInfo.name, style);
                 var xoffset = (sprite.width-label.width)/(-100)
                 label.anchor.set(xoffset, 0.5)
             }else if(dbInfo.status === 'User'){
@@ -130,7 +130,7 @@ LoM.player = {
         // console.log(player)
         // console.log(LoM.spriteMaster)
         if(player.id !== undefined && LoM.spriteMaster[player.id] !== undefined){
-            console.log(player)
+            // console.log(player)
             LoM[player.state].spriteMap.players[player.id].kill();
 
             delete LoM[player.state].spriteMap.players[player.id]

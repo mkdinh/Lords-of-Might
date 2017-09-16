@@ -98,7 +98,7 @@ LoM.Town = {
             for(i = 0; i < LoM.playerArray.length;i++){
                 if(LoM.playerArray[i].world.state === 'Town'){
                     LoM.player.add(LoM.playerArray[i])
-                    console.log(LoM.playerArray[i])
+                    // console.log(LoM.playerArray[i])
                 }
             }
         }

@@ -90,7 +90,7 @@ $('#buy-item').on('click', function(){
     var userGold = $('#user-gold').text();
     var cost = shopInvent[selected].buy;
 
-    if(userGold-cost > 0){
+    if(userGold-cost >= 0){
 
         var shopData = {
             cost: cost

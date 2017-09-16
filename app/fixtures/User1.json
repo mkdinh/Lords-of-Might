@@ -4,9 +4,9 @@
         "data": {
             "username": "foobar@gmail.com",
             "password": "foobar",
-            "name": "Mikey",
+            "name": "Flipped Script",
             "status": "Moderator",
-            "profile": "/monsters/orc.jpg",
+            "profile": "/monsters/skeleton.jpg",
             "online": false
         }
     },
@@ -38,12 +38,12 @@
     {
         "model": "Stats",
         "data": {
-            "attack": 10,
-            "agility": 10,
-            "defense": 10,
-            "recovery": 10,
-            "hp": 100,
-            "mp": 100,
+            "attack": 30,
+            "agility": 30,
+            "defense": 30,
+            "recovery": 30,
+            "hp": 200,
+            "mp": 200,
             "UserId": 1
         }
     },
@@ -53,7 +53,7 @@
             "equipped": true,
             "quantity": 1,
             "UserId": 1,
-            "ItemId": 1
+            "ItemId": 14
         }
     },
     {
@@ -62,7 +62,7 @@
             "equipped": true,
             "quantity": 1,
             "UserId": 1,
-            "ItemId": 2
+            "ItemId": 16
         }
     },
     {
@@ -71,7 +71,7 @@
             "equipped": true,
             "quantity": 1,
             "UserId": 1,
-            "ItemId": 3
+            "ItemId": 17
         }
     },
     {
@@ -80,7 +80,7 @@
             "equipped": true,
             "quantity": 1,
             "UserId": 1,
-            "ItemId": 4
+            "ItemId": 20
         }
     },
     {
