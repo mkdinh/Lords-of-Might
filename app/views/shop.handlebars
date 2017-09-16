@@ -2,10 +2,6 @@
 <html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/foundation/css/foundation.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/shop.css" />
     <!-- Lord of Might Font-->
@@ -19,10 +15,9 @@
       <source src="/audio/shop-music.mp3" type="audio/mpeg" />
     </audio> --}}
 
-    <div class="container">
 
         <!-- main content container-->
-        <div id="pageContainer" class='row'>
+        <div id="pageContainer" class='row container'>
 
             <h1 style="text-align: center;">WHAT WOULD YOU LIKE TO BUY?</h1>
 
@@ -30,33 +25,33 @@
             <div id="userProfile" class='col s4'>
                 <p id="charName">USERNAME</p>
                 <p>Gold: <span id='user-gold'></span></p>
-                <p>Space: <span id='user-invent-space'></span></p>
+                {{!-- <p>Space: <span id='user-invent-space'></span></p> --}}
                 <div id="checkContainer">
                     <p>ITEM INFO</p>
                     <div id="buyItem">
                         <div id='item-info'>
                             <span id='item-pic' class='left'></span>
-                            <span id='item-name' class='right'></span>
+                            <span id='item-name' class=''></span>
                         </div>
                         <table class=''>
                             <tbody>
                                 <tr>
                                     <td><span class='stats-item'>HP</span></td>
-                                    <td><span class='stat' id='user-hp'></span></td>
+                                    <td><span class='stat' id='item-hp'></span></td>
                                     <td><span class='stats-item'>MP</span></td>
-                                    <td><span class='stat' id='user-mp'></span></td>
+                                    <td><span class='stat' id='item-mp'></span></td>
                                 </tr>
                                 <tr>
                                     <td><span class='stats-item'>Attack</span></td>
-                                    <td><span class='stat' id='user-attack'></span></td>
+                                    <td><span class='stat' id='item-attack'></span></td>
                                     <td><span class='stats-item'>Defense</span></td>
-                                    <td><span class='stat' id='user-defense'></span></td>
+                                    <td><span class='stat' id='item-defense'></span></td>
                                 </tr>
                                 <tr>
                                     <td><span class='stats-item'>Agility</span></td>
-                                    <td><span class='stat' id='user-agility'></span></td>
+                                    <td><span class='stat' id='item-agility'></span></td>
                                     <td><span class='stats-item'>Recovery</span></td>
-                                    <td><span class='stat' id='user-recovery'></span></td>
+                                    <td><span class='stat' id='item-recovery'></span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -80,7 +75,7 @@
                 </div>
 
                 <div class='action-btn-wrapper'>
-                    <a class="action-btn waves-effect waves-light btn">BUY</a>
+                    <a class="action-btn waves-effect waves-light btn" id='buy-item'>BUY</a>
                     <a class="action-btn waves-effect waves-light btn" href='/user'>LOBBY</a>
                 </div>
 

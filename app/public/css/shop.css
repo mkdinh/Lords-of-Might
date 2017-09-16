@@ -17,12 +17,20 @@ h1 {
     padding: 20px;
     margin-top: 5%;
     height: 80%;
-    position: absolute;
 }
 
 #checkContainer{
     text-align: center;
     opacity: 0
+}
+
+#item-name{
+    line-height: 4rem;
+}
+
+
+.stat{
+    font-size: 1rem;
 }
 
 
@@ -31,6 +39,7 @@ table tbody tr:nth-child(even),table.striped>tbody>tr:nth-child(odd),table tbody
     border: 0px solid black;
     color: white;
 }
+
 
 #charName {
     text-align: center;
@@ -61,10 +70,13 @@ table tbody tr:nth-child(even),table.striped>tbody>tr:nth-child(odd),table tbody
 
 
 #items {
-    height: 90%;
+    height: 80%;
     position: relative;
 }
 
+#userProfile p{
+    margin: 0.5rem;
+}
 
 /*right side box design*/
 
@@ -122,6 +134,10 @@ img {
     outline: none;
     color:  #3f3fa7;
     background-color: white;
+}
+
+.item{
+    margin: 0.25rem;
 }
 
 .action-btn-wrapper{
