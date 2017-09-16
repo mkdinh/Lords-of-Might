@@ -262,34 +262,23 @@ $('#user-inventories').on('click',".invent-item",function(ev){
                 $(item).removeClass('equipped');
                 inventory[itemIndex].equipped = false;
                 delete equipments['slot-'+itemSlot];
-                // run updateEquipments function
-                LoM.user.updateEquipments();
-                // run updateStats function
-                LoM.user.updateStats();
             }
+            // run updateEquipments function
+            LoM.user.updateEquipments();
+            // run updateStats function
+            LoM.user.updateStats();
         }
     })
 });
 
-// SIDE BAR TAB FUNCTION
-// $('#user-inventories-tab').on('click', function(){
-//     LoM.user.getInventory();
-// });
-
-$('#user-equipments-tab').on('click', function(){
-    // LoM.user.updateEquipments();
-});
-
-$('#user-stats-tab').on('click', function(){
-    // LoM.user.getInventory();
-    // console.log('update stats')
-});
 
 // SHOP 
 
-// $('.npc-interaction').on('click','#shop-btn',function(){
-//     alert('going shopping!')
-// })
+('.npc-interaction').on('click','.page-btn', function(){
+    console.log('hey')
+    var audio = $("#overworld")[0];
+    audio.pause();
+})
 
 
 

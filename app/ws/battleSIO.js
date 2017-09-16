@@ -41,7 +41,7 @@ module.exports = function(io){
 
         // attack logic here with data
         var attackMod = randomInt(50,100);
-        var defenseMod = randomInt(20,50);
+        var defenseMod = randomInt(1,25);
         attackMod = attackMod/100;
         defenseMod = defenseMod/100;
 

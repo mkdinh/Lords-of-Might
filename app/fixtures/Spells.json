@@ -7,7 +7,7 @@
             "class": "offense",
             "level": 1,
             "damage_min": 10,
-            "damage_max": 30,
+            "damage_max": 40,
             "mp": 35,
             "pic": "/img/spells/ice.png"
         }
@@ -20,7 +20,7 @@
             "class": "offense",
             "level": 1,
             "damage_min": 10,
-            "damage_max": 30,
+            "damage_max": 40,
             "mp": 35,
             "pic": "/img/spells/poison.png"
         }
@@ -33,7 +33,7 @@
             "class": "offense",
             "level": 1,
             "damage_min": 10,
-            "damage_max": 30,
+            "damage_max": 40,
             "mp": 35,
             "pic": "/img/spells/fire.png"
         }
@@ -46,7 +46,7 @@
             "class": "offense",
             "level": 1,
             "damage_min": 10,
-            "damage_max": 30,
+            "damage_max": 40,
             "mp": 35,
             "pic": "/img/spells/shadow.png"
         }

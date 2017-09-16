@@ -3,12 +3,12 @@ module.exports = (sequelize,DataTypes) => {
         hp:{
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 100
+            defaultValue: 70
         },
         mp:{
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 50
+            defaultValue: 30
         },
         attack: {
             type: DataTypes.INTEGER,

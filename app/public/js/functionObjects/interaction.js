@@ -48,7 +48,7 @@ LoM.interaction = {
                             +'<p>My name is Fooz, I used to be an adventurer just like you, until I took an arrow to the pinkie toe.</p>'
                             +'<p>Now I just look cool in my golden armour and run the store, you want to check out the goods?</p>'
                             +'</div>')
-                            shop = "<a class='action-btn waves-effect waves-light btn right' id='shop-btn' target='_blank' href='/shop'>Shop</a>"
+                            shop = "<a class='action-btn waves-effect waves-light btn right page-btn' id='shop-btn' target='_blank' href='/shop'>Shop</a>"
                             $('.npc-interaction').append(text);
                             text.append(shop)
 
