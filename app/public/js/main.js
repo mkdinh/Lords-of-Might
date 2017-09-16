@@ -1,6 +1,7 @@
 // Initializing game states
 var LoM = LoM || {};
 var width = $('#game').width();
+var height = $('#game').height();
 
 console.log(width,height)
 LoM.game = new Phaser.Game(width, 500, Phaser.CANVAS, document.getElementById('game'));
