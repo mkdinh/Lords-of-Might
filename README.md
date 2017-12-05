@@ -2,7 +2,7 @@
 
 An browser MMO RPG blending classic RPG elements with a modern UI
 
-# Technologies used
+# Technologies
 - MaterializeCSS
 - ExpressJS
 - PhaserJS
@@ -15,6 +15,6 @@ An browser MMO RPG blending classic RPG elements with a modern UI
 - Multiplayer turn-based battle
 - In-game world and private chat
 
-# Sample Character
+# Sample User
 - username: foobar@gmail.com
 - password: 123456
