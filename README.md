@@ -16,5 +16,5 @@ An browser MMO RPG blending classic RPG elements with a modern UI
 - In-game world and private chat
 
 # Sample User
-- username: foobar@gmail.com
-- password: 123456
+- username: guest@sample.com
+- password: password
